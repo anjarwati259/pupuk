@@ -15,6 +15,7 @@ class Home_model extends CI_Model
 	public function promo(){
 		$this->db->select('*');
 		$this->db->from('tb_promo');
+		$this->db->where('status','1');
 		$this->db->order_by('id_promo','asc');
 		$query = $this->db->get();
 		return $query->result();

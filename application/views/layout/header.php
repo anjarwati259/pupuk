@@ -56,7 +56,7 @@
 								</div>
 								<?php }else{ ?>
 								<div>
-									<a href="<?php echo base_url('home/login') ?>">
+									<a href="<?php echo base_url('login') ?>">
 										<i class="fa fa-lock"></i>
 										<span>Login</span>
 									</a>
@@ -87,14 +87,6 @@
 											//kalau ada
 										}else{ 
 											foreach ($keranjang as $keranjang) {
-											// 	$option = $keranjang['option'];
-											// if($option==1){
-											// 	$id_promo = $keranjang['id'];
-											// 	$promonya = $this->home_model->listing_promo($id_promo);
-											// }else{
-											// 	$kode_produk = $keranjang['id'];
-											// 	$produknya = $this->home_model->listing_produk($kode_produk);
-											// }
 											?>
 											<div class="product-widget">
 												<div class="product-img">
@@ -108,6 +100,9 @@
 											</div>
 											<?php } } ?>
 										</div>
+										<?php 
+											//kalau ga ada data belanjaan
+											if(!empty($keranjang)){ ?>
 										<div class="cart-summary">
 											<h5>SUBTOTAL: <?php echo 'Rp. '.number_format($this->cart->total(), '0',',','.'); ?></h5>
 										</div>
@@ -115,6 +110,7 @@
 											<a href="<?php echo base_url('belanja') ?>">View Cart</a>
 											<a href="<?php echo base_url('belanja/checkout') ?>">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
+									<?php } ?>
 									</div>
 								</div>
 								<!-- /Cart -->

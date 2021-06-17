@@ -1,3 +1,4 @@
+
 <!-- SECTION -->
 <div class="section">
 	<!-- container -->
@@ -8,7 +9,7 @@
 			<div class="col-md-5 col-md-push-2">
 				<div id="product-main-img">
 					<div class="product-preview">
-						<img src="<?php echo base_url('assets/img/promo/'.$gambar->gambar) ?>" alt="">
+						<img src="<?php echo base_url('assets/img/produk/'.$gambar->gambar) ?>" alt="">
 					</div>
 				</div>
 			</div>
@@ -78,15 +79,19 @@
 				<?php } ?>
 			</div>
 			<!-- /Product details -->
-
+		</div>
+		<!-- /row -->
+		<div class="row deskripsi">
 			<!-- Product tab -->
-			<div class="col-md-12">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
 				<div id="product-tab">
 					<!-- product tab nav -->
 					<ul class="tab-nav">
 						<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-						<li><a data-toggle="tab" href="#tab2">Details</a></li>
-						<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+						<!-- <li><a data-toggle="tab" href="#tab2">Details</a></li>
+						<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li> -->
 					</ul>
 					<!-- /product tab nav -->
 
@@ -95,8 +100,19 @@
 						<!-- tab1  -->
 						<div id="tab1" class="tab-pane fade in active">
 							<div class="row">
-								<div class="col-md-12">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<div class="col-md-12" style="line-height: 30px;">
+									<p>POC kilat Merupakan Pupuk cair yang mengandung Hormon Penyubur Tanaman yang dapat merangsang tanaman agar Tumbuh lebat dan Kuat, terbuat dari Susu, Madu dan bahan organik lainnya tanpa campuran limbah maupun kotoran hewan.</p>
+									<p>Paket yang didapatkan dari pembelian ini adalah :</p>
+									<ul>
+										<li>10 botol POC 1 Liter</li>
+										<li>Bonus 2 botol POC 500ml</li>
+										<li>Subsidi Ongkir Rp. 200.000</li>
+										<li> 1 T-Shirt</li>
+										<li> 2 Baju Petani</li>
+										<li> 1 Banner Lahan</li>
+										<li> 1 Buku Aplikasi</li>
+										<li> 20 Lembar Brosur Produk</li>
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -292,9 +308,10 @@
 					<!-- /product tab content  -->
 				</div>
 			</div>
+			<div class="col-md-2">
+			</div>
 			<!-- /product tab -->
 		</div>
-		<!-- /row -->
 	</div>
 	<!-- /container -->
 </div>

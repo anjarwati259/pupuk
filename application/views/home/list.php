@@ -91,7 +91,7 @@
 							echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
 							?>
 									<div class="product-img">
-										<img src="<?php echo base_url('assets/img/promo/'.$promo->gambar) ?>" alt="">
+										<img src="<?php echo base_url('assets/img/produk/'.$promo->gambar) ?>" alt="">
 										<div class="product-label">
 											<span class="new">NEW</span>
 										</div>
