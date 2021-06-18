@@ -12,7 +12,8 @@
 					</div>
 					<?php 
                   echo form_open(base_url('belanja/checkout'));
-                  $kode_transaksi = date('dmY').strtoupper(random_string('alnum',8));
+                  
+                  //$kode_transaksi = date('dmY').strtoupper(random_string('alnum',8));
                   ?>
 					<div class="form-group">
 						<label>Nama Lengkap</label>

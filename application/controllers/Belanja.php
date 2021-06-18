@@ -36,6 +36,8 @@ class Belanja extends CI_Controller
 		$qty 			= $this->input->post('qty');
 		$price 			= $this->input->post('price');
 		$name 			= $this->input->post('name');
+		$id_promo 		= $this->input->post('id_promo');
+		$id_produk		= $this->input->post('id_produk');
 		$option 		= $this->input->post('option');
 		$gambar 		= $this->input->post('gambar');
 		$redirect_page 	= $this->input->post('redirect_page');
@@ -44,6 +46,8 @@ class Belanja extends CI_Controller
 						'qty'	=> $qty,
 						'price'	=> $price,
 						'name'	=> $name,
+						'id_promo' => $id_promo,
+						'id_produk' => $id_produk,
 						'gambar'=> $gambar,
 						'option' => $option
 						);
@@ -105,11 +109,20 @@ class Belanja extends CI_Controller
 				array(	'required' 		=> '%s harus diisi'));
 
 		if($valid->run()===FALSE){
+			//membuat kode transaksi
+			$id = $this->order_model->get_last_id();
+				if($id){
+					$id = $id[0]->kode_transaksi;
+					$kode_transaksi = generate_code('INC0',$id);
+				}else{
+					$kode_transaksi = 'INC0001';
+				}
 			//end validation
 
 			$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
 						'keranjang' => $keranjang,
 						'pelanggan' => $pelanggan,
+						'kode_transaksi' => $kode_transaksi,
 						'provinsi'	=> $provinsi,
 						'isi'		=> 'belanja/checkout'
 						);
@@ -131,6 +144,8 @@ class Belanja extends CI_Controller
 							'provinsi'		=> $i->post('prov'),
 							'kabupaten'		=> $i->post('kab'),
 							'kecamatan'		=> $i->post('kec'),
+							'ongkir'		=> 0,
+							'total_bayar'	=> $i->post('total_transaksi'),
 							'catatan'		=> $i->post('catatan'),
 							'metode_pembayaran'	=> $i->post('payment'),
 							'status_bayar'	=> 0,
@@ -142,7 +157,8 @@ class Belanja extends CI_Controller
 
 				$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
 								'kode_transaksi'	=> $i->post('kode_transaksi'),
-								'id_produk'			=> $keranjang['id'],
+								'id_produk'			=> $keranjang['id_produk'],
+								'id_promo'			=> $keranjang['id_promo'],
 								'harga'				=> $keranjang['price'],
 								'jml_beli'			=> $keranjang['qty'],
 								'total_harga'		=> $sub_total,
@@ -155,7 +171,7 @@ class Belanja extends CI_Controller
 			//hapus keranjang
 			$this->cart->destroy();
 			$this->session->set_flashdata('sukses','Checkout berhasil');
-			redirect(base_url('belanja/sukses'), 'refresh');
+			redirect(base_url('belanja/sukses/'.$kode_transaksi), 'refresh');
 		}
 		//end masuk database
 			//end database
@@ -164,5 +180,17 @@ class Belanja extends CI_Controller
 			$this->session->set_flashdata('sukses','Silahkan Login atau Registrasi Terlebih Dahulu');
 			redirect(base_url('registrasi'),'refresh');
 		}
+	}
+	//sukses checkout
+	public function sukses($kode_transaksi)
+	{
+		$transaksi 	= $this->order_model->kode_order($kode_transaksi);
+		$detail 	= $this->order_model->kode_transaksi($kode_transaksi);
+		$data = array(	'title'		=> 'Belanja Berhasil',
+						'transaksi' => $transaksi,
+						'detail'	=> $detail,
+						'isi'		=> 'belanja/sukses'
+						);
+		$this->load->view('layout/wrapper', $data, FALSE);
 	}
 }

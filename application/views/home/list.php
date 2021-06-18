@@ -82,6 +82,8 @@
 							echo form_open(base_url('belanja/add')); 
 							//elemen yang dibawa
 							echo form_hidden('id', $promo->id_promo);
+							echo form_hidden('id_promo', $promo->id_promo);
+							echo form_hidden('id_produk', null);
 							echo form_hidden('qty', 1);
 							echo form_hidden('price', $promo->harga);
 							echo form_hidden('name', $promo->nama_promo);
@@ -164,6 +166,8 @@
 							echo form_open(base_url('belanja/add')); 
 							//elemen yang dibawa
 							echo form_hidden('id', $produk->kode_produk);
+							echo form_hidden('id_produk', $produk->kode_produk);
+							echo form_hidden('id_promo', null);
 							echo form_hidden('qty', 1);
 							echo form_hidden('price', $produk->harga_customer);
 							echo form_hidden('name', $produk->nama_produk);
