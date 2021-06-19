@@ -11,6 +11,14 @@ class Pelanggan_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
+	//menampilkan semua data pelanggan
+	public function alllisting(){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->order_by('id_pelanggan','desc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	//menampilkan data semua customer
 	public function customer(){
 		$this->db->select('*');

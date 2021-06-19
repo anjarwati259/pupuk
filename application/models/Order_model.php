@@ -11,7 +11,7 @@ class Order_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
-	//menampilkan data order
+	//menampilkan data order berdasarkan status bayar
 	public function listing_admin($data){
 		$this->db->select('tb_detail_order.*,
 							tb_pelanggan.nama_pelanggan, tb_pembayaran.jumlah_bayar');
@@ -21,6 +21,14 @@ class Order_model extends CI_Model
 		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
 		$this->db->group_by('tb_detail_order.kode_transaksi');
 		$this->db->order_by('kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//menampilkan semua data order
+	public function Alllisting(){
+		$this->db->select('*');
+		$this->db->from('tb_detail_order');
+		$this->db->order_by('tanggal_transaksi','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -50,6 +58,16 @@ class Order_model extends CI_Model
 		$this->db->order_by('kode_transaksi','desc');
 		$query = $this->db->get();
 		return $query->row();
+	}
+	//update status untuk konfirmasi jika sudah dibayar
+	public function update_status($data)
+	{
+		$this->db->where('kode_transaksi', $data['kode_transaksi']);
+		$this->db->update('tb_detail_order',$data);
+	}
+	//pembayaran
+	public function bayar($data){
+		$this->db->insert('tb_pembayaran', $data);
 	}
 	//tambah detail order
 	public function tambah($data)

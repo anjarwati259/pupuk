@@ -136,15 +136,15 @@
                 <div class="col-md-6">
                    <label >Ongkos Kirim</label>
                     <div class="input-group">
-                      <span class="input-group-addon">Rp</span>
-                      <input type="text" class="form-control">
+                      <span class="input-group-addon prc">Rp</span>
+                      <input type="number" value="<?php echo $order->ongkir ?>" name="ongkir" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                    <label >Jumlah Transfer</label>
                     <div class="input-group">
-                      <span class="input-group-addon">Rp</span>
-                      <input type="text" value="<?php echo number_format($order->total_bayar,'0',',','.') ?>" class="form-control">
+                      <span class="input-group-addon prc">Rp</span>
+                      <input type="number" name="total_bayar" value="<?php echo $order->total_bayar ?>" class="form-control">
                     </div>
                 </div>
               </div>
