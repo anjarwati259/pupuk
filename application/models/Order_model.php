@@ -35,7 +35,7 @@ class Order_model extends CI_Model
 	//mendapatkan data transaksi berdasarkan kodenya
 	public function kode_order($kode_transaksi){
 		$this->db->select('tb_order.*, 
-						tb_produk.nama_produk, tb_promo.nama_promo as nama');
+						tb_produk.nama_produk, tb_promo.nama_promo as nama, tb_produk.gambar');
 		$this->db->from('tb_order');
 		//join
 		$this->db->join('tb_produk', 'tb_produk.kode_produk = tb_order.id_produk', 'left');
@@ -85,6 +85,18 @@ class Order_model extends CI_Model
 
 		$query = $this->db->get("tb_detail_order",1,0);
 		return $query->result();
+	}
+	//digunakan untuk mencari nama
+	public function getnama($nama){
+		$this->db->like('nama_pelanggan', $nama , 'both');
+        $this->db->order_by('nama_pelanggan', 'ASC');
+        $this->db->limit(10);
+        return $this->db->get('tb_pelanggan')->result();
+	}
+	//tambah stok
+	public function tambah_stok($data)
+	{
+		$this->db->insert('tb_stok', $data);
 	}
 
 }

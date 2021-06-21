@@ -143,6 +143,7 @@
                                     </option>
                                   <?php }?>
                                 <?php }?>
+                                <input type="hidden" id="id_promo" class="form-control" name="id_promo"/>
                               </select>
                               <!-- satuan -->
                               <select class="form-control" id="produk" name="kode_produk">
@@ -234,6 +235,7 @@
             $("#0").hide();
           }else{
             $("#paket").hide();
+            $("#id_promo").val('');
             $("#produk").show();
             $("#0").hide();
           }
@@ -279,11 +281,13 @@
             var response = $.parseJSON(hasil);
             var jumlah = response[0].jumlah;
             var bonus = response[0].bonus;
+            var promo = response[0].id_promo;
             //console.log(jumlah);
             $("#jumlah").val(jumlah);
             $("#bonus").val(bonus);
+            $("#id_promo").val(promo);
             if(hasil != 'false') {
-              var harga = '<option value="' + response[0].harga+ '">' + 'Rp. '+ parseInt(response[0].harga) + '</option>';
+              var harga = '<option value="' + response[0].harga_customer+ '">' + 'Rp. '+ parseInt(response[0].harga_customer) + '</option>';
               $("#sale_price").empty();
             $('#sale_price').append(harga);
             }
@@ -298,12 +302,16 @@
         // alert("hai");
         var paket = $("#pilih").val();
         //alert(id_produk);
-        if(paket==1){
+        if(paket==1){//satuan
           var id_produk = $("#produk").val();
+          var id_promo = 0;
           var sale_price = $("#sale_price").val();
-        }else{
+          var status = 2;
+        }else{//promo
           var id_produk = $("#paket").val();
-          var sale_price = 170000;
+          var id_promo = $("#id_promo").val();
+          var sale_price = $("#sale_price").val();
+          var status = 1;
         }
         var bonus = $("#bonus").val();
         var quantity = $("#jumlah").val();
@@ -316,8 +324,10 @@
                 url: '<?php echo base_url(); ?>' + 'admin/order/add_item',
                 data: {
                     'id_produk' : id_produk,
+                    'id_promo'  : id_promo,
                     'quantity' : quantity,
                     'sale_price' : sale_price,
+                    'status'  : status,
                     'bonus' : bonus
                 },
                 type: 'POST',

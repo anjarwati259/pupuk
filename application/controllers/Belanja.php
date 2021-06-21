@@ -42,7 +42,7 @@ class Belanja extends CI_Controller
 		$gambar 		= $this->input->post('gambar');
 		$redirect_page 	= $this->input->post('redirect_page');
 		//proses memasukkan ke keranjang belanja
-		$data = array(	'id'	=> $id,
+		$data = array(	'id'	=> $id, 
 						'qty'	=> $qty,
 						'price'	=> $price,
 						'name'	=> $name,
