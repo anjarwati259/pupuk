@@ -7,6 +7,9 @@
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 		<title>PT AGI - Website Order Produk Kilat</title>
+		<!-- Site Icons -->
+	    <link rel="shortcut icon" href="<?php echo base_url() ?>/assets/img/logo/favicon.ico" type="image/x-icon">
+	    <link rel="apple-touch-icon" href="<?php echo base_url() ?>/assets/img/logo/favicon.ico">
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">

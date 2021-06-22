@@ -225,7 +225,7 @@
                   <!-- potongan COD -->
                   <?php 
                   $total_bayar = (int) round(($order->total_bayar * 3)/100);
-                  $total = $order->total_bayar - $total_bayar;
+                  $total = $order->total_bayar + $total_bayar;
                    ?>
                    <label >Jumlah Transfer</label>
                     <div class="input-group">

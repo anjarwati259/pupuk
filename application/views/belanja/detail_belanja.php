@@ -102,9 +102,6 @@
 							echo form_open(base_url('belanja/update_cart'));
 							//echo form_hidden('rowid', $rowid);
 							?>
-							<tr>
-								<td><?php echo $keranjang['id_produk'] ?></td>
-							</tr>
 						<tr>
 							<td style="vertical-align: middle;"><a href="<?php echo base_url('belanja/hapus/'.$keranjang['rowid']) ?>"><i class="fa fa-times-circle icon"></i></a></td>
 							<td><img src="<?php echo base_url('assets/img/produk/'.$keranjang['gambar']) ?>"></td>

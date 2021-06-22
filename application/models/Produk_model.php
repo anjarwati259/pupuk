@@ -11,6 +11,14 @@ class Produk_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
+	//mendapatkan data prodduk
+	public function produk(){
+		$this->db->select('*');
+		$this->db->from('tb_produk');
+		$this->db->order_by('kode_produk','desc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	//mendapatkan data produk berdasarkan kodenya untuk order
 	public function get_by_produk($kode_produk){
 		$response = false;
@@ -68,5 +76,35 @@ class Produk_model extends CI_Model
 		$this->db->set('stok', 'stok-'.$data['stok'], FALSE);
 		$this->db->where('kode_produk', $id);
 		$this->db->update('tb_produk');
+	}
+	//listing order stok
+	public function getstok(){
+		$this->db->select('tb_stok.*,
+							tb_pelanggan.nama_pelanggan, tb_produk.nama_produk, tb_produk.stok');
+		$this->db->from('tb_stok');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
+		$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
+		$this->db->group_by('tb_stok.id_stok');
+		$this->db->order_by('id_stok','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//tambah stok
+	public function tambah_stok($data)
+	{
+		$this->db->insert('tb_stok', $data);
+	}
+	//update stok
+	public function update_stok($id,$data){
+		$this->db->set('stok', 'stok+'.$data['stok'], FALSE);
+		$this->db->where('kode_produk', $id);
+		$this->db->update('tb_produk');
+	}
+	public function getby_produk($id){
+		$this->db->select('*');
+		$this->db->from('tb_produk');
+		$this->db->where('kode_produk', $id);;
+		$query = $this->db->get();
+		return $query->result();
 	}
 }

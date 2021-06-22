@@ -5,7 +5,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3><!-- <?php echo $order->total ?> --></h3>
+              <h3><?php echo $order->total ?></h3>
 
               <p>Order Terbaru</p>
             </div>
@@ -20,7 +20,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3><!-- <?php echo $mitra->total ?> --></h3>
+              <h3><?php echo $mitra->total ?></h3>
 
               <p>Mitra</p>
             </div>
@@ -35,7 +35,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3><!-- <?php echo $dist->total ?> --></h3>
+              <h3><?php echo $dist->total ?></h3>
 
               <p>Distributor</p>
             </div>
@@ -50,14 +50,14 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3><!-- <?php echo $customer->total ?> --></h3>
+              <h3><?php echo $customer->total ?></h3>
 
               <p>Customer</p>
             </div>
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <a href="<?php echo base_url('admin/pelanggan') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('admin/pelanggan/customer') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -89,33 +89,33 @@
             <!-- /.box-body -->
             <div class="box-footer no-border">
               <div class="row">
-                <!-- <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
+                <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
                   <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($POC) ? $POC->total : '0';?>" data-width="60" data-height="60"
                          data-fgColor="#39CCCC">
 
                   <div class="knob-label">POC 1 Liter</div>
-                </div> -->
+                </div>
                 <!-- ./col -->
-                <!-- <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
+                <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
                   <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($POC500) ? $POC500->total : '0';?>" data-width="60" data-height="60"
                          data-fgColor="#39CCCC">
 
                   <div class="knob-label">POC 500ml</div>
-                </div> -->
+                </div>
                 <!-- ./col -->
-                <!-- <div class="col-xs-3 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($ikan) ? $ikan->total : '0';?>" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Nutrisi Ternak</div>
-                </div> -->
-                <!-- ./col -->
-                <!-- <div class="col-xs-3 text-center">
+                <div class="col-xs-3 text-center">
                   <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($ternak) ? $ternak->total : '0';?>" data-width="60" data-height="60"
                          data-fgColor="#39CCCC">
 
+                  <div class="knob-label">Nutrisi Ternak</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-3 text-center">
+                  <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($ikan) ? $ikan->total : '0';?>" data-width="60" data-height="60"
+                         data-fgColor="#39CCCC">
+
                   <div class="knob-label">Nutrisi Ikan</div>
-                </div> -->
+                </div>
               </div>
               <!-- /.row -->
             </div>
@@ -127,11 +127,11 @@
         <div class="col-md-4">
           <!-- Info Boxes Style 2 -->
           <div class="info-box bg-aqua">
-            <span class="info-box-icon"><a href="#" style="color: #fff;"><i class="fa fa-cubes"></i></a></span>
+            <span class="info-box-icon"><a href="<?php echo base_url('admin/order/stok_awal') ?>" style="color: #fff;"><i class="fa fa-cubes"></i></a></span>
 
             <div class="info-box-content">
               <span class="info-box-text">Stok</span>
-              <span class="info-box-number"><!-- <?php echo $stok->total ?> --></span>
+              <span class="info-box-number"><?php echo $stok->total ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -142,7 +142,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">PENJUALAN HARIAN</span>
-              <span class="info-box-number"><!-- <?php echo $harian->total ?> --></span>
+              <span class="info-box-number"><?php echo $harian->total ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -152,7 +152,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">PENJUALAN MINGGUAN</span>
-              <span class="info-box-number"><!-- <?php echo $mingguan->total?> --></span>
+              <span class="info-box-number"><?php echo $mingguan->total?></span>
 
             </div>
             <!-- /.info-box-content -->
@@ -163,7 +163,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">PENJUALAN BULANAN</span>
-              <span class="info-box-number"><!-- <?php echo $bulanan->total?> --> </span>
+              <span class="info-box-number"><?php echo $bulanan->total?> </span>
 
             </div>
             <!-- /.info-box-content -->

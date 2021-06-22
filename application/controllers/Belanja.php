@@ -15,7 +15,8 @@ class Belanja extends CI_Controller
 		//load helper random string
 		$this->load->helper('string');
 		//proteksi halaman
-		//$this->simple_login->cek_login();
+		$this->simple_login->cek_login();
+		$this->simple_login->customer();
 	}
 	//halaman belanja
 	public function index()
@@ -42,7 +43,7 @@ class Belanja extends CI_Controller
 		$gambar 		= $this->input->post('gambar');
 		$redirect_page 	= $this->input->post('redirect_page');
 		//proses memasukkan ke keranjang belanja
-		$data = array(	'id'	=> $id, 
+		$data = array(	'id'	=> $id,
 						'qty'	=> $qty,
 						'price'	=> $price,
 						'name'	=> $name,
@@ -154,7 +155,9 @@ class Belanja extends CI_Controller
 			//proses masuk ke tabel transaksi
 			foreach ($keranjang as $keranjang) {
 				$sub_total	= $keranjang['price'] * $keranjang['qty'];
-
+				//total item = qty * jumlah
+				//jika option = promo maka masukkan 2 data, bonus dan order
+				//bonus = bonus * qty
 				$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
 								'kode_transaksi'	=> $i->post('kode_transaksi'),
 								'id_produk'			=> $keranjang['id_produk'],

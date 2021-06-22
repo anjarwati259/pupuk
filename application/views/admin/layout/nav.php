@@ -9,7 +9,7 @@
           <img src="<?php echo base_url() ?>assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><!-- <?php echo $this->session->userdata('nama_user'); ?> --></p>
+          <p><?php echo $this->session->userdata('nama_user'); ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -18,7 +18,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
         <li class="active">
-          <a href="<?php echo base_url('page') ?>">
+          <a href="<?php echo base_url('admin/dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -47,7 +47,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('admin/produk') ?>"><i class="fa fa-users"></i> Data Stok</a></li>
+            <li><a href="<?php echo base_url('admin/order/stok_awal') ?>"><i class="fa fa-users"></i> Data Stok</a></li>
             <li><a href="<?php echo base_url('admin/order/stok') ?>"><i class="fa fa-plus-square-o"></i> Riwayat Stok</a></li>
           </ul>
         </li>
@@ -56,12 +56,6 @@
           <a href="<?php echo base_url('admin/order') ?>">
             <i class="fa fa-cart-plus"></i>
             <span>Order</span>
-          </a>
-        </li>
-        <!-- setting toko -->
-        <li>
-          <a href="<?php echo base_url('admin/dashboard/setting') ?>">
-            <i class="fa fa-dashboard"></i> <span>Setting Lokasi</span>
           </a>
         </li>
 

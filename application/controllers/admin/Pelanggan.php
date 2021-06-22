@@ -12,7 +12,8 @@ class Pelanggan extends CI_Controller
 		$this->load->model('pelanggan_model');
 		$this->load->model('wilayah_model');
 		//proteksi halaman
-		//$this->simple_login->cek_login();
+		$this->simple_login->cek_login();
+		$this->simple_login->admin();
 	}
 	//menampilkan data customer
 	public function customer(){

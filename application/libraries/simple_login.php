@@ -29,7 +29,7 @@ class Simple_login
       $this->CI->session->set_userdata('hak_akses',$hak_akses);
       //redirect ke halaman admin yang diproteksi
       if($hak_akses=='1'){
-      redirect(base_url('page'),'refresh');
+      redirect(base_url('admin/dashboard'),'refresh');
       }else if($hak_akses=='2'){
         redirect(base_url('page/distributor'),'refresh');
       }else if($hak_akses=='3'){
@@ -53,7 +53,26 @@ class Simple_login
       redirect(base_url('login'),'refresh');
     }
   }
-
+  //fungsi cek hak akses
+  public function admin()
+  {
+    //memeriksa apakah session sudah atau belum, jika belum alihkan ke halaman login
+    if($this->CI->session->userdata('hak_akses')!="1"){
+      $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
+      redirect(base_url('login'),'refresh');
+      //echo "anda tidak memiliki akses";
+    }
+  }
+  //fungsi cek hak akses
+  public function customer()
+  {
+    //memeriksa apakah session sudah atau belum, jika belum alihkan ke halaman login
+    if($this->CI->session->userdata('hak_akses')!="4"){
+      $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
+      redirect(base_url('login'),'refresh');
+      //echo "anda tidak memiliki akses";
+    }
+  }
   //fungsi logout
   public function logout()
   {

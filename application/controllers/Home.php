@@ -57,6 +57,17 @@ class Home extends CI_Controller
 						);
 		$this->load->view('layout/wrapper', $data, FALSE);
 	}
+	//page produk
+	public function produk(){
+		$promo 	= $this->home_model->promo();
+		$produk 	= $this->home_model->produk();
+		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+						'produk' => $produk,
+						'promo'	=> $promo,
+						'isi'	=> 'home/produk'
+						);
+		$this->load->view('layout/wrapper', $data, FALSE);
+	}
 	//page kontak
 	public function login(){
 		$this->load->view('login/login');

@@ -16,7 +16,8 @@ class Order extends CI_Controller
 		//load helper random string
 		$this->load->helper('string');
 		//proteksi halaman
-		//$this->simple_login->cek_login();
+		$this->simple_login->cek_login();
+		$this->simple_login->admin();
 	}
 	//halaman data order terbaru atau yg belum bayar
 	public function index()
@@ -392,5 +393,76 @@ class Order extends CI_Controller
 		$this->pembayaran_model->bayar($data);
 		$this->session->set_flashdata('sukses','Status Telah Diubah');
 		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+	}
+	//tampilkan data stok awal dari masing masing produk
+	public function stok_awal(){
+		$produk = $this->produk_model->produk();
+		$data = array(	'title' => 'Data Stok Awal',
+						'produk' => $produk,
+						'isi' => 'admin/stok/stok_awal' );
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	//tambah stok
+	public function tambah_stok()
+	{
+		$produk = $this->produk_model->produk();
+		//validation
+		$valid = $this-> form_validation;
+
+		$valid->set_rules('kode_produk', 'Kode Product','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('stok', 'Stok Product','required',
+				array(	'required' 		=> '%s harus diisi'));
+
+		if($valid->run()===FALSE){
+			//end validation
+			$data = array(	'title'		=> 'Tambah Data Stok',
+							'produk'	=> $produk,
+							'isi'		=> 'admin/stok/tambah_stok'
+						);
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		}else{
+			$i 	= $this->input;
+			$kode_produk = $i->post('kode_produk');
+			$stok = $i->post('stok');
+			$sisa =  $this->produk_model->get_stok_id($kode_produk)->stok;
+			$sisa_stok = $sisa + $stok;
+			$data = array(	'kode_produk'	=> $kode_produk,
+							'qty'	=> $i->post('stok'),
+							'sisa' => $sisa_stok,
+							'tanggal' => date('Y-m-d'),
+							'status' => 'in'
+						);
+			$this->produk_model->tambah_stok($data);
+
+			$this->produk_model->update_stok($kode_produk,array('stok' => $stok));
+			$this->session->set_flashdata('sukses','Data telah ditambah');
+			redirect(base_url('admin/order/stok_awal'), 'refresh');
+		}
+	}
+	//tapilkan riwayat stok
+	public function stok()
+	{ 
+
+		$stok 	= $this->produk_model->getstok();
+		$data = array(	'title'			=> 'Data Stok',
+						'stok'			=> $stok,
+						'isi'			=> 'admin/stok/stok'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	//mendapatkan data produk
+	public function get_produk(){
+		$id=$this->input->post('id');
+  		$data=$this->produk_model->getby_produk($id);
+  		if (count($data) > 0) {
+            foreach ($data as $row)
+                $arr_result[] = array(
+                	'nama_produk' => $row->nama_produk,
+                	'stok' => $row->stok,
+                );
+                echo json_encode($arr_result);
+            }
 	}
 }
