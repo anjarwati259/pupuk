@@ -30,4 +30,9 @@ class User_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	//tambah data user
+	public function tambah($data){
+		$this->db->insert('tb_user', $data);
+		return $this->db->insert_id();
+	}
 }

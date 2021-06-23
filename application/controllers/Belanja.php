@@ -130,7 +130,6 @@ class Belanja extends CI_Controller
 			$this->load->view('layout/wrapper', $data, FALSE);
 			//masuk database
 			}else{
-			//masuk database
 			$i = $this->input;
 			$kode_transaksi = $i->post('kode_transaksi');
 			$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
