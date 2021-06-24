@@ -15,8 +15,8 @@ class Belanja extends CI_Controller
 		//load helper random string
 		$this->load->helper('string');
 		//proteksi halaman
-		$this->simple_login->cek_login();
-		$this->simple_login->customer();
+		//$this->simple_login->cek_login();
+		//$this->simple_login->customer();
 	}
 	//halaman belanja
 	public function index()
@@ -39,20 +39,39 @@ class Belanja extends CI_Controller
 		$name 			= $this->input->post('name');
 		$id_promo 		= $this->input->post('id_promo');
 		$id_produk		= $this->input->post('id_produk');
-		$option 		= $this->input->post('option');
+		$option 		= $this->input->post('option');//1 promo, 2 non promo
+		$jumlah 		= $this->input->post('jumlah');
+		$bonus 			= $this->input->post('bonus');
 		$gambar 		= $this->input->post('gambar');
 		$redirect_page 	= $this->input->post('redirect_page');
 		//proses memasukkan ke keranjang belanja
-		$data = array(	'id'	=> $id,
+			$data = array(
+						array(
+						'id'	=> $id,
 						'qty'	=> $qty,
 						'price'	=> $price,
 						'name'	=> $name,
 						'id_promo' => $id_promo,
 						'id_produk' => $id_produk,
+						'jumlah'	=> $jumlah,
 						'gambar'=> $gambar,
-						'option' => $option
-						);
+						'option' => $option,
+						'options'  => array('ket'=>'promo')
+					),
+						array(
+						'id'      => $id_produk,
+						'id_produk' => $id_produk,
+						'id_promo' => $id_promo,
+						'jumlah'	=> $qty,
+						'option' => $option,
+						'qty'     => $bonus,
+						'price'   => 0,
+						'name'    => $name,
+						'gambar'=> $gambar,
+					)
+				);
 		$this->cart->insert($data);
+		//print_r($data);
 		//redirect page
 		redirect($redirect_page,'refresh');
 	}
@@ -114,9 +133,9 @@ class Belanja extends CI_Controller
 			$id = $this->order_model->get_last_id();
 				if($id){
 					$id = $id[0]->kode_transaksi;
-					$kode_transaksi = generate_code('INC0',$id);
+					$kode_transaksi = generate_code('INV0',$id);
 				}else{
-					$kode_transaksi = 'INC0001';
+					$kode_transaksi = 'INV0001';
 				}
 			//end validation
 
@@ -154,19 +173,33 @@ class Belanja extends CI_Controller
 			//proses masuk ke tabel transaksi
 			foreach ($keranjang as $keranjang) {
 				$sub_total	= $keranjang['price'] * $keranjang['qty'];
-				//total item = qty * jumlah
-				//jika option = promo maka masukkan 2 data, bonus dan order
-				//bonus = bonus * qty
-				$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
-								'kode_transaksi'	=> $i->post('kode_transaksi'),
-								'id_produk'			=> $keranjang['id_produk'],
-								'id_promo'			=> $keranjang['id_promo'],
-								'harga'				=> $keranjang['price'],
-								'jml_beli'			=> $keranjang['qty'],
-								'total_harga'		=> $sub_total,
-								'status'			=> $keranjang['option'],
-								'tanggal_transaksi'	=> $i->post('tanggal_transaksi')
-								);
+				if($keranjang['option']==1){
+				$qty = $keranjang['jumlah'] * $keranjang['qty'];
+					$data = array(	
+						'id_pelanggan'	=> $pelanggan->id_pelanggan,
+						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'id_produk'			=> $keranjang['id_produk'],
+						'id_promo'			=> $keranjang['id_promo'],
+						'harga'				=> $keranjang['price'],
+						'jml_beli'			=> $qty,
+						'total_harga'		=> $sub_total,
+						'status'			=> $keranjang['option'],
+						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')
+						);
+				}else{
+					$data = array(	
+						'id_pelanggan'	=> $pelanggan->id_pelanggan,
+						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'id_produk'			=> $keranjang['id_produk'],
+						'id_promo'			=> $keranjang['id_promo'],
+						'harga'				=> $keranjang['price'],
+						'jml_beli'			=> $keranjang['qty'],
+						'total_harga'		=> $sub_total,
+						'status'			=> $keranjang['option'],
+						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')
+						);
+				}
+				
 				$this->order_model->tambah_order($data);
 			}
 			//end proses masuk ke tabel transaksi
@@ -176,7 +209,6 @@ class Belanja extends CI_Controller
 			redirect(base_url('belanja/sukses/'.$kode_transaksi), 'refresh');
 		}
 		//end masuk database
-			//end database
 		}else{
 			//kalau belum, maka harus registrasi
 			$this->session->set_flashdata('sukses','Silahkan Login atau Registrasi Terlebih Dahulu');

@@ -73,7 +73,7 @@
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty"><?php echo $this->cart->total_items();?></div>
+										<div class="qty"><?php echo count($keranjang);?></div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
@@ -87,6 +87,7 @@
 											//kalau ada
 										}else{ 
 											foreach ($keranjang as $keranjang) {
+											if($keranjang['price'] != 0){
 											?>
 											<div class="product-widget">
 												<div class="product-img">
@@ -98,7 +99,7 @@
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
 											</div>
-											<?php } } ?>
+											<?php } } } ?>
 										</div>
 										<?php 
 											//kalau ga ada data belanjaan

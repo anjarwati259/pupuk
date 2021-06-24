@@ -113,7 +113,7 @@
 						</div>
 					</div>
 				</div>
-			  <input type="hidden" name="kode_transaksi" class="form-control" value="<?php echo $kode_transaksi ?>">
+			  <input type="text" name="kode_transaksi" class="form-control" value="<?php echo $kode_transaksi ?>">
               <input type="hidden" name="total_transaksi" value="<?php echo $this->cart->total() ?>">
               <input type="hidden" name="tanggal_transaksi" value="<?php echo date('Y-m-d'); ?>">
               <input type="hidden" name="total_item" value="<?php echo $total_item ?>">

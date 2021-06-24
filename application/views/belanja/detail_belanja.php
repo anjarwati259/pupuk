@@ -100,8 +100,8 @@
 							//form update
 							$rowid	= $keranjang['rowid'];
 							echo form_open(base_url('belanja/update_cart'));
-							//echo form_hidden('rowid', $rowid);
 							?>
+							<?php if($keranjang['price']!=0){ ?>
 						<tr>
 							<td style="vertical-align: middle;"><a href="<?php echo base_url('belanja/hapus/'.$keranjang['rowid']) ?>"><i class="fa fa-times-circle icon"></i></a></td>
 							<td><img src="<?php echo base_url('assets/img/produk/'.$keranjang['gambar']) ?>"></td>
@@ -122,6 +122,7 @@
 								 ?>
 							</td>
 						</tr>
+						<?php } ?>
 						<?php $i++; ?>
 					<?php
 						} 

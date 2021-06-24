@@ -22,16 +22,9 @@
         <section class="signup">
             <div class="container">
             	<h2 class="title">Form Register Member</h2>
-            	<?php if($this->session->flashdata('sukses')){
-		echo '<div class="alert alert-warning">';
-		echo $this->session->flashdata('sukses');
-		echo '</div>';
-	} ?>
                 <div class="signup-content">
                     <div class="signup-form">
                     	<?php 
-                    	//display error
-		echo validation_errors('<div class="alert alert-warning">','</div>');
                         echo form_open(base_url('login/register'),'class="login100-form validate-form"') ?>
                          <form method="POST" class="register-form" id="register-form">
                             <div class="form-group">

@@ -51,8 +51,7 @@
 	<!-- /container -->
 </div>
 <!-- /SECTION -->
-
-<!-- SECTION PROMO -->
+<!-- SECTION PRODUK-->
 <div class="section">
 	<!-- container -->
 	<div class="container">
@@ -62,7 +61,7 @@
 			<!-- section title -->
 			<div class="col-md-12">
 				<div class="section-title">
-					<h3 class="title">Promo Saat Ini</h3>
+					<h3 class="title">Promo dan Paket Kilat</h3>
 				</div>
 			</div>
 			<!-- /section title -->
@@ -72,34 +71,33 @@
 				<div class="row">
 					<div class="products-tabs">
 						<!-- tab -->
-						<div id="tab1" class="tab-pane active">
-							<div class="products-slick" data-nav="#slick-nav-1">
+						<div id="tab2" class="tab-pane fade in active">
+							<div class="products-slick" data-nav="#slick-nav-2">
 								<!-- product -->
-								<?php foreach ($promo as $promo) {?>
+								<?php foreach ($promo as $promo) { ?>
 								<div class="product">
 									<?php 
 							//form untuk memproses belanjaan
 							echo form_open(base_url('belanja/add')); 
 							//elemen yang dibawa
 							echo form_hidden('id', $promo->id_promo);
+							echo form_hidden('id_produk', $promo->kode_produk);
 							echo form_hidden('id_promo', $promo->id_promo);
-							echo form_hidden('id_produk', null);
 							echo form_hidden('qty', 1);
+							echo form_hidden('jumlah', $promo->jumlah);
+							echo form_hidden('bonus', $promo->bonus);
 							echo form_hidden('price', $promo->harga);
 							echo form_hidden('name', $promo->nama_promo);
 							echo form_hidden('gambar', $promo->gambar);
-							echo form_hidden('option', 1);
+							echo form_hidden('option', 2);
 							//elemen redirect
 							echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
 							?>
 									<div class="product-img">
 										<img src="<?php echo base_url('assets/img/produk/'.$promo->gambar) ?>" alt="">
-										<div class="product-label">
-											<span class="new">NEW</span>
-										</div>
 									</div>
 									<div class="product-body">
-										<h3 class="product-name"><a href="<?php echo base_url('home/detail_promo/'.$promo->id_promo) ?>"><?php echo $promo->nama_promo ?></a></h3>
+										<h3 class="product-name"><a href="<?php echo base_url('home/detail/'.$promo->kode_produk) ?>"><?php echo $promo->nama_promo ?></a></h3>
 										<h4 class="product-price">Rp. <?php echo number_format($promo->harga,'0',',','.') ?></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
@@ -109,22 +107,22 @@
 											<i class="fa fa-star"></i>
 										</div>
 										<div class="product-btns">
-											<button href="#" class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">add to cart</span></button>
-											<a href="<?php echo base_url('home/detail_promo/'.$promo->id_promo) ?>" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a>
+											<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">add to cart</span></button>
+											<a href="<?php echo base_url('home/detail/'.$promo->kode_produk) ?>" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Detail</span></a>
 										</div>
 									</div>
 									<?php echo form_close(); ?>
 								</div>
-							<?php } ?>
+								<?php } ?>
 								<!-- /product -->
 							</div>
-							<div id="slick-nav-1" class="products-slick-nav"></div>
+							<div id="slick-nav-2" class="products-slick-nav"></div>
 						</div>
 						<!-- /tab -->
 					</div>
 				</div>
 			</div>
-			<!-- Products tab & slick -->
+			<!-- /Products tab & slick -->
 		</div>
 		<!-- /row -->
 	</div>
@@ -169,6 +167,8 @@
 							echo form_hidden('id_produk', $produk->kode_produk);
 							echo form_hidden('id_promo', null);
 							echo form_hidden('qty', 1);
+							echo form_hidden('jumlah', null);
+							echo form_hidden('bonus', null);
 							echo form_hidden('price', $produk->harga_customer);
 							echo form_hidden('name', $produk->nama_produk);
 							echo form_hidden('gambar', $produk->gambar);
