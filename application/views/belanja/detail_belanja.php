@@ -101,10 +101,10 @@
 							$rowid	= $keranjang['rowid'];
 							echo form_open(base_url('belanja/update_cart'));
 							?>
-							<?php if($keranjang['price']!=0){ ?>
 						<tr>
 							<td style="vertical-align: middle;"><a href="<?php echo base_url('belanja/hapus/'.$keranjang['rowid']) ?>"><i class="fa fa-times-circle icon"></i></a></td>
 							<td><img src="<?php echo base_url('assets/img/produk/'.$keranjang['gambar']) ?>"></td>
+							<td><?php echo $keranjang['jumlah'] ?></td>
 							<td style="vertical-align: middle;"><?php echo $keranjang['name'] ?></td>
 							<td style="vertical-align: middle;">Rp. <?php echo number_format($keranjang['price'],'0',',','.') ?></td>
 							<td style="vertical-align: middle;">
@@ -122,7 +122,6 @@
 								 ?>
 							</td>
 						</tr>
-						<?php } ?>
 						<?php $i++; ?>
 					<?php
 						} 

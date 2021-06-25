@@ -100,6 +100,8 @@
 							echo form_hidden('id_produk', $produk->kode_produk);
 							echo form_hidden('id_promo', null);
 							echo form_hidden('qty', 1);
+							echo form_hidden('jumlah', null);
+							echo form_hidden('bonus', null);
 							echo form_hidden('price', $produk->harga_customer);
 							echo form_hidden('name', $produk->nama_produk);
 							echo form_hidden('gambar', $produk->gambar);
@@ -140,13 +142,15 @@
 							echo form_open(base_url('belanja/add')); 
 							//elemen yang dibawa
 							echo form_hidden('id', $promo->id_promo);
+							echo form_hidden('id_produk', $promo->kode_produk);
 							echo form_hidden('id_promo', $promo->id_promo);
-							echo form_hidden('id_produk', null);
 							echo form_hidden('qty', 1);
+							echo form_hidden('jumlah', $promo->jumlah);
+							echo form_hidden('bonus', $promo->bonus);
 							echo form_hidden('price', $promo->harga);
 							echo form_hidden('name', $promo->nama_promo);
 							echo form_hidden('gambar', $promo->gambar);
-							echo form_hidden('option', 1);
+							echo form_hidden('option', 2);
 							//elemen redirect
 							echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
 							?>

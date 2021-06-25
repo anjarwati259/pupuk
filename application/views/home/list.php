@@ -1,5 +1,5 @@
 <!-- SECTION PRODUK-->
-<div class="section">
+<div class="section"> 
 	<!-- container -->
 	<div class="container">
 		<!-- row -->
@@ -89,7 +89,7 @@
 							echo form_hidden('price', $promo->harga);
 							echo form_hidden('name', $promo->nama_promo);
 							echo form_hidden('gambar', $promo->gambar);
-							echo form_hidden('option', 2);
+							echo form_hidden('option', 1);
 							//elemen redirect
 							echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
 							?>

@@ -15,8 +15,8 @@ class Belanja extends CI_Controller
 		//load helper random string
 		$this->load->helper('string');
 		//proteksi halaman
-		//$this->simple_login->cek_login();
-		//$this->simple_login->customer();
+		$this->simple_login->cek_login();
+		$this->simple_login->customer();
 	}
 	//halaman belanja
 	public function index()
@@ -54,21 +54,22 @@ class Belanja extends CI_Controller
 						'id_promo' => $id_promo,
 						'id_produk' => $id_produk,
 						'jumlah'	=> $jumlah,
+						'bonus'		=> $bonus,
 						'gambar'=> $gambar,
 						'option' => $option,
 						'options'  => array('ket'=>'promo')
 					),
-						array(
-						'id'      => $id_produk,
-						'id_produk' => $id_produk,
-						'id_promo' => $id_promo,
-						'jumlah'	=> $qty,
-						'option' => $option,
-						'qty'     => $bonus,
-						'price'   => 0,
-						'name'    => $name,
-						'gambar'=> $gambar,
-					)
+					// 	array(
+					// 	'id'      => $id_produk,
+					// 	'id_produk' => $id_produk,
+					// 	'id_promo' => $id_promo,
+					// 	'jumlah'	=> $qty,
+					// 	'option' => $option,
+					// 	'qty'     => $bonus,
+					// 	'price'   => 0,
+					// 	'name'    => $name,
+					// 	'gambar' => $gambar,
+					// )
 				);
 		$this->cart->insert($data);
 		//print_r($data);
@@ -76,22 +77,14 @@ class Belanja extends CI_Controller
 		redirect($redirect_page,'refresh');
 	}
 	//hapus isi keranjang belanja
-	public function hapus($rowid='')
+	public function hapus($rowid)
 	{
 		
-		if($rowid){
-			//hapus per item
-			$this->cart->remove($rowid);
-			$this->session->set_flashdata('sukses','Data keranjang belanja telah dihapus');
-			redirect(base_url('belanja'), 'refresh');
-		}else{
-			//hapus all
-			$this->cart->destroy();
-			$this->session->set_flashdata('sukses','Data keranjang belanja telah dihapus');
-			redirect(base_url('belanja'), 'refresh');
-		}
+		//hapus per item
+		$this->cart->remove($rowid);
+		$this->session->set_flashdata('sukses','Data keranjang belanja telah dihapus');
+		redirect(base_url('belanja'), 'refresh');
 	}
-
 	//update cart
 	public function update_cart()
 	{	
@@ -126,6 +119,14 @@ class Belanja extends CI_Controller
 				array(	'required' 		=> '%s harus diisi'));
 
 		$valid->set_rules('alamat', 'Alamat','required',
+				array(	'required' 		=> '%s harus diisi'));
+		$valid->set_rules('provinsi', 'Provinsi','required',
+				array(	'required' 		=> '%s harus diisi'));
+		$valid->set_rules('kabupaten', 'Kabupaten','required',
+				array(	'required' 		=> '%s harus diisi'));
+		$valid->set_rules('kecamatan', 'Kecamatan','required',
+				array(	'required' 		=> '%s harus diisi'));
+		$valid->set_rules('payment', 'Metode Pembayaran','required',
 				array(	'required' 		=> '%s harus diisi'));
 
 		if($valid->run()===FALSE){
@@ -175,7 +176,9 @@ class Belanja extends CI_Controller
 				$sub_total	= $keranjang['price'] * $keranjang['qty'];
 				if($keranjang['option']==1){
 				$qty = $keranjang['jumlah'] * $keranjang['qty'];
-					$data = array(	
+				$bonus = $keranjang['bonus'] * $keranjang['qty'];
+					$data = array(
+					array(	
 						'id_pelanggan'	=> $pelanggan->id_pelanggan,
 						'kode_transaksi'	=> $i->post('kode_transaksi'),
 						'id_produk'			=> $keranjang['id_produk'],
@@ -185,6 +188,18 @@ class Belanja extends CI_Controller
 						'total_harga'		=> $sub_total,
 						'status'			=> $keranjang['option'],
 						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')
+							),
+					array(
+							'id_pelanggan'	=> $pelanggan->id_pelanggan,
+						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'id_produk'			=> $keranjang['id_produk'],
+						'id_promo'			=> $keranjang['id_promo'],
+						'harga'				=> $keranjang['price'],
+						'jml_beli'			=> $bonus,
+						'total_harga'		=> $sub_total,
+						'status'			=> $keranjang['option'],
+						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')
+							)
 						);
 				}else{
 					$data = array(	
