@@ -77,7 +77,7 @@ class Order_model extends CI_Model
 	//tambah order
 	public function tambah_order($data)
 	{
-		$this->db->insert('tb_order', $data);
+		$this->db->insert_batch('tb_order', $data);
 	}
 	//digunakan untuk mencari kode transaksi terakhir
 	public function get_last_id(){

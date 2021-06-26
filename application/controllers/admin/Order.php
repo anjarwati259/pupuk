@@ -213,8 +213,6 @@ class Order extends CI_Controller
 		$ongkir = $this->input->post('ongkir');
 
 		//cek id pelanggan
-
-
 		if(!empty($carts) && is_array($carts) && $ongkir != null){
 			$total_bayar = $subtotal + $ongkir;
 			$id_pelanggan = $this->input->post('id_pelanggan');
@@ -282,6 +280,7 @@ class Order extends CI_Controller
 		}
 		$this->cart->destroy();
 	}
+	//untuk menyimpan data stok ke database
 	private function _insert_stok_data($kode_transaksi,$carts,$id_pelanggan){
 		
 		foreach($carts as $key => $cart){

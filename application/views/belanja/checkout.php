@@ -81,7 +81,11 @@
 						<?php 
 						$total_item = 0;
 						foreach ($keranjang as $keranjang) { 
+							if($keranjang['option']==1){//jika promo
+							$total_item = $total_item + ($keranjang['qty'] * $keranjang['jumlah']);
+							}else{
 							$total_item = $total_item + $keranjang['qty'];
+							}
 							?>
 						<tr>
 							<td colspan="4" style="vertical-align: middle;color: #777777; font-weight: 500;"><?php echo $keranjang['name'] ?> x<?php echo $keranjang['qty'] ?></td>

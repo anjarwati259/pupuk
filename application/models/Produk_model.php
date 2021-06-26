@@ -77,6 +77,10 @@ class Produk_model extends CI_Model
 		$this->db->where('kode_produk', $id);
 		$this->db->update('tb_produk');
 	}
+	//mengurangi stok dari customer
+	public function update_stok_min($data){
+		$this->db->update_batch('tb_produk', 'stok-'.$data['stok'], 'id_produk'); 
+	}
 	//listing order stok
 	public function getstok(){
 		$this->db->select('tb_stok.*,

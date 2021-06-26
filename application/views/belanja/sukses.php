@@ -120,16 +120,19 @@ function tanggal_indo($tanggal, $cetak_hari = false)
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($transaksi as $transaksi) { ?>
+						<?php foreach ($transaksi as $transaksi) { 
+							if($transaksi->harga != 0){
+						?>
 						<tr>
-							<?php if($transaksi->status==2){ ?>
+							<?php 
+							if($transaksi->status==2){ ?>
 							<td colspan="3" style="vertical-align: middle;"><?php echo $transaksi->nama_produk ?></td>
 						<?php }else{ ?>
 							<td colspan="3" style="vertical-align: middle;"><?php echo $transaksi->nama ?></td>
 						<?php } ?>
-							<td style="vertical-align: middle; text-align: right;"><?php echo 'Rp. '.number_format($transaksi->harga,'0',',','.') ?></td>
+							<td style="vertical-align: middle; text-align: right;"><?php echo 'Rp. '.number_format($transaksi->total_harga,'0',',','.') ?></td>
 						</tr>
-					<?php } ?>
+					<?php } }?>
 						<tr>
 							<th colspan="3">Total:</th>
 							<th style="vertical-align: middle; text-align: right;"><?php echo 'Rp. '.number_format($detail->total_transaksi,'0',',','.') ?></th>
