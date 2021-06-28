@@ -102,16 +102,17 @@
                               </ul>
               <?php 
               //form untuk memproses belanjaan
-              echo form_open(base_url('belanja/add')); 
+              echo form_open(base_url('mitra/add')); 
               //elemen yang dibawa
               echo form_hidden('id', 'POC');
               echo form_hidden('id_produk', 'POC');
               echo form_hidden('id_promo', null);
-              echo form_hidden('qty', 20);
+              echo form_hidden('qty', 1);
               echo form_hidden('jumlah', 20);
               echo form_hidden('bonus', 5);
               echo form_hidden('price', 2700000);
               echo form_hidden('name', 'Pupuk Kilat 1L');
+              echo form_hidden('nama', 'Paket POC 1 Liter');
               echo form_hidden('gambar', 'POC.jpg');
               echo form_hidden('option', 2);
               //elemen redirect

@@ -33,7 +33,7 @@ class Simple_login
       }else if($hak_akses=='2'){
         redirect(base_url('page/distributor'),'refresh');
       }else if($hak_akses=='3'){
-        redirect(base_url('page/mitra'),'refresh');
+        redirect(base_url('mitra'),'refresh');
       }else if($hak_akses=='4'){
         redirect(base_url('home'),'refresh');
       }
@@ -68,6 +68,15 @@ class Simple_login
   {
     //memeriksa apakah session sudah atau belum, jika belum alihkan ke halaman login
     if($this->CI->session->userdata('hak_akses')!="4"){
+      $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
+      redirect(base_url('login'),'refresh');
+      //echo "anda tidak memiliki akses";
+    }
+  }
+  public function mitra()
+  {
+    //memeriksa apakah session sudah atau belum, jika belum alihkan ke halaman login
+    if($this->CI->session->userdata('hak_akses')!="3"){
       $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
       redirect(base_url('login'),'refresh');
       //echo "anda tidak memiliki akses";

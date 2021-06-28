@@ -99,7 +99,7 @@
 						foreach ($keranjang as $keranjang) {
 							//form update
 							$rowid	= $keranjang['rowid'];
-							echo form_open(base_url('belanja/update_cart'));
+							echo form_open(base_url('mitra/update_cart'));
 							?>
 						<tr>
 							<td style="vertical-align: middle;"><a href="<?php echo base_url('belanja/hapus/'.$keranjang['rowid']) ?>"><i class="fa fa-times-circle icon"></i></a></td>
@@ -128,9 +128,9 @@
 					?>
 					<tr>
 						<td colspan="3" style="text-align: right;"><a href="<?php echo base_url() ?>" class="btn btn-back">Lanjutkan Belanja</a></td>
+						<?php echo form_close(); ?>
 						<td colspan="3"><button class="btn btn-update">Update Keranjang</button></td>
 					</tr>
-					<?php echo form_close(); ?>
 					</tbody>
 				</table>
 			</div>

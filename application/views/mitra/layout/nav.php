@@ -24,7 +24,7 @@
                 $keranjang = $this->cart->contents();
                 ?>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter"><?php echo count($keranjang);?></span>
+                <span class="badge badge-danger badge-counter"><?php echo $this->cart->total_items();?></span>
             </a>
             <!-- Dropdown - Messages -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -39,12 +39,12 @@
                             alt="...">
                     </div>
                     <div class="font-weight-bold">
-                        <div class="text-truncate"><?php echo $keranjang['name'] ?></div>
-                        <div class="small text-gray-500"></div>
+                        <div class="text-truncate"><?php echo $keranjang['nama'] ?> X <?php echo $keranjang['qty'] ?></div>
+                        <div class="small text-gray-500">Total Rp.<?php echo number_format(($keranjang['price'] * $keranjang['qty']),'0',',','.')?></div>
                     </div>
                 </a>
             <?php } ?>
-                <a class="dropdown-item text-center" style="font-size: 20px; background-color: #4E73DF; color: #fff" href="#">Pembayaran</a>
+                <a class="dropdown-item text-center" style="font-size: 20px; background-color: #4E73DF; color: #fff" href="<?php echo base_url('mitra/view_cart') ?>">Checkout</a>
             </div>
         </li>
 

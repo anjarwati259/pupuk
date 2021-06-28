@@ -17,7 +17,7 @@ class Belanja extends CI_Controller
 		$this->load->helper('string');
 		//proteksi halaman
 		$this->simple_login->cek_login();
-		$this->simple_login->customer();
+		//$this->simple_login->customer();
 	}
 	//halaman belanja
 	public function index()
@@ -87,33 +87,14 @@ class Belanja extends CI_Controller
 		}
 		redirect(base_url('belanja'), 'refresh');
 	}
-	public function checkout(){
-		$cart 	= $this->cart->contents();
-		foreach ($cart as $cart) {
-		$data = array();
-			$qty = $cart['jumlah'] * $cart['qty'];
-				array_push($data, 
-					array('id_produk'=>$cart['id_produk'],
-							'stok'	=> $qty
-					),
-					array('id_produk' => 'POC500',
-						  'stok'	=> $cart['bonus']
-					)
-				);
-			foreach ($data as $keys) {
-				$this->produk_model->update_qty_min($keys['id_produk'],$keys);
-			}
-		}
-			print_r($data);
-	}
 	//checkout
-	public function checkout1()
+	public function checkout()
 	{
 		//cek sudah loggin atau belum, jika belum restrasi sekaligus login
 		//kondisi sudah login
 		$provinsi = $this->wilayah_model->listing();
 		if($this->session->userdata('username')){
-			$id_user				= $this->session->userdata('id_user');
+			$id_user	= $this->session->userdata('id_user');
 			$nama_user 	= $this->session->userdata('nama_user');
 			$pelanggan 	= $this->pelanggan_model->sudah_login($id_user, $nama_user);
 			$keranjang 	= $this->cart->contents();
@@ -248,13 +229,12 @@ class Belanja extends CI_Controller
 						);
 				}
 				
-				$this->order_model->tambah_order($data);
+				$this->order_model->tambahorder($data);
+				//update stok
+				if($i->post('kode_transaksi')){
+					$this->_insert_stok_data($i->post('kode_transaksi'),$data,$pelanggan->id_pelanggan);
+				}
 			}
-
-			if($i->post('kode_transaksi')){
-				$this->_insert_stok_data($i->post('kode_transaksi'),$keranjang,$pelanggan->id_pelanggan);
-			}
-
 			//end proses masuk ke tabel transaksi
 			//hapus keranjang
 			$this->cart->destroy();
@@ -271,105 +251,22 @@ class Belanja extends CI_Controller
 
 	//untuk menyimpan data stok ke database
 	private function _insert_stok_data($kode_transaksi,$carts,$id_pelanggan){
-		
-		foreach($carts as $key => $cart){
+		foreach ($carts as $cart) {
 			$id = array($cart['id_produk']);
-			$sisa =  $this->produk_model->get_stok_id($id);
-			$stok = array();
-			if($cart['option']==1){//jika promo
-				$qty = $cart['jumlah'] * $cart['qty'];
-				if($cart['id_produk']=='POC'){
-				array_push($stok,
-						array(	'kode_transaksi' => $kode_transaksi,
-								'kode_produk' => $cart['id_produk'],
-								'id_pelanggan' => $id_pelanggan,
-								'qty' => $qty,
-								'tanggal' => date('Y-m-d'),
-								'sisa'	=> $sisa->stok,
-								'status' => 'out'),
-						array(	'kode_transaksi' => $kode_transaksi,
-								'kode_produk' => 'POC500',
-								'id_pelanggan' => $id_pelanggan,
-								'qty' => $cart['bonus'],
-								'tanggal' => date('Y-m-d'),
-								'sisa'	=> $sisa->stok,
-								'status' => 'out')
-					);
-				}else{
-					array_push($stok,
-						array(	'kode_transaksi' => $kode_transaksi,
-								'kode_produk' => $cart['id_produk'],
-								'id_pelanggan' => $id_pelanggan,
-								'qty' => $qty,
-								'tanggal' => date('Y-m-d'),
-								'sisa'	=> $sisa->stok,
-								'status' => 'out'),
-						array(	'kode_transaksi' => $kode_transaksi,
-								'kode_produk' => $cart['id_produk'],
-								'id_pelanggan' => $id_pelanggan,
-								'qty' => $cart['bonus'],
-								'tanggal' => date('Y-m-d'),
-								'sisa'	=> $sisa->stok,
-								'status' => 'out')
-					);
-				}
-			}else{
-				$stok = array(
+		 	$sisa =  $this->produk_model->get_stok_id($id);
+			//masukkan tabel stok
+			$data = array(
 				'kode_transaksi' => $kode_transaksi,
 				'kode_produk' => $cart['id_produk'],
 				'id_pelanggan' => $id_pelanggan,
-				'qty' => $cart['qty'],
+				'qty' => $cart['jml_beli'],
 				'tanggal' => date('Y-m-d'),
 				'sisa'	=> $sisa->stok,
-				'status' => 'out'
-			);
+				'status' => 'out');
 			}
-			$this->order_model->tambah_stok($stok);
-			//update data stok produk
-			$data = array();
-			if($cart['option']==1 && $chart['id_produk'] == 'POC'){
-				$data = array();
-				$qty = $cart['jumlah'] * $cart['qty'];
-					array_push($data, 
-						array('id_produk'=>$cart['id_produk'],
-								'stok'	=> $qty
-						),
-						array('id_produk' => 'POC500',
-							  'stok'	=> $cart['bonus']
-						)
-					);
-				foreach ($data as $keys) {
-					$this->produk_model->update_qty_min($keys['id_produk'],$keys);
-				}
-				
-			}else if($cart['option']==1 && $chart['id_produk'] != 'POC')
-			{
-				$data = array();
-				$qty = $cart['jumlah'] * $cart['qty'];
-					array_push($data, 
-						array('id_produk'=>$cart['id_produk'],
-								'stok'	=> $qty
-						),
-						array('id_produk' => $cart['id_produk'],
-							  'stok'	=> $cart['bonus']
-						)
-					);
-				foreach ($data as $keys) {
-					$this->produk_model->update_qty_min($keys['id_produk'],$keys);
-				}
-			}else{
-				$data = array();
-					array_push($data, 
-						array('id_produk'=>$cart['id_produk'],
-								'stok'	=> $cart['qty']
-						)
-					);
-				foreach ($data as $keys) {
-					$this->produk_model->update_qty_min($keys['id_produk'],$keys);
-				}
-			}
-		}
-		$this->cart->destroy();
+			$this->order_model->tambah_stok($data);
+			//kurangi stok
+			$this->produk_model->update_qty_min($cart['id_produk'],array('stok' => $cart['jml_beli']));
 	}
 	//sukses checkout
 	public function sukses($kode_transaksi)

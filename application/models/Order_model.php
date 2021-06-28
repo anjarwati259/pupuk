@@ -77,6 +77,11 @@ class Order_model extends CI_Model
 	//tambah order
 	public function tambah_order($data)
 	{
+		$this->db->insert('tb_order', $data);
+	}
+	//tambah order
+	public function tambahorder($data)
+	{
 		$this->db->insert_batch('tb_order', $data);
 	}
 	//digunakan untuk mencari kode transaksi terakhir
@@ -98,5 +103,9 @@ class Order_model extends CI_Model
 	{
 		$this->db->insert('tb_stok', $data);
 	}
-
+	//tambah stok customer
+	public function stok($data)
+	{
+		$this->db->insert_batch('tb_stok', $data);
+	}
 }
