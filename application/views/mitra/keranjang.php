@@ -54,7 +54,7 @@
 					</tbody>
 				</table>
 	        </div>
-	    </div>
+	    </div> 
 	</div>
 </div>
 </div>
@@ -135,7 +135,7 @@
               <input type="hidden" name="kab" id="kab" value="<?php echo $pelanggan->kabupaten ?>">
               <input type="hidden" name="kec" id="kec" value="<?php echo $pelanggan->kecamatan ?>">
               <input type="hidden" name="prov" id="prov" value="<?php echo $pelanggan->provinsi ?>">
-            	<button type="submit" class="btn btn-primary">Checkout Sekarang</button>
+            	<button type="submit" class="btn btn-primary check" data-toggle="modal" >Checkout Sekarang</button>
             	<?php echo form_close(); ?>
 	        </div>
 	    </div>
@@ -143,9 +143,45 @@
 </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="sukses">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="alert alert-success" role="alert">
+		  <h4 class="alert-heading">Terima Kasih</h4>
+		  <p>Transaksi Anda Telah Kami Terima, Tim kami Akan Segera Menghubungi Anda untuk Konfirmasi. </p>
+		  <hr>
+		  <p class="mb-0">Jika Masih Ada Pertanyaan Silahkan Hubungi Kami Di Nomor WatsApp Berikut (081335005334) atau bisa Klik Tombol Dibawah Ini</p>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <a href="" class="btn btn-success"><i class="fab fa-whatsapp"></i> Hubungi Kami</button>
+        <a href="<?php echo base_url('mitra/order') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Close</a>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+ <?php
+    if($this->session->flashdata('checkout')){
+        echo "
+            <script type=\"text/javascript\">
+		    	$(window).on('load', function() {
+		        	$('#sukses').modal('show');
+		    	});
+            </script>
+        ";
+     }
+  ?>
 <script type="text/javascript">
   $(document).ready(function(){
 
+  		$(".check").click(function(){
+            alert(if($this->session->flashdata('sukses')))
+        });
       // ambil data kabupaten ketika data memilih provinsi
       $('body').on("change","#form_prov",function(){
         var id = $(this).val();

@@ -4,6 +4,7 @@ catatan status
 	1 = publish
 	0 = draf
 2. DETAIL ORDER
+	2 = dibatalkan
 	1 = sudah bayar
 	0 = belum bayar
 3. ORDER

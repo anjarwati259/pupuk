@@ -29,9 +29,17 @@ class Order extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+	public function coba($kode_transaksi){
+		$order 	= $this->order_model->listing_coba($kode_transaksi);
+		$data = array(	'id_pelanggan' => $order->id_pelanggan,
+						'status_pelanggan' => $order->jenis_pelanggan,
+						'kode_transaksi'	=> $order->kode_transaksi,
+						);
+		print_r($data);
+	}
 	//konfirmasi pesanan jika sudah bayar
 	public function konfirmasi($kode_transaksi){
-
+		//konfirmasi status bayar
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
 						'id_rekening'		=> $this->input->post('id_rekening'),
 						'ongkir'		=> $this->input->post('ongkir'),
@@ -48,6 +56,8 @@ class Order extends CI_Controller
 						'jumlah_bayar'		=> $this->input->post('total_bayar')
 						);
 		$this->order_model->bayar($data);
+		//insert point
+
 		$this->session->set_flashdata('sukses','Status Telah Diubah');
 		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
 	}
@@ -124,7 +134,7 @@ class Order extends CI_Controller
 					'id_promo' => $id_promo,
 					'qty'     => $quantity,
 					'price'   => $sale_price,
-					'status' => $status,
+					'status'  => $status,
 					'name'    => $get_product_detail[0]['nama_produk'],
 					'options'  => array('id'=>'POC500', 'qty' => $bonus)
 				),

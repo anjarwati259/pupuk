@@ -9,8 +9,10 @@ class Mitra extends CI_Controller
 		parent::__construct();
 		$this->load->model('home_model');
 		$this->load->model('pelanggan_model');
+		$this->load->model('dashboard_model');
 		$this->load->model('order_model');
 		$this->load->model('produk_model');
+		$this->load->model('pembayaran_model');
 		$this->load->model('wilayah_model');
 		//load helper random string
 		$this->load->helper('string');
@@ -21,7 +23,9 @@ class Mitra extends CI_Controller
 	
 	public function index()
 	{
+		$order = $this->dashboard_model->order();
 		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+						'order' => $order,
 						'isi'	=> 'mitra/dashboard'
 						); 
 		$this->load->view('mitra/layout/wrapper',$data, FALSE);
@@ -246,8 +250,8 @@ class Mitra extends CI_Controller
 			//end proses masuk ke tabel transaksi
 			//hapus keranjang
 			$this->cart->destroy();
-			$this->session->set_flashdata('sukses','Checkout berhasil');
-			redirect(base_url('mitra/sukses/'.$kode_transaksi), 'refresh');
+			$this->session->set_flashdata('checkout','Checkout berhasil');
+			redirect(base_url('mitra/view_cart'));
 		}
 		//end masuk database
 		}else{
@@ -259,6 +263,9 @@ class Mitra extends CI_Controller
 	//untuk menyimpan data stok ke database
 	private function _insert_stok_data($kode_transaksi,$carts,$id_pelanggan){
 		foreach ($carts as $cart) {
+			//kurangi stok
+			$this->produk_model->update_qty_min($cart['id_produk'],array('stok' => $cart['jml_beli']));
+
 			$id = array($cart['id_produk']);
 		 	$sisa =  $this->produk_model->get_stok_id($id);
 			//masukkan tabel stok
@@ -270,10 +277,9 @@ class Mitra extends CI_Controller
 				'tanggal' => date('Y-m-d'),
 				'sisa'	=> $sisa->stok,
 				'status' => 'out');
-			}
+			//tambah stok
 			$this->order_model->tambah_stok($data);
-			//kurangi stok
-			$this->produk_model->update_qty_min($cart['id_produk'],array('stok' => $cart['jml_beli']));
+			}
 	}
 	public function sukses(){
 		print_r("sukses");
@@ -288,8 +294,35 @@ class Mitra extends CI_Controller
 			$this->load->view('mitra/layout/wrapper', $data, FALSE);
 	}
 	public function batal($kode_transaksi){
-		//1. hapus data 
+		$get_stok 	= $this->order_model->get_stok($kode_transaksi);
+		//update status detail order
+		$update = array(
+			'kode_transaksi' => $kode_transaksi,
+			'status_bayar'	 => 2
+		);
+		$this->order_model->update_status($update);
+
+		//hapus stok
 		$this->order_model->batal($kode_transaksi);
-		//2. return data stok
+		foreach ($get_stok as $value) {
+		//update stok
+		$this->produk_model->update_stok($value->id_produk,array('stok' => $value->jml_beli ));
+		}
+		
+		//kalau belum, maka harus registrasi
+		$this->session->set_flashdata('sukses','Silahkan Login atau Registrasi Terlebih Dahulu');
+		redirect(base_url('mitra/order'),'refresh');
+	}
+	public function detail($kode_transaksi){
+		$detail_order 	= $this->order_model->kode_transaksi($kode_transaksi);
+		$transaksi 		= $this->order_model->kode_order($kode_transaksi);
+		$bayar 			= $this->pembayaran_model->detail($kode_transaksi);
+		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+						'detail_order' => $detail_order,
+						'transaksi'	=> $transaksi,
+						'bayar'	=> $bayar,
+						'isi'	=> 'mitra/detail'
+						);
+		$this->load->view('mitra/layout/wrapper', $data, FALSE);
 	}
 }

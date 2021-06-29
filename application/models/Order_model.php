@@ -24,6 +24,21 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//menampilkan data order berdasarkan status bayar
+	public function listing_coba($data){
+		$this->db->select('tb_detail_order.*,
+							tb_pelanggan.nama_pelanggan, tb_pelanggan.id_pelanggan, tb_pelanggan.jenis_pelanggan,
+							tb_order.kode_produk,
+							 tb_pembayaran.jumlah_bayar');
+		$this->db->from('tb_detail_order');
+		$this->db->where('status_bayar', $data);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->group_by('tb_detail_order.kode_transaksi');
+		$this->db->order_by('kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	//menampilkan semua data order berdasarkan id user
 	public function listing($id_user){
 		$this->db->select('*');
@@ -121,6 +136,15 @@ class Order_model extends CI_Model
 	public function batal($kode_transaksi)
 	{
 	$this->db->where('kode_transaksi',$kode_transaksi);
-    $this->db->delete(array('tb_detail_order', 'tb_order'));
+    $this->db->delete('tb_stok');
+	}
+	public function get_stok($kode_transaksi)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_order');
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$this->db->order_by('kode_transaksi','desc');
+		$query = $this->db->get();
+		return $query->result();
 	}
 }

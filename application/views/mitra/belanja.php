@@ -190,7 +190,7 @@
                               echo form_hidden('id_produk', 'NUTRISITERNAK');
                               echo form_hidden('id_promo', null);
                               echo form_hidden('qty', 1);
-                              echo form_hidden('jumlah', 20);
+                              echo form_hidden('jumlah', 40);
                               echo form_hidden('bonus', 5);
                               echo form_hidden('price', 2700000);
                               echo form_hidden('name', 'Nutrisi Ternak');
@@ -231,7 +231,7 @@
                               echo form_hidden('id_produk', 'NUTRISIIKAN');
                               echo form_hidden('id_promo', null);
                               echo form_hidden('qty', 1);
-                              echo form_hidden('jumlah', 20);
+                              echo form_hidden('jumlah', 40);
                               echo form_hidden('bonus', 5);
                               echo form_hidden('price', 3400000);
                               echo form_hidden('name', 'Nutrisi Ikan');

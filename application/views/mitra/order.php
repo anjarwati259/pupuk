@@ -57,21 +57,25 @@
               foreach ($order as $order) { ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
-                            <td>#<a href="<?php echo base_url('order/detail/'.$order->kode_transaksi) ?>"><?php echo $order->kode_transaksi ?></td>
+                            <td>#<a href="<?php echo base_url('mitra/detail/'.$order->kode_transaksi) ?>"><?php echo $order->kode_transaksi ?></td>
                             <td><?php echo tanggal_indo(date('Y-m-d',strtotime($order->tanggal_transaksi)),true); ?></td>
                             <td>Rp. <?php echo number_format($order->total_bayar,'0',',','.') ?></td>
                             <td><?php 
                               $status = $order->status_bayar;
                               if($status==0){
-                                echo "<span style='color:red;'>Belum Bayar</span>";
+                                echo "<span style='color:orange;'>Belum Bayar</span>";
+                            }else if($status==2){
+                                echo "<span style='color:red;'>Dibatalkan</span>";
                               }else{
                                 echo "<span style='color:green;'>Sudah Bayar</span>";
                               } ?></td>
                             <td>
-                                <a href="#" class="btn btn-success btn-sm">
+                                <?php if($status==0){ ?>
+                                <a href="https://wa.me/6281335005334" class="btn btn-success btn-sm" target="_blank">
                                     <span class="text">Konfirmasi Pembayaran</span>
                                 </a>
                                 <?php include('batal.php') ?>
+                            <?php } ?>
                             </td>
                         </tr>
                     <?php } ?>
