@@ -81,7 +81,50 @@ class Mitra extends CI_Controller
 			$provinsi = $this->wilayah_model->listing();
 
 			$keranjang = $this->cart->contents();
-			$valid = $this-> form_validation;
+			//membuat kode transaksi
+			$id = $this->order_model->get_last_id();
+				if($id){
+					$id = $id[0]->kode_transaksi;
+					$kode_transaksi = generate_code('INV0',$id);
+				}else{
+					$kode_transaksi = 'INV0001';
+				}
+
+			$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+							'keranjang' => $keranjang,
+							'pelanggan' => $pelanggan,
+							'kode_transaksi' => $kode_transaksi,
+							'provinsi'	=> $provinsi,
+							'isi'	=> 'mitra/keranjang'
+							);
+			$this->load->view('mitra/layout/wrapper',$data, FALSE);
+		}
+	}
+	//update cart
+	public function update_cart()
+	{	
+		$i = 1;
+		foreach ($this->cart->contents() as $items) {
+			$data = array(	'rowid' => $items['rowid'],
+							'qty'	=> $this->input->post($i . '[qty]')
+			 );
+			$this->cart->update($data);
+			$i++;
+		}
+		redirect(base_url('mitra/view_cart'), 'refresh');
+	}
+	//update cart
+	public function checkout(){
+		//cek sudah loggin atau belum, jika belum restrasi sekaligus login
+		//kondisi sudah login
+		$provinsi = $this->wilayah_model->listing();
+		if($this->session->userdata('username')){
+			$id_user	= $this->session->userdata('id_user');
+			$nama_user 	= $this->session->userdata('nama_user');
+			$pelanggan 	= $this->pelanggan_model->sudah_login($id_user, $nama_user);
+			$keranjang 	= $this->cart->contents();
+			//validation 
+		$valid = $this-> form_validation;
  
 		$valid->set_rules('nama_pelanggan', 'Nama Lengkap','required',
 				array(	'required' 		=> '%s harus diisi'));
@@ -109,34 +152,144 @@ class Mitra extends CI_Controller
 				}else{
 					$kode_transaksi = 'INV0001';
 				}
+			//end validation
 
 			$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
-							'keranjang' => $keranjang,
-							'pelanggan' => $pelanggan,
-							'kode_transaksi' => $kode_transaksi,
-							'provinsi'	=> $provinsi,
-							'isi'	=> 'mitra/keranjang'
-							);
-			$this->load->view('mitra/layout/wrapper',$data, FALSE);
+						'keranjang' => $keranjang,
+						'pelanggan' => $pelanggan,
+						'kode_transaksi' => $kode_transaksi,
+						'provinsi'	=> $provinsi,
+						'isi'		=> 'mitra/keranjang'
+						);
+			$this->load->view('mitra/layout/wrapper', $data, FALSE);
+
+			//masuk database
+			}else{
+			$i = $this->input;
+			$kode_transaksi = $i->post('kode_transaksi');
+			$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
+							'id_user'			=> $id_user,
+							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+							'no_hp'				=> $i->post('no_telp'),
+							'alamat'			=> $i->post('alamat'),
+							'kode_transaksi'	=> $i->post('kode_transaksi'), 
+							'tanggal_transaksi'	=> $i->post('tanggal_transaksi'),
+							'total_transaksi'	=> $i->post('total_transaksi'),
+							'total_item'		=> $i->post('total_item'),
+							'provinsi'		=> $i->post('prov'),
+							'kabupaten'		=> $i->post('kab'),
+							'kecamatan'		=> $i->post('kec'),
+							'ongkir'		=> 0,
+							'total_bayar'	=> $i->post('total_transaksi'),
+							'catatan'		=> $i->post('catatan'),
+							'metode_pembayaran'	=> $i->post('payment'),
+							'status_bayar'	=> 0,
+						);
+			$this->order_model->tambah($data);
+			//proses masuk ke tabel transaksi
+			foreach ($keranjang as $keranjang) {
+				$sub_total	= $keranjang['price'] * $keranjang['qty'];
+				$qty = $keranjang['jumlah'] * $keranjang['qty'];
+				$bonus = $keranjang['bonus'] * $keranjang['qty'];
+				//insert data cart
+				$data = array();
+				if($keranjang['id_produk'] != 'POC'){//jika bukan POC 1 liter
+					array_push($data,
+					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//cart resmi
+						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'id_produk'			=> $keranjang['id_produk'],
+						'id_promo'			=> $keranjang['id_promo'],
+						'harga'				=> $keranjang['price'],
+						'jml_beli'			=> $qty,
+						'total_harga'		=> $sub_total,
+						'status'			=> $keranjang['option'],
+						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')), 
+					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//bonus
+						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'id_produk'			=> $keranjang['id_produk'],
+						'id_promo'			=> $keranjang['id_promo'],
+						'harga'				=> 0,
+						'jml_beli'			=> $bonus,
+						'total_harga'		=> 0,
+						'status'			=> $keranjang['option'],
+						'tanggal_transaksi'	=> $i->post('tanggal_transaksi'))
+				);
+				}else{//jika POC 1 liter
+					array_push($data,
+					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//cart resmi
+						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'id_produk'			=> $keranjang['id_produk'],
+						'id_promo'			=> $keranjang['id_promo'],
+						'harga'				=> $keranjang['price'],
+						'jml_beli'			=> $qty,
+						'total_harga'		=> $sub_total,
+						'status'			=> $keranjang['option'],
+						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')), 
+					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//bonus
+						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'id_produk'			=> 'POC500',
+						'id_promo'			=> $keranjang['id_promo'],
+						'harga'				=> 0,
+						'jml_beli'			=> $bonus,
+						'total_harga'		=> 0,
+						'status'			=> $keranjang['option'],
+						'tanggal_transaksi'	=> $i->post('tanggal_transaksi'))
+				);
+				}
+				
+				$this->order_model->tambahorder($data);
+				//update stok
+				if($i->post('kode_transaksi')){
+					$this->_insert_stok_data($i->post('kode_transaksi'),$data,$pelanggan->id_pelanggan);
+				}
+			}
+			//end proses masuk ke tabel transaksi
+			//hapus keranjang
+			$this->cart->destroy();
+			$this->session->set_flashdata('sukses','Checkout berhasil');
+			redirect(base_url('mitra/sukses/'.$kode_transaksi), 'refresh');
 		}
-			
+		//end masuk database
+		}else{
+			//kalau belum, maka harus registrasi
+			$this->session->set_flashdata('sukses','Silahkan Login atau Registrasi Terlebih Dahulu');
+			redirect(base_url('registrasi'),'refresh');
 		}
 	}
-	//update cart
-	public function update_cart()
-	{	
-		$i = 1;
-		foreach ($this->cart->contents() as $items) {
-			$data = array(	'rowid' => $items['rowid'],
-							'qty'	=> $this->input->post($i . '[qty]')
-			 );
-			$this->cart->update($data);
-			$i++;
-		}
-		redirect(base_url('mitra/view_cart'), 'refresh');
+	//untuk menyimpan data stok ke database
+	private function _insert_stok_data($kode_transaksi,$carts,$id_pelanggan){
+		foreach ($carts as $cart) {
+			$id = array($cart['id_produk']);
+		 	$sisa =  $this->produk_model->get_stok_id($id);
+			//masukkan tabel stok
+			$data = array(
+				'kode_transaksi' => $kode_transaksi,
+				'kode_produk' => $cart['id_produk'],
+				'id_pelanggan' => $id_pelanggan,
+				'qty' => $cart['jml_beli'],
+				'tanggal' => date('Y-m-d'),
+				'sisa'	=> $sisa->stok,
+				'status' => 'out');
+			}
+			$this->order_model->tambah_stok($data);
+			//kurangi stok
+			$this->produk_model->update_qty_min($cart['id_produk'],array('stok' => $cart['jml_beli']));
 	}
-	//update cart
-	public function checkout(){
+	public function sukses(){
 		print_r("sukses");
+	}
+	public function order(){
+		$id_user	= $this->session->userdata('id_user');
+		$order 			= $this->order_model->listing($id_user);
+		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+						'order' => $order,
+						'isi'	=> 'mitra/order'
+						);
+			$this->load->view('mitra/layout/wrapper', $data, FALSE);
+	}
+	public function batal($kode_transaksi){
+		//1. hapus data 
+		$this->order_model->batal($kode_transaksi);
+		//2. return data stok
 	}
 }

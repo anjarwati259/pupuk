@@ -34,7 +34,7 @@
             <span>Belanja</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?php echo base_url('mitra/order') ?>">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Order Saya</span></a>
     </li>

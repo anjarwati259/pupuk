@@ -100,26 +100,26 @@
                                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Free Konsultasi Agro Konsultan</li>
                                 <li><span class="fa-li"><i class="fas fa-check"></i></i></span>Reward Tahunan Honda Beat Target 2.000 Botol POC 1 Liter</li>
                               </ul>
-              <?php 
-              //form untuk memproses belanjaan
-              echo form_open(base_url('mitra/add')); 
-              //elemen yang dibawa
-              echo form_hidden('id', 'POC');
-              echo form_hidden('id_produk', 'POC');
-              echo form_hidden('id_promo', null);
-              echo form_hidden('qty', 1);
-              echo form_hidden('jumlah', 20);
-              echo form_hidden('bonus', 5);
-              echo form_hidden('price', 2700000);
-              echo form_hidden('name', 'Pupuk Kilat 1L');
-              echo form_hidden('nama', 'Paket POC 1 Liter');
-              echo form_hidden('gambar', 'POC.jpg');
-              echo form_hidden('option', 2);
-              //elemen redirect
-              echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
-              ?>
+                              <?php 
+                              //form untuk memproses belanjaan
+                              echo form_open(base_url('mitra/add')); 
+                              //elemen yang dibawa
+                              echo form_hidden('id', 'POC');
+                              echo form_hidden('id_produk', 'POC');
+                              echo form_hidden('id_promo', null);
+                              echo form_hidden('qty', 1);
+                              echo form_hidden('jumlah', 20);
+                              echo form_hidden('bonus', 5);
+                              echo form_hidden('price', 2700000);
+                              echo form_hidden('name', 'Pupuk Kilat 1L');
+                              echo form_hidden('nama', 'Paket POC 1 Liter');
+                              echo form_hidden('gambar', 'POC.jpg');
+                              echo form_hidden('option', 1);
+                              //elemen redirect
+                              echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
+                              ?>
                               <button class="btn btn-block btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>  Beli Sekarang</button>
-              <?php echo form_close(); ?>
+                            <?php echo form_close(); ?>
                             </div>
                           </div>
                         </div>
@@ -141,7 +141,26 @@
                                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Free Konsultasi Agro Konsultan</li>
                                 <li><span class="fa-li"><i class="fas fa-check"></i></i></span>Reward Tahunan Honda Beat Target 4.000 Botol POC 500ml</li>
                               </ul>
-                              <a href="#" class="btn btn-block btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>  Beli Sekarang</a></a>
+                              <?php 
+                              //form untuk memproses belanjaan
+                              echo form_open(base_url('mitra/add')); 
+                              //elemen yang dibawa
+                              echo form_hidden('id', 'POC500');
+                              echo form_hidden('id_produk', 'POC500');
+                              echo form_hidden('id_promo', null);
+                              echo form_hidden('qty', 1);
+                              echo form_hidden('jumlah', 40);
+                              echo form_hidden('bonus', 5);
+                              echo form_hidden('price', 3200000);
+                              echo form_hidden('name', 'Pupuk Kilat 500ml');
+                              echo form_hidden('nama', 'Paket POC 500ml');
+                              echo form_hidden('gambar', 'POC.jpg');
+                              echo form_hidden('option', 1);
+                              //elemen redirect
+                              echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
+                              ?>
+                              <button class="btn btn-block btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>  Beli Sekarang</button>
+                              <?php echo form_close() ?>
                             </div>
                           </div>
                         </div>
@@ -163,7 +182,26 @@
                                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Free Konsultasi Agro Konsultan</li>
                                 <li><span class="fa-li"><i class="fas fa-check"></i></i></span>Reward Tahunan Honda Beat Target 4.000 Botol Nutrisi Ternak</li>
                               </ul>
-                              <a href="#" class="btn btn-block btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>  Beli Sekarang</a></a>
+                              <?php 
+                              //form untuk memproses belanjaan
+                              echo form_open(base_url('mitra/add')); 
+                              //elemen yang dibawa
+                              echo form_hidden('id', 'NUTRISITERNAK');
+                              echo form_hidden('id_produk', 'NUTRISITERNAK');
+                              echo form_hidden('id_promo', null);
+                              echo form_hidden('qty', 1);
+                              echo form_hidden('jumlah', 20);
+                              echo form_hidden('bonus', 5);
+                              echo form_hidden('price', 2700000);
+                              echo form_hidden('name', 'Nutrisi Ternak');
+                              echo form_hidden('nama', 'Paket Nutrisi Ternak');
+                              echo form_hidden('gambar', 'ternak.webp');
+                              echo form_hidden('option', 1);
+                              //elemen redirect
+                              echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
+                              ?>
+                              <button href="#" class="btn btn-block btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>  Beli Sekarang</button>
+                              <?php echo form_close() ?>
                             </div>
                           </div>
                         </div>
@@ -185,7 +223,26 @@
                                 <li><span class="fa-li"><i class="fas fa-check"></i></span>Free Konsultasi Agro Konsultan</li>
                                 <li><span class="fa-li"><i class="fas fa-check"></i></i></span>Reward Tahunan Honda Beat Target 4.000 Nutrisi Ikan</li>
                               </ul>
-                              <a href="#" class="btn btn-block btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>  Beli Sekarang</a></a>
+                              <?php 
+                              //form untuk memproses belanjaan
+                              echo form_open(base_url('mitra/add')); 
+                              //elemen yang dibawa
+                              echo form_hidden('id', 'NUTRISIIKAN');
+                              echo form_hidden('id_produk', 'NUTRISIIKAN');
+                              echo form_hidden('id_promo', null);
+                              echo form_hidden('qty', 1);
+                              echo form_hidden('jumlah', 20);
+                              echo form_hidden('bonus', 5);
+                              echo form_hidden('price', 3400000);
+                              echo form_hidden('name', 'Nutrisi Ikan');
+                              echo form_hidden('nama', 'Paket Nutrisi Ikan');
+                              echo form_hidden('gambar', 'ikan.webp');
+                              echo form_hidden('option', 1);
+                              //elemen redirect
+                              echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
+                              ?>
+                              <button class="btn btn-block btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>  Beli Sekarang</button>
+                              <?php echo form_close() ?>
                             </div>
                           </div>
                         </div>

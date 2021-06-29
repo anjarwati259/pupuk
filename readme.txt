@@ -14,3 +14,7 @@ catatan status
 	2 = distributor
 	3 = mitra
 	4 = customer
+5. STATUS BAYAR
+	0 = COD
+	1 = transfer bank
+

@@ -24,6 +24,15 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//menampilkan semua data order berdasarkan id user
+	public function listing($id_user){
+		$this->db->select('*');
+		$this->db->from('tb_detail_order');
+		$this->db->where('id_user', $id_user);
+		$this->db->order_by('kode_transaksi','desc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	//menampilkan semua data order
 	public function Alllisting(){
 		$this->db->select('*');
@@ -107,5 +116,11 @@ class Order_model extends CI_Model
 	public function stok($data)
 	{
 		$this->db->insert_batch('tb_stok', $data);
+	}
+	//batal pesanan
+	public function batal($kode_transaksi)
+	{
+	$this->db->where('kode_transaksi',$kode_transaksi);
+    $this->db->delete(array('tb_detail_order', 'tb_order'));
 	}
 }
