@@ -1,3 +1,8 @@
+<style type="text/css">
+	 td,th{
+    color: #121212;
+  }
+</style>
 <!--  -->
 <div class="container">
 	<div class="row">

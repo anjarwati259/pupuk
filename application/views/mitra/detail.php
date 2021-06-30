@@ -34,6 +34,11 @@ function tanggal_indo($tanggal, $cetak_hari = false)
       return $tgl_indo;
     }
  ?>
+ <style type="text/css">
+ 	td,th{
+ 		color: #121212;
+ 	}
+ </style>
 <div class="container">
 	 <div class="row">
 	 	<div class="col-lg-7">

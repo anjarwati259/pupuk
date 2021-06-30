@@ -29,33 +29,20 @@ class Order extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
-	public function konfirmasi_list(){
-		$kode_transaksi = 'INV0004';
-		$order 	= $this->order_model->listing_coba($kode_transaksi);
-		print_r($order);
-		foreach ($order as $value) {
-			if($value->jenis_pelanggan == 'Mitra' && $value->id_produk!='POC'){
-				$point = (($value->jml_beli/2) * 1);
-				print_r('Point Bukan POC: ' .$point);
-
-			}else if($value->jenis_pelanggan == 'Mitra' && $value->id_produk=='POC'){
-				$point = ($value->jml_beli * 1);
-				print_r('Point POC: ' .$point);
-			}
-		}
-
-	}
 	//konfirmasi pesanan jika sudah bayar
 	public function konfirmasi($kode_transaksi){
+		//mengambil jenis pelanggan
+		$pelanggan = $this->order_model->jenis_pelanggan($kode_transaksi);
+		$stok = $this->order_model->get_stok($kode_transaksi);
 		//konfirmasi status bayar
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
 						'id_rekening'		=> $this->input->post('id_rekening'),
-						'ongkir'		=> $this->input->post('ongkir'),
+						'ongkir'			=> $this->input->post('ongkir'),
 						'total_bayar'		=> $this->input->post('total_bayar'),
+						'expedisi'		=> $this->input->post('expedisi'),
 						'status_bayar'		=> 1
 						);
-		//$this->order_model->update_status($data);
-
+		$this->order_model->update_status($data);
 		//insert pembayaran
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
 						'nama_bank'			=> $this->input->post('nama_bank'),
@@ -63,33 +50,57 @@ class Order extends CI_Controller
 						'tanggal_bayar'		=> $this->input->post('tanggal_bayar'),
 						'jumlah_bayar'		=> $this->input->post('total_bayar')
 						);
-		//$this->order_model->bayar($data);
+		$this->order_model->bayar($data);
+		
 		//insert point
+		if($pelanggan->jenis_pelanggan=='Mitra'){
+			$this->point($kode_transaksi);
+		}
+
+		//konfirmasi stok
+		foreach ($stok as $value) {
+			$data = array(	'kode_transaksi' => $value->kode_transaksi,
+							'status'		 => 'out'
+						);
+			$this->produk_model->update($data);
+		}
+		$this->session->set_flashdata('sukses','Status Telah Diubah');
+		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+	}
+	//penghitungan point
+	private function point($kode_transaksi){
 		$order 	= $this->order_model->point_list($kode_transaksi);
 		$POC = 0;
-		$nonPOC =0;
+		$nonPOC = 0;
+		$pointtotal =0;
 		foreach ($order as $value) {
+			//get total point
+			$last_point = $this->order_model->last_point($value->id_pelanggan);
+			if(isset($last_point)){
+				$total_point = $last_point->total_point;
+			}else{
+				$total_point = 0;
+			}
 			if($value->jenis_pelanggan == 'Mitra' && $value->id_produk!='POC'){
 				$point = (($value->jml_beli/2) * 1);
 				$nonPOC = $nonPOC + $point;
-
+				$pointtotal = $nonPOC + $total_point;
 			}else if($value->jenis_pelanggan == 'Mitra' && $value->id_produk=='POC'){
 				$point = ($value->jml_beli * 1);
 				$POC = $POC + $point;
+				$pointtotal = $POC + $total_point;
 			}
 		}
 		//cek total point berdasarkan kode mitra
-		$total_point = $nonPOC + $POC;
-			$data = array('kode_transaksi'	=> $kode_transaksi,
-			'id_pelanggan'					=> $value->id_pelanggan,
-			'point'							=> $total_point,
-			'status'						=> 'in'
-			);
-		//print_r('point POC'.$data);
-		$this->order_model->tambah_point($data);
+		$total = $nonPOC + $POC;
 
-		$this->session->set_flashdata('sukses','Status Telah Diubah');
-		//redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+			$data = array('kode_transaksi'	=> $kode_transaksi,
+							'id_pelanggan'	=> $value->id_pelanggan,
+							'point'			=> $total,
+							'status'		=> 'in',
+							'total_point'	=> $pointtotal		
+			);
+		$this->order_model->tambah_point($data);
 	}
 	//menampilkan data order yang sudah dikonfirmasi/sudah bayar
 	public function sudah_bayar()
@@ -252,6 +263,13 @@ class Order extends CI_Controller
 		$subtotal = $this->cart->total();
 		$ongkir = $this->input->post('ongkir');
 
+		//get total item
+		$total = 0;
+		foreach ($carts as $value) {
+			if($value['price']!=0){
+				$total = $total + $value['qty'];
+			}
+		}
 		//cek id pelanggan
 		if(!empty($carts) && is_array($carts) && $ongkir != null){
 			$total_bayar = $subtotal + $ongkir;
@@ -274,7 +292,7 @@ class Order extends CI_Controller
 			$data['total_transaksi'] = $this->cart->total();
 			$data['status_bayar'] = '0';
 			$data['tanggal_transaksi'] = $this->input->post('tanggal_transaksi');
-			$data['total_item'] = $this->cart->total_items();
+			$data['total_item'] = $total;
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
 
 			$code = $this->input->post('code');
@@ -333,7 +351,7 @@ class Order extends CI_Controller
 				'qty' => $cart['qty'],
 				'tanggal' => date('Y-m-d'),
 				'sisa'	=> $sisa->stok,
-				'status' => 'out'
+				'status' => 'proses'
 			);
 			$this->order_model->tambah_stok($stok);
 			

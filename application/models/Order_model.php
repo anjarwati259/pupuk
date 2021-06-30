@@ -24,6 +24,16 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//get jenis pelanggan
+	public function jenis_pelanggan($kode_transaksi){
+		$this->db->select('tb_pelanggan.jenis_pelanggan');
+		$this->db->from('tb_detail_order');
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->order_by('kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->row();
+	}
 	//menampilkan data order berdasarkan status bayar
 	public function point_list($kode_transaksi){
 		$this->db->select('tb_order.*, tb_pelanggan.jenis_pelanggan');
@@ -43,6 +53,16 @@ class Order_model extends CI_Model
 		$this->db->order_by('kode_transaksi','desc');
 		$query = $this->db->get();
 		return $query->result();
+	}
+	//menampilkan semua data order berdasarkan id user
+	public function last_point($id_pelanggan){
+		$this->db->select('total_point');
+		$this->db->from('tb_point');
+		$this->db->where('id_pelanggan', $id_pelanggan);
+		$this->db->order_by('id_point','desc');
+		$this->db->limit(1);
+		$query = $this->db->get();
+		return $query->row();
 	}
 	//menampilkan semua data order
 	public function Alllisting(){

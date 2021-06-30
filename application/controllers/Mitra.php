@@ -23,9 +23,15 @@ class Mitra extends CI_Controller
 	
 	public function index()
 	{
+
+		$id_user = $this->session->userdata('id_user');
 		$order = $this->dashboard_model->order();
+		$pelanggan =  $this->dashboard_model->pelanggan_id($id_user);
+		$id_pelanggan = $pelanggan->id_pelanggan;
+		$point = $this->dashboard_model->point_mitra($id_pelanggan);
 		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
 						'order' => $order,
+						'point' => $point,
 						'isi'	=> 'mitra/dashboard'
 						); 
 		$this->load->view('mitra/layout/wrapper',$data, FALSE);
@@ -322,6 +328,12 @@ class Mitra extends CI_Controller
 						'transaksi'	=> $transaksi,
 						'bayar'	=> $bayar,
 						'isi'	=> 'mitra/detail'
+						);
+		$this->load->view('mitra/layout/wrapper', $data, FALSE);
+	}
+	public function reward(){
+		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+						'isi'	=> 'mitra/reward'
 						);
 		$this->load->view('mitra/layout/wrapper', $data, FALSE);
 	}

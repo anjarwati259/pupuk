@@ -107,4 +107,9 @@ class Produk_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//update status stok
+	public function update($data){
+		$this->db->where('kode_transaksi', $data['kode_transaksi']);
+		$this->db->update('tb_stok',$data);
+	}
 }

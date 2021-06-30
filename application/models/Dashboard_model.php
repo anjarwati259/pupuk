@@ -11,6 +11,15 @@ class Dashboard_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
+	public function pelanggan_id($id_user){
+		$this->db->select('tb_pelanggan.id_pelanggan, tb_user.id_user');
+		$this->db->from('tb_user');
+		$this->db->where('tb_user.id_user', $id_user);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_user = tb_user.id_user', 'left');
+		$this->db->order_by('tb_user.id_user','asc');
+		$query = $this->db->get();
+		return $query->row();
+	}
 	public function order_admin(){
 		$this->db->select('COUNT(*) as total');
 		$this->db->from('tb_detail_order');
@@ -28,6 +37,15 @@ class Dashboard_model extends CI_Model
 	public function stok(){
 		$this->db->select('SUM(stok) as total');
 		$this->db->from('tb_produk');
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function point_mitra($id_pelanggan){
+		$this->db->select('total_point');
+		$this->db->from('tb_point');
+		$this->db->where('id_pelanggan', $id_pelanggan);
+		$this->db->order_by('id_point','desc');
+		$this->db->limit(1);
 		$query = $this->db->get();
 		return $query->row();
 	}

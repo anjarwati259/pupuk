@@ -49,7 +49,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?php echo base_url('mitra/reward') ?>">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Reward</span></a>
     </li>
@@ -60,7 +60,6 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Bantuan</span></a>
     </li>
-
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

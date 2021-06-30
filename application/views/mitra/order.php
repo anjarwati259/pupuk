@@ -1,3 +1,8 @@
+<style type="text/css">
+     td,th{
+    color: #121212;
+  }
+</style>
 <!-- Begin Page Content -->
 <div class="container">
     <!-- DataTales Example -->
