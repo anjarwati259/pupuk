@@ -88,4 +88,5 @@ class Pelanggan_model extends CI_Model
 		$query = $this->db->get("tb_pelanggan",1,0);
 		return $query->result();
 	}
+	//get pelanggan
 }

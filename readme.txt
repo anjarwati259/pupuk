@@ -18,4 +18,7 @@ catatan status
 5. STATUS BAYAR
 	0 = COD
 	1 = transfer bank
+6. REWARD
+	0 = proses
+	1 = verifikasi
 

@@ -37,7 +37,7 @@
             <li><a href="<?php echo base_url('admin/pelanggan/distributor') ?>"><i class="fa fa-users"></i> Data Distributor</a></li>
           </ul>
         </li>
-        <!-- distributor -->
+        <!-- Stok -->
         <li class="treeview">
           <a href="#">
             <i class="fa fa-cubes"></i>
@@ -57,6 +57,20 @@
             <i class="fa fa-cart-plus"></i>
             <span>Order</span>
           </a>
+        </li>
+        <!-- reward -->
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gift"></i>
+            <span>Reward</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-bitcoin"></i> Data Point</a></li>
+            <li><a href=""><i class="fa fa-plus-square-o"></i> Pencairan Reward</a></li>
+          </ul>
         </li>
 
         <!-- pengguna -->

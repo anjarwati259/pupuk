@@ -41,7 +41,7 @@ class Dashboard_model extends CI_Model
 		return $query->row();
 	}
 	public function point_mitra($id_pelanggan){
-		$this->db->select('total_point');
+		$this->db->select('*');
 		$this->db->from('tb_point');
 		$this->db->where('id_pelanggan', $id_pelanggan);
 		$this->db->order_by('id_point','desc');
@@ -130,5 +130,33 @@ class Dashboard_model extends CI_Model
 		$this->db->where('id_user', $id_user);
 		$query = $this->db->get();
 		return $query->row();
+	}
+	//reward
+	public function reward(){
+		$this->db->select('*');
+		$this->db->from('tb_reward');
+		$this->db->order_by('pencapaian','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function get_reward($id_reward){
+		$this->db->select('*');
+		$this->db->from('tb_reward');
+		$this->db->where('id_reward', $id_reward);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	//select pencairan reward
+	public function get_pencairan($id_pelanggan){
+		$this->db->select('tb_pencairan_reward.*, tb_reward.pencapaian, tb_reward.reward');
+		$this->db->from('tb_pencairan_reward');
+		$this->db->where('id_pelanggan', $id_pelanggan);
+		$this->db->join('tb_reward','tb_reward.id_reward = tb_pencairan_reward.id_reward', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//tambah pencairan reward
+	public function pencairan_reward($data){
+		$this->db->insert('tb_pencairan_reward', $data);
 	}
 }

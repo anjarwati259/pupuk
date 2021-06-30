@@ -332,9 +332,48 @@ class Mitra extends CI_Controller
 		$this->load->view('mitra/layout/wrapper', $data, FALSE);
 	}
 	public function reward(){
+		//get last point berdasarkan id pelanggan
+		$id_user	= $this->session->userdata('id_user');
+		$pelanggan =  $this->dashboard_model->pelanggan_id($id_user);
+		$id_pelanggan = $pelanggan->id_pelanggan;
+		$last_id = $this->dashboard_model->point_mitra($id_pelanggan);
+		//get data reward
+		$reward =  $this->dashboard_model->reward();
+		//get pencairan reward
+		$pencairan_reward =  $this->dashboard_model->get_pencairan($id_pelanggan);
 		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+						'point'	=> $last_id,
+						'reward' => $reward,
+						'pencairan' => $pencairan_reward,
 						'isi'	=> 'mitra/reward'
 						);
 		$this->load->view('mitra/layout/wrapper', $data, FALSE);
+	}
+	public function tukar_reward($id_reward){
+		$id_user	= $this->session->userdata('id_user');
+		$pelanggan =  $this->dashboard_model->pelanggan_id($id_user);
+		$id_pelanggan = $pelanggan->id_pelanggan;
+		$last_id = $this->dashboard_model->point_mitra($id_pelanggan);
+
+		$reward =  $this->dashboard_model->get_reward($id_reward);
+		$totalpoint = ($last_id->total_point - $reward->pencapaian);
+		//tambah data point
+		$point = array('id_pelanggan' 	=> $last_id->id_pelanggan, 
+					  'kode_transaksi' 	=> '-',
+					  'point'		 	=> $reward->pencapaian,
+					  'status'			=> 'out',
+					  'total_point'		=> $totalpoint
+						);
+		$this->order_model->tambah_point($point);
+
+		//tambah data pencairan reward
+		$data = array('id_pelanggan' 	=> $last_id->id_pelanggan, 
+					  'id_reward' 		=> $reward->id_reward,
+					  'waktu_pencairan'	=> date('Y-m-d'),
+					  'status'			=> 0
+						);
+		$this->dashboard_model->pencairan_reward($data);
+		$this->session->set_flashdata('sukses','Status Telah Diubah');
+		redirect(base_url('mitra/reward'), 'refresh');
 	}
 }
