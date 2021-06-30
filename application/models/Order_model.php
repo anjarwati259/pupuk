@@ -25,16 +25,12 @@ class Order_model extends CI_Model
 		return $query->result();
 	}
 	//menampilkan data order berdasarkan status bayar
-	public function listing_coba($data){
-		$this->db->select('tb_detail_order.*,
-							tb_pelanggan.nama_pelanggan, tb_pelanggan.id_pelanggan, tb_pelanggan.jenis_pelanggan,
-							tb_order.kode_produk,
-							 tb_pembayaran.jumlah_bayar');
-		$this->db->from('tb_detail_order');
-		$this->db->where('status_bayar', $data);
-		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
-		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-		$this->db->group_by('tb_detail_order.kode_transaksi');
+	public function point_list($kode_transaksi){
+		$this->db->select('tb_order.*, tb_pelanggan.jenis_pelanggan');
+		$this->db->from('tb_order');
+		$this->db->where('harga!=',0);
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
 		$this->db->order_by('kode_transaksi','asc');
 		$query = $this->db->get();
 		return $query->result();
@@ -97,6 +93,11 @@ class Order_model extends CI_Model
 	public function tambah($data)
 	{
 		$this->db->insert('tb_detail_order', $data);
+	}
+	//tambah point
+	public function tambah_point($data)
+	{
+		$this->db->insert('tb_point', $data);
 	}
 	//tambah order
 	public function tambah_order($data)

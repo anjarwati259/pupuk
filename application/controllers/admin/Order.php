@@ -29,13 +29,21 @@ class Order extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
-	public function coba($kode_transaksi){
+	public function konfirmasi_list(){
+		$kode_transaksi = 'INV0004';
 		$order 	= $this->order_model->listing_coba($kode_transaksi);
-		$data = array(	'id_pelanggan' => $order->id_pelanggan,
-						'status_pelanggan' => $order->jenis_pelanggan,
-						'kode_transaksi'	=> $order->kode_transaksi,
-						);
-		print_r($data);
+		print_r($order);
+		foreach ($order as $value) {
+			if($value->jenis_pelanggan == 'Mitra' && $value->id_produk!='POC'){
+				$point = (($value->jml_beli/2) * 1);
+				print_r('Point Bukan POC: ' .$point);
+
+			}else if($value->jenis_pelanggan == 'Mitra' && $value->id_produk=='POC'){
+				$point = ($value->jml_beli * 1);
+				print_r('Point POC: ' .$point);
+			}
+		}
+
 	}
 	//konfirmasi pesanan jika sudah bayar
 	public function konfirmasi($kode_transaksi){
@@ -46,7 +54,7 @@ class Order extends CI_Controller
 						'total_bayar'		=> $this->input->post('total_bayar'),
 						'status_bayar'		=> 1
 						);
-		$this->order_model->update_status($data);
+		//$this->order_model->update_status($data);
 
 		//insert pembayaran
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
@@ -55,11 +63,33 @@ class Order extends CI_Controller
 						'tanggal_bayar'		=> $this->input->post('tanggal_bayar'),
 						'jumlah_bayar'		=> $this->input->post('total_bayar')
 						);
-		$this->order_model->bayar($data);
+		//$this->order_model->bayar($data);
 		//insert point
+		$order 	= $this->order_model->point_list($kode_transaksi);
+		$POC = 0;
+		$nonPOC =0;
+		foreach ($order as $value) {
+			if($value->jenis_pelanggan == 'Mitra' && $value->id_produk!='POC'){
+				$point = (($value->jml_beli/2) * 1);
+				$nonPOC = $nonPOC + $point;
+
+			}else if($value->jenis_pelanggan == 'Mitra' && $value->id_produk=='POC'){
+				$point = ($value->jml_beli * 1);
+				$POC = $POC + $point;
+			}
+		}
+		//cek total point berdasarkan kode mitra
+		$total_point = $nonPOC + $POC;
+			$data = array('kode_transaksi'	=> $kode_transaksi,
+			'id_pelanggan'					=> $value->id_pelanggan,
+			'point'							=> $total_point,
+			'status'						=> 'in'
+			);
+		//print_r('point POC'.$data);
+		$this->order_model->tambah_point($data);
 
 		$this->session->set_flashdata('sukses','Status Telah Diubah');
-		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+		//redirect(base_url('admin/order/sudah_bayar'), 'refresh');
 	}
 	//menampilkan data order yang sudah dikonfirmasi/sudah bayar
 	public function sudah_bayar()

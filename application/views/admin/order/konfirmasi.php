@@ -12,7 +12,7 @@
         <h4 class="modal-title">Order #<strong><?php echo $order->kode_transaksi ?></strong></h4>
       </div>
       <div class="modal-body">
-        <?php echo form_open(base_url('admin/order/coba/'.$order->kode_transaksi)); ?>
+        <?php echo form_open(base_url('admin/order/konfirmasi/'.$order->kode_transaksi)); ?>
         <form role="form">
           <div class="box-body">
             <div class="form-group">
