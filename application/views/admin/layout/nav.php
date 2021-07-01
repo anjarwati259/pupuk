@@ -68,8 +68,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-bitcoin"></i> Data Point</a></li>
-            <li><a href=""><i class="fa fa-plus-square-o"></i> Pencairan Reward</a></li>
+            <li><a href="<?php echo base_url('admin/dashboard/reward') ?>"><i class="fa fa-bitcoin"></i> Data Point</a></li>
+            <li><a href="<?php echo base_url('admin/dashboard/pencairan_reward') ?>"><i class="fa fa-plus-square-o"></i> Pencairan Reward</a></li>
           </ul>
         </li>
 

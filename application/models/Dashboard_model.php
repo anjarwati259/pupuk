@@ -146,6 +146,15 @@ class Dashboard_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	//pencairan reward
+	public function list_pencairan_reward(){
+		$this->db->select('tb_pencairan_reward.*, tb_pelanggan.nama_pelanggan, tb_reward.reward');
+		$this->db->from('tb_pencairan_reward');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_pencairan_reward.id_pelanggan', 'left');
+		$this->db->join('tb_reward','tb_reward.id_reward = tb_pencairan_reward.id_reward', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	//select pencairan reward
 	public function get_pencairan($id_pelanggan){
 		$this->db->select('tb_pencairan_reward.*, tb_reward.pencapaian, tb_reward.reward');
@@ -158,5 +167,12 @@ class Dashboard_model extends CI_Model
 	//tambah pencairan reward
 	public function pencairan_reward($data){
 		$this->db->insert('tb_pencairan_reward', $data);
+	}
+	public function get_total($id_pelanggan){
+		$this->db->select('SUM(total_item) as total');
+		$this->db->from('tb_detail_order');
+		$this->db->where('id_pelanggan', $id_pelanggan);
+		$query = $this->db->get();
+		return $query->row();
 	}
 }

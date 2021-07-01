@@ -168,4 +168,24 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function reward(){
+		$this->db->select('m1.*, tb_pelanggan.nama_pelanggan');
+		$this->db->from('tb_point m1');
+		//join
+		$this->db->join('tb_point m2', 'm1.id_pelanggan = m2.id_pelanggan AND m1.id_point < m2.id_point', 'left');
+		$this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = m1.id_pelanggan', 'left');
+		//end join
+		$this->db->where('m2.id_point',NULL);
+		$this->db->order_by('m1.id_pelanggan','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function detailreward($id_pelanggan){
+		$this->db->select('*');
+		$this->db->from('tb_point');
+		$this->db->where('tb_point.id_pelanggan', $id_pelanggan);
+		$this->db->order_by('tb_point.id_point','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

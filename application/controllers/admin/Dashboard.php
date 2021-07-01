@@ -13,6 +13,8 @@ class Dashboard extends CI_Controller
 		$this->simple_login->admin();
 		$this->load->model('wilayah_model');
 		$this->load->model('dashboard_model');
+		$this->load->model('pelanggan_model');
+		$this->load->model('order_model');
 	}
 	public function index(){
 		$tanggal = date('Y-m-d');
@@ -48,5 +50,39 @@ class Dashboard extends CI_Controller
                         'ternak' => $ternak,
                         'isi' => 'admin/dashboard/list' );
         $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	//reward
+	public function reward(){
+		$reward = $this->order_model->reward();
+		//print_r($reward);
+		$data = array('title' => 'Data Reward',
+						'reward' => $reward,
+                        'isi' => 'admin/dashboard/reward' );
+        $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function detail_reward($id_pelanggan){
+		 $point = $this->order_model->detailreward($id_pelanggan);
+		 $pelanggan = $this->pelanggan_model->get_pelanggan($id_pelanggan);
+		 $getpoint = $this->order_model->last_point($id_pelanggan);
+		 //get last
+		 $reward = $this->dashboard_model->reward();
+		 $total = $this->dashboard_model->get_total($id_pelanggan);
+		 //print_r($reward);
+		 $data = array(	'title' => 'Data Reward',
+		 				'pelanggan' => $pelanggan,
+		 				'point' => $point,
+		 				'reward'=> $reward,
+		 				'get_point' => $getpoint,
+		 				'total'	=> $total,
+                       	'isi' => 'admin/dashboard/detail_reward' );
+         $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function pencairan_reward(){
+		//data pencairan reward
+		$data_pencairan = $this->dashboard_model->list_pencairan_reward();
+		$data = array(	'title' => 'Data Pencairan Reward',
+		 				'pencairan_reward' => $data_pencairan,
+                       	'isi' => 'admin/dashboard/pencairan_reward');
+         $this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 }
