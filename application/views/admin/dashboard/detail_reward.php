@@ -98,11 +98,11 @@
               foreach ($point as $point) { ?>
             <tr>
               <td><?php echo $point->tanggal ?></td>
-              <td><?php if($point->kode_transaksi == '-'){
+              <td><a href="<?php echo base_url('admin/order/detail/'.$point->kode_transaksi) ?>"><?php if($point->kode_transaksi == '-'){
                   echo "<span class='alert-success'>Pencairan</span>";
                }else{
                   echo $point->kode_transaksi;
-               } ?></td>
+               } ?></a></td>
               <td><?php echo $point->point ?></td>
               <td><?php echo $point->status ?></td>
               <td><?php echo $point->total_point ?></td>

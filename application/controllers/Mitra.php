@@ -376,4 +376,10 @@ class Mitra extends CI_Controller
 		$this->session->set_flashdata('sukses','Status Telah Diubah');
 		redirect(base_url('mitra/reward'), 'refresh');
 	}
+	public function bantuan(){
+		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
+						'isi'	=> 'mitra/bantuan'
+						);
+		$this->load->view('mitra/layout/wrapper', $data, FALSE);
+	}
 }

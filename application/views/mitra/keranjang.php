@@ -161,7 +161,7 @@
 		</div>
       </div>
       <div class="modal-footer">
-        <a href="" class="btn btn-success"><i class="fab fa-whatsapp"></i> Hubungi Kami</button>
+        <a href="https://wa.me/6281335005334" class="btn btn-success"><i class="fab fa-whatsapp"></i> Hubungi Kami</a>
         <a href="<?php echo base_url('mitra/order') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Close</a>
       </div>
     </div>

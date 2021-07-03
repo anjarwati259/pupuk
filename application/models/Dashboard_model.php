@@ -175,4 +175,8 @@ class Dashboard_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	public function status_reward($data){
+		$this->db->where('id_pencairan_reward', $data['id_pencairan_reward']);
+		$this->db->update('tb_pencairan_reward',$data);
+	}
 }

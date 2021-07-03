@@ -25,7 +25,12 @@
               echo "Disetujui";
           }
         ?></td>
-        <td><a href="<?php echo base_url('admin/dashboard/detail_reward/') ?>" class="btn btn-warning btn-md" >Verifikasi</a></td>
+        <td>
+          <?php if($value->status==0){ ?>
+          <a href="<?php echo base_url('admin/dashboard/konfir_reward/'.$value->id_pencairan_reward) ?>" class="btn btn-warning btn-md" >Verifikasi</a>
+        <?php } ?>
+        <a href="<?php echo base_url('admin/dashboard/detail_reward/'.$value->id_pelanggan) ?>" class="btn btn-success btn-md" >Detail</a>
+        </td>
       </tr>
     <?php $no++; } ?>
   </tbody>

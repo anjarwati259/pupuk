@@ -85,4 +85,13 @@ class Dashboard extends CI_Controller
                        	'isi' => 'admin/dashboard/pencairan_reward');
          $this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
+	public function konfir_reward($id_pencairan_reward){
+		$data = array(	'id_pencairan_reward'	=> $id_pencairan_reward,
+						'status'				=> 1
+						);
+
+		$this->dashboard_model->status_reward($data);
+        $this->session->set_flashdata('sukses','Status Telah Diubah');
+		redirect(base_url('admin/dashboard/pencairan_reward'), 'refresh');
+	}
 }
