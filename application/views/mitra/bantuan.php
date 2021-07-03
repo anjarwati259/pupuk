@@ -29,15 +29,24 @@
 		        </div>
 		        <div class="card-body">
 		        	<div class="bantuan">
-			            <h4>Bagaimana Saya Order Di member area?</h4>
+			            <h4>Bagaimana Saya Order Di Member Area?</h4>
 			            <p>
 			            	<ol>
 			            		<li>Login dengan Menggunakan Username dan Password yang telah didapatkan sebelumnya, Username dan Password akan didapatkan Ketika telah resmi menjadi Mitra Resmi PT Agi</li>
 			            		<li>Klik menu belanja, dalam menu belanja terdapat penawaran khusus mitra dari PT AGI, silahkan pilih salah satu penawaran produk yang diinginkan</li>
 			            		<li>Kemudian klik beli sekarang, setalah itu klik icon keranjang di pojok kanan atas</li>
 			            		<li>Klik checkout untuk melanjutkan pesanan</li>
-			            		<li>Proses order telah selesai, untuk proses pembayaran akan dihubungi admin kami untuk mengetahui detail pembayarannya, karena total belanja belum termasuk ongkir</li>
+			            		<li>Proses order telah selesai, untuk proses pembayaran akan dihubungi admin kami untuk mengetahui detail pembayarannya, karena total belanja belum termasuk ongkos kirim</li>
+			            		<li>Ongkos kirim bervariasi tergantung dengan Ekspedisi yang dipilih dan daerah tujuan</li>
 			            		<li>Anda juga bisa melihat Riwayat order pemesanan sebelumnya di menu Order Saya</li>
+			            	</ol>
+			            </p>
+			            <h4>Jika Sudah Melakukan Pembayaran Apa yang Harus Dilakukan Selanjutnya?</h4>
+			            <p>
+			            	<ol>
+			            		<li>Jika telah melakukan pembayaran silahkan klik menu Order Saya kemudian klik Menu Action Konfirmasi Pembayaran dan kirimkan bukti pembayaran melalui Nomor WhatshApp yang Tertera</li>
+			            		<li>Jika telah melakukan konfirmasi, pesanan anda segera dikirm ke alamat anda</li>
+			            		<li>Lama Pengiriman tergantung dari ekspedisi yang dipilih dan dearh tujuan</li>
 			            	</ol>
 			            </p>
 			            <h4>Apa Itu Reward dan Point?</h4>
@@ -59,7 +68,7 @@
 			            <h4>Masih Ada Pertanyaan?</h4>
 			            <p>Jika masih ada pertanyaan atau masih bingung bisa menghubungi kami melalui klik tombol dibawah ini</p>
 			            <div class="button">
-			            	<a href="https://wa.me/6281335005334" class="btn btn-success"><i class="fab fa-whatsapp"></i> Hubungi Kami</a>
+			            	<a href="https://wa.me/6281335005334" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i> Hubungi Kami</a>
 			            </div>
 		            </div>
 		        </div>
