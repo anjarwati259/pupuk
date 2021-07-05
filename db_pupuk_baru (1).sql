@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Jun 2021 pada 12.22
+-- Waktu pembuatan: 05 Jul 2021 pada 12.40
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.2.23
 
@@ -33,6 +33,7 @@ CREATE TABLE `tb_detail_order` (
   `id_pelanggan` varchar(20) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_rekening` int(11) DEFAULT NULL,
+  `id_marketing` varchar(20) NOT NULL,
   `nama_pelanggan` varchar(50) DEFAULT NULL,
   `no_hp` varchar(13) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
@@ -47,17 +48,34 @@ CREATE TABLE `tb_detail_order` (
   `total_bayar` int(10) DEFAULT NULL,
   `tanggal_transaksi` date DEFAULT NULL,
   `metode_pembayaran` varchar(1) NOT NULL,
+  `jenis_order` int(11) NOT NULL,
   `status_bayar` int(1) DEFAULT NULL,
   `no_resi` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `tb_detail_order`
+-- Struktur dari tabel `tb_marketing`
 --
 
-INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `status_bayar`, `no_resi`) VALUES
-('INV0001', 'mit002', 3, 1, 'Sistoni', '081554988354', 'jember', 'JAWA TIMUR', 'semboro', 'jember', '', 20, 2700000, 'JNE', 12000, 2700000, '2021-06-30', '1', 1, NULL),
-('INV0002', 'mit002', 3, 2, 'Sistoni', '081554988354', 'jember', 'JAWA TIMUR', 'semboro', 'jember', '', 40, 3200000, 'JNE', 0, 3200000, '2021-06-30', '1', 1, NULL);
+CREATE TABLE `tb_marketing` (
+  `id_marketing` varchar(20) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `nama_marketing` varchar(50) NOT NULL,
+  `alamat` text NOT NULL,
+  `no_hp` varchar(15) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `foto` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_marketing`
+--
+
+INSERT INTO `tb_marketing` (`id_marketing`, `id_user`, `nama_marketing`, `alamat`, `no_hp`, `tanggal_lahir`, `foto`) VALUES
+('ID202101', 11, 'faida', 'jember', '081554988354', '2021-07-05', 'faida.jpg'),
+('ID202102', 1, 'Mely', 'Jember', '081554988354', '2021-07-05', 'mely.jpg');
 
 -- --------------------------------------------------------
 
@@ -71,22 +89,13 @@ CREATE TABLE `tb_order` (
   `id_pelanggan` varchar(20) NOT NULL,
   `id_produk` varchar(20) DEFAULT NULL,
   `id_promo` int(11) DEFAULT NULL,
+  `id_marketing` varchar(20) NOT NULL,
   `jml_beli` int(20) NOT NULL,
   `harga` int(20) NOT NULL,
   `total_harga` int(20) NOT NULL,
   `tanggal_transaksi` date NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_order`
---
-
-INSERT INTO `tb_order` (`id_order`, `kode_transaksi`, `id_pelanggan`, `id_produk`, `id_promo`, `jml_beli`, `harga`, `total_harga`, `tanggal_transaksi`, `status`) VALUES
-(365, 'INV0001', 'mit002', 'POC', 0, 20, 2700000, 2700000, '2021-06-30', 1),
-(366, 'INV0001', 'mit002', 'POC500', 0, 5, 0, 0, '2021-06-30', 1),
-(367, 'INV0002', 'mit002', 'POC500', 0, 40, 3200000, 3200000, '2021-06-30', 1),
-(368, 'INV0002', 'mit002', 'POC500', 0, 5, 0, 0, '2021-06-30', 1);
 
 -- --------------------------------------------------------
 
@@ -98,6 +107,7 @@ CREATE TABLE `tb_pelanggan` (
   `id_pelanggan` varchar(50) NOT NULL,
   `komoditi` varchar(100) NOT NULL,
   `id_user` int(8) NOT NULL,
+  `id_marketing` varchar(20) NOT NULL,
   `nama_pelanggan` varchar(50) NOT NULL,
   `no_hp` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
@@ -112,9 +122,8 @@ CREATE TABLE `tb_pelanggan` (
 -- Dumping data untuk tabel `tb_pelanggan`
 --
 
-INSERT INTO `tb_pelanggan` (`id_pelanggan`, `komoditi`, `id_user`, `nama_pelanggan`, `no_hp`, `alamat`, `kecamatan`, `kabupaten`, `provinsi`, `jenis_pelanggan`, `tanggal_daftar`) VALUES
-('cus001', 'Jagung', 4, 'tunggul', '081554988354', 'jember', 'Sumbersari', 'Jember', 'Jawa Timur', 'Customer', '2021-05-18'),
-('mit002', 'Jagung', 3, 'Sistoni', '081554988354', 'jember', 'semboro', 'jember', 'JAWA TIMUR', 'Mitra', '2021-06-28');
+INSERT INTO `tb_pelanggan` (`id_pelanggan`, `komoditi`, `id_user`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `kecamatan`, `kabupaten`, `provinsi`, `jenis_pelanggan`, `tanggal_daftar`) VALUES
+('ID202201', 'Jagung', 0, 'ID202101', 'Sistoni', '081554988354', 'jember', 'Samboja', 'KAB. KUTAI KARTANEGARA', 'KALIMANTAN TIMUR', 'Mitra', '2021-07-05');
 
 -- --------------------------------------------------------
 
@@ -139,18 +148,15 @@ CREATE TABLE `tb_pembayaran` (
 --
 
 INSERT INTO `tb_pembayaran` (`id_pembayaran`, `kode_transaksi`, `id_rekening`, `no_rekening`, `atas_nama`, `tanggal_bayar`, `nama_bank`, `jumlah_bayar`, `bukti_bayar`) VALUES
-(31, 'INV0001', 1, '', '', '2021-06-29 00:00:00', 'BNI', 2700000, ''),
-(32, 'INV0001', 2, '', '', '2021-06-30 00:00:00', '', 862000, ''),
-(33, 'INV0002', 2, '', '', '2021-06-30 00:00:00', '', 2212000, ''),
-(34, 'INV0001', 1, '', '', '2021-06-30 00:00:00', 'BNI', 2700000, ''),
-(35, 'INV0001', 2, '', '', '2021-06-30 00:00:00', '', 2700000, ''),
-(36, 'INV0001', 2, '', '', '2021-06-30 00:00:00', '', 2700000, ''),
-(37, 'INV0001', 2, '', '', '2021-06-30 00:00:00', '', 2700000, ''),
-(38, 'INV0001', 2, '', '', '2021-06-30 00:00:00', '', 2700000, ''),
-(39, 'INV0001', 2, '', '', '2021-06-30 00:00:00', '', 2700000, ''),
-(40, 'INV0002', 2, '', '', '2021-06-30 00:00:00', '', 3200000, ''),
-(41, 'INV0002', 2, '', '', '2021-06-30 00:00:00', '', 3200000, ''),
-(42, 'INV0001', 1, '', '', '2021-06-30 00:00:00', 'BRI', 2700000, '');
+(43, 'INV0001', 2, '', '', '2021-07-05 00:00:00', 'BNI', 2012000, ''),
+(44, 'INV0002', 0, '', '', '2021-07-05 00:00:00', '-', 2072360, ''),
+(45, 'INV0003', 2, '', '', '2021-07-05 00:00:00', '', 110012, ''),
+(46, 'INV0008', 0, '', '', '2021-07-05 00:00:00', '-', 103, ''),
+(47, 'INV0006', 0, '', '', '2021-07-05 00:00:00', '-', 175, ''),
+(48, 'INV0004', 0, '', '', '2021-07-05 00:00:00', '-', 876, ''),
+(49, 'INV0009', 0, '', '', '2021-07-05 00:00:00', '-', 2060, ''),
+(50, 'INV0010', 0, '', '', '2021-07-05 00:00:00', '-', 2, ''),
+(51, 'INV0012', 0, '', '', '2021-07-05 00:00:00', '-', 113500, '');
 
 -- --------------------------------------------------------
 
@@ -171,7 +177,7 @@ CREATE TABLE `tb_pencairan_reward` (
 --
 
 INSERT INTO `tb_pencairan_reward` (`id_pencairan_reward`, `id_pelanggan`, `id_reward`, `waktu_pencairan`, `status`) VALUES
-(5, 'mit002', 2, '2021-06-30', 0);
+(5, 'mit002', 2, '2021-06-30', 1);
 
 -- --------------------------------------------------------
 
@@ -188,17 +194,6 @@ CREATE TABLE `tb_point` (
   `total_point` int(11) NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_point`
---
-
-INSERT INTO `tb_point` (`id_point`, `id_pelanggan`, `kode_transaksi`, `point`, `status`, `total_point`, `tanggal`) VALUES
-(20, 'mit002', 'INV0002', 20, 'in', 20, '0000-00-00'),
-(21, 'mit003', 'INV0002', 20, 'in', 40, '0000-00-00'),
-(22, 'mit001', 'INV0002', 20, 'in', 40, '0000-00-00'),
-(23, 'mit002', 'INV0001', 20, 'in', 600, '0000-00-00'),
-(30, 'mit002', '-', 400, 'out', 200, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -225,9 +220,9 @@ CREATE TABLE `tb_produk` (
 
 INSERT INTO `tb_produk` (`kode_produk`, `nama_produk`, `harga_customer`, `harga_mitra`, `harga_distributor`, `keterangan`, `gambar`, `stok`, `berat`, `tanggal_update`) VALUES
 ('NUTRISIIKAN', 'Nutrisi Ikan', 110000, 85000, 85000, '<p>Nutrisi ikan</p>\r\n', 'ikan.jpg', 480, 500, '2021-04-16'),
-('NUTRISITERNAK', 'Nutrisi Ternak', 110000, 85000, 85000, '<p>nutrisi ternak</p>\r\n', 'ternak.jpg', 427, 500, '2021-04-16'),
-('POC', 'Pupuk Kilat 1L', 170000, 135000, 120000, '<p>pupuk kilat&nbsp;</p>\r\n', 'POC.jpg', 5138, 1000, '2021-04-16'),
-('POC500', 'Pupuk Kilat 500ml', 100000, 80000, 80000, '<p>pupuk kilat 500ml</p>\r\n', 'POC.jpg', 6118, 500, '2021-04-16');
+('NUTRISITERNAK', 'Nutrisi Ternak', 110000, 85000, 85000, '<p>nutrisi ternak</p>\r\n', 'ternak.jpg', 425, 500, '2021-04-16'),
+('POC', 'Pupuk Kilat 1L', 170000, 135000, 120000, '<p>pupuk kilat&nbsp;</p>\r\n', 'POC.jpg', 5106, 1000, '2021-04-16'),
+('POC500', 'Pupuk Kilat 500ml', 100000, 80000, 80000, '<p>pupuk kilat 500ml</p>\r\n', 'POC.jpg', 5978, 500, '2021-04-16');
 
 -- --------------------------------------------------------
 
@@ -347,16 +342,6 @@ CREATE TABLE `tb_stok` (
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tb_stok`
---
-
-INSERT INTO `tb_stok` (`id_stok`, `kode_produk`, `kode_transaksi`, `id_pelanggan`, `qty`, `sisa`, `status`, `tanggal`) VALUES
-(157, 'POC', 'INV0001', 'mit002', 20, 5138, 'out', '2021-06-30'),
-(158, 'POC500', 'INV0001', 'mit002', 5, 6163, 'out', '2021-06-30'),
-(159, 'POC500', 'INV0002', 'mit002', 40, 6123, 'out', '2021-06-30'),
-(160, 'POC500', 'INV0002', 'mit002', 5, 6118, 'out', '2021-06-30');
-
 -- --------------------------------------------------------
 
 --
@@ -377,10 +362,11 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `nama_user`, `email`, `username`, `password`, `hak_akses`) VALUES
-(1, 'Admin', '', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '1'),
+(1, 'Mely', '', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '1'),
 (2, 'egi', '', 'distributor', '5ffa7721e6d84150470a179e969643c0618e327a', '2'),
 (3, 'Sistoni', '', 'mitra', '2f87990a73489f1ebee3a830918e57d564a9b483', '3'),
-(4, 'Tunggul', '', 'tunggul', '1bd993421cde1ca45b66a98f71b983952e1804ad', '4');
+(4, 'Tunggul', '', 'tunggul', '1bd993421cde1ca45b66a98f71b983952e1804ad', '4'),
+(11, 'faida', 'faida@gmail.com', 'faida', '107c5a7f9ba1780257b15aeabf0140243bf0c16e', '5');
 
 -- --------------------------------------------------------
 
@@ -91683,6 +91669,12 @@ ALTER TABLE `tb_detail_order`
   ADD PRIMARY KEY (`kode_transaksi`);
 
 --
+-- Indeks untuk tabel `tb_marketing`
+--
+ALTER TABLE `tb_marketing`
+  ADD PRIMARY KEY (`id_marketing`);
+
+--
 -- Indeks untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
@@ -91769,13 +91761,13 @@ ALTER TABLE `wilayah_2020`
 -- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id_order` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=369;
+  MODIFY `id_order` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=392;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pencairan_reward`
@@ -91787,7 +91779,7 @@ ALTER TABLE `tb_pencairan_reward`
 -- AUTO_INCREMENT untuk tabel `tb_point`
 --
 ALTER TABLE `tb_point`
-  MODIFY `id_point` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_point` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_promo`
@@ -91817,13 +91809,13 @@ ALTER TABLE `tb_setting`
 -- AUTO_INCREMENT untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
-  MODIFY `id_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
