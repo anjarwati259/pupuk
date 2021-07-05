@@ -55,6 +55,10 @@ function tanggal_indo($tanggal, $cetak_hari = false)
           		<td width="40%">Kode Invoice</td>
           		<th><?php echo $detail_order->kode_transaksi ?></th>
           	</tr>
+            <tr>
+              <td width="40%">Marketing</td>
+              <th><?php echo $detail_order->nama_marketing ?></th>
+            </tr>
           	<tr>
           		<td width="40%">Tanggal Transaksi</td>
           		<th><strong><?php echo tanggal_indo(date('Y-m-d',strtotime($detail_order->tanggal_transaksi)),true); ?></strong></th>

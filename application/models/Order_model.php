@@ -14,11 +14,12 @@ class Order_model extends CI_Model
 	//menampilkan data order berdasarkan status bayar
 	public function listing_admin($data){
 		$this->db->select('tb_detail_order.*,
-							tb_pelanggan.nama_pelanggan, tb_pembayaran.jumlah_bayar');
+							tb_pelanggan.nama_pelanggan, tb_pembayaran.jumlah_bayar, tb_marketing.nama_marketing');
 		$this->db->from('tb_detail_order');
 		$this->db->where('status_bayar', $data);
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
 		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
 		$this->db->group_by('tb_detail_order.kode_transaksi');
 		$this->db->order_by('kode_transaksi','asc');
 		$query = $this->db->get();
@@ -116,10 +117,11 @@ class Order_model extends CI_Model
 	}
 	//detail
 	public function kode_transaksi($kode_transaksi){
-		$this->db->select('tb_detail_order.*, tb_rekening.nama_bank, tb_rekening.no_rekening');
+		$this->db->select('tb_detail_order.*, tb_rekening.nama_bank, tb_rekening.no_rekening, tb_marketing.nama_marketing');
 		$this->db->from('tb_detail_order');
 		//join
 		$this->db->join('tb_rekening', 'tb_rekening.id_rekening = tb_detail_order.id_rekening', 'left');
+		$this->db->join('tb_marketing', 'tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
 		//end join
 		$this->db->where('kode_transaksi', $kode_transaksi);
 		$this->db->order_by('kode_transaksi','desc');

@@ -353,7 +353,7 @@
               <!-- row -->
             </div>
           </div>
-          <input type="text" name="id_marketing" value="<?php echo $marketing->id_marketing ?>">
+          <input type="hidden" name="id_marketing" value="<?php echo $marketing->id_marketing ?>">
           <input type="hidden" name="kab" id="kab">
           <input type="hidden" name="kec" id="kec">
           <input type="hidden" name="prov" id="prov">

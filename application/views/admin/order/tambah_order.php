@@ -269,7 +269,7 @@
       <div class="modal-body" style="color: #292929;">
         <?php 
         // Form open
-        echo form_open_multipart(base_url('marketing/add_pelanggan'), ' class="form-horizontal"');
+        echo form_open_multipart(base_url('admin/order/add_pelanggan'), ' class="form-horizontal"');
         ?>
         <form role="form">
           <div class="box-body">
@@ -353,7 +353,7 @@
               <!-- row -->
             </div>
           </div>
-          <input type="text" name="id_marketing" value="<?php echo $marketing->id_marketing ?>">
+          <input type="hidden" name="id_marketing" value="<?php echo $marketing->id_marketing ?>">
           <input type="hidden" name="kab" id="kab">
           <input type="hidden" name="kec" id="kec">
           <input type="hidden" name="prov" id="prov">

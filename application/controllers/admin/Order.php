@@ -103,7 +103,8 @@ class Order extends CI_Controller
 							'id_pelanggan'	=> $value->id_pelanggan,
 							'point'			=> $total,
 							'status'		=> 'in',
-							'total_point'	=> $pointtotal		
+							'total_point'	=> $pointtotal,
+							'tanggal'		=> date('Y-m-d')		
 			);
 		$this->order_model->tambah_point($data);
 	}
@@ -129,7 +130,7 @@ class Order extends CI_Controller
 			$kode_transaksi = generate_invoice('INV0',$id);
 		}else{
 			$kode_transaksi = 'INV0001';
-		}
+		} 
 
 		//last id pelanggan
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
@@ -155,6 +156,7 @@ class Order extends CI_Controller
 						'pelanggan'			=> $pelanggan,
 						'marketing'			=> $marketing,
 						'produk'			=> $produk,
+						'provinsi'			=> $provinsi,
 						'promo'				=> $promo,
 						'id_pelanggan'		=> $id_pelanggan,
 						'isi'				=> 'admin/order/tambah_order'
@@ -541,5 +543,72 @@ class Order extends CI_Controller
                 );
                 echo json_encode($arr_result);
             }
+	}
+	public function add_pelanggan()
+	{
+		//get provinsi
+		$provinsi = $this->wilayah_model->listing();
+		//validation
+		$valid = $this-> form_validation;
+
+		$valid->set_rules('namapelanggan', 'Nama Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('alamat', 'Alamat','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('no_hp', 'No. Telp','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$valid->set_rules('provinsi', 'provinsi','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kabupaten', 'kabupaten','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kecamatan', 'kecamatan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$valid->set_rules('komoditi', 'komoditi','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+
+		if($valid->run()===FALSE){
+			//end validation
+			$customer = $this->pelanggan_model->customer();
+			$id = $this->pelanggan_model->get_last_id();
+
+			if($id){
+				$id = $id[0]->id_pelanggan;
+				$id_pelanggan = generate_code('ID20220',$id);
+			}else{
+				$id_pelanggan = 'ID202201';
+			}
+			
+			$data = array(	'title'		=> 'Tambah Data Pelanggan',
+							'customer'	=> $customer,
+							'id'		=> $id,
+							'provinsi'	=> $provinsi,
+							'isi'		=> 'admin/customer/list'
+						);
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		}else{
+			$i 	= $this->input;
+			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
+							'nama_pelanggan'	=> $i->post('namapelanggan'),
+							'alamat'			=> $i->post('alamat'),
+							'id_marketing'			=> $i->post('id_marketing'),
+							'no_hp'				=> $i->post('no_hp'),
+							'komoditi'			=> $i->post('komoditi'),
+							'tanggal_daftar'	=> date('Y-m-d'),
+							'provinsi'			=> $i->post('prov'),
+							'kabupaten'			=> $i->post('kab'),
+							'kecamatan'			=> $i->post('kec'),
+							'jenis_pelanggan'	=> $i->post('jenis_pelanggan')
+						);
+			$this->pelanggan_model->tambah($data);
+			$this->session->set_flashdata('sukses','Data telah ditambah');
+			redirect(base_url('admin/order/tambah_order'), 'refresh');
+		}
 	}
 }

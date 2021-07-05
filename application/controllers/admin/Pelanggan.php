@@ -53,6 +53,10 @@ class Pelanggan extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
+		$id_user = $this->session->userdata('id_user');
+		$id = $this->pelanggan_model->get_last_id();
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
 		//validation
 		$valid = $this-> form_validation;
 
@@ -101,6 +105,7 @@ class Pelanggan extends CI_Controller
 			$i 	= $this->input;
 			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+							'id_marketing'		=> $id_marketing,
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
 							'komoditi'			=> $i->post('komoditi'),
@@ -223,6 +228,10 @@ class Pelanggan extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
+		$id_user = $this->session->userdata('id_user');
+		$id = $this->pelanggan_model->get_last_id();
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
 		//validation
 		$valid = $this-> form_validation;
 
@@ -272,6 +281,7 @@ class Pelanggan extends CI_Controller
 			$i 	= $this->input;
 			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+							'id_marketing'		=> $id_marketing,
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
 							'komoditi'			=> $i->post('komoditi'),
@@ -395,6 +405,10 @@ class Pelanggan extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
+		$id_user = $this->session->userdata('id_user');
+		$id = $this->pelanggan_model->get_last_id();
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
 		//validation
 		$valid = $this-> form_validation;
 
@@ -447,6 +461,7 @@ class Pelanggan extends CI_Controller
 							'no_hp'				=> $i->post('no_hp'),
 							'komoditi'		=> $i->post('komoditi'),
 							'tanggal_daftar'	=> $i->post('tanggal_daftar'),
+							'id_marketing'		=> $id_marketing,
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
 							'kecamatan'			=> $i->post('kec'),
