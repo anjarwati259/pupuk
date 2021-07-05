@@ -41,12 +41,12 @@
                   <?php 
                   $total_bayar = (int) round(($order->total_bayar * 3)/100);
                   $total = $order->total_bayar + $total_bayar;
-                  $bayar = number_format($total,'0',',','.');
                    ?>
                    <label >Jumlah Transfer</label>
                     <div class="input-group">
                       <span class="input-group-addon">Rp</span>
-                      <input type="text" name="total_bayar" value="<?php echo $bayar ?>" class="form-control">
+                      <input type="text"  value="<?php echo number_format($total,'0',',','.') ?>" class="form-control">
+                      <input type="hidden" name="total_bayar" value="<?php echo $total ?>" class="form-control">
                     </div>
                 </div>
                 

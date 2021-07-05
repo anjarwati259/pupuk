@@ -10,24 +10,35 @@ class Pelanggan extends CI_Controller
 		parent::__construct();
 		$this->load->model('user_model');
 		$this->load->model('pelanggan_model');
+		$this->load->model('marketing_model');
 		$this->load->model('wilayah_model');
 		//proteksi halaman
 		$this->simple_login->cek_login();
-		$this->simple_login->admin();
+		//$this->simple_login->admin();
 	}
 	//menampilkan data customer
 	public function customer(){
 		$id = $this->pelanggan_model->get_last_id();
+		$id_user = $this->session->userdata('id_user');
 		$provinsi = $this->wilayah_model->listing();
 
 		if($id){
 			$id = $id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('cus',$id);
+			$id_pelanggan = generate_code('ID',$id);
 		}else{
-			$id_pelanggan = 'cus001';
+			$id_pelanggan = 'ID202201';
 		}
 
-		$customer = $this->pelanggan_model->customer();
+		$hak_akses = $this->session->userdata('hak_akses');
+		if($hak_akses==1){
+			$customer = $this->pelanggan_model->customer();
+		}else if($hak_akses==5){
+			$marketing =  $this->marketing_model->get_marketing($id_user);
+			$id_marketing = $marketing->id_marketing;
+			$customer = $this->pelanggan_model->get_marketing($id_marketing,'Customer');
+		}
+
+		
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
 						'cus'	=> $customer, 
@@ -74,9 +85,9 @@ class Pelanggan extends CI_Controller
 
 			if($id){
 				$id = $id[0]->id_pelanggan;
-				$id_pelanggan = generate_code('cus',$id);
+				$id_pelanggan = generate_code('ID',$id);
 			}else{
-				$id_pelanggan = 'cus001';
+				$id_pelanggan = 'ID202201';
 			}
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
@@ -182,16 +193,24 @@ class Pelanggan extends CI_Controller
 	//menampilkan data mitra
 	public function mitra(){
 		$id = $this->pelanggan_model->get_last_id();
+		$id_user = $this->session->userdata('id_user');
 		$provinsi = $this->wilayah_model->listing();
 
 		if($id){
 			$id = $id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('mit',$id);
+			$id_pelanggan = generate_code('ID',$id);
 		}else{
-			$id_pelanggan = 'mit001';
+			$id_pelanggan = 'ID202201';
 		}
 
-		$mitra = $this->pelanggan_model->mitra();
+		$hak_akses = $this->session->userdata('hak_akses');
+		if($hak_akses==1){
+			$mitra = $this->pelanggan_model->mitra();
+		}else if($hak_akses==5){
+			$marketing =  $this->marketing_model->get_marketing($id_user);
+			$id_marketing = $marketing->id_marketing;
+			$mitra = $this->pelanggan_model->get_marketing($id_marketing,'Mitra');
+		}
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
 						'provinsi'	=> $provinsi,
@@ -236,9 +255,9 @@ class Pelanggan extends CI_Controller
 
 			if($id){
 				$id = $id[0]->id_pelanggan;
-				$id_pelanggan = generate_code('mit',$id);
+				$id_pelanggan = generate_code('ID',$id);
 			}else{
-				$id_pelanggan = 'mit001';
+				$id_pelanggan = 'ID202201';
 			}
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
@@ -345,16 +364,25 @@ class Pelanggan extends CI_Controller
 	//menampilkan data distributor
 	public function distributor(){
 		$id = $this->pelanggan_model->get_last_id();
+		$id_user = $this->session->userdata('id_user');
 		$provinsi = $this->wilayah_model->listing();
 
 		if($id){
 			$id = $id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('dis',$id);
+			$id_pelanggan = generate_code('ID',$id);
 		}else{
-			$id_pelanggan = 'dis001';
+			$id_pelanggan = 'ID202201';
 		}
 
-		$distributor = $this->pelanggan_model->distributor();
+		$hak_akses = $this->session->userdata('hak_akses');
+		if($hak_akses==1){
+			$distributor = $this->pelanggan_model->distributor();
+		}else if($hak_akses==5){
+			$marketing =  $this->marketing_model->get_marketing($id_user);
+			$id_marketing = $marketing->id_marketing;
+			$distributor = $this->pelanggan_model->get_marketing($id_marketing,'Distributor');
+		}
+		
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
 						'provinsi'	=> $provinsi,

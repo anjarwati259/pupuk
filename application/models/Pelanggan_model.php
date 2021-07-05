@@ -94,6 +94,16 @@ class Pelanggan_model extends CI_Model
 		$this->db->from('tb_pelanggan');
 		$this->db->where('id_pelanggan', $id_pelanggan);
 		$query = $this->db->get();
-		return $query->row();
+		return $query->row(); 
+	}
+	//get pelanggan
+	public function get_marketing($id_marketing,$data){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('jenis_pelanggan', $data);
+		$this->db->where('id_marketing', $id_marketing);
+		$this->db->order_by('id_pelanggan','desc');
+		$query = $this->db->get();
+		return $query->result();
 	}
 }

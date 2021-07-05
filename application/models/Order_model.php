@@ -24,6 +24,33 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//menampilkan data order berdasarkan status bayar dan id marketing
+	public function list_belum($id_marketing,$data){
+		$this->db->select('tb_detail_order.*,
+							tb_pelanggan.nama_pelanggan, tb_pembayaran.jumlah_bayar');
+		$this->db->from('tb_detail_order');
+		$this->db->where('tb_detail_order.status_bayar', $data);
+		$this->db->where('tb_detail_order.id_marketing', $id_marketing);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->group_by('tb_detail_order.kode_transaksi');
+		$this->db->order_by('kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//menampilkan data order berdasarkan status bayar dan id marketing
+	public function all_list($id_marketing){
+		$this->db->select('tb_detail_order.*,
+							tb_pelanggan.nama_pelanggan, tb_pembayaran.jumlah_bayar');
+		$this->db->from('tb_detail_order');
+		$this->db->where('tb_detail_order.id_marketing', $id_marketing);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->group_by('tb_detail_order.kode_transaksi');
+		$this->db->order_by('kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	//get jenis pelanggan
 	public function jenis_pelanggan($kode_transaksi){
 		$this->db->select('tb_pelanggan.jenis_pelanggan');

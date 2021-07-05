@@ -125,7 +125,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
         <li class="active">
-          <a href="<?php echo base_url('admin/dashboard') ?>">
+          <a href="<?php echo base_url('marketing') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>

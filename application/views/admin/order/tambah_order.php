@@ -1,109 +1,149 @@
 <!-- START CUSTOM TABS -->
-      <div class="row">
-        <div class="col-md-12">
-          <!-- Custom Tabs -->
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li role="presentation" class="active"><a href="#tab_1">Tambah Order</a></li>
-              <li role="presentation"><a href="<?php echo site_url('admin/order');?>">Belum Bayar</a></li>
-              <li role="presentation"><a href="<?php echo site_url('admin/order/sudah_bayar');?>">Sudah Bayar</a></li>
-            </ul>
-            <div class="tab-content">
-              <!-- /.tab-pane -->
-              <div class="tab-pane active" id="tab_1">
-                <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo base_url('admin/order/add_process');?>">
+<div class="row">
+  <div class="col-md-12">
+    <!-- Custom Tabs -->
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#tab_1">Tambah Order</a></li>
+        <li role="presentation"><a href="<?php echo site_url('admin/order');?>">Belum Bayar</a></li>
+        <li role="presentation"><a href="<?php echo site_url('admin/order/sudah_bayar');?>">Sudah Bayar</a></li>
+      </ul>
+      <div class="tab-content">
+        <!-- /.tab-pane -->
+        <div class="tab-pane active" id="tab_1">
+          <div class="row">
+            <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo base_url('admin/order/add_process');?>">
+            <div class="col-sm-6">
+              <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Informasi Order</h3>
+                  <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
                 <div class="box-body">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="kode">Kode Invoice</label>
-                      <div class="col-sm-8">
-                        <input type="hidden" name="kode_transaksi" id="kode_transaksi" value="<?php echo $kode_transaksi?>"/>
-                        <input type="text" name="kode" id="kode_transaksi" class="form-control" value="<?php echo $kode_transaksi ?>" disabled/>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Nama</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="nama_pelanggan" value="<?php echo set_value('nama_pelanggan') ?>" class="form-control" id="nama_pelanggan" placeholder="Nama Pelanggan"> 
-                        <input type="hidden" class="form-control" name="id_pelanggan" value="<?php echo set_value('id_pelanggan') ?>" id="id_pelanggan" placeholder="id_pelanggan">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-4"></div>
-                      <div class="col-sm-8">
-                        <input type="radio" name="code" id="code" value="0" checked> <label> Lama</label>
-                        <input type="radio" name="code" id="code" value="1"> <label> Baru</label>
+                  
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Kode Invoice</label>
+                    <div class="col-sm-8">
+                      <input type="hidden" name="kode_transaksi" id="kode_transaksi" value="<?php echo $kode_transaksi ?>"/>
+                      <input type="text" name="kode" id="kode_transaksi" class="form-control" value="<?php echo $kode_transaksi ?>" disabled/>
                     </div>
                   </div>
                   <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">No. Hp</label>
-                      <div class="col-sm-4">
-                        <input type="text" name="no_hp" id="no_hp" value="<?php echo set_value('no_hp') ?>" class="form-control" placeholder="No. Hp">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" name="komoditi" id="komoditi" value="<?php echo set_value('komoditi') ?>" class="form-control" placeholder="Komoditi">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Alamat</label>
-                      <div class="col-sm-8">
-                        <textarea type="text" name="alamat" id="alamat" value="<?php echo set_value('alamat') ?>" class="form-control"></textarea>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Provinsi</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="provinsi" id="provinsi" value="<?php echo set_value('provinsi') ?>" class="form-control"/>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Kabupaten</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="kabupaten" id="kabupaten" value="<?php echo set_value('kabupaten') ?>" class="form-control"/>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Kecamatan</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="kecamatan" id="kecamatan" value="<?php echo set_value('kecamatan') ?>" class="form-control"/>
-                      </div>
-                    </div>
-                    <input type="hidden" class="form-control" name="no_hp" id="no_hp" value="<?php echo set_value('no_hp') ?>" />
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="date">Tanggal</label>
-                      <div class="col-sm-8">
-                        <input type="text" value="<?php echo date('Y-m-d H:i:s');?>" id="date" class="form-control" disabled/>
+                    <label class="col-sm-4 control-label" for="kode">Tanggal</label>
+                    <div class="col-sm-8">
+                      <input type="text" value="<?php echo date('Y-m-d H:i:s');?>" id="date" class="form-control" disabled/>
                         <input type="hidden" id="tanggal_transaksi" name="tanggal_transaksi" value="<?php echo date('Y-m-d H:i:s');?>" id="tanggal_transaksi" class="form-control"/>
-                      </div>
                     </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Ekspedisi</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" name="ekspedisi" id="ekspedisi"/>
-                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Marketing</label>
+                    <div class="col-sm-8">
+                      <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $marketing->id_marketing ?>"/>
+                      <input type="text" name="kode" class="form-control" value="<?php echo $marketing->nama_marketing ?>" disabled/>
                     </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Ongkos Kirim</label>
-                      <div class="col-sm-8">
-                        <input type="number" class="form-control" name="ongkir" id="ongkir"/>
-                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Jenis Order</label>
+                    <div class="col-sm-8">
+                      <select name='jenis_order' class="form-control" id="jenis_order">
+                          <option value='1'>Adsense</option>
+                          <option value='2'>Organik</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label" for="category_id">Metode Bayar</label>
-                      <div class="col-sm-8">
-                        <select name='metode_pembayaran' class="form-control" id="metode_pembayaran">
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Ekspedisi</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="ekspedisi" id="ekspedisi"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Ongkos Kirim</label>
+                    <div class="col-sm-8">
+                      <input type="number" class="form-control" name="ongkir" id="ongkir"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Metode Bayar</label>
+                    <div class="col-sm-8">
+                      <select name='metode_pembayaran' class="form-control" id="metode_pembayaran">
                           <option value='1'>Transfer Bank</option>
                           <option value='0'>COD</option>
-                        </select>
-                      </div>
+                      </select>
                     </div>
-                  </div> 
-                  <div class="col-md-11 col-md-offset-1">
-                    <h3 class="content-title">Informasi Barang</h3>
-                    <div class="content-process">
-                      <table class="table">
+                  </div>
+                  
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+            <div class="col-sm-6">
+              <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Informasi Pelanggan</h3>
+                  <!-- /.box-tools -->
+                  <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-info btn-box-tool" data-toggle="modal" data-target="#modal-default"><h3 class="box-title">Tambah Baru</h3>&nbsp;&nbsp;<i class="fa fa-plus"></i></button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Nama Pelanggan</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="nama_pelanggan" value="<?php echo set_value('nama_pelanggan') ?>" class="form-control" id="nama_pelanggan" placeholder="Nama Pelanggan">
+                      <input type="hidden" class="form-control" name="id_pelanggan" value="<?php echo set_value('id_pelanggan') ?>" id="id_pelanggan" placeholder="id_pelanggan">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">No. Handphone</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="no_hp" id="no_hp" value="<?php echo set_value('no_hp') ?>" class="form-control" placeholder="No. Hp">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Alamat Lengkap</label>
+                    <div class="col-sm-8">
+                      <textarea type="text" name="alamat" id="alamat" value="<?php echo set_value('alamat') ?>" class="form-control" placeholder="Alamat Lengkap"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Provinsi</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="provinsi" id="provinsi" value="<?php echo set_value('provinsi') ?>" class="form-control" placeholder="Provinsi"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Kabupaten</label>
+                    <div class="col-sm-8">
+                     <input type="text" name="kabupaten" id="kabupaten" value="<?php echo set_value('kabupaten') ?>" class="form-control" placeholder="Kabupaten"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Kecamatan</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="kecamatan" id="kecamatan" value="<?php echo set_value('kecamatan') ?>" class="form-control" placeholder="Kecamatan"/>
+                    </div>
+                  </div>
+                  
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-12">
+              <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Informasi Barang</h3>
+                  <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <table class="table">
                         <thead>
                           <tr>
                             <td>Pilih Paket</td>
@@ -193,12 +233,11 @@
                           </tr>
                         </tfoot>
                         </tbody>
-                       
                       </table>
-                    </div>
-                  </div>
                 </div>
-                <!-- /.box-body -->
+              </div>
+            </div>
+            <!-- /.box-body -->
                 <div class="box-footer">
                   <div class="col-md-3 col-md-offset-4">
                     <a class="btn btn-default" href="<?php echo base_url('order');?>">Cancel</a>
@@ -206,19 +245,130 @@
                   </div>
                 </div>
                 <!-- /.box-footer -->
-              </form>
-                <!-- /.box -->
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
+            </form>
           </div>
-          <!-- nav-tabs-custom -->
+          <!-- /.box -->
         </div>
-        <!-- /.col -->
+        <!-- /.tab-pane -->
       </div>
+      <!-- /.tab-content -->
+    </div>
+    <!-- nav-tabs-custom -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- modal tambah pelanggan -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="color: #292929;">Tambah Data Pelanggan</h4>
+      </div>
+      <div class="modal-body" style="color: #292929;">
+        <?php 
+        // Form open
+        echo form_open_multipart(base_url('marketing/add_pelanggan'), ' class="form-horizontal"');
+        ?>
+        <form role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                   <label >ID Pelanggan</label>
+                    <input type="text" class="form-control" value="<?php echo $id_pelanggan ?>" disabled/>
+                    <input type="hidden" name="id_pelanggan" class="form-control" value="<?php echo (isset($id_pelanggan))?$id_pelanggan:'';?>"/>
+                </div>
+                <div class="col-md-6">
+                   <label >Nama Pelanggan</label>
+                    <input type="text" value="<?php echo set_value('namapelanggan') ?>" name="namapelanggan" placeholder="Nama Pelanggan" class="form-control" required/>
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                   <label >No Handphone</label>
+                    <input type="number" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                   <label >Komoditi</label>
+                    <input type="text" name="komoditi" value="<?php echo set_value('komoditi') ?>" placeholder="Komoditi" class="form-control"/>
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-12">
+                   <label >Alamat Lengkap</label>
+                    <textarea type="text" name="alamat" id="alamat" value="<?php echo set_value('alamat') ?>" class="form-control" placeholder="Alamat Lengkap"></textarea>
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                   <label >Provinsi</label>
+                    <select class="form-control" id="form_prov" name="provinsi">
+                    <?php foreach ($provinsi as $provinsi) { ?>
+                    <option value="<?php echo $provinsi->kode ?>"><?php echo $provinsi->nama ?></option>
+                  <?php } ?>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                   <label >Kabupaten/Kota</label>
+                    <select class="form-control" id="form_kab" name="kabupaten">
+                      <option></option>
+                  </select>
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                   <label >Kecamatan</label>
+                    <select class="form-control" id="form_kec" name="kecamatan">
+                      <option></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                   <label >Jenis Pelanggan</label>
+                    <select class="form-control" id="jenis_pelanggan" name="jenis_pelanggan">
+                      <option value="Customer">Customer</option>
+                      <option value="Mitra">Mitra</option>
+                      <option value="Distributor">Distributor</option>
+                  </select>
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+            </div>
+          </div>
+          <input type="text" name="id_marketing" value="<?php echo $marketing->id_marketing ?>">
+          <input type="hidden" name="kab" id="kab">
+          <input type="hidden" name="kec" id="kec">
+          <input type="hidden" name="prov" id="prov">
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Tambah Data</button>
+        </div>
+        </form>
+        <?php echo form_close(); ?>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 
-<!-- javascript -->
 <script type="text/javascript">
   $(document).ready(function(){
     $("#0").show();
@@ -417,7 +567,7 @@
                         alert("Data Ada yg belum diisi, Silahkan lengkapi!!!");
                     }
                 }
-            });
+            }); 
         }else{
             alert("Silahkan periksa kode transaksi atau supplier anda!");
         }
@@ -434,9 +584,10 @@
         var ekspedisi = $("#ekspedisi").val();
         var nama_pelanggan = $("#nama_pelanggan").val();
         var ongkir = $("#ongkir").val();
-        var code = $("input[name='code']:checked").val();
+        //var code = $("input[name='code']:checked").val();
         var no_hp = $("#no_hp").val();
-        var komoditi = $("#komoditi").val();
+        var id_marketing = $("#id_marketing").val();
+        var jenis_order = $("#jenis_order").val();
         var metode_pembayaran = $("#metode_pembayaran").val();
         var tanggal_transaksi = $("#tanggal_transaksi").val();
         if(typeof kode_transaksi !== "undefined" && kode_transaksi != ""){
@@ -453,9 +604,10 @@
                 'ekspedisi': ekspedisi,
                 'ongkir': ongkir,
                 'no_hp': no_hp,
-                'komoditi':komoditi,
+                'id_marketing':id_marketing,
+                'jenis_order' : jenis_order,
                 'metode_pembayaran' : metode_pembayaran,
-                'code': code,
+                //'code': code,
                 'tanggal_transaksi' : tanggal_transaksi
             };
             data = [status,method,arr];
@@ -470,11 +622,70 @@
                     $('[name="id_pelanggan"]').val(ui.item.id);
                     $('[name="alamat"]').val(ui.item.alamat);
                     $('[name="no_hp"]').val(ui.item.no_hp);
-                    $('[name="komoditi"]').val(ui.item.komoditi);
                     $('[name="kecamatan"]').val(ui.item.kecamatan);
                     $('[name="kabupaten"]').val(ui.item.kabupaten);
                     $('[name="provinsi"]').val(ui.item.provinsi);
                 }
+      });
+
+    // ambil data kabupaten ketika data memilih provinsi
+      $('body').on("change","#form_prov",function(){
+        var id = $(this).val();
+        var data = "id="+id+"&data=kabupaten";
+        $.ajax({
+          type: 'POST',
+          url: "<?php echo base_url('wilayah/get_wilayah'); ?>",
+          data: data,
+          success: function(hasil) {
+             $("#form_kab").html(hasil);
+            //alert("sukses");
+          }
+        });
+      });
+
+      // ambil data kecamatan/kota ketika data memilih kabupaten
+      $('body').on("change","#form_kab",function(){
+        var id = $(this).val();
+        var data = "id="+id+"&data=kecamatan";
+        $.ajax({
+          type: 'POST',
+          url: "<?php echo base_url('wilayah/get_wilayah'); ?>",
+          data: data,
+          success: function(hasil) {
+            $("#form_kec").html(hasil);
+          }
+        });
+      });
+
+       //get provinsi
+      $('body').on("change","#form_prov",function(){
+        var id=$(this).val();
+        $.ajax({
+            type : "POST",
+            url  : "<?php echo base_url('wilayah/getprov'); ?>",
+            dataType : "JSON",
+            data : {id: id},
+            cache:false,
+            success: function(data){
+                $.each(data,function(nama){
+                    $('[name="prov"]').val(data.nama);
+                     
+                });
+                 
+            }
+        });
+        return false; 
+      });
+
+      //get kabupaten
+    $('body').on("change","#form_kab",function(){
+        var datakab = $("option:selected", this).attr('datakab');
+          $("input[name=kab]").val(datakab);
+      });
+    //get kecamatan
+    $('body').on("change","#form_kec",function(){
+        var datakec = $("option:selected", this).attr('datakec');
+          $("input[name=kec]").val(datakec); 
       });
     });
 </script>

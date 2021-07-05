@@ -11,12 +11,15 @@ class Order extends CI_Controller
 		$this->load->model('pelanggan_model');
 		$this->load->model('home_model');
 		$this->load->model('produk_model');
+		$this->load->model('marketing_model');
 		$this->load->model('pembayaran_model');
+		$this->load->model('wilayah_model');
 		//load helper random string
 		$this->load->helper('string');
 		//proteksi halaman
 		$this->simple_login->cek_login();
-		$this->simple_login->admin();
+		//$this->simple_login->admin();
+		//$this->simple_login->markering();
 	}
 	//halaman data order terbaru atau yg belum bayar
 	public function index()
@@ -39,7 +42,9 @@ class Order extends CI_Controller
 						'id_rekening'		=> $this->input->post('id_rekening'),
 						'ongkir'			=> $this->input->post('ongkir'),
 						'total_bayar'		=> $this->input->post('total_bayar'),
+						'no_resi'		=> $this->input->post('no_resi'),
 						'expedisi'		=> $this->input->post('expedisi'),
+						'no_resi'		=> $this->input->post('no_resi'),
 						'status_bayar'		=> 1
 						);
 		$this->order_model->update_status($data);
@@ -116,18 +121,30 @@ class Order extends CI_Controller
 	}
 	//menampilkan form tambah order
 	public function tambah_order()
-	{
-		//kode invoice 
-
+	{ 
+		//last id kode transaksi
 		$id = $this->order_model->get_last_id();
 		if($id){
 			$id = $id[0]->kode_transaksi;
-			$kode_transaksi = generate_code('INV0',$id);
+			$kode_transaksi = generate_invoice('INV0',$id);
 		}else{
 			$kode_transaksi = 'INV0001';
 		}
+
+		//last id pelanggan
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
+		if($pelanggan_id){
+			$pelanggan_id = $pelanggan_id[0]->id_pelanggan;
+			$id_pelanggan = generate_code('ID',$pelanggan_id);
+		}else{
+			$id_pelanggan = 'ID202201';
+		}
 		// destry cart
 		$this->cart->destroy();
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		//get provinsi
+		$provinsi = $this->wilayah_model->listing();
 
 		$pelanggan 	= $this->pelanggan_model->alllisting();
 		$produk 	= $this->home_model->produk();
@@ -136,8 +153,10 @@ class Order extends CI_Controller
 		$data = array(	'title'				=> 'Tambah Order',
 						'kode_transaksi'	=> $kode_transaksi,
 						'pelanggan'			=> $pelanggan,
+						'marketing'			=> $marketing,
 						'produk'			=> $produk,
 						'promo'				=> $promo,
+						'id_pelanggan'		=> $id_pelanggan,
 						'isi'				=> 'admin/order/tambah_order'
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
@@ -292,6 +311,8 @@ class Order extends CI_Controller
 			$data['total_transaksi'] = $this->cart->total();
 			$data['status_bayar'] = '0';
 			$data['tanggal_transaksi'] = $this->input->post('tanggal_transaksi');
+			$data['id_marketing'] = $this->input->post('id_marketing');
+			$data['jenis_order'] = $this->input->post('jenis_order');
 			$data['total_item'] = $total;
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
 
@@ -308,23 +329,24 @@ class Order extends CI_Controller
 			 }
 			 
 			if($data['kode_transaksi']){
-				$this->_insert_purchase_data($data['kode_transaksi'],$carts,$id_pelanggan,$data['tanggal_transaksi']);
+				$this->_insert_purchase_data($data['kode_transaksi'],$carts,$id_pelanggan,$data['tanggal_transaksi'],$data['id_marketing']);
 				$this->_insert_stok_data($data['kode_transaksi'],$carts,$id_pelanggan);
 			}
 			//disini
-
-			echo json_encode(array('status' => 'ok'));
+			
+			echo json_encode(array('status' => 'ok', ));
 		}else{
 			echo json_encode(array('status' => 'error'));
 		}
 	}
 	//untuk menyimpan data belanja ke database
-	private function _insert_purchase_data($kode_transaksi,$carts,$id_pelanggan, $tanggal_transaksi){
+	private function _insert_purchase_data($kode_transaksi,$carts,$id_pelanggan, $tanggal_transaksi,$id_marketing){
 		foreach($carts as $key => $cart){
 			$purchase_data = array(
 				'kode_transaksi' => $kode_transaksi,
 				'id_produk' => $cart['id'],
 				'id_pelanggan' => $id_pelanggan,
+				'id_marketing' => $id_marketing,
 				'id_promo'	=> $cart['id_promo'],
 				'status'	=> $cart['status'],
 				'jml_beli' => $cart['qty'],
@@ -384,7 +406,6 @@ class Order extends CI_Controller
                 	'kecamatan' => $row->kecamatan,
                 	'kabupaten' => $row->kabupaten,
                 	'provinsi'	=> $row->provinsi,
-                	'komoditi' => $row->komoditi,
                 	'no_hp'	=> $row->no_hp,
                 );
                 echo json_encode($arr_result);
@@ -438,13 +459,13 @@ class Order extends CI_Controller
 			$this->order_model->update_status($data);
 			$this->session->set_flashdata('sukses','Status Telah Diubah');
 			//redirect(base_url('admin/order/sudah_bayar'), 'refresh');
-
+			$bayar = (int)str_replace('.', '', $this->input->post('total_bayar'));
 			//insert pembayaran
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
 						'nama_bank'			=> '-',
 						'id_rekening'		=> 0,
 						'tanggal_bayar'		=> $this->input->post('tanggal_bayar'),
-						'jumlah_bayar'		=> $this->input->post('total_bayar')
+						'jumlah_bayar'		=> $bayar
 						);
 		$this->pembayaran_model->bayar($data);
 		$this->session->set_flashdata('sukses','Status Telah Diubah');

@@ -1,6 +1,7 @@
 catatan status
 
 1. PROMO
+	2 = mitra
 	1 = publish
 	0 = draf
 2. DETAIL ORDER
@@ -22,4 +23,9 @@ catatan status
 6. REWARD
 	0 = proses
 	1 = verifikasi
-
+7. JENIS TRANSAKSI
+	1 = ads
+	2 = organik
+8. KODE ID
+	2021 = marketing
+	2022 = pelanggan
