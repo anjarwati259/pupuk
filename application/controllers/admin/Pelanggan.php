@@ -9,9 +9,11 @@ class Pelanggan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->model('order_model');
 		$this->load->model('pelanggan_model');
 		$this->load->model('marketing_model');
 		$this->load->model('wilayah_model');
+		$this->load->model('dashboard_model');
 		//proteksi halaman
 		$this->simple_login->cek_login();
 		//$this->simple_login->admin();

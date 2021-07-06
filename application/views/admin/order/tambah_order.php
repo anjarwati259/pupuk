@@ -234,6 +234,7 @@
                         </tfoot>
                         </tbody>
                       </table>
+                      <input type="hidden" id="status_baca" name="status_baca" value="1">
                 </div>
               </div>
             </div>
@@ -590,6 +591,7 @@
         var jenis_order = $("#jenis_order").val();
         var metode_pembayaran = $("#metode_pembayaran").val();
         var tanggal_transaksi = $("#tanggal_transaksi").val();
+        var status_baca = $("#status_baca").val();
         if(typeof kode_transaksi !== "undefined" && kode_transaksi != ""){
             var status = true;
             var method = "penjualan";
@@ -608,7 +610,8 @@
                 'jenis_order' : jenis_order,
                 'metode_pembayaran' : metode_pembayaran,
                 //'code': code,
-                'tanggal_transaksi' : tanggal_transaksi
+                'tanggal_transaksi' : tanggal_transaksi,
+                'status_baca' : status_baca
             };
             data = [status,method,arr];
         }

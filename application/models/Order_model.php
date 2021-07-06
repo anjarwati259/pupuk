@@ -217,4 +217,9 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//edit data pelanggan
+	public function status_baca($data){
+		$this->db->where('kode_transaksi', $data['kode_transaksi']);
+		$this->db->update('tb_detail_order',$data);
+	}
 }

@@ -29,3 +29,6 @@ catatan status
 8. KODE ID
 	2021 = marketing
 	2022 = pelanggan
+9. STATUS BACA
+	1 = sudah dibaca
+	0 = belum baca

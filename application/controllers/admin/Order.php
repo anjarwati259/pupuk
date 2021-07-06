@@ -14,6 +14,7 @@ class Order extends CI_Controller
 		$this->load->model('marketing_model');
 		$this->load->model('pembayaran_model');
 		$this->load->model('wilayah_model');
+		$this->load->model('dashboard_model');
 		//load helper random string
 		$this->load->helper('string');
 		//proteksi halaman
@@ -163,6 +164,7 @@ class Order extends CI_Controller
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+	
 	//untuk check produk berdasarkan kode produk
 	public function check_product($kode_produk){
 		$produk = $this->produk_model->get_by_produk($kode_produk);
@@ -317,6 +319,7 @@ class Order extends CI_Controller
 			$data['jenis_order'] = $this->input->post('jenis_order');
 			$data['total_item'] = $total;
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
+			$data['status_baca'] = $this->input->post('status_baca');
 
 			$code = $this->input->post('code');
 			 if($code==1 || $id_pelanggan==null){
@@ -335,7 +338,6 @@ class Order extends CI_Controller
 				$this->_insert_stok_data($data['kode_transaksi'],$carts,$id_pelanggan);
 			}
 			//disini
-			
 			echo json_encode(array('status' => 'ok', ));
 		}else{
 			echo json_encode(array('status' => 'error'));
@@ -610,5 +612,8 @@ class Order extends CI_Controller
 			$this->session->set_flashdata('sukses','Data telah ditambah');
 			redirect(base_url('admin/order/tambah_order'), 'refresh');
 		}
+	}
+	public function notifikasi(){
+		$this->load->view('admin/order/notifikasi');
 	}
 }

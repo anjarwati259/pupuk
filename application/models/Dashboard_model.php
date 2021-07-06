@@ -262,4 +262,27 @@ class Dashboard_model extends CI_Model
 		$this->db->where('id_pencairan_reward', $data['id_pencairan_reward']);
 		$this->db->update('tb_pencairan_reward',$data);
 	}
+	public function total_order(){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_detail_order');
+		$this->db->where('status_baca', 0);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function data_notif(){
+		$this->db->select('tb_detail_order.*, tb_marketing.nama_marketing');
+		$this->db->from('tb_detail_order');
+		$this->db->where('status_baca', 0);
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function detail_notif($kode_transaksi){
+		$this->db->select('tb_detail_order.*, tb_marketing.nama_marketing');
+		$this->db->from('tb_detail_order');
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

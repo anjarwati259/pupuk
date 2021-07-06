@@ -94,4 +94,22 @@ class Dashboard extends CI_Controller
         $this->session->set_flashdata('sukses','Status Telah Diubah');
 		redirect(base_url('admin/dashboard/pencairan_reward'), 'refresh');
 	}
+	public function get_notif(){
+		$tot = $this->dashboard_model->total_order();
+		$order = $this->dashboard_model->data_notif();
+		$result['total'] = $tot->total;
+		$result['data'] = $order;
+		echo json_encode($result);
+	}
+	public function data_notif(){
+		$order = $this->dashboard_model->data_notif();
+		$result['data_notif'] = $order;
+	}
+	public function status_baca($kode_transaksi){
+		$data = array(	'kode_transaksi' => $kode_transaksi,
+						'status_baca'	 => 1
+						);
+		$this->order_model->status_baca($data);
+		redirect(base_url('admin/order'), 'refresh');
+	}
 }

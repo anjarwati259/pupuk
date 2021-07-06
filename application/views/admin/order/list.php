@@ -93,3 +93,19 @@
     <!-- nav-tabs-custom -->
   </div>
   <!-- /.col -->
+<span id="tot_notif">1</span>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    setInterval(function(){
+      $.ajax({
+        url:"<?php echo base_url() ?>admin/dashboard/get_notif",
+        type:"POST",
+        dataType:"json",
+        data:{},
+        success:function(data){
+          $("#tot_notif").html(data.total);
+        }
+      });
+    }, 3000);
+  })
+</script>
