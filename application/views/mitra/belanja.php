@@ -104,8 +104,8 @@
                               //form untuk memproses belanjaan
                               echo form_open(base_url('mitra/add')); 
                               //elemen yang dibawa
-                              echo form_hidden('id', 'POC');
-                              echo form_hidden('id_produk', 'POC');
+                              echo form_hidden('id', 'PK001');
+                              echo form_hidden('id_produk', 'PK001');
                               echo form_hidden('id_promo', null);
                               echo form_hidden('qty', 1);
                               echo form_hidden('jumlah', 20);
@@ -145,8 +145,8 @@
                               //form untuk memproses belanjaan
                               echo form_open(base_url('mitra/add')); 
                               //elemen yang dibawa
-                              echo form_hidden('id', 'POC500');
-                              echo form_hidden('id_produk', 'POC500');
+                              echo form_hidden('id', 'PK002');
+                              echo form_hidden('id_produk', 'PK002');
                               echo form_hidden('id_promo', null);
                               echo form_hidden('qty', 1);
                               echo form_hidden('jumlah', 40);
@@ -186,8 +186,8 @@
                               //form untuk memproses belanjaan
                               echo form_open(base_url('mitra/add')); 
                               //elemen yang dibawa
-                              echo form_hidden('id', 'NUTRISITERNAK');
-                              echo form_hidden('id_produk', 'NUTRISITERNAK');
+                              echo form_hidden('id', 'PK003');
+                              echo form_hidden('id_produk', 'PK003');
                               echo form_hidden('id_promo', null);
                               echo form_hidden('qty', 1);
                               echo form_hidden('jumlah', 40);
@@ -227,8 +227,8 @@
                               //form untuk memproses belanjaan
                               echo form_open(base_url('mitra/add')); 
                               //elemen yang dibawa
-                              echo form_hidden('id', 'NUTRISIIKAN');
-                              echo form_hidden('id_produk', 'NUTRISIIKAN');
+                              echo form_hidden('id', 'PK004');
+                              echo form_hidden('id_produk', 'PK004');
                               echo form_hidden('id_promo', null);
                               echo form_hidden('qty', 1);
                               echo form_hidden('jumlah', 40);

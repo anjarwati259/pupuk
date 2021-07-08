@@ -169,7 +169,7 @@ class Belanja extends CI_Controller
 				$bonus = $keranjang['bonus'] * $keranjang['qty'];
 				//insert data cart
 				$data = array();
-				if($keranjang['id_produk'] != 'POC'){//jika bukan POC 1 liter
+				if($keranjang['id_produk'] != 'PK001'){//jika bukan POC 1 liter
 					array_push($data,
 					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//cart resmi
 						'kode_transaksi'	=> $i->post('kode_transaksi'),
@@ -203,7 +203,7 @@ class Belanja extends CI_Controller
 						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')), 
 					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//bonus
 						'kode_transaksi'	=> $i->post('kode_transaksi'),
-						'id_produk'			=> 'POC500',
+						'id_produk'			=> 'PK002',
 						'id_promo'			=> $keranjang['id_promo'],
 						'harga'				=> 0,
 						'jml_beli'			=> $bonus,

@@ -143,98 +143,100 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                  <table class="table">
-                        <thead>
-                          <tr>
-                            <td>Pilih Paket</td>
-                            <td>Nama Barang</td>
-                            <td>Jumlah</td>
-                            <td>Bonus</td>
-                            <td>Harga Beli</td>
-                            <td>Input Barang</td>
-                          </tr>
-                        </thead>
-                        <tbody id="transaksi-item">
-                          <tr>
-                            <td>
-                              <select class="form-control" id="pilih" name="kode_produk">
-                                <option value="0">
-                                  Please select one
-                                </option>
-                                    <option value="1">Satuan</option>
-                                    <option value="2">Promo</option>
-                              </select>
-                            </td>
+                  <div class="scrollmenu">
+                    <table class="table">
+                    <thead>
+                      <tr>
+                        <td>Pilih Paket</td>
+                        <td>Nama Barang</td>
+                        <td>Jumlah</td>
+                        <td>Bonus</td>
+                        <td>Harga Beli</td>
+                        <td>Input Barang</td>
+                      </tr>
+                    </thead>
+                    <tbody id="transaksi-item">
+                      <tr>
+                        <td>
+                          <select class="form-control" id="pilih" name="kode_produk">
+                            <option value="0">
+                              Please select one
+                            </option>
+                                <option value="1">Satuan</option>
+                                <option value="2">Promo</option>
+                          </select>
+                        </td>
 
-                            <td>
-                              <!-- paket -->
-                              <select class="form-control" id="0">
-                              </select>
+                        <td>
+                          <!-- paket -->
+                          <select class="form-control" id="0">
+                          </select>
 
-                              <!-- paket -->
-                              <select class="form-control" id="paket" name="kode_produk">
-                                <option value="0">
-                                  Please select one
+                          <!-- paket -->
+                          <select class="form-control" id="paket" name="kode_produk">
+                            <option value="0">
+                              Please select one
+                            </option>
+                            <?php if(isset($promo) && is_array($promo)){?>
+                              <?php foreach($promo as $item){?>
+                                <option value="<?php echo $item->kode_produk;?>" dataid="<?php echo $item->id_promo;?>">
+                                  <?php echo $item->nama_promo;?>
                                 </option>
-                                <?php if(isset($promo) && is_array($promo)){?>
-                                  <?php foreach($promo as $item){?>
-                                    <option value="<?php echo $item->kode_produk;?>" dataid="<?php echo $item->id_promo;?>">
-                                      <?php echo $item->nama_promo;?>
-                                    </option>
-                                  <?php }?>
-                                <?php }?>
-                                <input type="hidden" id="id_promo" class="form-control" name="id_promo"/>
-                              </select>
-                              <!-- satuan -->
-                              <select class="form-control" id="produk" name="kode_produk">
-                                <option value="0">
-                                  Please select one
-                                </option>
-                                <?php if(isset($produk) && is_array($produk)){?>
-                                  <?php foreach($produk as $item){?>
-                                    <option value="<?php echo $item->kode_produk;?>">
-                                      <?php echo $item->nama_produk;?>
-                                    </option>
-                                  <?php }?>
-                                <?php }?>
-                              </select>
-                            </td>
-
-                            <td width="15%">
-                              <input type="number" id="jumlah" class="form-control" name="jumlah" min="1" value="1"/>
-                            </td>
-                            <td width="15%">
-                              <input type="number" id="bonus" class="form-control" name="bonus"/>
-                            </td>
-                            <td>
-                              <select class="form-control" id="sale_price" name="sale_price">
-                                
-                              </select>
-                            </td>
-                            <td>
-                              <a href="#" class="btn btn-primary" id="tambah-barang">Input Barang</a>
-                            </td>
-                          </tr>
-                          <?php if(!empty($carts) && is_array($carts)){?>
-                              <?php foreach($carts['data'] as $k => $cart){?>
-                                <tr id="<?php echo $k;?>" class="cart-value">
-                                  <td><?php echo $cart['name'];?></td>
-                                  <td><?php echo $cart['qty'];?></td>
-                                  <td>Rp<?php echo number_format($cart['price']);?></td>
-                                  <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
-                                </tr>
                               <?php }?>
+                            <?php }?>
+                            <input type="hidden" id="id_promo" class="form-control" name="id_promo"/>
+                          </select>
+                          <!-- satuan -->
+                          <select class="form-control" id="produk" name="kode_produk">
+                            <option value="0">
+                              Please select one
+                            </option>
+                            <?php if(isset($produk) && is_array($produk)){?>
+                              <?php foreach($produk as $item){?>
+                                <option value="<?php echo $item->kode_produk;?>">
+                                  <?php echo $item->nama_produk;?>
+                                </option>
+                              <?php }?>
+                            <?php }?>
+                          </select>
+                        </td>
+
+                        <td width="15%">
+                          <input type="number" id="jumlah" class="form-control" name="jumlah" min="1" value="1"/>
+                        </td>
+                        <td width="15%">
+                          <input type="number" id="bonus" class="form-control" name="bonus"/>
+                        </td>
+                        <td>
+                          <select class="form-control" id="sale_price" name="sale_price">
+                            
+                          </select>
+                        </td>
+                        <td>
+                          <a href="#" class="btn btn-primary" id="tambah-barang">Input Barang</a>
+                        </td>
+                      </tr>
+                      <?php if(!empty($carts) && is_array($carts)){?>
+                          <?php foreach($carts['data'] as $k => $cart){?>
+                            <tr id="<?php echo $k;?>" class="cart-value">
+                              <td><?php echo $cart['name'];?></td>
+                              <td><?php echo $cart['qty'];?></td>
+                              <td>Rp<?php echo number_format($cart['price']);?></td>
+                              <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
+                            </tr>
                           <?php }?>
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <td>Total Penjualan</td>
-                            <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?></td>
-                          </tr>
-                        </tfoot>
-                        </tbody>
-                      </table>
-                      <input type="hidden" id="status_baca" name="status_baca" value="1">
+                      <?php }?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>Total Penjualan</td>
+                        <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?></td>
+                      </tr>
+                    </tfoot>
+                    </tbody>
+                  </table>
+                  </div>
+                  <input type="hidden" id="status_baca" name="status_baca" value="1">
                 </div>
               </div>
             </div>

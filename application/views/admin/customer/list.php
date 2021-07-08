@@ -26,7 +26,8 @@
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <div class="scrollmenu">
+                      <table id="example1" class="table table-bordered table-striped">
                       <thead>
                       <tr>
                         <th>No</th>
@@ -98,6 +99,7 @@
                     <?php } ?>
                       </tbody>
                     </table>
+                    </div>
                   </div>
                   <!-- /.box-body -->
                 </div>

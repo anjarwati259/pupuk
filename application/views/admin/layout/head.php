@@ -39,6 +39,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url()?>assets/admin/ckeditor/ckeditor.js"></script>
   <script type="text/javascript" src="<?php echo base_url()?>assets/admin/ckeditor/samples/js/sample.js"></script>
+  <style type="text/css">
+    /*csroll table*/
+.scrollmenu {
+  background-color: none;
+  overflow: auto;
+  white-space: nowrap;
+}
+.scrollmenu table {
+  /*display: inline-block;*/
+  /*color: white;*/
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+  </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

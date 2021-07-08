@@ -19,7 +19,8 @@
       <div class="tab-content">
         <!-- /.tab-pane -->
         <div class="tab-pane active" id="tab_1">
-          <table id="example1" class="table table-bordered table-striped">
+          <div class="scrollmenu">
+            <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th>Kode Invoice</th>
@@ -87,6 +88,7 @@
               <?php } ?>
               </tbody>
             </table>
+          </div>
           <!-- /.box -->
         </div>
         <!-- /.tab-pane -->

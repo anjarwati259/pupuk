@@ -142,7 +142,7 @@
                   <!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body scrollmenu">
                   <table class="table">
                         <thead>
                           <tr>

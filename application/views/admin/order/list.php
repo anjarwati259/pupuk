@@ -8,7 +8,7 @@
         <li><a href="<?php echo site_url('admin/order/sudah_bayar');?>">Sudah Bayar</a></li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="tab_1">
+        <div class="tab-pane active scrollmenu" id="tab_1">
           <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -93,19 +93,3 @@
     <!-- nav-tabs-custom -->
   </div>
   <!-- /.col -->
-<span id="tot_notif">1</span>
-  <script type="text/javascript">
-  $(document).ready(function(){
-    setInterval(function(){
-      $.ajax({
-        url:"<?php echo base_url() ?>admin/dashboard/get_notif",
-        type:"POST",
-        dataType:"json",
-        data:{},
-        success:function(data){
-          $("#tot_notif").html(data.total);
-        }
-      });
-    }, 3000);
-  })
-</script>

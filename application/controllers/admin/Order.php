@@ -22,6 +22,7 @@ class Order extends CI_Controller
 		//$this->simple_login->admin();
 		//$this->simple_login->markering();
 	}
+	 
 	//halaman data order terbaru atau yg belum bayar
 	public function index()
 	{ 
@@ -32,6 +33,10 @@ class Order extends CI_Controller
 						'isi'			=> 'admin/order/list'
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		// $kode_customer = 'C001';
+		// $SO = generate_SO();
+		// $kode_transaksi = $SO . '/' . $kode_customer;
+		// print_r($kode_transaksi);
 	}
 	//konfirmasi pesanan jika sudah bayar
 	public function konfirmasi($kode_transaksi){
@@ -87,11 +92,11 @@ class Order extends CI_Controller
 			}else{
 				$total_point = 0;
 			}
-			if($value->jenis_pelanggan == 'Mitra' && $value->id_produk!='POC'){
+			if($value->jenis_pelanggan == 'Mitra' && $value->id_produk!='PK001'){
 				$point = (($value->jml_beli/2) * 1);
 				$nonPOC = $nonPOC + $point;
 				$pointtotal = $nonPOC + $total_point;
-			}else if($value->jenis_pelanggan == 'Mitra' && $value->id_produk=='POC'){
+			}else if($value->jenis_pelanggan == 'Mitra' && $value->id_produk=='PK001'){
 				$point = ($value->jml_beli * 1);
 				$POC = $POC + $point;
 				$pointtotal = $POC + $total_point;
@@ -200,10 +205,10 @@ class Order extends CI_Controller
 					'price'   => $sale_price,
 					'status'  => $status,
 					'name'    => $get_product_detail[0]['nama_produk'],
-					'options'  => array('id'=>'POC500', 'qty' => $bonus)
+					'options'  => array('id'=>'PK001', 'qty' => $bonus)
 				),
 					array(
-					'id'      => 'POC500',
+					'id'      => 'PK002',
 					'id_promo' => $id_promo,
 					'status' => $status,
 					'qty'     => $bonus,
@@ -231,7 +236,7 @@ class Order extends CI_Controller
 					'price'   => $sale_price,
 					'status' => $status,
 					'name'    => $get_product_detail[0]['nama_produk'],
-					'options'  => array('id'=>'POC500', 'qty' => $bonus)
+					'options'  => array('id'=>'PK001', 'qty' => $bonus)
 				),
 					array(
 					'id'      => $id_produk,

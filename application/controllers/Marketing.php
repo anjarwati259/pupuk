@@ -36,10 +36,10 @@ class Marketing extends CI_Controller
 	    $bulanan = $this->dashboard_model->bulanan_market($id_marketing);
 	    $order_baru = $this->dashboard_model->order_baru();
 	    $data1 = $this->dashboard_model->hari_market($id_marketing);
-	    $POC1 = $this->dashboard_model->chart_market('POC',$id_marketing);
-	    $POC500 = $this->dashboard_model->chart_market('POC500',$id_marketing);
-	    $ikan = $this->dashboard_model->chart_market('NUTRISIIKAN',$id_marketing);
-	    $ternak = $this->dashboard_model->chart_market('NUTRISITERNAK',$id_marketing);
+	    $POC1 = $this->dashboard_model->chart_market('PK001',$id_marketing);
+	    $POC500 = $this->dashboard_model->chart_market('PK002',$id_marketing);
+	    $ikan = $this->dashboard_model->chart_market('PK004',$id_marketing);
+	    $ternak = $this->dashboard_model->chart_market('PK003',$id_marketing);
 		$data = array('title' => 'Admin',
                         'order' => $order,
                         'mitra' => $mitra,
@@ -65,7 +65,7 @@ class Marketing extends CI_Controller
 			$kode_transaksi = generate_invoice('INV0',$id);
 		}else{
 			$kode_transaksi = 'INV0001';
-		}
+		} 
 
 		//last id pelanggan
 		$pelanggan_id = $this->pelanggan_model->get_last_id();

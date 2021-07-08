@@ -27,8 +27,16 @@ catatan status
 	1 = ads
 	2 = organik
 8. KODE ID
-	2021 = marketing
-	2022 = pelanggan
+	M001 = kode marketing
+	C = customer
+	S001 = CV. Catur Inti Persada
 9. STATUS BACA
 	1 = sudah dibaca
 	0 = belum baca
+10. KODE PRODUK
+	PK001 = POC 1 liter
+	PK002 = POC 500ml
+	PK003 = NUTRISI TERNAK
+	PK004 = NUTRISI IKAN
+11. KODE INVOICE/SO
+	NO/SO/AGI/VII/2021/kodecustomer

@@ -18,7 +18,7 @@
        ?>
       <div class="tab-content">
         <!-- /.tab-pane -->
-        <div class="tab-pane active" id="tab_1">
+        <div class="tab-pane active scrollmenu" id="tab_1">
           <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>

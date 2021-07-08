@@ -8,7 +8,7 @@
         <li><a href="<?php echo site_url('marketing/sudah_bayar');?>">Sudah Bayar</a></li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="tab_1">
+        <div class="tab-pane active scrollmenu" id="tab_1">
           <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>

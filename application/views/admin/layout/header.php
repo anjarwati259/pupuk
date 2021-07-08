@@ -21,31 +21,23 @@ $notif = $this->dashboard_model->data_notif();
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <?php if($this->session->userdata('hak_akses')=='1'){ ?>
-          <li class="dropdown messages-menu list-menu">
+          <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-success" id="tot_notif"><?php echo $jml_order->total ?></span>
+              <span class="label label-warning" id="notif"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Notifikasi Order Baru</li>
+              <li class="header">Notifikasi Order</li>
               <li>
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <?php foreach ($order as $order) { ?>
-                 <li>
-                    <a href="#" data-toggle="modal" data-target="#notif<?= $order->kode_transaksi?>">
-                      <div class="pull-left">
-                        <img src="<?php echo base_url() ?>assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4><?php echo $order->nama_marketing ?></h4>
-                      <p>Pesan Belum Dibaca</p>
+                <ul class="menu" id="pesan">
+                  <!-- <li>
+                    <a href="#">
+                      <i class="fa fa-shopping-cart text-green"></i>
                     </a>
-                  </li>
-                <?php } ?>
-                  <!-- end message -->
+                  </li> -->
                 </ul>
               </li>
-              <!-- <li class="footer"><a href="#">See All Messages</a></li> -->
             </ul>
           </li>
         <?php } ?>
@@ -80,7 +72,6 @@ $notif = $this->dashboard_model->data_notif();
       </div>
     </nav>
   </header>
-  <input type="text" id="coba" style="color: white;" value="080">
 <style type="text/css">
   .invoice-col img{
     height: 120px;
@@ -92,7 +83,7 @@ $notif = $this->dashboard_model->data_notif();
   $data = $this->dashboard_model->detail_notif($notif->kode_transaksi);
   $transaksi = $this->order_model->kode_order($notif->kode_transaksi);
   ?>
- <div class="modal fade" id="notif<?= $notif->kode_transaksi?>">
+<div class="modal fade" id="notif<?= $notif->kode_transaksi?>">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -173,20 +164,34 @@ $notif = $this->dashboard_model->data_notif();
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 <?php } ?>
 <script type="text/javascript">
   $(document).ready(function(){
-    setInterval(function(){
-      $.ajax({
-        url:"<?php echo base_url() ?>admin/dashboard/get_notif",
-        type:"POST",
-        dataType:"json",
-        data:{},
-        success:function(data){
-          $("#tot_notif").html(data.total);
-        }
-      });
-    }, 3000);
-  })
+    selesai();
+  });
+  function selesai(){
+    setTimeout(function(){
+      jumlah();
+      selesai();
+      pesan();
+    },200);
+  }
+  function jumlah(){
+    $.getJSON("<?php echo base_url('admin/dashboard/get_notif') ?>", function(datas){
+      $("#notif").html(datas.total);
+    });
+  }
+  function pesan(){
+    $.getJSON("<?php echo base_url('admin/dashboard/data_notif') ?>", function(data){
+      $("#pesan").empty();
+      var no = 1;
+      $.each(data.data_notif, function(){
+        if(this['nama_marketing'] == null){
+          $("#pesan").append('<li><a href="#" data-toggle="modal" data-target="#notif'+this['kode_transaksi']+'"> <i class="fa fa-shopping-cart text-green"></i> Order Baru Dari Mitra</a></li>');
+        }else{
+        $("#pesan").append('<li><a href="#" data-toggle="modal" data-target="#notif'+this['kode_transaksi']+'"> <i class="fa fa-shopping-cart text-green"></i> Order Baru Dari '+this['nama_marketing']+'</a></li>');
+      }
+      })
+    })
+  }
 </script>

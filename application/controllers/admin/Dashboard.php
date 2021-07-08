@@ -28,10 +28,10 @@ class Dashboard extends CI_Controller
 	    $bulanan = $this->dashboard_model->bulanan();
 	    $order_baru = $this->dashboard_model->order_baru();
 	    $data = $this->dashboard_model->hari();
-	    $POC1 = $this->dashboard_model->chart('POC');
-	    $POC500 = $this->dashboard_model->chart('POC500');
-	    $ikan = $this->dashboard_model->chart('NUTRISIIKAN');
-	    $ternak = $this->dashboard_model->chart('NUTRISITERNAK');
+	    $POC1 = $this->dashboard_model->chart('PK001');
+	    $POC500 = $this->dashboard_model->chart('PK002');
+	    $ikan = $this->dashboard_model->chart('PK004');
+	    $ternak = $this->dashboard_model->chart('PK003');
 
 		$data = array('title' => 'Admin',
                         'order' => $order,
@@ -96,14 +96,15 @@ class Dashboard extends CI_Controller
 	}
 	public function get_notif(){
 		$tot = $this->dashboard_model->total_order();
-		$order = $this->dashboard_model->data_notif();
+		//$order = $this->dashboard_model->data_notif();
 		$result['total'] = $tot->total;
-		$result['data'] = $order;
+		//$result['data'] = $order;
 		echo json_encode($result);
 	}
 	public function data_notif(){
 		$order = $this->dashboard_model->data_notif();
 		$result['data_notif'] = $order;
+		echo json_encode($result);
 	}
 	public function status_baca($kode_transaksi){
 		$data = array(	'kode_transaksi' => $kode_transaksi,
