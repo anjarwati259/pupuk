@@ -174,7 +174,7 @@ $notif = $this->dashboard_model->data_notif();
       jumlah();
       selesai();
       pesan();
-    },200);
+    },900);
   }
   function jumlah(){
     $.getJSON("<?php echo base_url('admin/dashboard/get_notif') ?>", function(datas){

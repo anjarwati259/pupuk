@@ -1,8 +1,11 @@
 <?php 
-function generate_code($prefix,$num,$length = 6){
-	$addcode = (int)filter_var($num, FILTER_SANITIZE_NUMBER_INT) + 1;
-	$numcode = str_pad($addcode,$length,STR_PAD_LEFT);
-	return $prefix.$numcode;
+function generate_code($suffix,$id){
+	// $addcode = (int)filter_var($num, FILTER_SANITIZE_NUMBER_INT) + 1;
+	// $numcode = str_pad($addcode,$length,STR_PAD_LEFT);
+	// return $prefix.$numcode;
+	$kode = (int) $id;
+	$kode = $kode + 1;
+	return $suffix .str_pad($kode, 3, "0",  STR_PAD_LEFT);
 }
 
 function generate_invoice($prefix,$num,$length = 3){
@@ -51,11 +54,22 @@ function getRomawi($bln){
     }
 }
 
-function generate_SO(){
+function generate_SO($id){
 	$tanggal = date('d') ;
-	$suffix = '/SO/AGI/';
+	$suffix = '-SO-AGI-';
 	$bulan = date('m');
 	$tahun = date('Y');
 	$romawi = getRomawi($bulan);
-	return $tanggal . $suffix . $romawi . '/' . $tahun;
+    $kode = (int) $id;
+    $kode = $kode + 1;
+
+	return $tanggal . $suffix . $romawi . '-' . $tahun . '-' . str_pad($kode, 3, "0",  STR_PAD_LEFT);
+}
+function generate_else(){
+    $tanggal = date('d') ;
+    $suffix = '-SO-AGI-';
+    $bulan = date('m');
+    $tahun = date('Y');
+    $romawi = getRomawi($bulan);
+    return $tanggal . $suffix . $romawi . '-' . $tahun . '-001';
 }

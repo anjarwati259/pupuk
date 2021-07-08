@@ -20,15 +20,17 @@ class Pelanggan extends CI_Controller
 	}
 	//menampilkan data customer
 	public function customer(){
-		$id = $this->pelanggan_model->get_last_id();
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
+		$marketing = $this->pelanggan_model->marketing();
 		$id_user = $this->session->userdata('id_user');
 		$provinsi = $this->wilayah_model->listing();
 
-		if($id){
-			$id = $id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('ID',$id);
+		//last id pelanggan
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
 		}else{
-			$id_pelanggan = 'ID202201';
+			$id_pelanggan = 'C001';
 		}
 
 		$hak_akses = $this->session->userdata('hak_akses');
@@ -43,6 +45,7 @@ class Pelanggan extends CI_Controller
 		
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
+						'marketing' => $marketing,
 						'cus'	=> $customer, 
 						'prov'	=> $provinsi,
 						'provinsi'	=> $provinsi,
@@ -55,10 +58,8 @@ class Pelanggan extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
-		$id_user = $this->session->userdata('id_user');
 		$id = $this->pelanggan_model->get_last_id();
-		$marketing =  $this->marketing_model->get_marketing($id_user);
-		$id_marketing = $marketing->id_marketing;
+		$marketing = $this->pelanggan_model->marketing();
 		//validation
 		$valid = $this-> form_validation;
 
@@ -87,17 +88,19 @@ class Pelanggan extends CI_Controller
 		if($valid->run()===FALSE){
 			//end validation
 			$customer = $this->pelanggan_model->customer();
-			$id = $this->pelanggan_model->get_last_id();
+			$pelanggan_id = $this->pelanggan_model->get_last_id();
 
-			if($id){
-				$id = $id[0]->id_pelanggan;
-				$id_pelanggan = generate_code('ID',$id);
+			//last id pelanggan
+			if($pelanggan_id){
+				$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+				$id_pelanggan = generate_code('C', $id);
 			}else{
-				$id_pelanggan = 'ID202201';
+				$id_pelanggan = 'C001';
 			}
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'customer'	=> $customer,
+							'marketing' => $marketing,
 							'id'		=> $id,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/customer/list'
@@ -107,7 +110,7 @@ class Pelanggan extends CI_Controller
 			$i 	= $this->input;
 			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-							'id_marketing'		=> $id_marketing,
+							'id_marketing'		=> $i->post('id_marketing'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
 							'komoditi'			=> $i->post('komoditi'),
@@ -126,6 +129,7 @@ class Pelanggan extends CI_Controller
 	public function edit_customer($id_pelanggan){
 		$customer = $this->pelanggan_model->detail($id_pelanggan);
 		//get provinsi
+		$marketing = $this->pelanggan_model->marketing();
 		$provinsi = $this->wilayah_model->listing();
 		//validation
 		$valid = $this-> form_validation;
@@ -158,6 +162,7 @@ class Pelanggan extends CI_Controller
 
 			$data = array(	'title'		=> 'Edit Pelanggan',
 							'customer'	=> $customer,
+							'marketing' => $marketing,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/customer/edit'
 						);
@@ -172,6 +177,7 @@ class Pelanggan extends CI_Controller
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
 								'komoditi'		=> $i->post('komoditi'),
 								'provinsi'			=> $i->post('prov'),
 								'kabupaten'			=> $i->post('kab'),
@@ -180,6 +186,7 @@ class Pelanggan extends CI_Controller
 			}else{
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'id_marketing'		=> $i->post('id_marketing'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'komoditi'		=> $i->post('komoditi')
@@ -199,15 +206,17 @@ class Pelanggan extends CI_Controller
 	}
 	//menampilkan data mitra
 	public function mitra(){
-		$id = $this->pelanggan_model->get_last_id();
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		$id_user = $this->session->userdata('id_user');
+		$marketing = $this->pelanggan_model->marketing();
 		$provinsi = $this->wilayah_model->listing();
 
-		if($id){
-			$id = $id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('ID',$id);
+		//last id pelanggan
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
 		}else{
-			$id_pelanggan = 'ID202201';
+			$id_pelanggan = 'C001';
 		}
 
 		$hak_akses = $this->session->userdata('hak_akses');
@@ -221,6 +230,7 @@ class Pelanggan extends CI_Controller
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
 						'provinsi'	=> $provinsi,
+						'marketing' => $marketing,
 						'mitra' => $mitra,
 						'isi' => 'admin/mitra/list' );
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
@@ -230,10 +240,8 @@ class Pelanggan extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
-		$id_user = $this->session->userdata('id_user');
 		$id = $this->pelanggan_model->get_last_id();
-		$marketing =  $this->marketing_model->get_marketing($id_user);
-		$id_marketing = $marketing->id_marketing;
+		$marketing = $this->pelanggan_model->marketing();
 		//validation
 		$valid = $this-> form_validation;
 
@@ -262,18 +270,20 @@ class Pelanggan extends CI_Controller
 		if($valid->run()===FALSE){
 			//end validation
 			$mitra = $this->pelanggan_model->mitra();
-			$id = $this->pelanggan_model->get_last_id();
+			$pelanggan_id = $this->pelanggan_model->get_last_id();
 
-			if($id){
-				$id = $id[0]->id_pelanggan;
-				$id_pelanggan = generate_code('ID',$id);
-			}else{
-				$id_pelanggan = 'ID202201';
-			}
+			//last id pelanggan
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
+		}else{
+			$id_pelanggan = 'C001';
+		}
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'mitra'		=> $mitra,
 							'id'		=> $id,
+							'marketing' => $marketing,
 							'komoditi'	=> $komoditi,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/mitra/list'
@@ -283,7 +293,7 @@ class Pelanggan extends CI_Controller
 			$i 	= $this->input;
 			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-							'id_marketing'		=> $id_marketing,
+							'id_marketing'		=> $i->post('id_marketing'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
 							'komoditi'			=> $i->post('komoditi'),
@@ -303,6 +313,7 @@ class Pelanggan extends CI_Controller
 		$mitra = $this->pelanggan_model->detail($id_pelanggan);
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
+		$marketing = $this->pelanggan_model->marketing();
 		//validation
 		$valid = $this-> form_validation;
 
@@ -335,6 +346,7 @@ class Pelanggan extends CI_Controller
 			$data = array(	'title'		=> 'Edit Pelanggan',
 							'mitra'		=> $mitra,
 							'provinsi'	=> $provinsi,
+							'marketing' => $marketing,
 							'isi'		=> 'admin/mitra/edit'
 						);
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
@@ -347,6 +359,7 @@ class Pelanggan extends CI_Controller
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'alamat'			=> $i->post('alamat'),
+								'id_marketing'		=> $i->post('id_marketing'),
 								'no_hp'				=> $i->post('no_hp'),
 								'komoditi'		=> $i->post('komoditi'),
 								'provinsi'			=> $i->post('prov'),
@@ -356,6 +369,7 @@ class Pelanggan extends CI_Controller
 			}else{
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'id_marketing'		=> $i->post('id_marketing'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'komoditi'		=> $i->post('komoditi'),
@@ -375,15 +389,16 @@ class Pelanggan extends CI_Controller
 	}
 	//menampilkan data distributor
 	public function distributor(){
-		$id = $this->pelanggan_model->get_last_id();
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		$id_user = $this->session->userdata('id_user');
 		$provinsi = $this->wilayah_model->listing();
-
-		if($id){
-			$id = $id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('ID',$id);
+		$marketing = $this->pelanggan_model->marketing();
+		//last id pelanggan
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
 		}else{
-			$id_pelanggan = 'ID202201';
+			$id_pelanggan = 'C001';
 		}
 
 		$hak_akses = $this->session->userdata('hak_akses');
@@ -398,6 +413,7 @@ class Pelanggan extends CI_Controller
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
 						'provinsi'	=> $provinsi,
+						'marketing'	=> $marketing,
 						'distributor' => $distributor,
 						'isi' => 'admin/distributor/list' );
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
@@ -407,10 +423,8 @@ class Pelanggan extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
-		$id_user = $this->session->userdata('id_user');
 		$id = $this->pelanggan_model->get_last_id();
-		$marketing =  $this->marketing_model->get_marketing($id_user);
-		$id_marketing = $marketing->id_marketing;
+		$marketing = $this->pelanggan_model->marketing();
 		//validation
 		$valid = $this-> form_validation;
 
@@ -439,18 +453,18 @@ class Pelanggan extends CI_Controller
 		if($valid->run()===FALSE){
 			//end validation
 			$distributor = $this->pelanggan_model->distributor();
-			$id = $this->pelanggan_model->get_last_id();
-
-			if($id){
-				$id = $id[0]->id_pelanggan;
-				$id_pelanggan = generate_code('dis',$id);
-			}else{
-				$id_pelanggan = 'dis001';
-			}
-			
+			$pelanggan_id = $this->pelanggan_model->get_last_id();
+		//last id pelanggan
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
+		}else{
+			$id_pelanggan = 'C001';
+		}
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'distributor'	=> $distributor,
 							'id'		=> $id,
+							'marketing' => $marketing,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/distributor/list'
 						);
@@ -463,7 +477,7 @@ class Pelanggan extends CI_Controller
 							'no_hp'				=> $i->post('no_hp'),
 							'komoditi'		=> $i->post('komoditi'),
 							'tanggal_daftar'	=> $i->post('tanggal_daftar'),
-							'id_marketing'		=> $id_marketing,
+							'id_marketing'		=> $i->post('id_marketing'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
 							'kecamatan'			=> $i->post('kec'),
@@ -478,6 +492,7 @@ class Pelanggan extends CI_Controller
 	public function edit_distributor($id_pelanggan){
 		$distributor = $this->pelanggan_model->detail($id_pelanggan);
 		//get provinsi
+		$marketing = $this->pelanggan_model->marketing();
 		$provinsi = $this->wilayah_model->listing();
 		//validation
 		$valid = $this-> form_validation;
@@ -511,6 +526,7 @@ class Pelanggan extends CI_Controller
 			$data = array(	'title'		=> 'Edit Pelanggan',
 							'distributor'	=> $distributor,
 							'provinsi'	=> $provinsi,
+							'marketing' => $marketing,
 							'isi'		=> 'admin/distributor/edit'
 						);
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
@@ -523,6 +539,7 @@ class Pelanggan extends CI_Controller
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'komoditi'			=> $i->post('komoditi'),
+								'id_marketing'			=> $i->post('id_marketing'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'provinsi'			=> $i->post('prov'),
@@ -532,6 +549,7 @@ class Pelanggan extends CI_Controller
 			}else{
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'id_marketing'			=> $i->post('id_marketing'),
 								'komoditi'		=> $i->post('komoditi'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
@@ -549,4 +567,6 @@ class Pelanggan extends CI_Controller
 		$this->session->set_flashdata('sukses', 'Data telah dihapus');
 		redirect(base_url('admin/pelanggan/distributor'), 'refresh');
 	}
+	// ============================= Marketing====================//
+
 }

@@ -36,6 +36,7 @@
                         <th>Kabupaten</th>
                         <th>Provinsi</th>
                         <th>Komoditi</th>
+                        <th>Marketing</th>
                         <th>Tanggal Gabung</th>
                         <th>Action</th>
                       </tr>
@@ -88,6 +89,7 @@
                         <td><?php echo $mitra->kabupaten ?></td>
                         <td><?php echo $mitra->provinsi ?></td>
                         <td><?php echo $mitra->komoditi ?></td>
+                        <td><?php echo $mitra->nama_marketing ?></td>
                         <td><?php echo tanggal_indo(date('Y-m-d',strtotime($mitra->tanggal_daftar))); ?></td>
                         <td>
                           <a href="<?php echo base_url('admin/pelanggan/edit_mitra/'.$mitra->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
@@ -169,6 +171,16 @@
                         <label class="col-sm-4 control-label" for="no_hp">No Telp</label>
                         <div class="col-sm-8">
                           <input type="number" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="no_hp">Marketing</label>
+                        <div class="col-sm-8">
+                          <select class="form-control" name="id_marketing">
+                            <?php foreach ($marketing as $market) { ?>
+                            <option value="<?php echo $market->id_marketing ?>"> <?php echo $market->nama_marketing ?></option>
+                          <?php } ?>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">

@@ -49,7 +49,7 @@
 .scrollmenu table {
   /*display: inline-block;*/
   /*color: white;*/
-  text-align: center;
+  /*text-align: center;*/
   padding: 14px;
   text-decoration: none;
 }

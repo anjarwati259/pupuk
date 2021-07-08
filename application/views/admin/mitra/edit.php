@@ -87,6 +87,16 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_mitra/'.$mitra->id_pelan
                         </div>
                       </div>
                       <div class="form-group">
+                        <label class="col-sm-4 control-label" for="no_hp">Marketing</label>
+                        <div class="col-sm-8">
+                          <select class="form-control" name="id_marketing">
+                            <?php foreach ($marketing as $market) { ?>
+                            <option value="<?php echo $market->id_marketing ?>" <?php if($mitra->id_marketing==$market->id_marketing){ echo "selected"; } ?>> <?php echo $market->nama_marketing ?></option>
+                          <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label class="col-sm-4 control-label" for="komoditi">Komoditi</label>
                         <div class="col-sm-8">
                           <input type="text" value="<?php echo $mitra->komoditi ?>" name="komoditi" placeholder="Komoditi" class="form-control"/>

@@ -58,30 +58,31 @@ class Marketing extends CI_Controller
         $this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 	public function order(){
-		//last id kode transaksi
-		$id = $this->order_model->get_last_id();
-		if($id){
-			$id = $id[0]->kode_transaksi;
-			$kode_transaksi = generate_invoice('INV0',$id);
+		//last id pelanggan
+		$id_SO = $this->order_model->get_last_id();
+		if($id_SO){
+			$id = substr($id_SO[0]->kode_transaksi, 19);
+			$kode_transaksi = generate_SO($id);
 		}else{
-			$kode_transaksi = 'INV0001';
-		} 
+			$kode_transaksi = generate_else();
+		}
 
 		//last id pelanggan
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		if($pelanggan_id){
-			$pelanggan_id = $pelanggan_id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('ID',$pelanggan_id);
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
 		}else{
-			$id_pelanggan = 'ID202201';
+			$id_pelanggan = 'C001';
 		}
 		// destry cart
 		$this->cart->destroy();
 
-		$id_user = $this->session->userdata('id_user');
-		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_user 	= $this->session->userdata('id_user');
+		$marketing 	=  $this->marketing_model->get_marketing($id_user);
 		$produk 	= $this->home_model->produk();
 		$promo 		= $this->home_model->promo();
+		$expedisi 	=  $this->order_model->expedisi();
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
 
@@ -89,6 +90,7 @@ class Marketing extends CI_Controller
 						'kode_transaksi' => $kode_transaksi,
 						'marketing'		=> $marketing,
 						'produk'		=> $produk,
+						'expedisi'		=> $expedisi,
 						'promo'			=> $promo,
 						'provinsi'		=> $provinsi,
 						'id_pelanggan'	=> $id_pelanggan,

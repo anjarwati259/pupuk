@@ -33,10 +33,6 @@ class Order extends CI_Controller
 						'isi'			=> 'admin/order/list'
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
-		// $kode_customer = 'C001';
-		// $SO = generate_SO();
-		// $kode_transaksi = $SO . '/' . $kode_customer;
-		// print_r($kode_transaksi);
 	}
 	//konfirmasi pesanan jika sudah bayar
 	public function konfirmasi($kode_transaksi){
@@ -129,27 +125,28 @@ class Order extends CI_Controller
 	//menampilkan form tambah order
 	public function tambah_order()
 	{ 
-		//last id kode transaksi
-		$id = $this->order_model->get_last_id();
-		if($id){
-			$id = $id[0]->kode_transaksi;
-			$kode_transaksi = generate_invoice('INV0',$id);
+		//last id pelanggan
+		$id_SO = $this->order_model->get_last_id();
+		if($id_SO){
+			$id = substr($id_SO[0]->kode_transaksi, 19);
+			$kode_transaksi = generate_SO($id);
 		}else{
-			$kode_transaksi = 'INV0001';
-		} 
+			$kode_transaksi = generate_else();
+		}
 
 		//last id pelanggan
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		if($pelanggan_id){
-			$pelanggan_id = $pelanggan_id[0]->id_pelanggan;
-			$id_pelanggan = generate_code('ID',$pelanggan_id);
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
 		}else{
-			$id_pelanggan = 'ID202201';
+			$id_pelanggan = 'C001';
 		}
 		// destry cart
 		$this->cart->destroy();
 		$id_user = $this->session->userdata('id_user');
-		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$marketing =  $this->pelanggan_model->marketing();
+		$expedisi =  $this->order_model->expedisi();
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
 
@@ -162,6 +159,7 @@ class Order extends CI_Controller
 						'pelanggan'			=> $pelanggan,
 						'marketing'			=> $marketing,
 						'produk'			=> $produk,
+						'expedisi'			=> $expedisi,
 						'provinsi'			=> $provinsi,
 						'promo'				=> $promo,
 						'id_pelanggan'		=> $id_pelanggan,
@@ -270,7 +268,7 @@ class Order extends CI_Controller
 	}
 	//untuk menyimpan data checkout
 	public function add_process(){
-		$this->form_validation->set_rules('kode_transaksi', 'kode_transaksi', 'required');
+		// $this->form_validation->set_rules('kode_transaksi', 'kode_transaksi', 'required');
 		$this->form_validation->set_rules('nama_pelanggan', 'nama_pelanggan', 'required');
 		$this->form_validation->set_rules('alamat', 'alamat', 'required');
 		$this->form_validation->set_rules('provinsi', 'provinsi', 'required');

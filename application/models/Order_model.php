@@ -222,4 +222,11 @@ class Order_model extends CI_Model
 		$this->db->where('kode_transaksi', $data['kode_transaksi']);
 		$this->db->update('tb_detail_order',$data);
 	}
+	public function expedisi(){
+		$this->db->select('*');
+		$this->db->from('tb_expedisi');
+		$this->db->order_by('id_expedisi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

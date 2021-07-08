@@ -39,8 +39,11 @@
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="kode">Marketing</label>
                     <div class="col-sm-8">
-                      <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $marketing->id_marketing ?>"/>
-                      <input type="text" name="kode" class="form-control" value="<?php echo $marketing->nama_marketing ?>" disabled/>
+                      <select class="form-control" id="id_marketing" name="id_marketing">
+                      <?php foreach ($marketing as $market) { ?>
+                      <option value="<?php echo $market->id_marketing ?>"> <?php echo $market->nama_marketing ?></option>
+                    <?php } ?>
+                    </select>
                     </div>
                   </div>
                   <div class="form-group">
@@ -55,7 +58,11 @@
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="kode">Ekspedisi</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="ekspedisi" id="ekspedisi"/>
+                      <select name='ekspedisi' class="form-control" id="ekspedisi">
+                        <?php foreach ($expedisi as $expedisi) { ?>
+                          <option value='<?php echo $expedisi->expedisi ?>'><?php echo $expedisi->expedisi ?></option>
+                        <?php } ?>
+                        </select>
                     </div>
                   </div>
                   <div class="form-group">
@@ -307,6 +314,20 @@
             </div>
             <div class="form-group">
               <div class="row">
+                <div class="col-md-6">
+                   <label >Marketing</label>
+                    <select class="form-control" name="id_marketing">
+                      <?php foreach ($marketing as $market) { ?>
+                      <option value="<?php echo $market->id_marketing ?>"> <?php echo $market->nama_marketing ?></option>
+                    <?php } ?>
+                    </select>
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+            </div>
+            <div class="form-group">
+              <div class="row">
                 <div class="col-md-12">
                    <label >Alamat Lengkap</label>
                     <textarea type="text" name="alamat" id="alamat" value="<?php echo set_value('alamat') ?>" class="form-control" placeholder="Alamat Lengkap"></textarea>
@@ -356,7 +377,6 @@
               <!-- row -->
             </div>
           </div>
-          <input type="hidden" name="id_marketing" value="<?php echo $marketing->id_marketing ?>">
           <input type="hidden" name="kab" id="kab">
           <input type="hidden" name="kec" id="kec">
           <input type="hidden" name="prov" id="prov">

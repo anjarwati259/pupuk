@@ -37,6 +37,7 @@
                         <th>Alamat</th>
                         <th>Kabupaten</th>
                         <th>Provinsi</th>
+                        <th>Marketing</th>
                         <th>Komoditi</th>
                         <th>Tanggal Gabung</th>
                         <th>Action</th>
@@ -89,6 +90,7 @@
                         </td>
                         <td><?php echo $customer->kabupaten ?></td>
                         <td><?php echo $customer->provinsi ?></td>
+                        <td><?php echo $customer->nama_marketing ?></td>
                         <td><?php echo $customer->komoditi ?></td>
                         <td><?php echo tanggal_indo(date('Y-m-d',strtotime($customer->tanggal_daftar))); ?></td>
                         <td>
@@ -172,6 +174,16 @@
                         <label class="col-sm-4 control-label" for="no_hp">No Telp</label>
                         <div class="col-sm-8">
                           <input type="number" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="no_hp">Marketing</label>
+                        <div class="col-sm-8">
+                          <select class="form-control" name="id_marketing">
+                            <?php foreach ($marketing as $market) { ?>
+                            <option value="<?php echo $market->id_marketing ?>"> <?php echo $market->nama_marketing ?></option>
+                          <?php } ?>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">

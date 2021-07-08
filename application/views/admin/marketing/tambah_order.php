@@ -55,7 +55,11 @@
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="kode">Ekspedisi</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="ekspedisi" id="ekspedisi"/>
+                      <select name='ekspedisi' class="form-control" id="ekspedisi">
+                        <?php foreach ($expedisi as $expedisi) { ?>
+                          <option value='<?php echo $expedisi->expedisi ?>'><?php echo $expedisi->expedisi ?></option>
+                        <?php } ?>
+                        </select>
                     </div>
                   </div>
                   <div class="form-group">

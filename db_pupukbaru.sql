@@ -19,40 +19,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_pupuk_baru`
+-- Database: `db_pupukbaru`
 --
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tb_detail_order`
---
-
-CREATE TABLE `tb_detail_order` (
-  `kode_transaksi` varchar(50) NOT NULL,
-  `id_pelanggan` varchar(20) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_rekening` int(11) DEFAULT NULL,
-  `id_marketing` varchar(20) NOT NULL,
-  `nama_pelanggan` varchar(50) DEFAULT NULL,
-  `no_hp` varchar(13) DEFAULT NULL,
-  `alamat` text DEFAULT NULL,
-  `provinsi` varchar(50) DEFAULT NULL,
-  `kecamatan` varchar(50) DEFAULT NULL,
-  `kabupaten` varchar(50) DEFAULT NULL,
-  `catatan` text NOT NULL,
-  `total_item` int(10) DEFAULT NULL,
-  `total_transaksi` int(10) DEFAULT NULL,
-  `expedisi` varchar(20) DEFAULT NULL,
-  `ongkir` int(10) DEFAULT NULL,
-  `total_bayar` int(10) DEFAULT NULL,
-  `tanggal_transaksi` date DEFAULT NULL,
-  `metode_pembayaran` varchar(1) NOT NULL,
-  `jenis_order` int(11) NOT NULL,
-  `status_bayar` int(1) DEFAULT NULL,
-  `no_resi` varchar(50) DEFAULT NULL,
-  `status_baca` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -65,20 +33,6 @@ CREATE TABLE `tb_expedisi` (
   `expedisi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tb_expedisi`
---
-
-INSERT INTO `tb_expedisi` (`id_expedisi`, `expedisi`) VALUES
-(1, 'JNE'),
-(2, 'J&T'),
-(3, 'SiCepat'),
-(4, 'Mtrans'),
-(5, 'Dakota'),
-(6, 'Indah Cargo'),
-(7, 'Boli Trans'),
-(8, 'POS Indonesia');
-
 -- --------------------------------------------------------
 
 --
@@ -86,13 +40,13 @@ INSERT INTO `tb_expedisi` (`id_expedisi`, `expedisi`) VALUES
 --
 
 CREATE TABLE `tb_marketing` (
-  `id_marketing` varchar(20) NOT NULL,
+  `id_marketing` varchar(5) NOT NULL,
   `id_user` int(11) NOT NULL,
   `nama_marketing` varchar(50) NOT NULL,
-  `alamat` text NOT NULL,
+  `alamat` text DEFAULT NULL,
   `no_hp` varchar(15) NOT NULL,
-  `tanggal_lahir` date NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `tanggal_lahir` date DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -102,17 +56,49 @@ CREATE TABLE `tb_marketing` (
 --
 
 CREATE TABLE `tb_order` (
-  `id_order` int(20) NOT NULL,
-  `kode_transaksi` varchar(50) NOT NULL,
-  `id_pelanggan` varchar(20) NOT NULL,
-  `id_produk` varchar(20) DEFAULT NULL,
-  `id_promo` int(11) DEFAULT NULL,
-  `id_marketing` varchar(20) NOT NULL,
-  `jml_beli` int(20) NOT NULL,
-  `harga` int(20) NOT NULL,
-  `total_harga` int(20) NOT NULL,
+  `id_order` int(9) NOT NULL,
+  `kode_transaksi` varchar(30) NOT NULL,
+  `id_pelanggan` varchar(7) NOT NULL,
+  `id_produk` varchar(6) NOT NULL,
+  `id_promo` int(6) NOT NULL,
+  `id_marketing` varchar(5) NOT NULL,
+  `jml_beli` int(10) NOT NULL,
+  `harga` int(7) NOT NULL,
+  `total_harga` int(7) NOT NULL,
   `tanggal_transaksi` date NOT NULL,
   `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_order_detail`
+--
+
+CREATE TABLE `tb_order_detail` (
+  `kode_transaksi` varchar(30) NOT NULL,
+  `id_pelanggan` varchar(7) NOT NULL,
+  `id_user` int(7) NOT NULL,
+  `id_rekening` int(3) DEFAULT NULL,
+  `id_marketing` varchar(5) DEFAULT NULL,
+  `nama_pelanggan` varchar(50) NOT NULL,
+  `no_hp` varchar(15) NOT NULL,
+  `alamat` text NOT NULL,
+  `provinsi` varchar(50) NOT NULL,
+  `kecamatan` varchar(50) NOT NULL,
+  `kabupaten` varchar(50) NOT NULL,
+  `catatan` text DEFAULT NULL,
+  `total_item` int(10) NOT NULL,
+  `total_transaksi` int(10) NOT NULL,
+  `expedisi` varchar(20) DEFAULT NULL,
+  `ongkir` int(10) DEFAULT NULL,
+  `total_bayar` int(10) DEFAULT NULL,
+  `tanggal_transaksi` date NOT NULL,
+  `metode_pembayaran` int(1) DEFAULT NULL,
+  `jenis_order` int(1) DEFAULT NULL,
+  `status_bayar` int(1) NOT NULL,
+  `no_resi` varchar(50) DEFAULT NULL,
+  `status_baca` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -122,17 +108,17 @@ CREATE TABLE `tb_order` (
 --
 
 CREATE TABLE `tb_pelanggan` (
-  `id_pelanggan` varchar(50) NOT NULL,
-  `komoditi` varchar(100) NOT NULL,
-  `id_user` int(8) NOT NULL,
-  `id_marketing` varchar(20) NOT NULL,
+  `id_pelanggan` varchar(7) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_marketing` varchar(5) NOT NULL,
   `nama_pelanggan` varchar(50) NOT NULL,
-  `no_hp` varchar(50) NOT NULL,
+  `no_hp` varchar(15) NOT NULL,
   `alamat` text NOT NULL,
   `kecamatan` varchar(50) NOT NULL,
   `kabupaten` varchar(50) NOT NULL,
   `provinsi` varchar(50) NOT NULL,
-  `jenis_pelanggan` varchar(50) NOT NULL,
+  `komoditi` varchar(20) DEFAULT NULL,
+  `jenis_pelanggan` varchar(12) NOT NULL,
   `tanggal_daftar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -143,15 +129,14 @@ CREATE TABLE `tb_pelanggan` (
 --
 
 CREATE TABLE `tb_pembayaran` (
-  `id_pembayaran` int(11) NOT NULL,
-  `kode_transaksi` varchar(50) NOT NULL,
-  `id_rekening` int(5) NOT NULL,
+  `id_pembayaran` int(7) NOT NULL,
+  `kode_transaksi` varchar(30) NOT NULL,
+  `id_rekening` int(3) NOT NULL,
   `no_rekening` varchar(30) NOT NULL,
-  `atas_nama` varchar(50) NOT NULL,
-  `tanggal_bayar` datetime NOT NULL,
+  `atas_nama` varchar(30) NOT NULL,
+  `tanggal_bayar` date NOT NULL,
   `nama_bank` varchar(30) NOT NULL,
-  `jumlah_bayar` int(9) NOT NULL,
-  `bukti_bayar` varchar(255) NOT NULL
+  `jumlah_bayar` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -162,10 +147,10 @@ CREATE TABLE `tb_pembayaran` (
 
 CREATE TABLE `tb_pencairan_reward` (
   `id_pencairan_reward` int(11) NOT NULL,
-  `id_pelanggan` varchar(20) NOT NULL,
-  `id_reward` int(11) NOT NULL,
+  `id_pelanggan` varchar(7) NOT NULL,
+  `id_reward` int(5) NOT NULL,
   `waktu_pencairan` date NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -175,12 +160,12 @@ CREATE TABLE `tb_pencairan_reward` (
 --
 
 CREATE TABLE `tb_point` (
-  `id_point` int(11) NOT NULL,
-  `id_pelanggan` varchar(17) NOT NULL,
-  `kode_transaksi` varchar(50) NOT NULL,
-  `point` int(11) NOT NULL,
+  `id_point` int(7) NOT NULL,
+  `id_pelanggan` varchar(7) NOT NULL,
+  `kode_transaksi` varchar(30) NOT NULL,
+  `point` int(8) NOT NULL,
   `status` enum('in','out') NOT NULL,
-  `total_point` int(11) NOT NULL,
+  `total_point` int(8) NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -191,27 +176,16 @@ CREATE TABLE `tb_point` (
 --
 
 CREATE TABLE `tb_produk` (
-  `kode_produk` varchar(20) NOT NULL,
+  `kode_produk` varchar(6) NOT NULL,
   `nama_produk` varchar(50) NOT NULL,
   `harga_customer` int(7) NOT NULL,
   `harga_mitra` int(7) NOT NULL,
   `harga_distributor` int(7) NOT NULL,
   `keterangan` text NOT NULL,
-  `gambar` varchar(255) NOT NULL,
-  `stok` int(11) NOT NULL,
-  `berat` int(8) NOT NULL,
-  `tanggal_update` date NOT NULL
+  `gambar` varchar(100) NOT NULL,
+  `stok` int(5) NOT NULL,
+  `tanggal_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_produk`
---
-
-INSERT INTO `tb_produk` (`kode_produk`, `nama_produk`, `harga_customer`, `harga_mitra`, `harga_distributor`, `keterangan`, `gambar`, `stok`, `berat`, `tanggal_update`) VALUES
-('PK001', 'Pupuk Kilat 1L', 170000, 135000, 120000, '<p>pupuk kilat&nbsp;</p>\r\n', 'POC.jpg', 5023, 1000, '2021-04-16'),
-('PK002', 'Pupuk Kilat 500ml', 100000, 80000, 80000, '<p>pupuk kilat 500ml</p>\r\n', 'POC.jpg', 5942, 500, '2021-04-16'),
-('PK003', 'Nutrisi Ternak', 110000, 85000, 85000, '<p>nutrisi ternak</p>\r\n', 'ternak.jpg', 384, 500, '2021-04-16'),
-('PK004', 'Nutrisi Ikan', 110000, 85000, 85000, '<p>Nutrisi ikan</p>\r\n', 'ikan.jpg', 436, 500, '2021-04-16');
 
 -- --------------------------------------------------------
 
@@ -220,34 +194,16 @@ INSERT INTO `tb_produk` (`kode_produk`, `nama_produk`, `harga_customer`, `harga_
 --
 
 CREATE TABLE `tb_promo` (
-  `id_promo` int(11) NOT NULL,
-  `kode_produk` varchar(20) NOT NULL,
-  `nama_promo` varchar(255) NOT NULL,
-  `harga` int(11) NOT NULL,
-  `jumlah` int(4) NOT NULL,
-  `bonus` int(4) NOT NULL,
-  `gambar` varchar(255) NOT NULL,
-  `keterangan` text DEFAULT NULL,
+  `id_promo` int(6) NOT NULL,
+  `kode_produk` varchar(6) NOT NULL,
+  `nama_produk` varchar(50) NOT NULL,
+  `harga` int(7) NOT NULL,
+  `jumlah` int(5) NOT NULL,
+  `bonus` int(5) NOT NULL,
+  `gambar` varchar(100) NOT NULL,
+  `keterangan` text NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_promo`
---
-
-INSERT INTO `tb_promo` (`id_promo`, `kode_produk`, `nama_promo`, `harga`, `jumlah`, `bonus`, `gambar`, `keterangan`, `status`) VALUES
-(1, 'PK001', 'Paket A', 1700000, 10, 5, 'paket-a.jpg', '0', 0),
-(2, 'PK001', 'Paket B', 850000, 5, 2, 'paket-b.jpg', '0', 0),
-(3, 'PK001', 'Paket C', 510000, 3, 1, 'paket-c.jpg', '0', 0),
-(4, 'PK001', 'Paket Mitra', 2700000, 20, 10, 'paket-a.jpg', '0', 0),
-(5, 'PK001', 'Paket 10 POC 1 Liter', 1700000, 10, 2, 'POC-10.jpg', '<p>POC kilat Merupakan Pupuk cair yang mengandung Hormon Penyubur Tanaman yang dapat merangsang tanaman agar Tumbuh lebat dan Kuat, terbuat dari Susu, Madu dan bahan organik lainnya tanpa campuran limbah maupun kotoran hewan.</p>\r\n<p>Paket yang didapatkan dari pembelian ini adalah :</p>\r\n<ul>\r\n<li>10 botol POC 1 Liter</li>\r\n<li>Bonus 2 botol POC 500ml</li>\r\n<li>Subsidi Ongkir Rp. 200.000</li>\r\n<li> 1 T-Shirt</li>\r\n<li> 2 Baju Petani</li>\r\n<li> 1 Banner Lahan</li>\r\n<li> 1 Buku Aplikasi</li>\r\n<li> 20 Lembar Brosur Produk</li>\r\n</ul>\r\n', 1),
-(6, 'PK001', 'Paket 5 POC 1 Liter', 850000, 5, 1, 'POC-5.jpg', '<p>POC kilat Merupakan Pupuk cair yang mengandung Hormon Penyubur Tanaman yang dapat merangsang tanaman agar Tumbuh lebat dan Kuat, terbuat dari Susu, Madu dan bahan organik lainnya tanpa campuran limbah maupun kotoran hewan.</p>\r\n<p>Paket yang didapatkan dari pembelian ini adalah :</p>\r\n<ul>\r\n<li>5 botol POC 1 Liter</li>\r\n<li>Bonus 1 botol POC 500ml</li>\r\n<li>Subsidi Ongkir Rp. 50.000</li>\r\n<li> 1 Baju Petani</li>\r\n<li> 10 Lembar Brosur Produk</li>\r\n</ul>\r\n', 1),
-(7, 'PK002', 'Paket 20 POC 500ml', 2000000, 20, 2, 'POC-10.jpg', '<p>POC kilat Merupakan Pupuk cair yang mengandung Hormon Penyubur Tanaman yang dapat merangsang tanaman agar Tumbuh lebat dan Kuat, terbuat dari Susu, Madu dan bahan organik lainnya tanpa campuran limbah maupun kotoran hewan.</p>\r\n<p>Paket yang didapatkan dari pembelian ini adalah :</p>\r\n<ul>\r\n<li>20 botol POC 500ml</li>\r\n<li>Bonus 2 botol POC 500ml</li>\r\n<li>Subsidi Ongkir Rp. 100.000</li>\r\n<li> 1 T-Shirt</li>\r\n<li> 2 Baju Petani</li>\r\n<li> 1 Banner Lahan</li>\r\n<li> 1 Buku Aplikasi</li>\r\n<li> 20 Lembar Brosur Produk</li>\r\n</ul>\r\n', 1),
-(8, 'PK002', 'Paket 10 POC 500ml', 1000000, 10, 1, 'POC-5.jpg', '<p>POC kilat Merupakan Pupuk cair yang mengandung Hormon Penyubur Tanaman yang dapat merangsang tanaman agar Tumbuh lebat dan Kuat, terbuat dari Susu, Madu dan bahan organik lainnya tanpa campuran limbah maupun kotoran hewan.</p>\r\n<p>Paket yang didapatkan dari pembelian ini adalah :</p>\r\n<ul>\r\n<li>10 botol POC 500ml</li>\r\n<li>Bonus 1 botol POC 500ml</li>\r\n<li>Subsidi Ongkir Rp. 50.000</li>\r\n<li> 1 Baju Petani</li>\r\n<li> 10 Lembar Brosur Produk</li>\r\n</ul>\r\n', 1),
-(9, 'PK003', 'Paket Ternak 1', 2200000, 20, 2, 'ternak.webp', '0', 1),
-(10, 'PK003', 'Paket Ternak 2', 1100000, 10, 1, 'ternak.webp', '0', 1),
-(11, 'PK004', 'Paket Ikan 1', 2200000, 20, 2, 'ikan.webp', '0', 1),
-(12, 'PK004', 'Paket Ikan 2', 1100000, 10, 1, 'ikan.webp', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -256,19 +212,11 @@ INSERT INTO `tb_promo` (`id_promo`, `kode_produk`, `nama_promo`, `harga`, `jumla
 --
 
 CREATE TABLE `tb_rekening` (
-  `id_rekening` int(5) NOT NULL,
-  `nama_bank` varchar(30) NOT NULL,
+  `id_rekening` int(3) NOT NULL,
+  `nama_rekening` varchar(30) NOT NULL,
   `no_rekening` varchar(30) NOT NULL,
-  `nama_pemilik` varchar(50) NOT NULL
+  `nama_pemilik` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_rekening`
---
-
-INSERT INTO `tb_rekening` (`id_rekening`, `nama_bank`, `no_rekening`, `nama_pemilik`) VALUES
-(1, 'Bank Mandiri', '14300 - 8165 - 5555', 'Agrikultur Gemilang Indonesia'),
-(2, 'Bank BCA', '024 - 7095 - 555', 'Agrikultur Gemilang Indonesia');
 
 -- --------------------------------------------------------
 
@@ -277,42 +225,10 @@ INSERT INTO `tb_rekening` (`id_rekening`, `nama_bank`, `no_rekening`, `nama_pemi
 --
 
 CREATE TABLE `tb_reward` (
-  `id_reward` int(11) NOT NULL,
-  `pencapaian` int(11) NOT NULL,
+  `id_reward` int(5) NOT NULL,
+  `pencapaian` int(5) NOT NULL,
   `reward` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_reward`
---
-
-INSERT INTO `tb_reward` (`id_reward`, `pencapaian`, `reward`) VALUES
-(1, 200, 'Handphone'),
-(2, 400, 'TV LED 32\"'),
-(3, 800, 'Mesin Cuci'),
-(4, 1000, 'Laptop'),
-(5, 2000, 'Sepeda Motor');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tb_setting`
---
-
-CREATE TABLE `tb_setting` (
-  `id` int(7) NOT NULL,
-  `nama_toko` varchar(255) DEFAULT NULL,
-  `lokasi` int(5) DEFAULT NULL,
-  `alamat_toko` text DEFAULT NULL,
-  `no_telp` varchar(13) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_setting`
---
-
-INSERT INTO `tb_setting` (`id`, `nama_toko`, `lokasi`, `alamat_toko`, `no_telp`) VALUES
-(1, 'Pupuk Kilat Official', 160, 'Jl.Manggis Raya No. 11, Jemberlor Patrang', '081554988354');
 
 -- --------------------------------------------------------
 
@@ -321,10 +237,10 @@ INSERT INTO `tb_setting` (`id`, `nama_toko`, `lokasi`, `alamat_toko`, `no_telp`)
 --
 
 CREATE TABLE `tb_stok` (
-  `id_stok` int(11) NOT NULL,
-  `kode_produk` varchar(20) NOT NULL,
-  `kode_transaksi` varchar(50) NOT NULL,
-  `id_pelanggan` varchar(20) NOT NULL,
+  `id_stok` int(8) NOT NULL,
+  `kode_produk` varchar(6) NOT NULL,
+  `kode_transaksi` varchar(30) NOT NULL,
+  `id_pelanggan` varchar(7) NOT NULL,
   `qty` int(5) NOT NULL,
   `sisa` int(5) NOT NULL,
   `status` enum('in','out','proses') NOT NULL,
@@ -338,24 +254,13 @@ CREATE TABLE `tb_stok` (
 --
 
 CREATE TABLE `tb_user` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int(6) NOT NULL,
   `nama_user` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
-  `hak_akses` varchar(20) NOT NULL
+  `hak_akses` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_user`
---
-
-INSERT INTO `tb_user` (`id_user`, `nama_user`, `email`, `username`, `password`, `hak_akses`) VALUES
-(1, 'Mely', '', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '1'),
-(2, 'egi', '', 'distributor', '5ffa7721e6d84150470a179e969643c0618e327a', '2'),
-(3, 'Sistoni', '', 'mitra', '2f87990a73489f1ebee3a830918e57d564a9b483', '3'),
-(4, 'Tunggul', '', 'tunggul', '1bd993421cde1ca45b66a98f71b983952e1804ad', '4'),
-(11, 'faida', 'faida@gmail.com', 'faida', '107c5a7f9ba1780257b15aeabf0140243bf0c16e', '5');
 
 -- --------------------------------------------------------
 
@@ -91652,12 +91557,6 @@ INSERT INTO `wilayah_2020` (`kode`, `nama`) VALUES
 --
 
 --
--- Indeks untuk tabel `tb_detail_order`
---
-ALTER TABLE `tb_detail_order`
-  ADD PRIMARY KEY (`kode_transaksi`);
-
---
 -- Indeks untuk tabel `tb_expedisi`
 --
 ALTER TABLE `tb_expedisi`
@@ -91667,37 +91566,60 @@ ALTER TABLE `tb_expedisi`
 -- Indeks untuk tabel `tb_marketing`
 --
 ALTER TABLE `tb_marketing`
-  ADD PRIMARY KEY (`id_marketing`);
+  ADD PRIMARY KEY (`id_marketing`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeks untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  ADD PRIMARY KEY (`id_order`);
+  ADD PRIMARY KEY (`id_order`),
+  ADD KEY `id_marketing` (`id_marketing`),
+  ADD KEY `id_pelanggan` (`id_pelanggan`),
+  ADD KEY `id_produk` (`id_produk`),
+  ADD KEY `id_promo` (`id_promo`);
+
+--
+-- Indeks untuk tabel `tb_order_detail`
+--
+ALTER TABLE `tb_order_detail`
+  ADD PRIMARY KEY (`kode_transaksi`),
+  ADD KEY `id_marketing` (`id_marketing`),
+  ADD KEY `id_pelanggan` (`id_pelanggan`),
+  ADD KEY `id_rekening` (`id_rekening`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeks untuk tabel `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  ADD PRIMARY KEY (`id_pelanggan`);
+  ADD PRIMARY KEY (`id_pelanggan`),
+  ADD KEY `id_marketing` (`id_marketing`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeks untuk tabel `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  ADD PRIMARY KEY (`id_pembayaran`);
+  ADD PRIMARY KEY (`id_pembayaran`),
+  ADD KEY `id_rekening` (`id_rekening`),
+  ADD KEY `kode_transaksi` (`kode_transaksi`);
 
 --
 -- Indeks untuk tabel `tb_pencairan_reward`
 --
 ALTER TABLE `tb_pencairan_reward`
-  ADD PRIMARY KEY (`id_pencairan_reward`);
+  ADD PRIMARY KEY (`id_pencairan_reward`),
+  ADD KEY `id_reward` (`id_reward`),
+  ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
 -- Indeks untuk tabel `tb_point`
 --
 ALTER TABLE `tb_point`
-  ADD PRIMARY KEY (`id_point`);
+  ADD PRIMARY KEY (`id_point`),
+  ADD KEY `id_pelanggan` (`id_pelanggan`),
+  ADD KEY `kode_transaksi` (`kode_transaksi`);
 
 --
 -- Indeks untuk tabel `tb_produk`
@@ -91709,14 +91631,14 @@ ALTER TABLE `tb_produk`
 -- Indeks untuk tabel `tb_promo`
 --
 ALTER TABLE `tb_promo`
-  ADD PRIMARY KEY (`id_promo`);
+  ADD PRIMARY KEY (`id_promo`),
+  ADD KEY `kode_produk` (`kode_produk`);
 
 --
 -- Indeks untuk tabel `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
-  ADD PRIMARY KEY (`id_rekening`),
-  ADD UNIQUE KEY `no_rekening` (`no_rekening`);
+  ADD PRIMARY KEY (`id_rekening`);
 
 --
 -- Indeks untuk tabel `tb_reward`
@@ -91725,16 +91647,13 @@ ALTER TABLE `tb_reward`
   ADD PRIMARY KEY (`id_reward`);
 
 --
--- Indeks untuk tabel `tb_setting`
---
-ALTER TABLE `tb_setting`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
-  ADD PRIMARY KEY (`id_stok`);
+  ADD PRIMARY KEY (`id_stok`),
+  ADD KEY `id_pelanggan` (`id_pelanggan`),
+  ADD KEY `kode_transaksi` (`kode_transaksi`),
+  ADD KEY `kode_produk` (`kode_produk`);
 
 --
 -- Indeks untuk tabel `tb_user`
@@ -91756,67 +91675,131 @@ ALTER TABLE `wilayah_2020`
 -- AUTO_INCREMENT untuk tabel `tb_expedisi`
 --
 ALTER TABLE `tb_expedisi`
-  MODIFY `id_expedisi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_expedisi` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id_order` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=428;
+  MODIFY `id_order` int(9) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_pembayaran` int(7) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pencairan_reward`
 --
 ALTER TABLE `tb_pencairan_reward`
-  MODIFY `id_pencairan_reward` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pencairan_reward` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_point`
 --
 ALTER TABLE `tb_point`
-  MODIFY `id_point` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_point` int(7) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_promo`
 --
 ALTER TABLE `tb_promo`
-  MODIFY `id_promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_promo` int(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
-  MODIFY `id_rekening` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_rekening` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_reward`
 --
 ALTER TABLE `tb_reward`
-  MODIFY `id_reward` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT untuk tabel `tb_setting`
---
-ALTER TABLE `tb_setting`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_reward` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
-  MODIFY `id_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
+  MODIFY `id_stok` int(8) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_user` int(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `tb_marketing`
+--
+ALTER TABLE `tb_marketing`
+  ADD CONSTRAINT `tb_marketing_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_order`
+--
+ALTER TABLE `tb_order`
+  ADD CONSTRAINT `tb_order_ibfk_1` FOREIGN KEY (`id_marketing`) REFERENCES `tb_marketing` (`id_marketing`),
+  ADD CONSTRAINT `tb_order_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`),
+  ADD CONSTRAINT `tb_order_ibfk_3` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`kode_produk`),
+  ADD CONSTRAINT `tb_order_ibfk_4` FOREIGN KEY (`id_promo`) REFERENCES `tb_promo` (`id_promo`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_order_detail`
+--
+ALTER TABLE `tb_order_detail`
+  ADD CONSTRAINT `tb_order_detail_ibfk_1` FOREIGN KEY (`id_marketing`) REFERENCES `tb_marketing` (`id_marketing`),
+  ADD CONSTRAINT `tb_order_detail_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`),
+  ADD CONSTRAINT `tb_order_detail_ibfk_3` FOREIGN KEY (`id_rekening`) REFERENCES `tb_rekening` (`id_rekening`),
+  ADD CONSTRAINT `tb_order_detail_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_pelanggan`
+--
+ALTER TABLE `tb_pelanggan`
+  ADD CONSTRAINT `tb_pelanggan_ibfk_1` FOREIGN KEY (`id_marketing`) REFERENCES `tb_marketing` (`id_marketing`),
+  ADD CONSTRAINT `tb_pelanggan_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_pembayaran`
+--
+ALTER TABLE `tb_pembayaran`
+  ADD CONSTRAINT `tb_pembayaran_ibfk_1` FOREIGN KEY (`id_rekening`) REFERENCES `tb_rekening` (`id_rekening`),
+  ADD CONSTRAINT `tb_pembayaran_ibfk_2` FOREIGN KEY (`kode_transaksi`) REFERENCES `tb_order_detail` (`kode_transaksi`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_pencairan_reward`
+--
+ALTER TABLE `tb_pencairan_reward`
+  ADD CONSTRAINT `tb_pencairan_reward_ibfk_1` FOREIGN KEY (`id_reward`) REFERENCES `tb_reward` (`id_reward`),
+  ADD CONSTRAINT `tb_pencairan_reward_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_point`
+--
+ALTER TABLE `tb_point`
+  ADD CONSTRAINT `tb_point_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`),
+  ADD CONSTRAINT `tb_point_ibfk_2` FOREIGN KEY (`kode_transaksi`) REFERENCES `tb_order_detail` (`kode_transaksi`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_promo`
+--
+ALTER TABLE `tb_promo`
+  ADD CONSTRAINT `tb_promo_ibfk_1` FOREIGN KEY (`kode_produk`) REFERENCES `tb_produk` (`kode_produk`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_stok`
+--
+ALTER TABLE `tb_stok`
+  ADD CONSTRAINT `tb_stok_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`),
+  ADD CONSTRAINT `tb_stok_ibfk_2` FOREIGN KEY (`kode_transaksi`) REFERENCES `tb_order_detail` (`kode_transaksi`),
+  ADD CONSTRAINT `tb_stok_ibfk_3` FOREIGN KEY (`kode_produk`) REFERENCES `tb_produk` (`kode_produk`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
