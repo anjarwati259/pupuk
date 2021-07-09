@@ -86,6 +86,7 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_mitra/'.$mitra->id_pelan
                           <input type="number" value="<?php echo $mitra->no_hp ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
                         </div>
                       </div>
+                      <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="no_hp">Marketing</label>
                         <div class="col-sm-8">
@@ -96,6 +97,9 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_mitra/'.$mitra->id_pelan
                           </select>
                         </div>
                       </div>
+                      <?php }else{ ?>
+                        <input type="text" name="id_marketing" value="<?php echo $market->id_marketing ?>">
+                    <?php } ?>
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="komoditi">Komoditi</label>
                         <div class="col-sm-8">

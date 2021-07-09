@@ -20,6 +20,9 @@ class Pelanggan extends CI_Controller
 	}
 	//menampilkan data customer
 	public function customer(){
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
+
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		$marketing = $this->pelanggan_model->marketing();
 		$id_user = $this->session->userdata('id_user');
@@ -48,6 +51,7 @@ class Pelanggan extends CI_Controller
 						'marketing' => $marketing,
 						'cus'	=> $customer, 
 						'prov'	=> $provinsi,
+						'market' =>$market,
 						'provinsi'	=> $provinsi,
 						'customer' => $customer,
 						'isi' => 'admin/customer/list' );
@@ -57,6 +61,8 @@ class Pelanggan extends CI_Controller
 	public function add_customer()
 	{
 		//get provinsi
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		$provinsi = $this->wilayah_model->listing();
 		$id = $this->pelanggan_model->get_last_id();
 		$marketing = $this->pelanggan_model->marketing();
@@ -101,6 +107,7 @@ class Pelanggan extends CI_Controller
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'customer'	=> $customer,
 							'marketing' => $marketing,
+							'market'	=> $market,
 							'id'		=> $id,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/customer/list'
@@ -128,6 +135,8 @@ class Pelanggan extends CI_Controller
 	//edit data customer
 	public function edit_customer($id_pelanggan){
 		$customer = $this->pelanggan_model->detail($id_pelanggan);
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		//get provinsi
 		$marketing = $this->pelanggan_model->marketing();
 		$provinsi = $this->wilayah_model->listing();
@@ -162,6 +171,7 @@ class Pelanggan extends CI_Controller
 
 			$data = array(	'title'		=> 'Edit Pelanggan',
 							'customer'	=> $customer,
+							'market'	=> $market,
 							'marketing' => $marketing,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/customer/edit'
@@ -207,6 +217,8 @@ class Pelanggan extends CI_Controller
 	//menampilkan data mitra
 	public function mitra(){
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		$id_user = $this->session->userdata('id_user');
 		$marketing = $this->pelanggan_model->marketing();
 		$provinsi = $this->wilayah_model->listing();
@@ -230,6 +242,7 @@ class Pelanggan extends CI_Controller
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
 						'provinsi'	=> $provinsi,
+						'market'	=> $market,
 						'marketing' => $marketing,
 						'mitra' => $mitra,
 						'isi' => 'admin/mitra/list' );
@@ -240,6 +253,8 @@ class Pelanggan extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		$id = $this->pelanggan_model->get_last_id();
 		$marketing = $this->pelanggan_model->marketing();
 		//validation
@@ -284,6 +299,7 @@ class Pelanggan extends CI_Controller
 							'mitra'		=> $mitra,
 							'id'		=> $id,
 							'marketing' => $marketing,
+							'market'	=> $market,
 							'komoditi'	=> $komoditi,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/mitra/list'
@@ -313,6 +329,8 @@ class Pelanggan extends CI_Controller
 		$mitra = $this->pelanggan_model->detail($id_pelanggan);
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		$marketing = $this->pelanggan_model->marketing();
 		//validation
 		$valid = $this-> form_validation;
@@ -345,6 +363,7 @@ class Pelanggan extends CI_Controller
 
 			$data = array(	'title'		=> 'Edit Pelanggan',
 							'mitra'		=> $mitra,
+							'market'	=> $market,
 							'provinsi'	=> $provinsi,
 							'marketing' => $marketing,
 							'isi'		=> 'admin/mitra/edit'
@@ -392,6 +411,7 @@ class Pelanggan extends CI_Controller
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		$id_user = $this->session->userdata('id_user');
 		$provinsi = $this->wilayah_model->listing();
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		$marketing = $this->pelanggan_model->marketing();
 		//last id pelanggan
 		if($pelanggan_id){
@@ -412,6 +432,7 @@ class Pelanggan extends CI_Controller
 		
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
+						'market' => $market,
 						'provinsi'	=> $provinsi,
 						'marketing'	=> $marketing,
 						'distributor' => $distributor,
@@ -424,6 +445,8 @@ class Pelanggan extends CI_Controller
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
 		$id = $this->pelanggan_model->get_last_id();
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		$marketing = $this->pelanggan_model->marketing();
 		//validation
 		$valid = $this-> form_validation;
@@ -464,6 +487,7 @@ class Pelanggan extends CI_Controller
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'distributor'	=> $distributor,
 							'id'		=> $id,
+							'market'	=> $market,
 							'marketing' => $marketing,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/distributor/list'
@@ -491,6 +515,8 @@ class Pelanggan extends CI_Controller
 	//edit data distributor
 	public function edit_distributor($id_pelanggan){
 		$distributor = $this->pelanggan_model->detail($id_pelanggan);
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
 		//get provinsi
 		$marketing = $this->pelanggan_model->marketing();
 		$provinsi = $this->wilayah_model->listing();
@@ -525,6 +551,7 @@ class Pelanggan extends CI_Controller
 
 			$data = array(	'title'		=> 'Edit Pelanggan',
 							'distributor'	=> $distributor,
+							'market'	=> $market,
 							'provinsi'	=> $provinsi,
 							'marketing' => $marketing,
 							'isi'		=> 'admin/distributor/edit'

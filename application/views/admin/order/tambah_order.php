@@ -236,8 +236,19 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <td>Total Penjualan</td>
-                        <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?></td>
+                        <td>Sub Total</td>
+                        <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?>
+                        </td>
+                        <td><input type="number" id="subtotal
+                          " name="subtotal" class="prc"></td>
+                      </tr>
+                      <tr>
+                        <td>Potongan</td>
+                        <td><input type="text" name="potongan" id="potongan" class="form-control prc"></td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td><input type="text" name="total" id="total"></td>
                       </tr>
                     </tfoot>
                     </tbody>
@@ -394,6 +405,8 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    var = 
+
     $("#0").show();
     $("#paket").hide();
     $("#produk").hide();
@@ -414,7 +427,6 @@
           }
          
       });
-
       // ambil data produk dan harga
       $('body').on("change","#produk",function(){
         var url =  '<?php echo base_url(); ?>' + 'admin/order/check_product/' + this.value;
@@ -477,7 +489,7 @@
         //alert(id_produk);
         if(paket==1){//satuan
           var id_produk = $("#produk").val();
-          var id_promo = 0;
+          var id_promo = null;
           var sale_price = $("#sale_price").val();
           var status = 2;
         }else{//promo
@@ -525,6 +537,7 @@
                     });
                     $("#total-pembelian").text('Rp'+res.total_price);
                     $("#transaksi-item").find("input[type=text], input[type=number]").val("0");
+                    $("input[name=subtotal]").val(res.total_price); 
                     //$("body").faLoading(false);
                     console.log(res);
                 },
@@ -535,6 +548,7 @@
         }else{
             alert("Silahkan isi semua box");
         }
+
         });
       //delete chart
       $(document).on("click",".transaksi-delete-item",function(e){

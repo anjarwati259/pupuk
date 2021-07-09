@@ -37,7 +37,9 @@
                         <th>Alamat</th>
                         <th>Kabupaten</th>
                         <th>Provinsi</th>
+                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
+                      <?php } ?>
                         <th>Komoditi</th>
                         <th>Tanggal Gabung</th>
                         <th>Action</th>
@@ -90,7 +92,9 @@
                         </td>
                         <td><?php echo $customer->kabupaten ?></td>
                         <td><?php echo $customer->provinsi ?></td>
+                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td><?php echo $customer->nama_marketing ?></td>
+                      <?php } ?>
                         <td><?php echo $customer->komoditi ?></td>
                         <td><?php echo tanggal_indo(date('Y-m-d',strtotime($customer->tanggal_daftar))); ?></td>
                         <td>
@@ -176,6 +180,7 @@
                           <input type="number" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
                         </div>
                       </div>
+                      <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="no_hp">Marketing</label>
                         <div class="col-sm-8">
@@ -186,6 +191,9 @@
                           </select>
                         </div>
                       </div>
+                    <?php }else{ ?>
+                      <input type="hidden" name="id_marketing" value="<?php echo $market->id_marketing ?>">
+                    <?php } ?>
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="komoditi">Komoditi</label>
                         <div class="col-sm-8">
