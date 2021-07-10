@@ -248,6 +248,7 @@
 <script src="<?php echo base_url()?>assets/admin/dist/js/jquery-ui.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>assets/admin/dist/js/demo.js"></script>
+<!-- <script src="<?php echo base_url();?>assets/js/jquery-price-format/jquery.price_format.2.0.min.js"></script> -->
 
 <script>
   $(function () {

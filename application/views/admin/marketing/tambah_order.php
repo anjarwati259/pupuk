@@ -147,7 +147,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body scrollmenu">
-                  <table class="table">
+                  <table class="table" id="mytable">
                         <thead>
                           <tr>
                             <td>Pilih Paket</td>
@@ -231,11 +231,22 @@
                           <?php }?>
                         </tbody>
                         <tfoot>
-                          <tr>
-                            <td>Total Penjualan</td>
-                            <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?></td>
-                          </tr>
-                        </tfoot>
+                      <tr>
+                        <td>Sub Total</td>
+                        <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?>
+                        </td>
+                        <td><input type="hidden" id="subtotal
+                          " name="subtotal"></td>
+                      </tr>
+                      <tr>
+                        <td>Potongan</td>
+                        <td><input type="number" name="potongan" id="potongan" class="form-control prc"></td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td id="total"></td>
+                      </tr>
+                    </tfoot>
                         </tbody>
                       </table>
                       <input type="hidden" name="status_baca" id="status_baca" value="0">
@@ -245,7 +256,7 @@
             <!-- /.box-body -->
                 <div class="box-footer">
                   <div class="col-md-3 col-md-offset-4">
-                    <a class="btn btn-default" href="<?php echo base_url('order');?>">Cancel</a>
+                    <a class="btn btn-default" href="<?php echo base_url('admin/order');?>">Cancel</a>
                     <a class="btn btn-info pull-right" href="#" id="submit-transaksi">Submit</a>
                   </div>
                 </div>
@@ -376,6 +387,22 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    $("#mytable").on('input', '.prc', function(){
+      var sum_total = 0;
+      var subtotal = $('input[name=subtotal]').val();
+      var ongkir = $('input[name=ongkir]').val();
+      $("#mytable .prc").each(function(){
+        var getValue = $(this).val();
+        if($.isNumeric(getValue)){
+          sum_total +=parseInt(getValue);
+        }
+      });
+      var total = (parseInt(subtotal) + parseInt(ongkir)) - parseInt(sum_total);
+      //$('input[name=total]').val(total);
+      $("#total").text('Rp. '+price(total));
+      console.log(total);
+    })
+
     $("#0").show();
     $("#paket").hide();
     $("#produk").hide();
@@ -409,12 +436,12 @@
             if(status == 'success' && data != 'false') {
                 var value = $.parseJSON(data);
                 var val = value[0];
-                var sale_value = '<option value="' + val.harga_customer + '">' + 'Rp. '+ parseInt(val.harga_customer) + '</option>';
+                var sale_value = '<option value="' + val.harga_customer + '">' + 'Rp. '+ price(parseInt(val.harga_customer)) + '</option>';
                 if(val.harga_mitra != "0"){
-                    var type1 = '<option value="' + val.harga_mitra + '">' + 'Rp. '+ parseInt(val.harga_mitra) + '</option>';
+                    var type1 = '<option value="' + val.harga_mitra + '">' + 'Rp. '+ price(parseInt(val.harga_mitra)) + '</option>';
                 }
                 if(val.harga_distributor != "0"){
-                    var type2 = '<option value="' + val.harga_distributor + '">' + 'Rp. '+ parseInt(val.harga_distributor) + '</option>';
+                    var type2 = '<option value="' + val.harga_distributor + '">' + 'Rp. '+ price(parseInt(val.harga_distributor)) + '</option>';
                 }
                 $("#bonus").val('0');
                 $('#sale_price').append(sale_value+type1+type2);
@@ -442,7 +469,7 @@
             $("#bonus").val(bonus);
             $("#id_promo").val(promo);
             if(hasil != 'false') {
-              var harga = '<option value="' + response[0].harga_customer+ '">' + 'Rp. '+ parseInt(response[0].harga_customer) + '</option>';
+              var harga = '<option value="' + response[0].harga_customer+ '">' + 'Rp. '+ price(parseInt(response[0].harga_customer)) + '</option>';
               $("#sale_price").empty();
             $('#sale_price').append(harga);
             }
@@ -500,13 +527,14 @@
                         var display = '<tr class="cart-value" id="'+ key +'">' +
                                     '<td>'+ value.name +'</td>' +
                                     '<td>'+ value.qty +'</td>' +
-                                    '<th '+row_2+'>Rp'+ value.subtotal +'</th>' +
+                                    '<th '+row_2+'>Rp'+ price(value.subtotal) +'</th>' +
                                     '<td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="'+ key +'">x</span></td>' +
                                     '</tr>';
                         $("#transaksi-item tr:last").after(display);
                     });
-                    $("#total-pembelian").text('Rp'+res.total_price);
+                    $("#total-pembelian").text('Rp. '+price(res.total_price));
                     $("#transaksi-item").find("input[type=text], input[type=number]").val("0");
+                    $("input[name=subtotal]").val(res.total_price); 
                     //$("body").faLoading(false);
                     console.log(res);
                 },
@@ -528,6 +556,7 @@
                     $("#"+rowid).remove();
                     console.log(data);
                     $("#total-pembelian").text('Rp'+data);
+                    $('input[name=subtotal]').val(data);
                     //$el.faLoading(false);
                 }                
             }
@@ -595,6 +624,7 @@
         var jenis_order = $("#jenis_order").val();
         var metode_pembayaran = $("#metode_pembayaran").val();
         var tanggal_transaksi = $("#tanggal_transaksi").val();
+        var potongan = $("#potongan").val();
         var status_baca = $("#status_baca").val();
         if(typeof kode_transaksi !== "undefined" && kode_transaksi != ""){
             var status = true;
@@ -615,6 +645,7 @@
                 'metode_pembayaran' : metode_pembayaran,
                 //'code': code,
                 'tanggal_transaksi' : tanggal_transaksi,
+                'potongan' : potongan,
                 'status_baca' : status_baca
             };
             data = [status,method,arr];
@@ -695,4 +726,18 @@
           $("input[name=kec]").val(datakec); 
       });
     });
+
+  function price(input){
+      return (input).formatMoney(0, '.', '.');
+  }
+  Number.prototype.formatMoney = function(c, d, t){
+      var n = this,
+          c = isNaN(c = Math.abs(c)) ? 2 : c,
+          d = d == undefined ? "." : d,
+          t = t == undefined ? "," : t,
+          s = n < 0 ? "-" : "",
+          i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+          j = (j = i.length) > 3 ? j % 3 : 0;
+      return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+  };
 </script>

@@ -153,7 +153,7 @@ class Order extends CI_Controller
 		$pelanggan 	= $this->pelanggan_model->alllisting();
 		$produk 	= $this->home_model->produk();
 		$promo 		= $this->home_model->promo();
-		
+		$mitra 		= $this->home_model->mitra();
 		$data = array(	'title'				=> 'Tambah Order',
 						'kode_transaksi'	=> $kode_transaksi,
 						'pelanggan'			=> $pelanggan,
@@ -162,6 +162,7 @@ class Order extends CI_Controller
 						'expedisi'			=> $expedisi,
 						'provinsi'			=> $provinsi,
 						'promo'				=> $promo,
+						'mitra'				=> $mitra,
 						'id_pelanggan'		=> $id_pelanggan,
 						'isi'				=> 'admin/order/tambah_order'
 					);
@@ -190,6 +191,7 @@ class Order extends CI_Controller
 		$id_bonus= $this->input->post('id_bonus');
 		$bonus = $this->input->post('bonus');
 		$status = $this->input->post('status');
+		$potongan = $this->input->post('potongan');
 
 		$get_product_detail =  $this->produk_model->detail_by_id($id_produk);
 		$get_bonus_detail =  $this->produk_model->detail_by_id($id_bonus);
@@ -201,6 +203,7 @@ class Order extends CI_Controller
 					'id_promo' => $id_promo,
 					'qty'     => $quantity,
 					'price'   => $sale_price,
+					'potongan' => $potongan,
 					'status'  => $status,
 					'name'    => $get_product_detail[0]['nama_produk'],
 					'options'  => array('id'=>'PK001', 'qty' => $bonus)
@@ -211,6 +214,7 @@ class Order extends CI_Controller
 					'status' => $status,
 					'qty'     => $bonus,
 					'price'   => 0,
+					'potongan' => $potongan,
 					'name'    => 'Pupuk Kilat 500ml'
 				)
 				); 
@@ -232,6 +236,7 @@ class Order extends CI_Controller
 					'id_promo' => $id_promo,
 					'qty'     => $quantity,
 					'price'   => $sale_price,
+					'potongan' => $potongan,
 					'status' => $status,
 					'name'    => $get_product_detail[0]['nama_produk'],
 					'options'  => array('id'=>'PK001', 'qty' => $bonus)
@@ -240,6 +245,7 @@ class Order extends CI_Controller
 					'id'      => $id_produk,
 					'id_promo' => $id_promo,
 					'status' => $status,
+					'potongan' => 0,
 					'qty'     => $bonus,
 					'price'   => 0,
 					'name'    => $get_product_detail[0]['nama_produk']
@@ -288,6 +294,7 @@ class Order extends CI_Controller
 		//grand total
 		$subtotal = $this->cart->total();
 		$ongkir = $this->input->post('ongkir');
+		$potongan = $this->input->post('potongan');
 
 		//get total item
 		$total = 0;
@@ -298,7 +305,8 @@ class Order extends CI_Controller
 		}
 		//cek id pelanggan
 		if(!empty($carts) && is_array($carts) && $ongkir != null){
-			$total_bayar = $subtotal + $ongkir;
+			$total = $subtotal - $potongan;
+			$total_bayar = $total + $ongkir;
 			$id_pelanggan = $this->input->post('id_pelanggan');
 			$komoditi = $this->input->post('komoditi');
 			$no_hp = $this->input->post('no_hp');
@@ -315,12 +323,13 @@ class Order extends CI_Controller
 			$data['ongkir'] = $ongkir;
 			$data['no_hp'] = $this->input->post('no_hp');
 			$data['total_bayar'] = $total_bayar;
-			$data['total_transaksi'] = $this->cart->total();
+			$data['total_transaksi'] = $total;
 			$data['status_bayar'] = '0';
 			$data['tanggal_transaksi'] = $this->input->post('tanggal_transaksi');
 			$data['id_marketing'] = $this->input->post('id_marketing');
 			$data['jenis_order'] = $this->input->post('jenis_order');
 			$data['total_item'] = $total;
+			$data['potongan'] = $this->input->post('potongan');
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
 			$data['status_baca'] = $this->input->post('status_baca');
 

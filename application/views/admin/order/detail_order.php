@@ -51,34 +51,42 @@ function tanggal_indo($tanggal, $cetak_hari = false)
         </div>
         <table id="example1" class="table table-bordered table-striped">
           <tbody>
-          	<tr>
-          		<td width="40%">Kode Invoice</td>
-          		<th><?php echo $detail_order->kode_transaksi ?></th>
-          	</tr>
+            <tr>
+              <td width="40%">Kode Invoice</td>
+              <th><?php echo $detail_order->kode_transaksi ?></th>
+            </tr>
             <tr>
               <td width="40%">Marketing</td>
               <th><?php echo $detail_order->nama_marketing ?></th>
             </tr>
-          	<tr>
-          		<td width="40%">Tanggal Transaksi</td>
-          		<th><strong><?php echo tanggal_indo(date('Y-m-d',strtotime($detail_order->tanggal_transaksi)),true); ?></strong></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Jumlah Item</td>
-          		<th><?php echo $detail_order->total_item ?></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Ekspedisi</td>
-          		<th><?php echo $detail_order->expedisi ?></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Ongkos Kirim</td>
-          		<th>Rp. <?php echo number_format($detail_order->ongkir,'0',',','.') ?></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Total Bayar</td>
-          		<th>Rp. <?php echo number_format($detail_order->total_bayar,'0',',','.') ?></th>
-          	</tr>
+            <tr>
+              <td width="40%">Tanggal Transaksi</td>
+              <th><strong><?php echo tanggal_indo(date('Y-m-d',strtotime($detail_order->tanggal_transaksi)),true); ?></strong></th>
+            </tr>
+            <tr>
+              <td width="40%">Jumlah Item</td>
+              <th><?php echo $detail_order->total_item ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Ekspedisi</td>
+              <th><?php echo $detail_order->expedisi ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Potongan</td>
+              <th>Rp. <?php echo number_format($detail_order->potongan,'0',',','.') ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Total Transaksi</td>
+              <th>Rp. <?php echo number_format($detail_order->total_transaksi,'0',',','.') ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Ongkos Kirim</td>
+              <th>Rp. <?php echo number_format($detail_order->ongkir,'0',',','.') ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Total Bayar</td>
+              <th>Rp. <?php echo number_format($detail_order->total_bayar,'0',',','.') ?></th>
+            </tr>
             <tr>
               <td width="40%">No Resi</td>
               <th><?php if($detail_order->no_resi !=null){
@@ -89,41 +97,15 @@ function tanggal_indo($tanggal, $cetak_hari = false)
               ?>
               </th>
             </tr>
-          	<tr>
-          		<td width="40%">Status</td>
-          		<th><?php $status = $detail_order->status_bayar;
+            <tr>
+              <td width="40%">Status</td>
+              <th><?php $status = $detail_order->status_bayar;
                if($status==0){
-          			echo "Belum Bayar";
+                echo "Belum Bayar";
               }else{
                 echo "Sudah Bayar";
-          		} ?></th>
-          	</tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title"><strong>Barang Dalam Pesanan</strong></h3>
-        </div>
-        <table id="example1" class="table table-bordered table-striped">
-        	<thead>
-        		<tr>
-        			<th></th>
-        			<th>Produk</th>
-        			<th>Jml Beli</th>
-        			<th>Harga Satuan</th>
-        		</tr>
-        	</thead>
-          <tbody>
-          	<?php foreach ($transaksi as $transaksi) { ?>
-          	<tr>
-          		<td><img src="<?php echo base_url('assets/img/produk/'.$transaksi->gambar) ?>" class="img img-responsive img-thumbnail" width="60"></td>
-          		<td><?php echo $transaksi->nama_produk ?></td>
-          		<td><?php echo $transaksi->jml_beli ?></td>
-          		<td>Rp. <?php echo number_format($transaksi->harga,'0',',','.') ?></td>
-          	</tr>
-          <?php } ?>
+              } ?></th>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -137,18 +119,18 @@ function tanggal_indo($tanggal, $cetak_hari = false)
         </div>
         <table id="example1" class="table table-bordered table-striped">
           <tbody>
-          	<tr>
-          		<td width="40%">Nama Penerima</td>
-          		<th><?php echo $detail_order->nama_pelanggan ?></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">No. Hp</td>
-          		<th><?php echo $detail_order->no_hp ?></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Alamat</td>
-          		<th><?php echo $detail_order->alamat ?></th>
-          	</tr>
+            <tr>
+              <td width="40%">Nama Penerima</td>
+              <th><?php echo $detail_order->nama_pelanggan ?></th>
+            </tr>
+            <tr>
+              <td width="40%">No. Hp</td>
+              <th><?php echo $detail_order->no_hp ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Alamat</td>
+              <th><?php echo $detail_order->alamat ?></th>
+            </tr>
             <tr>
               <td width="40%">Kabupaten</td>
               <th><?php echo $detail_order->kabupaten ?></th>
@@ -176,27 +158,27 @@ function tanggal_indo($tanggal, $cetak_hari = false)
         <?php }else{ ?>
         <table id="example1" class="table table-bordered table-striped">
           <tbody>
-          	<tr>
-          		<td width="40%">Transfer</td>
-          		<th>Rp. <?php echo number_format($bayar->jumlah_bayar,'0',',','.') ?></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Tanggal</td>
-          		<th><?php echo tanggal_indo(date('Y-m-d',strtotime($bayar->tanggal_bayar)),true); ?></th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Transfer ke</td>
-          		<th><?php echo $bayar->bank ?> a.n <?php echo $bayar->nama_pemilik ?> (<?php echo $bayar->rekening ?>)</th>
-          	</tr>
-          	<tr>
-          		<td width="40%">Transfer Dari</td>
-          		<th>
+            <tr>
+              <td width="40%">Transfer</td>
+              <th>Rp. <?php echo number_format($bayar->jumlah_bayar,'0',',','.') ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Tanggal</td>
+              <th><?php echo tanggal_indo(date('Y-m-d',strtotime($bayar->tanggal_bayar)),true); ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Transfer ke</td>
+              <th><?php echo $bayar->bank ?> a.n <?php echo $bayar->nama_pemilik ?> (<?php echo $bayar->rekening ?>)</th>
+            </tr>
+            <tr>
+              <td width="40%">Transfer Dari</td>
+              <th>
                 <?php if($bayar->nama_bank == null){
                   echo '-';
                 }else{ 
                   echo $bayar->nama_bank; 
                 } ?></th>
-          	</tr>
+            </tr>
           </tbody>
         </table>
       <div class="row">
@@ -221,6 +203,35 @@ function tanggal_indo($tanggal, $cetak_hari = false)
       <!-- /.box -->
     </div>
     <!--/.col (right) -->
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title"><strong>Barang Dalam Pesanan</strong></h3>
+        </div>
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Produk</th>
+              <th>Jml Beli</th>
+              <th>Harga Satuan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($transaksi as $transaksi) { ?>
+            <tr>
+              <td><img src="<?php echo base_url('assets/img/produk/'.$transaksi->gambar) ?>" class="img img-responsive img-thumbnail" width="60"></td>
+              <td><?php echo $transaksi->nama_produk ?></td>
+              <td><?php echo $transaksi->jml_beli ?></td>
+              <td>Rp. <?php echo number_format($transaksi->harga,'0',',','.') ?></td>
+            </tr>
+          <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
   <!-- /.row -->
 </section>

@@ -151,7 +151,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                   <div class="scrollmenu">
-                    <table class="table">
+                    <table class="table" id="mytable">
                     <thead>
                       <tr>
                         <td>Pilih Paket</td>
@@ -170,7 +170,8 @@
                               Please select one
                             </option>
                                 <option value="1">Satuan</option>
-                                <option value="2">Promo</option>
+                                <option value="2">Paket Customer</option>
+                                <option value="3">Paket Mitra</option>
                           </select>
                         </td>
 
@@ -206,6 +207,20 @@
                               <?php }?>
                             <?php }?>
                           </select>
+                          <!-- paket mitra -->
+                          <select class="form-control" id="mitra" name="kode_produk">
+                            <option value="0">
+                              Please select one
+                            </option>
+                            <?php if(isset($mitra) && is_array($mitra)){?>
+                              <?php foreach($mitra as $item){?>
+                                <option value="<?php echo $item->kode_produk;?>" dataid="<?php echo $item->id_promo;?>">
+                                  <?php echo $item->nama_promo;?>
+                                </option>
+                              <?php }?>
+                            <?php }?>
+                            <input type="hidden" id="id_promo" class="form-control" name="id_promo"/>
+                          </select>
                         </td>
 
                         <td width="15%">
@@ -239,16 +254,16 @@
                         <td>Sub Total</td>
                         <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?>
                         </td>
-                        <td><input type="number" id="subtotal
-                          " name="subtotal" class="prc"></td>
+                        <td><input type="hidden" id="subtotal
+                          " name="subtotal"></td>
                       </tr>
                       <tr>
                         <td>Potongan</td>
-                        <td><input type="text" name="potongan" id="potongan" class="form-control prc"></td>
+                        <td><input type="number" name="potongan" id="potongan" class="form-control prc"></td>
                       </tr>
                       <tr>
                         <td>Total</td>
-                        <td><input type="text" name="total" id="total"></td>
+                        <td id="total"></td>
                       </tr>
                     </tfoot>
                     </tbody>
@@ -261,8 +276,8 @@
             <!-- /.box-body -->
                 <div class="box-footer">
                   <div class="col-md-3 col-md-offset-4">
-                    <a class="btn btn-default" href="<?php echo base_url('order');?>">Cancel</a>
-                    <a class="btn btn-info pull-right" href="#" id="submit-transaksi">Submit</a>
+                    <a class="btn btn-default" href="<?php echo base_url('admin/order');?>">Cancel</a>
+                    <a class="btn btn-info pull-right" href="#" id="submit-transaksi">Order</a>
                   </div>
                 </div>
                 <!-- /.box-footer -->
@@ -405,11 +420,25 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    var = 
-
+    $("#mytable").on('input', '.prc', function(){
+      var sum_total = 0;
+      var subtotal = $('input[name=subtotal]').val();
+      var ongkir = $('input[name=ongkir]').val();
+      $("#mytable .prc").each(function(){
+        var getValue = $(this).val();
+        if($.isNumeric(getValue)){
+          sum_total +=parseInt(getValue);
+        }
+      });
+      var total = parseInt(subtotal) - parseInt(sum_total);
+      //$('input[name=total]').val(total);
+      $("#total").text('Rp. '+price(total));
+      console.log(total);
+    })
     $("#0").show();
     $("#paket").hide();
     $("#produk").hide();
+    $("#mitra").hide();
     // ambil data kabupaten ketika data memilih provinsi
       $('body').on("change","#pilih",function(){
         var id_paket = $(this).val();
@@ -418,14 +447,20 @@
           if(id_paket==2){
             $("#paket").show();
             $("#produk").hide();
+            $("#mitra").hide();
+            $("#0").hide();
+          }else if(id_paket==3){
+            $("#paket").hide();
+            $("#produk").hide();
+            $("#mitra").show();
             $("#0").hide();
           }else{
+            $("#paket").hide();
             $("#paket").hide();
             $("#id_promo").val('');
             $("#produk").show();
             $("#0").hide();
           }
-         
       });
       // ambil data produk dan harga
       $('body').on("change","#produk",function(){
@@ -439,12 +474,12 @@
             if(status == 'success' && data != 'false') {
                 var value = $.parseJSON(data);
                 var val = value[0];
-                var sale_value = '<option value="' + val.harga_customer + '">' + 'Rp. '+ parseInt(val.harga_customer) + '</option>';
+                var sale_value = '<option value="' + val.harga_customer + '">' + 'Rp. '+ price(parseInt(val.harga_customer)) + '</option>';
                 if(val.harga_mitra != "0"){
-                    var type1 = '<option value="' + val.harga_mitra + '">' + 'Rp. '+ parseInt(val.harga_mitra) + '</option>';
+                    var type1 = '<option value="' + val.harga_mitra + '">' + 'Rp. '+ price(parseInt(val.harga_mitra)) + '</option>';
                 }
                 if(val.harga_distributor != "0"){
-                    var type2 = '<option value="' + val.harga_distributor + '">' + 'Rp. '+ parseInt(val.harga_distributor) + '</option>';
+                    var type2 = '<option value="' + val.harga_distributor + '">' + 'Rp. '+ price(parseInt(val.harga_distributor)) + '</option>';
                 }
                 $("#bonus").val('0');
                 $('#sale_price').append(sale_value+type1+type2);
@@ -472,7 +507,7 @@
             $("#bonus").val(bonus);
             $("#id_promo").val(promo);
             if(hasil != 'false') {
-              var harga = '<option value="' + response[0].harga_customer+ '">' + 'Rp. '+ parseInt(response[0].harga_customer) + '</option>';
+              var harga = '<option value="' + response[0].harga_customer+ '">' + 'Rp. '+ price(parseInt(response[0].harga_customer)) + '</option>';
               $("#sale_price").empty();
             $('#sale_price').append(harga);
             }
@@ -530,12 +565,12 @@
                         var display = '<tr class="cart-value" id="'+ key +'">' +
                                     '<td>'+ value.name +'</td>' +
                                     '<td>'+ value.qty +'</td>' +
-                                    '<th '+row_2+'>Rp'+ value.subtotal +'</th>' +
+                                    '<th '+row_2+'>Rp. '+ price(value.subtotal) +'</th>' +
                                     '<td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="'+ key +'">x</span></td>' +
                                     '</tr>';
                         $("#transaksi-item tr:last").after(display);
                     });
-                    $("#total-pembelian").text('Rp'+res.total_price);
+                    $("#total-pembelian").text('Rp. '+price(res.total_price));
                     $("#transaksi-item").find("input[type=text], input[type=number]").val("0");
                     $("input[name=subtotal]").val(res.total_price); 
                     //$("body").faLoading(false);
@@ -559,7 +594,8 @@
                 if(status == 'success'  && data != 'false'){
                     $("#"+rowid).remove();
                     console.log(data);
-                    $("#total-pembelian").text('Rp'+data);
+                    $("#total-pembelian").text('Rp. '+data);
+                    $('input[name=subtotal]').val(data);
                     //$el.faLoading(false);
                 }                
             }
@@ -627,6 +663,7 @@
         var jenis_order = $("#jenis_order").val();
         var metode_pembayaran = $("#metode_pembayaran").val();
         var tanggal_transaksi = $("#tanggal_transaksi").val();
+        var potongan = $("#potongan").val();
         var status_baca = $("#status_baca").val();
         if(typeof kode_transaksi !== "undefined" && kode_transaksi != ""){
             var status = true;
@@ -647,6 +684,7 @@
                 'metode_pembayaran' : metode_pembayaran,
                 //'code': code,
                 'tanggal_transaksi' : tanggal_transaksi,
+                'potongan' : potongan,
                 'status_baca' : status_baca
             };
             data = [status,method,arr];
@@ -726,5 +764,20 @@
         var datakec = $("option:selected", this).attr('datakec');
           $("input[name=kec]").val(datakec); 
       });
+
     });
+
+  function price(input){
+      return (input).formatMoney(0, '.', '.');
+  }
+  Number.prototype.formatMoney = function(c, d, t){
+      var n = this,
+          c = isNaN(c = Math.abs(c)) ? 2 : c,
+          d = d == undefined ? "." : d,
+          t = t == undefined ? "," : t,
+          s = n < 0 ? "-" : "",
+          i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+          j = (j = i.length) > 3 ? j % 3 : 0;
+      return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+  };
 </script>

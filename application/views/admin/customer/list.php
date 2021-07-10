@@ -1,15 +1,14 @@
-            <?php 
-              //error upload
-              if(isset($error)){
-                echo '<p class="alert alert-warning">';
-                echo $error;
-                echo '</p>';
-              }
-              //Notifikasi error
-              echo validation_errors('<div class = "alert alert-warning">','</div>');
-
-              
-               ?>
+  <?php 
+    //error upload
+    if(isset($error)){
+      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
+      echo $error;
+      echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+      echo '</div>';
+    }
+    //Notifikasi error
+    echo validation_errors('<div class = "alert alert-warning">','</div>');
+     ?>
 <!-- START CUSTOM TABS -->
       <div class="row">
         <div class="col-md-12">

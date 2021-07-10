@@ -146,7 +146,7 @@ $notif = $this->dashboard_model->data_notif();
           <?php } ?>
             <tr>
               <td colspan="3" style="text-align: right;"><strong>Total Belanja :</strong></td>
-              <td colspan="1"><strong></strong></td>
+              <td colspan="1"><strong>Rp. <?php echo number_format($data->total_bayar,'0',',','.') ?></strong></td>
             </tr>
             </tbody>
           </table>

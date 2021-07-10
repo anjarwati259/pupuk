@@ -82,4 +82,13 @@ class Home_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	//ambil data paket mitra
+	public function mitra(){
+		$this->db->select('*');
+		$this->db->from('tb_promo');
+		$this->db->where('status','2');
+		$this->db->order_by('id_promo','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
