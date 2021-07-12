@@ -159,7 +159,6 @@
                         <td>Jumlah</td>
                         <td>Bonus</td>
                         <td>Harga Beli</td>
-                        <td>Potongan</td>
                         <td>Input Barang</td>
                       </tr>
                     </thead>
@@ -224,19 +223,16 @@
                           </select>
                         </td>
 
-                        <td width="120px;">
+                        <td width="15%">
                           <input type="number" id="jumlah" class="form-control" name="jumlah" min="1" value="1"/>
                         </td>
-                        <td width="120px;">
+                        <td width="15%">
                           <input type="number" id="bonus" class="form-control" name="bonus"/>
                         </td>
-                        <td width="150px;">
+                        <td>
                           <select class="form-control" id="sale_price" name="sale_price">
                             
                           </select>
-                        </td>
-                        <td width="140px;">
-                          <input type="number" id="potongan" class="form-control" name="potongan"/>
                         </td>
                         <td>
                           <a href="#" class="btn btn-primary" id="tambah-barang">Input Barang</a>
@@ -258,13 +254,17 @@
                         <td>Sub Total</td>
                         <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?>
                         </td>
-                        <td><input type="hidden" id="sub_potongan
-                          " name="sub_potongan"></td>
+                        <td><input type="hidden" id="subtotal
+                          " name="subtotal"></td>
                       </tr>
-                      <!-- <tr>
+                      <tr>
+                        <td>Potongan</td>
+                        <td><input type="number" name="potongan" id="potongan" class="form-control prc"></td>
+                      </tr>
+                      <tr>
                         <td>Total</td>
                         <td id="total"></td>
-                      </tr> -->
+                      </tr>
                     </tfoot>
                     </tbody>
                   </table>
@@ -420,6 +420,21 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    $("#mytable").on('input', '.prc', function(){
+      var sum_total = 0;
+      var subtotal = $('input[name=subtotal]').val();
+      var ongkir = $('input[name=ongkir]').val();
+      $("#mytable .prc").each(function(){
+        var getValue = $(this).val();
+        if($.isNumeric(getValue)){
+          sum_total +=parseInt(getValue);
+        }
+      });
+      var total = parseInt(subtotal) - parseInt(sum_total);
+      //$('input[name=total]').val(total);
+      $("#total").text('Rp. '+price(total));
+      console.log(total);
+    })
     $("#0").show();
     $("#paket").hide();
     $("#produk").hide();
@@ -441,7 +456,7 @@
             $("#0").hide();
           }else{
             $("#paket").hide();
-            $("#mitra").hide();
+            $("#paket").hide();
             $("#id_promo").val('');
             $("#produk").show();
             $("#0").hide();
@@ -501,35 +516,7 @@
           }
         });
       });
-      // ambil promo mitra
-      $('body').on("change","#mitra",function(){
-        var id = $(this).find(':selected').attr('dataid');
-        
-        var data = "id="+id;
-        //alert(data);
-        $.ajax({
-          type: 'POST',
-          url: "<?php echo base_url('admin/order/get_mitra'); ?>",
-          data: data,
-          success: function(hasil) {
-            var response = $.parseJSON(hasil);
-            var jumlah = response[0].jumlah;
-            var bonus = response[0].bonus;
-            var promo = response[0].id_promo;
-            //console.log(jumlah);
-            $("#jumlah").val(jumlah);
-            $("#bonus").val(bonus);
-            $("#id_promo").val(promo);
-            if(hasil != 'false') {
-              var harga = '<option value="' + response[0].harga_mitra+ '">' + 'Rp. '+ price(parseInt(response[0].harga_mitra)) + '</option>';
-              $("#sale_price").empty();
-            $('#sale_price').append(harga);
-            }
 
-
-          }
-        });
-      });
       //tambah chart
       $('body').on("click","#tambah-barang",function(){
         // alert("hai");
@@ -547,7 +534,6 @@
           var status = 1;
         }
         var bonus = $("#bonus").val();
-        var potongan = $("#potongan").val();
         var quantity = $("#jumlah").val();
 
         if($('#harga_satuan_net').length){
@@ -562,7 +548,6 @@
                     'quantity' : quantity,
                     'sale_price' : sale_price,
                     'status'  : status,
-                    'potongan' : potongan,
                     'bonus' : bonus
                 },
                 type: 'POST',
@@ -577,28 +562,23 @@
                         if($('#harga_satuan_net').length){
                             //row_2 = "colspan='2'";
                         }
-                        var sub = parseInt(value.subtotal) - parseInt(value.potongan);
-                        //total_pot = value.potongan;
                         var display = '<tr class="cart-value" id="'+ key +'">' +
                                     '<td>'+ value.name +'</td>' +
                                     '<td>'+ value.qty +'</td>' +
-                                    '<td>'+ '-Rp. '+price(parseInt(value.potongan)) +'</td>'+
-                                    '<th '+row_2+'>Rp. '+ price(sub) +'</th>' +
+                                    '<th '+row_2+'>Rp. '+ price(value.subtotal) +'</th>' +
                                     '<td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="'+ key +'">x</span></td>' +
                                     '</tr>';
                         $("#transaksi-item tr:last").after(display);
                     });
-                    var total = parseInt(res.total_price) - parseInt(res.total_potongan);
-                    $("#total-pembelian").text('Rp. '+price(total));
-                    $("#transaksi-item").find("input[type=text], input[type=number]").val("0"); 
-                    $("input[name=sub_potongan]").val(res.total_potongan);
+                    $("#total-pembelian").text('Rp. '+price(res.total_price));
+                    $("#transaksi-item").find("input[type=text], input[type=number]").val("0");
+                    $("input[name=subtotal]").val(res.total_price); 
                     //$("body").faLoading(false);
                     console.log(res);
                 },
-                error: function(){
-                    alert('Something Error');
-                }
-
+                // error: function(){
+                //     alert('Something Error');
+                // }
             });
         }else{
             alert("Silahkan isi semua box");
@@ -677,12 +657,13 @@
         var ekspedisi = $("#ekspedisi").val();
         var nama_pelanggan = $("#nama_pelanggan").val();
         var ongkir = $("#ongkir").val();
+        //var code = $("input[name='code']:checked").val();
         var no_hp = $("#no_hp").val();
         var id_marketing = $("#id_marketing").val();
         var jenis_order = $("#jenis_order").val();
         var metode_pembayaran = $("#metode_pembayaran").val();
         var tanggal_transaksi = $("#tanggal_transaksi").val();
-        var sub_potongan = $('input[name=sub_potongan]').val();
+        var potongan = $("#potongan").val();
         var status_baca = $("#status_baca").val();
         if(typeof kode_transaksi !== "undefined" && kode_transaksi != ""){
             var status = true;
@@ -703,7 +684,7 @@
                 'metode_pembayaran' : metode_pembayaran,
                 //'code': code,
                 'tanggal_transaksi' : tanggal_transaksi,
-                'sub_potongan' : sub_potongan,
+                'potongan' : potongan,
                 'status_baca' : status_baca
             };
             data = [status,method,arr];

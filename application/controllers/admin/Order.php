@@ -182,6 +182,13 @@ class Order extends CI_Controller
 		echo json_encode($promo);
 		
 	}
+	//untuk mengambil data promo mitra
+	public function get_mitra(){
+		$id = $this->input->post('id');
+
+		$promo = $this->produk_model->get_mitra($id);
+		echo json_encode($promo);
+	}
 	//untuk tambah produk belanja di cart
 	public function add_item(){
 		$id_produk = $this->input->post('id_produk');
@@ -214,7 +221,7 @@ class Order extends CI_Controller
 					'status' => $status,
 					'qty'     => $bonus,
 					'price'   => 0,
-					'potongan' => $potongan,
+					'potongan' => 0,
 					'name'    => 'Pupuk Kilat 500ml'
 				)
 				); 
@@ -250,11 +257,17 @@ class Order extends CI_Controller
 					'price'   => 0,
 					'name'    => $get_product_detail[0]['nama_produk']
 				)
-				); 
+				);
 				$this->cart->insert($data);
+				$data_cart = $this->cart->contents();
+				$tot_pot = 0;
+				foreach ($data_cart as $data_cart) {
+					$tot_pot += $data_cart['potongan'];
+				}
 				echo json_encode(array('status' => 'ok',
-								'data' => $this->cart->contents() ,
+								'data' => $this->cart->contents(),
 								'total_item' => $this->cart->total_items(),
+								'total_potongan' => $tot_pot,
 								'total_price' => $this->cart->total(),
 							)
 					);
@@ -294,7 +307,7 @@ class Order extends CI_Controller
 		//grand total
 		$subtotal = $this->cart->total();
 		$ongkir = $this->input->post('ongkir');
-		$potongan = $this->input->post('potongan');
+		$potongan = $this->input->post('sub_potongan');
 
 		//get total item
 		$total = 0;
@@ -328,8 +341,8 @@ class Order extends CI_Controller
 			$data['tanggal_transaksi'] = $this->input->post('tanggal_transaksi');
 			$data['id_marketing'] = $this->input->post('id_marketing');
 			$data['jenis_order'] = $this->input->post('jenis_order');
-			$data['total_item'] = $total;
-			$data['potongan'] = $this->input->post('potongan');
+			$data['total_item'] = $this->cart->total_items();
+			$data['potongan'] = $potongan;
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
 			$data['status_baca'] = $this->input->post('status_baca');
 
@@ -358,6 +371,7 @@ class Order extends CI_Controller
 	//untuk menyimpan data belanja ke database
 	private function _insert_purchase_data($kode_transaksi,$carts,$id_pelanggan, $tanggal_transaksi,$id_marketing){
 		foreach($carts as $key => $cart){
+			$total_transaksi = ($cart['subtotal']) - ($cart['potongan']);
 			$purchase_data = array(
 				'kode_transaksi' => $kode_transaksi,
 				'id_produk' => $cart['id'],
@@ -368,6 +382,8 @@ class Order extends CI_Controller
 				'jml_beli' => $cart['qty'],
 				'harga' => $cart['price'],
 				'total_harga' => $cart['subtotal'],
+				'potongan'	=> $cart['potongan'],
+				'total_transaksi' => $total_transaksi,
 				'tanggal_transaksi' => $tanggal_transaksi
 			);
 			$this->order_model->tambah_order($purchase_data);
@@ -627,5 +643,44 @@ class Order extends CI_Controller
 	}
 	public function notifikasi(){
 		$this->load->view('admin/order/notifikasi');
+	}
+	public function laporan(){
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'isi'		=> 'admin/order/laporan'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function lap_tanggal(){
+		$awal = $this->input->post('tgl_awal');
+		$akhir = $this->input->post('tgl_akhir');
+		
+		$laporan = $this->order_model->lap_harian($awal,$akhir);
+		$total = $this->order_model->total_transaksi($awal,$akhir);
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'laporan'	=> $laporan,
+						'awal'		=> $awal,
+						'akhir'		=> $akhir,
+						'total'		=> $total,
+						'isi'		=> 'admin/order/lap_tanggal'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		 //print_r($laporan);
+	}
+	public function lap_bulan(){
+		$awal = $this->input->post('tgl_awal');
+		$akhir = $this->input->post('tgl_akhir');
+		$tahun = $this->input->post('tahun');
+		
+		$laporan = $this->order_model->lap_bulan($awal,$akhir, $tahun);
+		$total = $this->order_model->total_transaksi($awal,$akhir,$tahun);
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'laporan'	=> $laporan,
+						'awal'		=> $awal,
+						'akhir'		=> $akhir,
+						'total'		=> $total,
+						'tahun'		=> $tahun,
+						'isi'		=> 'admin/order/lap_bulan'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 }

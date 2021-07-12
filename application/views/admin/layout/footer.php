@@ -248,6 +248,11 @@
 <script src="<?php echo base_url()?>assets/admin/dist/js/jquery-ui.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>assets/admin/dist/js/demo.js"></script>
+<script src="<?php echo base_url()?>assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url()?>assets/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="<?php echo base_url()?>assets/admin/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 <!-- <script src="<?php echo base_url();?>assets/js/jquery-price-format/jquery.price_format.2.0.min.js"></script> -->
 
 <script>
@@ -260,6 +265,15 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
+    })
+  //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true,
+      format:'yyyy-mm-dd'
+    })
+    $('#datepicker2').datepicker({
+      autoclose: true,
+      format:'yyyy-mm-dd'
     })
   })
 </script>

@@ -229,4 +229,45 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//laporan order
+	public function lap_harian($awal, $akhir){
+		$this->db->select('tb_order.*,
+							tb_pelanggan.nama_pelanggan, tb_produk.nama_produk, tb_marketing.nama_marketing, tb_detail_order.metode_pembayaran, tb_detail_order.jenis_order, tb_detail_order.status_bayar');
+		$this->db->from('tb_order');
+		$this->db->where('tb_order.tanggal_transaksi >=', $awal);
+		$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->join('tb_produk','tb_produk.kode_produk = tb_order.id_produk', 'left');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_order.id_marketing', 'left');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->group_by('tb_order.kode_transaksi');
+		$this->db->order_by('tb_order.kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//laporan order
+	public function lap_bulan($awal, $akhir, $tahun){
+		$this->db->select('tb_order.*,
+							tb_pelanggan.nama_pelanggan, tb_produk.nama_produk, tb_marketing.nama_marketing, tb_detail_order.metode_pembayaran, tb_detail_order.jenis_order, tb_detail_order.status_bayar');
+		$this->db->from('tb_order');
+		$this->db->where('DATE_FORMAT(tb_order.tanggal_transaksi,%Y)', $tahun);
+		$this->db->where('DATE_FORMAT(tb_order.tanggal_transaksi,%m) >=', $awal);
+		$this->db->where('DATE_FORMAT(tb_order.tanggal_transaksi,%m) <=', $akhir);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->join('tb_produk','tb_produk.kode_produk = tb_order.id_produk', 'left');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_order.id_marketing', 'left');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->group_by('tb_order.kode_transaksi');
+		$this->db->order_by('tb_order.kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function total_transaksi($awal,$akhir){
+		$this->db->select('sum(total_transaksi) as total');
+		$this->db->from('tb_order');
+		$this->db->where('tb_order.tanggal_transaksi >=', $awal);
+		$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

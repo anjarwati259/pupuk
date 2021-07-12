@@ -33,6 +33,17 @@ class Produk_model extends CI_Model
 		$this->db->select('*,tb_produk.harga_customer');
 		$this->db->from('tb_promo');
 		$this->db->where('id_promo', $id);
+		$this->db->where('status', '1');
+		$this->db->join('tb_produk','tb_produk.kode_produk = tb_promo.kode_produk', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//mendapatkan data promo berdasarkan kodenya untuk order
+	public function get_mitra($id){
+		$this->db->select('*,tb_produk.harga_mitra');
+		$this->db->from('tb_promo');
+		$this->db->where('id_promo', $id);
+		$this->db->where('status', '2');
 		$this->db->join('tb_produk','tb_produk.kode_produk = tb_promo.kode_produk', 'left');
 		$query = $this->db->get();
 		return $query->result();

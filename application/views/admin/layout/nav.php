@@ -59,6 +59,13 @@
             <span>Order</span>
           </a>
         </li>
+        <!-- Order -->
+        <li>
+          <a href="<?php echo base_url('admin/order/laporan') ?>">
+            <i class="fa fa-file" aria-hidden="true"></i>
+            <span>Laporan Penjualan</span>
+          </a>
+        </li>
         <!-- reward -->
         <li class="treeview">
           <a href="#">

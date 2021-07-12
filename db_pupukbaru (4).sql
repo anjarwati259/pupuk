@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jul 2021 pada 11.35
+-- Waktu pembuatan: 12 Jul 2021 pada 12.17
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.2.23
 
@@ -60,10 +60,9 @@ CREATE TABLE `tb_detail_order` (
 --
 
 INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `potongan`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `jenis_order`, `status_bayar`, `no_resi`, `status_baca`) VALUES
-('10-SO-AGI-VII-2021-001', 'C003', 1, NULL, 'M010', 'agi', '081554988354', 'jember', 'KALIMANTAN TIMUR', 'Sanga Sanga', 'KAB. KUTAI KARTANEGARA', NULL, 1, 100000, 'JNE', 12000, NULL, 100000, '2021-07-10', 1, 1, 0, NULL, 1),
-('10-SO-AGI-VII-2021-002', 'C003', 3, 2, 'M002', 'agi', '081554988354', 'jember', 'KALIMANTAN TIMUR', 'Sanga Sanga', 'KAB. KUTAI KARTANEGARA', NULL, 20, 1600000, 'JNE', 12000, 12000, 1600000, '2021-07-10', 1, 1, 1, 'JKT48', 1),
-('10-SO-AGI-VII-2021-003', 'C003', 1, NULL, 'M010', 'agi', '081554988354', 'jember', 'KALIMANTAN TIMUR', 'Sanga Sanga', 'KAB. KUTAI KARTANEGARA', NULL, 10, 1700000, 'JNE', 12000, NULL, 1712000, '2021-07-10', 1, 1, 0, NULL, 1),
-('10-SO-AGI-VII-2021-004', 'C002', 1, NULL, 'M010', 'elila', '081554988354', '12', 'KALIMANTAN SELATAN', 'Mantewe', 'KAB. TANAH BUMBU', NULL, 1350000, 1350000, 'JNE', 12000, 350000, 1362000, '2021-07-10', 1, 1, 0, NULL, 1);
+('12-SO-AGI-VII-2021-001', 'C005', 1, NULL, 'M010', 'agil', '081554988354', 'jember', 'KALIMANTAN BARAT', 'Semparuk', 'KAB. SAMBAS', NULL, 1, 158000, 'JNE', 12000, 12000, 170000, '2021-07-12', 1, 1, 0, NULL, 1),
+('12-SO-AGI-VII-2021-002', 'C002', 1, NULL, 'M006', 'elila', '081554988354', '12', 'KALIMANTAN SELATAN', 'Mantewe', 'KAB. TANAH BUMBU', NULL, 1, 158000, 'JNE', 12000, 12000, 170000, '2021-07-12', 1, 1, 0, NULL, 1),
+('12-SO-AGI-VII-2021-003', 'C004', 1, NULL, 'M010', 'Mela', '081554988354', 'jember', 'KEPULAUAN BANGKA BELITUNG', 'Pangkalan Baru', 'KAB. BANGKA TENGAH', NULL, 5, 488000, 'JNE', 30000, 12000, 518000, '2021-07-12', 0, 1, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -137,6 +136,8 @@ CREATE TABLE `tb_order` (
   `jml_beli` int(10) NOT NULL,
   `harga` int(7) NOT NULL,
   `total_harga` int(7) NOT NULL,
+  `potongan` int(7) DEFAULT NULL,
+  `total_transaksi` int(7) NOT NULL,
   `tanggal_transaksi` date NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -145,11 +146,10 @@ CREATE TABLE `tb_order` (
 -- Dumping data untuk tabel `tb_order`
 --
 
-INSERT INTO `tb_order` (`id_order`, `kode_transaksi`, `id_pelanggan`, `id_produk`, `id_promo`, `id_marketing`, `jml_beli`, `harga`, `total_harga`, `tanggal_transaksi`, `status`) VALUES
-(14, '10-SO-AGI-VII-2021-001', 'C003', 'PK002', 0, 'M010', 1, 100000, 100000, '2021-07-10', 2),
-(15, '10-SO-AGI-VII-2021-002', 'C003', 'PK002', 0, 'M002', 20, 80000, 1600000, '2021-07-10', 2),
-(16, '10-SO-AGI-VII-2021-003', 'C003', 'PK001', 0, 'M010', 10, 170000, 1700000, '2021-07-10', 2),
-(17, '10-SO-AGI-VII-2021-004', 'C002', 'PK001', 0, 'M010', 10, 170000, 1700000, '2021-07-10', 2);
+INSERT INTO `tb_order` (`id_order`, `kode_transaksi`, `id_pelanggan`, `id_produk`, `id_promo`, `id_marketing`, `jml_beli`, `harga`, `total_harga`, `potongan`, `total_transaksi`, `tanggal_transaksi`, `status`) VALUES
+(28, '12-SO-AGI-VII-2021-001', 'C005', 'PK001', 0, 'M010', 1, 170000, 170000, 12000, 158000, '2021-07-12', 2),
+(29, '12-SO-AGI-VII-2021-002', 'C002', 'PK001', 0, 'M006', 1, 170000, 170000, 12000, 158000, '2021-07-11', 2),
+(30, '12-SO-AGI-VII-2021-003', 'C004', 'PK002', 0, 'M010', 5, 100000, 500000, 12000, 488000, '2021-07-10', 2);
 
 -- --------------------------------------------------------
 
@@ -237,13 +237,6 @@ CREATE TABLE `tb_point` (
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tb_point`
---
-
-INSERT INTO `tb_point` (`id_point`, `id_pelanggan`, `kode_transaksi`, `point`, `status`, `total_point`, `tanggal`) VALUES
-(1, 'C005', '09-SO-AGI-VII-2021-001', 5, 'in', 5, '2021-07-09');
-
 -- --------------------------------------------------------
 
 --
@@ -267,9 +260,9 @@ CREATE TABLE `tb_produk` (
 --
 
 INSERT INTO `tb_produk` (`kode_produk`, `nama_produk`, `harga_customer`, `harga_mitra`, `harga_distributor`, `keterangan`, `gambar`, `stok`, `tanggal_update`) VALUES
-('PK001', 'Pupuk Kilat 1L', 170000, 135000, 120000, '<p>pupuk kilat&nbsp;</p>', 'POC.jpg', 5003, '2021-07-10 09:34:09'),
-('PK002', 'Pupuk Kilat 500ml', 100000, 80000, 80000, '<p>pupuk kilat 500ml</p>\r\n', 'POC.jpg', 18186, '2021-07-10 04:57:13'),
-('PK003', 'Nutrisi Ternak', 110000, 85000, 85000, '<p>nutrisi ternak</p>', 'ternak.jpg', 384, '2021-07-09 03:07:57'),
+('PK001', 'Pupuk Kilat 1L', 170000, 135000, 120000, '<p>pupuk kilat&nbsp;</p>', 'POC.jpg', 4995, '2021-07-12 08:35:31'),
+('PK002', 'Pupuk Kilat 500ml', 100000, 80000, 80000, '<p>pupuk kilat 500ml</p>\r\n', 'POC.jpg', 18149, '2021-07-12 08:36:13'),
+('PK003', 'Nutrisi Ternak', 110000, 85000, 85000, '<p>nutrisi ternak</p>', 'ternak.jpg', 383, '2021-07-12 04:24:18'),
 ('PK004', 'Nutrisi Ikan', 110000, 85000, 85000, '<p>Nutrisi ikan</p>\r\n', 'ikan.jpg', 436, '2021-07-09 03:07:57');
 
 -- --------------------------------------------------------
@@ -374,13 +367,9 @@ CREATE TABLE `tb_stok` (
 --
 
 INSERT INTO `tb_stok` (`id_stok`, `kode_produk`, `kode_transaksi`, `id_pelanggan`, `qty`, `sisa`, `status`, `tanggal`) VALUES
-(8, 'PK002', '09-SO-AGI-VII-2021-001', 'C005', 10, 18219, 'out', '2021-07-09'),
-(9, 'PK002', '09-SO-AGI-VII-2021-001', 'C005', 1, 18209, 'out', '2021-07-09'),
-(10, 'PK002', '10-SO-AGI-VII-2021-002', 'C005', 1, 18208, 'out', '2021-07-10'),
-(11, 'PK002', '10-SO-AGI-VII-2021-001', 'C003', 1, 18207, 'proses', '2021-07-10'),
-(12, 'PK002', '10-SO-AGI-VII-2021-002', 'C003', 20, 18206, 'out', '2021-07-10'),
-(13, 'PK001', '10-SO-AGI-VII-2021-003', 'C003', 10, 5023, 'proses', '2021-07-10'),
-(14, 'PK001', '10-SO-AGI-VII-2021-004', 'C002', 10, 5013, 'proses', '2021-07-10');
+(25, 'PK001', '12-SO-AGI-VII-2021-001', 'C005', 1, 4997, 'proses', '2021-07-12'),
+(26, 'PK001', '12-SO-AGI-VII-2021-002', 'C002', 1, 4996, 'proses', '2021-07-12'),
+(27, 'PK002', '12-SO-AGI-VII-2021-003', 'C004', 5, 18154, 'proses', '2021-07-12');
 
 -- --------------------------------------------------------
 
@@ -91828,7 +91817,7 @@ ALTER TABLE `tb_expedisi`
 -- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id_order` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_order` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pembayaran`
@@ -91870,7 +91859,7 @@ ALTER TABLE `tb_reward`
 -- AUTO_INCREMENT untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
-  MODIFY `id_stok` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_stok` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`

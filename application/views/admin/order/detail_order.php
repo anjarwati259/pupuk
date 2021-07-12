@@ -68,6 +68,26 @@ function tanggal_indo($tanggal, $cetak_hari = false)
               <th><?php echo $detail_order->total_item ?></th>
             </tr>
             <tr>
+              <td width="40%">Jenis Transaksi</td>
+              <th><?php if($detail_order->jenis_order ==1){
+                echo "Adsense";
+              } else{
+                echo "Organik";
+              }
+              ?>
+              </th>
+            </tr>
+            <tr>
+              <td width="40%">Metode Pembayaran</td>
+              <th><?php if($detail_order->metode_pembayaran ==0){
+                echo "COD";
+              } else{
+                echo "Transfer Bank";
+              }
+              ?>
+              </th>
+            </tr>
+            <tr>
               <td width="40%">Ekspedisi</td>
               <th><?php echo $detail_order->expedisi ?></th>
             </tr>
@@ -217,6 +237,8 @@ function tanggal_indo($tanggal, $cetak_hari = false)
               <th>Produk</th>
               <th>Jml Beli</th>
               <th>Harga Satuan</th>
+              <th>Potongan</th>
+              <th>Subtotal</th>
             </tr>
           </thead>
           <tbody>
@@ -226,6 +248,8 @@ function tanggal_indo($tanggal, $cetak_hari = false)
               <td><?php echo $transaksi->nama_produk ?></td>
               <td><?php echo $transaksi->jml_beli ?></td>
               <td>Rp. <?php echo number_format($transaksi->harga,'0',',','.') ?></td>
+              <td>Rp. <?php echo number_format($transaksi->potongan,'0',',','.') ?></td>
+              <td>Rp. <?php echo number_format($transaksi->total_transaksi,'0',',','.') ?></td>
             </tr>
           <?php } ?>
           </tbody>
