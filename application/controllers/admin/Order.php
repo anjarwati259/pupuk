@@ -34,16 +34,39 @@ class Order extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+	//konfirmasi COD
+	public function cod($kode_transaksi)
+	{
+			$data = array(	'kode_transaksi'	=> $kode_transaksi,
+							'no_resi'			=> $this->input->post('no_resi'),
+							'status_bayar'		=> 1
+						);
+			$this->order_model->update_status($data);
+			$this->session->set_flashdata('sukses','Status Telah Diubah');
+			//redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+			$bayar = (int)str_replace('.', '', $this->input->post('total_bayar'));
+			//insert pembayaran
+		$data = array(	'kode_transaksi'	=> $kode_transaksi,
+						'nama_bank'			=> '-',
+						'id_rekening'		=> 0,
+						'tanggal_bayar'		=> $this->input->post('tanggal_bayar'),
+						'jumlah_bayar'		=> $bayar
+						);
+		$this->pembayaran_model->bayar($data);
+		$this->session->set_flashdata('sukses','Status Telah Diubah');
+		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+	}
 	//konfirmasi pesanan jika sudah bayar
 	public function konfirmasi($kode_transaksi){
 		//mengambil jenis pelanggan
 		$pelanggan = $this->order_model->jenis_pelanggan($kode_transaksi);
 		$stok = $this->order_model->get_stok($kode_transaksi);
+		$bayar = (int)str_replace('.', '', $this->input->post('total_bayar'));
 		//konfirmasi status bayar
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
 						'id_rekening'		=> $this->input->post('id_rekening'),
 						'ongkir'			=> $this->input->post('ongkir'),
-						'total_bayar'		=> $this->input->post('total_bayar'),
+						'total_bayar'		=> $bayar,
 						'no_resi'		=> $this->input->post('no_resi'),
 						'expedisi'		=> $this->input->post('expedisi'),
 						'no_resi'		=> $this->input->post('no_resi'),
@@ -55,7 +78,7 @@ class Order extends CI_Controller
 						'nama_bank'			=> $this->input->post('nama_bank'),
 						'id_rekening'		=> $this->input->post('id_rekening'),
 						'tanggal_bayar'		=> $this->input->post('tanggal_bayar'),
-						'jumlah_bayar'		=> $this->input->post('total_bayar')
+						'jumlah_bayar'		=> $bayar
 						);
 		$this->order_model->bayar($data);
 		
@@ -346,10 +369,9 @@ class Order extends CI_Controller
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
 			$data['status_baca'] = $this->input->post('status_baca');
 
-			$code = $this->input->post('code');
-			 if($code==1 || $id_pelanggan==null){
+			//$code = $this->input->post('code');
+			 if($id_pelanggan==null){
 			 	$id_pelanggan = $this->_insert_pelanggan($data['nama_pelanggan'],$data['alamat'],$data['kecamatan'],$data['kabupaten'], $data['provinsi'], $data['tanggal_transaksi'],$data['total_item'],$komoditi,$no_hp);
-
 			 	$data['id_pelanggan'] = $id_pelanggan;
 
 			 	$this->order_model->tambah($data);
@@ -481,27 +503,6 @@ class Order extends CI_Controller
 			$this->session->set_flashdata('sukses','Resi Telah ditambah');
 			redirect(base_url('admin/order/detail/'.$kode_transaksi), 'refresh');
 		}
-	}
-	public function cod($kode_transaksi)
-	{
-			$data = array(	'kode_transaksi'	=> $kode_transaksi,
-							'no_resi'			=> $this->input->post('no_resi'),
-							'status_bayar'		=> 1
-						);
-			$this->order_model->update_status($data);
-			$this->session->set_flashdata('sukses','Status Telah Diubah');
-			//redirect(base_url('admin/order/sudah_bayar'), 'refresh');
-			$bayar = (int)str_replace('.', '', $this->input->post('total_bayar'));
-			//insert pembayaran
-		$data = array(	'kode_transaksi'	=> $kode_transaksi,
-						'nama_bank'			=> '-',
-						'id_rekening'		=> 0,
-						'tanggal_bayar'		=> $this->input->post('tanggal_bayar'),
-						'jumlah_bayar'		=> $bayar
-						);
-		$this->pembayaran_model->bayar($data);
-		$this->session->set_flashdata('sukses','Status Telah Diubah');
-		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
 	}
 	//tampilkan data stok awal dari masing masing produk
 	public function stok_awal(){
@@ -667,12 +668,12 @@ class Order extends CI_Controller
 		 //print_r($laporan);
 	}
 	public function lap_bulan(){
-		$awal = $this->input->post('tgl_awal');
-		$akhir = $this->input->post('tgl_akhir');
+		$awal = $this->input->post('bln_awal');
+		$akhir = $this->input->post('bln_akhir');
 		$tahun = $this->input->post('tahun');
 		
 		$laporan = $this->order_model->lap_bulan($awal,$akhir, $tahun);
-		$total = $this->order_model->total_transaksi($awal,$akhir,$tahun);
+		$total = $this->order_model->total_bulan($awal,$akhir,$tahun);
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'awal'		=> $awal,
@@ -682,5 +683,82 @@ class Order extends CI_Controller
 						'isi'		=> 'admin/order/lap_bulan'
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function lap_tahun(){
+		$tahun = $this->input->post('tahun2');
+		$laporan = $this->order_model->lap_tahun($tahun);
+		$total = $this->order_model->total_tahun($tahun);
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'laporan'	=> $laporan,
+						'total'		=> $total,
+						'tahun'		=> $tahun,
+						'isi'		=> 'admin/order/lap_tahun'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function excel(){
+		$tahun = $this->input->post('year');
+		$data = $this->order_model->lap_tahun($tahun);
+		//print_r($tahun);
+
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+		$object = new PHPExcel();
+
+		$object->getProperties()->setCreator("PT AGI");
+		$object->getProperties()->setLastModifiedBy("PT AGI");
+		$object->getProperties()->setTitle("Laporan Penjualan");
+
+		$object->setActiveSheetIndex(0);
+
+		$object->getActiveSheet()->setCellValue('E5','No');
+		$object->getActiveSheet()->setCellValue('F5','Kode Invoice');
+		$object->getActiveSheet()->setCellValue('G5','Tanggal Transaksi');
+		$object->getActiveSheet()->setCellValue('H5','Marketing');
+		$object->getActiveSheet()->setCellValue('I5','Jenis Order');
+		$object->getActiveSheet()->setCellValue('J5','Nama Pelanggan');
+		$object->getActiveSheet()->setCellValue('K5','Produk');
+		$object->getActiveSheet()->setCellValue('L5','Jumlah');
+		$object->getActiveSheet()->setCellValue('M5','Harga');
+		$object->getActiveSheet()->setCellValue('N5','Potongan');
+		$object->getActiveSheet()->setCellValue('O5','Total');
+		$object->getActiveSheet()->setCellValue('P5','Metode Bayar');
+		$object->getActiveSheet()->setCellValue('Q5','Status Bayar');
+
+		$baris = 6;
+		$no = 1;
+
+		foreach ($$data['lap_tahun'] as $value) {
+			$object->getActiveSheet()->setCellValue('E'.$baris, $no++);
+			$object->getActiveSheet()->setCellValue('F'.$baris, $value->kode_transaksi);
+			$object->getActiveSheet()->setCellValue('G'.$baris, $value->tanggal_transaksi);
+			$object->getActiveSheet()->setCellValue('H'.$baris, $value->nama_marketing);
+			$object->getActiveSheet()->setCellValue('I'.$baris, $value->jenis_order);
+			$object->getActiveSheet()->setCellValue('J'.$baris, $value->nama_pelanggan);
+			$object->getActiveSheet()->setCellValue('K'.$baris, $value->nama_produk);
+			$object->getActiveSheet()->setCellValue('L'.$baris, $value->jml_beli);
+			$object->getActiveSheet()->setCellValue('M'.$baris, $value->harga);
+			$object->getActiveSheet()->setCellValue('N'.$baris, $value->potongan);
+			$object->getActiveSheet()->setCellValue('O'.$baris, $value->total_transaksi);
+			$object->getActiveSheet()->setCellValue('P'.$baris, $value->metode_pembayaran);
+			$object->getActiveSheet()->setCellValue('Q'.$baris, $value->status_bayar);
+
+			$baris++;
+		}
+
+		$filename = "Laporan Penjualan".'.xlsx';
+
+		$object->getActiveSheet()->setTitle("Laporan Penjualan");
+
+		//header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="'.$filename. '"');
+		header('Cache-Control: max-age=0');
+
+		$Writer = PHPEcel_IOFactory::createwriter($object, 'Excel2007');
+		$Writer->save('php://output');
+
+		exit;
 	}
 }

@@ -236,7 +236,7 @@
                           </select>
                         </td>
                         <td width="140px;">
-                          <input type="number" id="potongan" class="form-control" name="potongan"/>
+                          <input type="number" id="potongan" class="form-control" name="potongan" min="0" value="0" />
                         </td>
                         <td>
                           <a href="#" class="btn btn-primary" id="tambah-barang">Input Barang</a>
@@ -261,10 +261,6 @@
                         <td><input type="hidden" id="sub_potongan
                           " name="sub_potongan"></td>
                       </tr>
-                      <!-- <tr>
-                        <td>Total</td>
-                        <td id="total"></td>
-                      </tr> -->
                     </tfoot>
                     </tbody>
                   </table>
@@ -293,6 +289,7 @@
   </div>
   <!-- /.col -->
 </div>
+
 <!-- modal tambah pelanggan -->
 <div class="modal fade" id="modal-default">
   <div class="modal-dialog">

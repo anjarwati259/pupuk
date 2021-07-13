@@ -1,3 +1,11 @@
+<style type="text/css">
+  .foot{
+    display: flex;
+  }
+  .foot .excel{
+    margin-left: 5px;
+  }
+</style>
 <div class="col-md-12">
   <!-- Box Comment -->
   <div class="box box-widget">
@@ -112,7 +120,7 @@
                       <label>Mulai Bulan</label>
 
                       <div class="form-group">
-                        <select name='awal' class="form-control" id="awal">
+                        <select name='bln_awal' class="form-control" id="awal">
                           <option>--- Pilih ---</option>
                           <option value="01">Januari</option>
                           <option value="02">Februari</option>
@@ -136,7 +144,7 @@
                       <label>Sampai Bulan</label>
 
                       <div class="form-group">
-                        <select name='akhir' class="form-control" id="akhir">
+                        <select name='bln_akhir' class="form-control" id="akhir">
                           <option>--- Pilih ---</option>
                           <option value="01">Januari</option>
                           <option value="02">Februari</option>
@@ -160,43 +168,46 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-info">Proses</button>
                 <?php echo form_close() ?>
-                <button type="submit" class="btn btn-success">Print</button>
+                <!-- <button type="submit" class="btn btn-success">Print</button> -->
               </div>
             </div>
             <!-- /.box-body -->
 
             <!-- Tahun -->
-            <div class="box box-primary box-solid" id="tahun">
+            <div class="box box-primary box-solid" id="year">
               <div class="box-header with-border">
                 <h3 class="box-title">Laporan Berdasarkan Tahun</h3>
                 <!-- /.box-tools -->
               </div>
               <!-- /.box-header -->
-              <form role="form">
-                <div class="box-body">
-                  <div class="col-sm-12">
+              <div class="box-body">
+                <div class="col-sm-12">
+                  <?php echo form_open(base_url('admin/order/lap_tahun')); ?>
+                  <div class="form-group">
+                    <label>Mulai Tanggal</label>
                     <div class="form-group">
-                      <label>Mulai Tanggal</label>
-
-                      <div class="form-group">
-                        <select name='filter' class="form-control" id="filter">
-                          <option>--- Pilih Tahun---</option>
-                          <option value="2021">2021</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                          <option value="2024">2024</option>
-                          <option value="2025">2025</option>
-                        </select>
-                      </div>
-                      <!-- /.input group -->
+                      <select name='tahun2' class="form-control" id="tahun2">
+                        <option>--- Pilih Tahun---</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                      </select>
                     </div>
+                    <!-- /.input group -->
                   </div>
-                  <!-- /.form group -->
                 </div>
-              </form>
-              <div class="box-footer">
+                <!-- /.form group -->
+              </div>
+              <div class="box-footer foot">
                 <button type="submit" class="btn btn-info">Proses</button>
-                <button type="submit" class="btn btn-success">Print</button>
+                <?php echo form_close() ?>
+
+                <!-- <?php echo form_open('admin/order/excel') ?>
+                <input type="text" name="year" id="year">
+                <button type="submit" class="btn btn-success excel">Export Excel</button>
+                <?php echo form_close(); ?> -->
               </div>
             </div>
             <!-- /.box-body -->
@@ -211,9 +222,9 @@
 </div>
 
 <script type="text/javascript">
-  // $("#tanggal").hide();
-  // $("#tahun").hide();
-  // $("#bulan").hide();
+  $("#tanggal").hide();
+  $("#year").hide();
+  $("#bulan").hide();
   $(document).ready(function(){
 
     $('body').on("click","#proses",function(){
@@ -221,17 +232,16 @@
       if(id == 1){
       $("#tanggal").show();
       $("#bulan").hide();
-      $("#tahun").hide();
+      $("#year").hide();
       }else if(id == 2){
-      $("#tanggal").hide();
       $("#bulan").show();
-      $("#tahun").hide();
+      $("#tanggal").hide();
+      $("#year").hide();
       }else if(id == 3){
+      $("#year").show();
       $("#tanggal").hide();
       $("#bulan").hide();
-      $("#tahun").show();
       }
-      
     });
   });
 </script>

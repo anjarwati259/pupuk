@@ -238,14 +238,6 @@
                         <td><input type="hidden" id="subtotal
                           " name="subtotal"></td>
                       </tr>
-                      <tr>
-                        <td>Potongan</td>
-                        <td><input type="number" name="potongan" id="potongan" class="form-control prc"></td>
-                      </tr>
-                      <tr>
-                        <td>Total</td>
-                        <td id="total"></td>
-                      </tr>
                     </tfoot>
                         </tbody>
                       </table>
@@ -509,6 +501,7 @@
                     'id_promo'  : id_promo,
                     'quantity' : quantity,
                     'sale_price' : sale_price,
+                    'potongan' : 0,
                     'status'  : status,
                     'bonus' : bonus
                 },
@@ -624,7 +617,6 @@
         var jenis_order = $("#jenis_order").val();
         var metode_pembayaran = $("#metode_pembayaran").val();
         var tanggal_transaksi = $("#tanggal_transaksi").val();
-        var potongan = $("#potongan").val();
         var status_baca = $("#status_baca").val();
         if(typeof kode_transaksi !== "undefined" && kode_transaksi != ""){
             var status = true;
@@ -645,7 +637,7 @@
                 'metode_pembayaran' : metode_pembayaran,
                 //'code': code,
                 'tanggal_transaksi' : tanggal_transaksi,
-                'potongan' : potongan,
+                'potongan' : 0,
                 'status_baca' : status_baca
             };
             data = [status,method,arr];

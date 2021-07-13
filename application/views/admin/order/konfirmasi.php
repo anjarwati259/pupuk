@@ -49,8 +49,8 @@
                    <label >Jumlah Transfer</label>
                     <div class="input-group">
                       <span class="input-group-addon prc">Rp</span>
-                      <input type="number" name="total_bayar" value="<?php echo $order->total_bayar ?>" class="form-control">
-                    </div>
+                      <input type="number" name="total_bayar" value="<?php echo number_format($order->total_bayar,'0',',','.') ?>" class="form-control">
+                    </div> 
                 </div>
               </div>
             </div>

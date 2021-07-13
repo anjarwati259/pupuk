@@ -24,7 +24,7 @@
       <div class="judul">
         <h3>Penjualan Berdasarkan Bulan</h3>
         <h2><STRONG>PT Agrikultur Gemilang Indonesia</STRONG></h2>
-        <h4>Dari Bulan <b><?php echo getBulan($awal) ?></b> Sampai Bulan <b><?php getBulan(echo $awal) ?></b></h4>
+        <h4>Dari Bulan <b><?php echo getBulan($awal) ?></b> Sampai Bulan <b><?php echo getBulan($akhir) ?></b></h4>
       </div>
       <div class="table">
         <table class="table table-bordered table-striped">
