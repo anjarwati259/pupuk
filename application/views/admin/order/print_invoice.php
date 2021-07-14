@@ -129,7 +129,6 @@ table td.grand {
 footer {
   color: #5D6975;
   width: 100%;
-  height: 30px;
   position: absolute;
   bottom: 0;
   border-top: 1px solid #C1CED9;
@@ -173,7 +172,7 @@ footer {
       </div>
       <h1>INVOICE : <?php echo $kode_transaksi ?></h1>
       <div id="company" class="clearfix">
-        <div style="font-size: 20px;"><strong>PT AGI</strong></div>
+        <div style="font-size: 20px;"><strong>Agrikultur Gemilang Indonesia</strong></div>
         <div>Jl. Manggis Raya No.11 Jemberlor Patrang, <br /> Jember Jawa Timur</div>
         <div>+6233 1510 8758</div>
         <div><a href="#" style="color: blue;">support@ptagi.co.id</a></div>
@@ -184,12 +183,12 @@ footer {
         <div><span>No. Telp</span> <?php echo $detail->no_hp ?></div>
         <div><span>Alamat</span> <?php echo $detail->alamat ?>, <?php echo $detail->kecamatan ?>, <?php echo $detail->kabupaten ?></div>
         <div><span></span> <?php echo $detail->provinsi ?></div>
-        <div><span>Tanggal</span> <?php echo tanggal_indo(date('Y-m-d',strtotime($detail->tanggal_transaksi))); ?></div>
+        <div><span>Tanggal</span> <?php echo tanggal(date('Y-m-d',strtotime($detail->tanggal_transaksi))); ?></div>
       </div>
     </header>
     <main>
       <table>
-        <thead style="background-color: #3989C6; color: white;">
+        <thead style="background-color: #8FBC8F; color: white;">
           <tr>
             <th style="color: black;" class="service">No</th>
             <th style="color: black;" class="desc">Produk</th>
@@ -219,8 +218,8 @@ footer {
             <td class="total">Rp. <?php echo number_format($detail->ongkir,'0',',','.') ?></td>
           </tr>
           <tr>
-            <td style="background-color: #3989C6;" colspan="5" class="grand total"><b>Total</b></td>
-            <td style="background-color: #3989C6;" class="grand total">Rp. <?php echo number_format($detail->total_bayar,'0',',','.') ?></td>
+            <td style="background-color: #8FBC8F;" colspan="5" class="grand total"><b>Total</b></td>
+            <td style="background-color: #8FBC8F;" class="grand total">Rp. <?php echo number_format($detail->total_bayar,'0',',','.') ?></td>
           </tr>
         </tbody>
       </table>
@@ -240,7 +239,7 @@ footer {
 			  </div>
 			  <div id="item3">
 			  	<span>Jember, <?php $date = date('Y-m-d');
-			  	 echo tanggal_indo(date('Y-m-d',strtotime($date))); ?></span><br>
+			  	 echo tanggal(date('Y-m-d',strtotime($date))); ?></span><br>
 			  	 <br>
 			  	 <br>
 			  	 <br>
@@ -251,8 +250,8 @@ footer {
         </div>
       </div>
     </main>
-    <footer>
-      Copy Right &copy; PT. Agrikultur Gemilang Indonesia
-    </footer>
   </body>
 </html>
+<script type="text/javascript">
+  window.print();
+</script>

@@ -40,7 +40,18 @@ function tanggal_indo($tanggal, $cetak_hari = false)
     echo $this->session->flashdata('sukses');
     echo '</div>';
   } ?>
+  <style type="text/css">
+    .button{
+      margin: 10px;
+      text-align: right;
+    }
+  </style>
 <section class="content">
+  <div class="button">
+    <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-success"><i class="fa fa-print" target="_blank"></i> Print</a>
+    <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-warning"> Kembali</a>
+  </div>
+  
   <div class="row">
     <!-- left column -->
     <div class="col-md-7">
@@ -212,9 +223,6 @@ function tanggal_indo($tanggal, $cetak_hari = false)
             </div>
           </div>
           <?php form_close(); ?>
-        </div>
-        <div class="col-sm-3">
-          <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-info"><i class="fa fa-print" target="_blank"></i> Print</a>
         </div>
       </div>
         <br>

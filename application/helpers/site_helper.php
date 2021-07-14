@@ -113,7 +113,7 @@ function generate_else(){
     $romawi = getRomawi($bulan);
     return $tanggal . $suffix . $romawi . '-' . $tahun . '-001';
 }
-function tanggal_indo($tanggal, $cetak_hari = false)
+function tanggal($tanggal, $cetak_hari = false)
                             {
                               $hari = array ( 1 =>    'Senin',
                                     'Selasa',
