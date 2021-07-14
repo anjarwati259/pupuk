@@ -24,6 +24,7 @@
               <thead>
               <tr>
                 <th>Kode Invoice</th>
+                <th>Marketing</th>
                 <th>Nama</th>
                 <th>No. HP</th>
                 <th>Tanggal</th>
@@ -72,6 +73,7 @@
                 foreach ($sudah_bayar as $sudah_bayar) { ?>
                     <tr>
                       <td><a href="<?php echo base_url('admin/order/detail/'.$sudah_bayar->kode_transaksi) ?>"><?php echo $sudah_bayar->kode_transaksi ?></a></td>
+                      <td><?php echo $sudah_bayar->nama_marketing ?></td>
                       <td><?php echo $sudah_bayar->nama_pelanggan ?></td>
                       <td><?php echo $sudah_bayar->no_hp ?></td>
                       <td><?php echo tanggal_indo(date('Y-m-d',strtotime($sudah_bayar->tanggal_transaksi)),FALSE); ?></td>

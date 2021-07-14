@@ -19,7 +19,6 @@
               <th>Jumlah Item</th>
               <th>Jumlah Belanja</th>
               <th>Status</th>
-              <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -72,13 +71,6 @@
                       echo "<span class='alert-danger'>COD</span>";
                     }
                  ?></td>
-                 <td>
-                  <?php if($order->metode_pembayaran ==1){ ?>
-                   <?php include('konfirmasi.php') ?>
-                <?php }else{ ?>
-                   <?php include('konfirmasi_cod.php') ?>
-                <?php } ?>
-                 </td>
               </tr>
             <?php } ?>
             </tbody>

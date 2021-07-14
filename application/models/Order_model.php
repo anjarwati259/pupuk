@@ -21,7 +21,7 @@ class Order_model extends CI_Model
 		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
 		$this->db->group_by('tb_detail_order.kode_transaksi');
-		$this->db->order_by('kode_transaksi','asc');
+		$this->db->order_by('kode_transaksi','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -35,7 +35,7 @@ class Order_model extends CI_Model
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
 		$this->db->join('tb_pembayaran','tb_pembayaran.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
 		$this->db->group_by('tb_detail_order.kode_transaksi');
-		$this->db->order_by('kode_transaksi','asc');
+		$this->db->order_by('kode_transaksi','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}

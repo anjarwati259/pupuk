@@ -54,7 +54,11 @@ class Order extends CI_Controller
 						);
 		$this->pembayaran_model->bayar($data);
 		$this->session->set_flashdata('sukses','Status Telah Diubah');
+		if($this->session->userdata('hak_akses')=='1'){
 		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+		}else{
+			redirect(base_url('marketing/sudah_bayar'), 'refresh');
+		}
 	}
 	//konfirmasi pesanan jika sudah bayar
 	public function konfirmasi($kode_transaksi){
@@ -95,7 +99,11 @@ class Order extends CI_Controller
 			$this->produk_model->update($data);
 		}
 		$this->session->set_flashdata('sukses','Status Telah Diubah');
+		if($this->session->userdata('hak_akses')=='1'){
 		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+		}else{
+			redirect(base_url('marketing/sudah_bayar'), 'refresh');
+		}
 	}
 	//penghitungan point
 	private function point($kode_transaksi){
@@ -341,14 +349,13 @@ class Order extends CI_Controller
 		}
 		//cek id pelanggan
 		if(!empty($carts) && is_array($carts) && $ongkir != null){
+
 			$total = $subtotal - $potongan;
 			$total_bayar = $total + $ongkir;
 			$id_pelanggan = $this->input->post('id_pelanggan');
 			$komoditi = $this->input->post('komoditi');
 			$no_hp = $this->input->post('no_hp');
-
 			$data['kode_transaksi'] = $this->input->post('kode_transaksi');
-			//$data['id_pelanggan'] = $id_pelanggan;
 			$data['id_user'] = $user;
 			$data['nama_pelanggan'] = $this->input->post('nama_pelanggan');
 			$data['alamat'] = $this->input->post('alamat');
@@ -760,5 +767,15 @@ class Order extends CI_Controller
 		$Writer->save('php://output');
 
 		exit;
+	}
+	public function print($kode_transaksi){
+		$order = $this->order_model->kode_order($kode_transaksi);
+		$detail = $this->order_model->kode_transaksi($kode_transaksi);
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'kode_transaksi' => $kode_transaksi,
+						'order'		=> $order,
+						'detail'	=> $detail,
+					);
+		$this->load->view('admin/order/print_invoice', $data, FALSE);
 	}
 }
