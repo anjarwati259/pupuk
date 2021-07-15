@@ -7,7 +7,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url() ?>assets/img/logo/logo_2.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama_user'); ?></p>
@@ -120,7 +120,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url() ?>assets/img/logo/logo_2.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama_user'); ?></p>

@@ -70,6 +70,8 @@
                 <td>Rp. <?php echo number_format($order->total_bayar,'0',',','.') ?></td>
                 <td><?php if($order->status_bayar==0 && $order->metode_pembayaran ==1){
                       echo "<span class='alert-warning'>Belum Bayar</span>";
+                    }else if($order->status_bayar==0 && $order->metode_pembayaran ==2){
+                      echo "<span class='alert-success'>Cash</span>";
                     }else{
                       echo "<span class='alert-danger'>COD</span>";
                     }
@@ -77,6 +79,10 @@
                  <td>
                   <?php if($order->metode_pembayaran ==1){ ?>
                    <?php include('konfirmasi.php') ?>
+                 <?php }else if($order->metode_pembayaran ==2){ ?>
+                  <a href="<?php echo base_url('admin/order/cash/'.$order->kode_transaksi) ?>" class="btn btn-success btn-xs">
+                    <i class="fa fa-check"></i> Konfirmasi
+                  </button>
                 <?php }else{ ?>
                    <?php include('konfirmasi_cod.php') ?>
                 <?php } ?>

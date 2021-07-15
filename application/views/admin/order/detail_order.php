@@ -49,7 +49,7 @@ function tanggal_indo($tanggal, $cetak_hari = false)
 <section class="content">
   <div class="button">
     <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-success"><i class="fa fa-print" target="_blank"></i> Print</a>
-    <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-warning"> Kembali</a>
+    <a href="<?php echo base_url('admin/order') ?>" class="btn btn-warning"> Kembali</a>
   </div>
   
   <div class="row">
@@ -185,7 +185,13 @@ function tanggal_indo($tanggal, $cetak_hari = false)
           </div>
           <br>
           </div>
-          
+          <?php }else if($detail_order->status_bayar==1 && $detail_order->metode_pembayaran==2){ ?>
+            <br>
+          <div class="alert alert-success alert-dismissible">
+            Sudah Bayar Via Cash
+          </div>
+          <br>
+          </div>
         <?php }else{ ?>
         <table id="example1" class="table table-bordered table-striped">
           <tbody>

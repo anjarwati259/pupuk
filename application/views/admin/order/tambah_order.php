@@ -77,6 +77,7 @@
                       <select name='metode_pembayaran' class="form-control" id="metode_pembayaran">
                           <option value='1'>Transfer Bank</option>
                           <option value='0'>COD</option>
+                          <option value='2'>Cash</option>
                       </select>
                     </div>
                   </div>
@@ -537,6 +538,11 @@
           var id_promo = null;
           var sale_price = $("#sale_price").val();
           var status = 2;
+        }else if(paket==3){
+          var id_produk = $("#mitra").val();
+          var id_promo = $("#id_promo").val();
+          var sale_price = $("#sale_price").val();
+          var status = 1;
         }else{//promo
           var id_produk = $("#paket").val();
           var id_promo = $("#id_promo").val();

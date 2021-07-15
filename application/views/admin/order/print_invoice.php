@@ -114,7 +114,7 @@ table td.desc {
 table td.unit,
 table td.qty,
 table td.total {
-  font-size: 1.2em;
+  font-size: 0.9em;
 }
 
 table td.grand {
@@ -200,6 +200,7 @@ footer {
         </thead>
         <tbody>
         	<?php $no=1; foreach ($order as $order) { ?>
+            <?php if($order->harga !=0){ ?>
           <tr>
             <td class="service"><?php echo $no++ ?></td>
             <td class="desc"><?php echo $order->nama_produk ?></td>
@@ -208,6 +209,7 @@ footer {
             <td class="qty">Rp. <?php echo number_format($order->harga,'0',',','.') ?></td>
             <td class="total">Rp. <?php echo number_format($order->total_transaksi,'0',',','.') ?></td>
           </tr>
+        <?php } ?>
       <?php } ?>
           <tr>
             <td colspan="5"><b>Subtotal<b></td>
@@ -244,6 +246,8 @@ footer {
 			  	 <br>
 			  	 <br>
 			  	 <br>
+           <br>
+           <br>
 			  	 <span>Melina</span>
 			  </div>
 			</div>

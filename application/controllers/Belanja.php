@@ -28,7 +28,6 @@ class Belanja extends CI_Controller
 						'isi'	=> 'belanja/detail_belanja'
 						); 
 		$this->load->view('layout/wrapper', $data, FALSE);
-
 	}
 	//tambahkan ke keranjang belanja
 	public function add()

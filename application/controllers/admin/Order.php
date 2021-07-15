@@ -34,6 +34,18 @@ class Order extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+	public function cash($kode_transaksi){
+		$data = array(	'kode_transaksi'	=> $kode_transaksi,
+							'status_bayar'	=> 1
+						);
+			$this->order_model->update_status($data);
+			$this->session->set_flashdata('sukses','Status Telah Diubah');
+			if($this->session->userdata('hak_akses')=='1'){
+		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
+		}else{
+			redirect(base_url('marketing/sudah_bayar'), 'refresh');
+		}
+	}
 	//konfirmasi COD
 	public function cod($kode_transaksi)
 	{

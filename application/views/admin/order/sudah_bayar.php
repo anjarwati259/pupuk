@@ -79,9 +79,15 @@
                       <td><?php echo tanggal_indo(date('Y-m-d',strtotime($sudah_bayar->tanggal_transaksi)),FALSE); ?></td>
                       <td><?php echo $sudah_bayar->total_item ?></td>
                       <td>Rp. <?php echo number_format($sudah_bayar->total_bayar,'0',',','.') ?></td>
+                      <?php if($sudah_bayar->metode_pembayaran==2){ ?>
+                        <td>Rp. <?php echo number_format($sudah_bayar->total_bayar,'0',',','.') ?></td>
+                      <?php }else{ ?>
                       <td>Rp. <?php echo number_format($sudah_bayar->jumlah_bayar,'0',',','.') ?></td>
+                    <?php } ?>
                       <td><?php if($sudah_bayar->status_bayar==1 && $sudah_bayar->metode_pembayaran ==1){
                           echo "<span class='alert-success'>Sudah Bayar</span>";
+                        }else if($sudah_bayar->status_bayar==1 && $sudah_bayar->metode_pembayaran ==2){
+                          echo "<span class='alert-success'>Cash</span>";
                         }else{
                           echo "<span class='alert-success'>COD</span>";
                         }

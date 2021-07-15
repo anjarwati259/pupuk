@@ -113,4 +113,13 @@ class Dashboard extends CI_Controller
 		$this->order_model->status_baca($data);
 		redirect(base_url('admin/order'), 'refresh');
 	}
+	public function profil(){
+		$id_user = $this->session->userdata('id_user');
+		$marketing = $this->dashboard_model->user_market($id_user);
+		$data = array(	'title' => 'Profil',
+						'marketing' => $marketing,
+						'isi'	 => 'admin/dashboard/profil'
+						);
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
 }

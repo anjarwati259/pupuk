@@ -285,4 +285,12 @@ class Dashboard_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	public function user_market($id_user){
+		$this->db->select('tb_marketing.*, tb_user.email');
+		$this->db->from('tb_marketing');
+		$this->db->where('tb_marketing.id_user', $id_user);
+		$this->db->join('tb_user','tb_user.id_user = tb_marketing.id_user', 'left');
+		$query = $this->db->get();
+		return $query->row();
+	}
 }
