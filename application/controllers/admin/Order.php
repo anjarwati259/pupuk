@@ -211,6 +211,10 @@ class Order extends CI_Controller
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+	//edit order
+	public function edit($kode_transaksi){
+
+	}
 	
 	//untuk check produk berdasarkan kode produk
 	public function check_product($kode_produk){
@@ -346,6 +350,24 @@ class Order extends CI_Controller
 			exit;
 		}
 
+		//SO
+		$id_SO = $this->order_model->get_last_id();
+		if($id_SO){
+			$id = substr($id_SO[0]->kode_transaksi, 19);
+			$kode_transaksi = generate_SO($id);
+		}else{
+			$kode_transaksi = generate_else();
+		}
+
+		//last id pelanggan
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
+		}else{
+			$id_pelanggan = 'C001';
+		}
+
 		$user = $this->session->userdata('id_user');
 		//grand total
 		$subtotal = $this->cart->total();
@@ -354,11 +376,14 @@ class Order extends CI_Controller
 
 		//get total item
 		$total = 0;
+		$total_item = 0;
 		foreach ($carts as $value) {
 			if($value['price']!=0){
 				$total = $total + $value['qty'];
+				$total_item += $value['qty'];
 			}
 		}
+
 		//cek id pelanggan
 		if(!empty($carts) && is_array($carts) && $ongkir != null){
 
@@ -367,7 +392,7 @@ class Order extends CI_Controller
 			$id_pelanggan = $this->input->post('id_pelanggan');
 			$komoditi = $this->input->post('komoditi');
 			$no_hp = $this->input->post('no_hp');
-			$data['kode_transaksi'] = $this->input->post('kode_transaksi');
+			$data['kode_transaksi'] =  $kode_transaksi;
 			$data['id_user'] = $user;
 			$data['nama_pelanggan'] = $this->input->post('nama_pelanggan');
 			$data['alamat'] = $this->input->post('alamat');
@@ -383,7 +408,7 @@ class Order extends CI_Controller
 			$data['tanggal_transaksi'] = $this->input->post('tanggal_transaksi');
 			$data['id_marketing'] = $this->input->post('id_marketing');
 			$data['jenis_order'] = $this->input->post('jenis_order');
-			$data['total_item'] = $this->cart->total_items();
+			$data['total_item'] = $total_item;
 			$data['potongan'] = $potongan;
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
 			$data['status_baca'] = $this->input->post('status_baca');
@@ -395,7 +420,7 @@ class Order extends CI_Controller
 
 			 	$this->order_model->tambah($data);
 			 }else{
-			 	$data['id_pelanggan'] = $this->input->post('id_pelanggan');
+			 	$data['id_pelanggan'] = $id_pelanggan;
 			 	$this->order_model->tambah($data);
 			 }
 			 
@@ -598,6 +623,14 @@ class Order extends CI_Controller
 	{
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
+		//last id pelanggan
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
+		}else{
+			$id_pelanggan = 'C001';
+		}
 		//validation
 		$valid = $this-> form_validation;
 
@@ -619,37 +652,25 @@ class Order extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('komoditi', 'komoditi','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
 
 		if($valid->run()===FALSE){
 			//end validation
 			$customer = $this->pelanggan_model->customer();
 			$id = $this->pelanggan_model->get_last_id();
-
-			if($id){
-				$id = $id[0]->id_pelanggan;
-				$id_pelanggan = generate_code('ID20220',$id);
-			}else{
-				$id_pelanggan = 'ID202201';
-			}
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'customer'	=> $customer,
-							'id'		=> $id,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/customer/list'
 						);
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		}else{
 			$i 	= $this->input;
-			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
+			$data = array(	'id_pelanggan'		=> $id_pelanggan,
 							'nama_pelanggan'	=> $i->post('namapelanggan'),
 							'alamat'			=> $i->post('alamat'),
 							'id_marketing'			=> $i->post('id_marketing'),
 							'no_hp'				=> $i->post('no_hp'),
-							'komoditi'			=> $i->post('komoditi'),
 							'tanggal_daftar'	=> date('Y-m-d'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),

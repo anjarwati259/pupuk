@@ -35,4 +35,12 @@ class User_model extends CI_Model
 		$this->db->insert('tb_user', $data);
 		return $this->db->insert_id();
 	}
+	public function user($id_user){
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->where('id_user',$id_user);
+		$this->db->order_by('id_user','asc');
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

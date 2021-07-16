@@ -329,16 +329,6 @@
                     <input type="number" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
                 </div>
                 <div class="col-md-6">
-                   <label >Komoditi</label>
-                    <input type="text" name="komoditi" value="<?php echo set_value('komoditi') ?>" placeholder="Komoditi" class="form-control"/>
-                </div>
-                <!-- col -->
-              </div>
-              <!-- row -->
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-6">
                    <label >Marketing</label>
                     <select class="form-control" name="id_marketing">
                       <?php foreach ($marketing as $market) { ?>
@@ -346,6 +336,13 @@
                     <?php } ?>
                     </select>
                 </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+            </div>
+            <div class="form-group">
+              <div class="row">
+                
                 <!-- col -->
               </div>
               <!-- row -->

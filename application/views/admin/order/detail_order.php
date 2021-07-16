@@ -48,6 +48,7 @@ function tanggal_indo($tanggal, $cetak_hari = false)
   </style>
 <section class="content">
   <div class="button">
+    <a href="<?php echo base_url('admin/order/edit/'.$detail_order->kode_transaksi) ?>" class="btn btn-success"><i class="fa fa-print" target="_blank"></i> Edit</a>
     <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-success"><i class="fa fa-print" target="_blank"></i> Print</a>
     <a href="<?php echo base_url('admin/order') ?>" class="btn btn-warning"> Kembali</a>
   </div>

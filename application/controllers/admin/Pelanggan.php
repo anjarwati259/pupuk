@@ -35,7 +35,6 @@ class Pelanggan extends CI_Controller
 		}else{
 			$id_pelanggan = 'C001';
 		}
-
 		$hak_akses = $this->session->userdata('hak_akses');
 		if($hak_akses==1){
 			$customer = $this->pelanggan_model->customer();
@@ -60,6 +59,7 @@ class Pelanggan extends CI_Controller
 	//tambah data customer
 	public function add_customer()
 	{
+		
 		//get provinsi
 		$id_user 	= $this->session->userdata('id_user');
 		$market 	=  $this->marketing_model->get_marketing($id_user);

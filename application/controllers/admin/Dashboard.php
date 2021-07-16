@@ -116,10 +116,19 @@ class Dashboard extends CI_Controller
 	public function profil(){
 		$id_user = $this->session->userdata('id_user');
 		$marketing = $this->dashboard_model->user_market($id_user);
+		$user = $this->user_model->user('id_user');
 		$data = array(	'title' => 'Profil',
+						'user'	=> $user,
 						'marketing' => $marketing,
 						'isi'	 => 'admin/dashboard/profil'
 						);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function change_password(){
+		$valid = $this-> form_validation;
+		$this->form_validation->set_rules('pass_lama', "Password Lama", 'required|trim');
+		$this->form_validation->set_rules('pass_baru', "Password Baru", 'required|trim|min_length[3]|matches[rep_pass]');
+		$this->form_validation->set_rules('rep_pass', "Password Lama", 'required|trim|min_length[3]|matches[pass_baru]');
+		
 	}
 }
