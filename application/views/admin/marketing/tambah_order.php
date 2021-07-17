@@ -74,6 +74,7 @@
                       <select name='metode_pembayaran' class="form-control" id="metode_pembayaran">
                           <option value='1'>Transfer Bank</option>
                           <option value='0'>COD</option>
+                          <option value='2'>Cash</option>
                       </select>
                     </div>
                   </div>

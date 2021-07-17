@@ -102,7 +102,7 @@ class Order_model extends CI_Model
 	}
 	//mendapatkan data transaksi berdasarkan kodenya
 	public function kode_order($kode_transaksi){
-		$this->db->select('tb_order.*, 
+		$this->db->select('tb_order.*,
 						tb_produk.nama_produk, tb_promo.nama_promo as nama, tb_produk.gambar');
 		$this->db->from('tb_order');
 		//join
@@ -300,5 +300,12 @@ class Order_model extends CI_Model
 		$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
 		$query = $this->db->get();
 		return $query->row();
+	}
+	public function edit_detail($data){
+		$this->db->where('kode_transaksi', $data['kode_transaksi']);
+		$this->db->update('tb_detail_order',$data);
+	}
+	public function edit_order($data){
+		$this->db->update_batch('tb_order',$data, 'id_order'); 
 	}
 }

@@ -21,7 +21,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                  
+                   
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="kode">Kode Invoice</label>
                     <div class="col-sm-8">
@@ -224,7 +224,6 @@
                             <input type="hidden" id="id_promo" class="form-control" name="id_promo"/>
                           </select>
                         </td>
-
                         <td width="120px;">
                           <input type="number" id="jumlah" class="form-control" name="jumlah" min="1" value="1"/>
                         </td>

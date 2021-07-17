@@ -36,7 +36,8 @@ class Order extends CI_Controller
 	}
 	public function cash($kode_transaksi){
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
-							'status_bayar'	=> 1
+						'status_bayar'		=> 1,
+						'status_baca'		=> 1
 						);
 			$this->order_model->update_status($data);
 			$this->session->set_flashdata('sukses','Status Telah Diubah');
@@ -49,9 +50,12 @@ class Order extends CI_Controller
 	//konfirmasi COD
 	public function cod($kode_transaksi)
 	{
+		$pelanggan = $this->order_model->jenis_pelanggan($kode_transaksi);
+		$stok = $this->order_model->get_stok($kode_transaksi);
 			$data = array(	'kode_transaksi'	=> $kode_transaksi,
 							'no_resi'			=> $this->input->post('no_resi'),
-							'status_bayar'		=> 1
+							'status_bayar'		=> 1,
+							'status_baca'		=> 1
 						);
 			$this->order_model->update_status($data);
 			$this->session->set_flashdata('sukses','Status Telah Diubah');
@@ -65,6 +69,19 @@ class Order extends CI_Controller
 						'jumlah_bayar'		=> $bayar
 						);
 		$this->pembayaran_model->bayar($data);
+		//insert point
+		if($pelanggan->jenis_pelanggan=='Mitra'){
+			$this->point($kode_transaksi);
+		}
+		
+		//konfirmasi stok
+		foreach ($stok as $value) {
+			$data = array(	'kode_transaksi' => $value->kode_transaksi,
+							'status'		 => 'out'
+						);
+			$this->produk_model->update($data);
+		}
+
 		$this->session->set_flashdata('sukses','Status Telah Diubah');
 		if($this->session->userdata('hak_akses')=='1'){
 		redirect(base_url('admin/order/sudah_bayar'), 'refresh');
@@ -86,7 +103,8 @@ class Order extends CI_Controller
 						'no_resi'		=> $this->input->post('no_resi'),
 						'expedisi'		=> $this->input->post('expedisi'),
 						'no_resi'		=> $this->input->post('no_resi'),
-						'status_bayar'		=> 1
+						'status_bayar'		=> 1,
+						'status_baca'		=> 1
 						);
 		$this->order_model->update_status($data);
 		//insert pembayaran
@@ -213,7 +231,63 @@ class Order extends CI_Controller
 	}
 	//edit order
 	public function edit($kode_transaksi){
+		$detail_order =  $this->order_model->kode_transaksi($kode_transaksi);
+		$order =  $this->order_model->kode_order($kode_transaksi);
+		$marketing =  $this->pelanggan_model->marketing();
+		$expedisi =  $this->order_model->expedisi();
+		$produk =  $this->produk_model->produk();
+		
 
+		$data = array(	'title'				=> 'Order #' . $kode_transaksi,
+						'marketing'			=> $marketing,
+						'detail'			=> $detail_order,
+						'expedisi'			=> $expedisi,
+						'order'				=> $order,
+						'produk'			=> $produk,
+						'kode_transaksi' 	=> $kode_transaksi,
+						'isi'				=> 'admin/order/edit_order'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function edit2($kode_transaksi){
+		$i = $this->input;
+
+		$data = array( 'kode_transaksi' => $kode_transaksi,
+						'tanggal_transaksi' => $i->post('tanggal_transaksi'),
+						'id_marketing' => $i->post('id_marketing'),
+						'jenis_order' => $i->post('jenis_order'),
+						'expedisi' => $i->post('ekspedisi'),
+						'ongkir' => $i->post('ongkir'),
+						'total_transaksi' => $i->post('subtotal'),
+						'total_item' => $i->post('total_item'),
+						'metode_pembayaran' => $i->post('metode_pembayaran')
+		);
+		//$this->order_model->edit_detail($data);
+
+		$kode_produk = $i->post('kode_produk');
+		$jml_beli = $i->post('jumlah');
+		$harga = $i->post('harga');
+		$potongan = $i->post('potongan');
+		$total = $i->post('total');
+		$id_order = $i->post('id_order');
+		$index = 0;
+		$data2 = array();
+		//$data = array
+		foreach ($kode_produk as $key) {
+			$data2[] = array( 'id_order' => $id_order[$index],
+							'id_produk' => $key,
+							'kode_transaksi' => $kode_transaksi,
+							'jml_beli' => $jml_beli[$index],
+							'potongan' => $potongan[$index],
+							'total_transaksi' => $total[$index]
+			 );
+			$index++;
+			
+		}
+		//print_r($data2);
+		$this->order_model->edit_order($data2);
+		//redirect(base_url('admin/order/detail/'.$kode_transaksi), 'refresh');
 	}
 	
 	//untuk check produk berdasarkan kode produk

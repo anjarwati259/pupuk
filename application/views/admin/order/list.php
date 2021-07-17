@@ -69,7 +69,7 @@
                 <td><?php echo $order->total_item ?></td>
                 <td>Rp. <?php echo number_format($order->total_bayar,'0',',','.') ?></td>
                 <td><?php if($order->status_bayar==0 && $order->metode_pembayaran ==1){
-                      echo "<span class='alert-warning'>Belum Bayar</span>";
+                      echo "<span class='alert-warning'>Transfer Bank</span>";
                     }else if($order->status_bayar==0 && $order->metode_pembayaran ==2){
                       echo "<span class='alert-success'>Cash</span>";
                     }else{
