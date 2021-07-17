@@ -123,7 +123,7 @@
                     <input type="number" id="jumlah" class="form-control prc" min="1" name="jumlah[]" value="<?php echo $order->jml_beli ?>"/>
                   </td>
                   <td width="120px">
-                    <input type="number" id="harga" class="form-control harga" name="harga[]" min="0" value="<?php echo $order->harga ?>" readonly/>
+                    <input type="number" id="harga<?php echo $i ?>" class="form-control harga" name="harga[]" min="0" value="<?php echo $order->harga ?>" readonly/>
                   </td>
                   <td width="105px">
                     <input type="number" id="potongan" class="form-control" name="potongan[]" min="0" value="<?php echo $order->potongan ?>" />
@@ -161,10 +161,12 @@
   $(function(){
     var total = function(){
       var sum =0;
+      var i =1;
       $('.prc').each(function(){
         var num = $(this).val().replace(',','');
-        var tot = parseInt(num) * parseInt(harga);
-        alert(tot);
+        var harga = $("#harga"+i).val()
+        alert(harga);
+        i++;
       });
     }
     $('.prc').keyup(function(){
