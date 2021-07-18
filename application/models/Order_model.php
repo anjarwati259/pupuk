@@ -308,4 +308,16 @@ class Order_model extends CI_Model
 	public function edit_order($data){
 		$this->db->update_batch('tb_order',$data, 'id_order'); 
 	}
+	public function delete_stok($kode_transaksi){
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$this->db->delete('tb_stok'); 
+	}
+	public function delete_order($kode_transaksi){
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$this->db->delete('tb_order'); 
+	}
+	public function delete_detail($kode_transaksi){
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$this->db->delete('tb_detail_order'); 
+	}
 }

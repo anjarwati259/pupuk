@@ -100,6 +100,13 @@ class Produk_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function stok($kode_transaksi){
+		$this->db->select('*');
+		$this->db->from('tb_stok');
+		$this->db->where('kode_transaksi', $kode_transaksi);
+		$query = $this->db->get();
+		return $query->result();
+	}
 	//tambah stok
 	public function tambah_stok($data)
 	{

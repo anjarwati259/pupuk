@@ -236,6 +236,7 @@ class Order extends CI_Controller
 		$marketing =  $this->pelanggan_model->marketing();
 		$expedisi =  $this->order_model->expedisi();
 		$produk =  $this->produk_model->produk();
+		$provinsi = $this->wilayah_model->listing();
 		
 
 		$data = array(	'title'				=> 'Order #' . $kode_transaksi,
@@ -244,6 +245,7 @@ class Order extends CI_Controller
 						'expedisi'			=> $expedisi,
 						'order'				=> $order,
 						'produk'			=> $produk,
+						'provinsi'			=> $provinsi,
 						'kode_transaksi' 	=> $kode_transaksi,
 						'isi'				=> 'admin/order/edit_order'
 					);
@@ -259,11 +261,12 @@ class Order extends CI_Controller
 						'jenis_order' => $i->post('jenis_order'),
 						'expedisi' => $i->post('ekspedisi'),
 						'ongkir' => $i->post('ongkir'),
+						'total_bayar' => $i->post('total_bayar'),
 						'total_transaksi' => $i->post('subtotal'),
 						'total_item' => $i->post('total_item'),
 						'metode_pembayaran' => $i->post('metode_pembayaran')
 		);
-		//$this->order_model->edit_detail($data);
+		$this->order_model->edit_detail($data);
 
 		$kode_produk = $i->post('kode_produk');
 		$jml_beli = $i->post('jumlah');
@@ -287,7 +290,43 @@ class Order extends CI_Controller
 		}
 		//print_r($data2);
 		$this->order_model->edit_order($data2);
-		//redirect(base_url('admin/order/detail/'.$kode_transaksi), 'refresh');
+		redirect(base_url('admin/order/detail/'.$kode_transaksi), 'refresh');
+	}
+
+	public function edit_penerima($kode_transaksi){
+		$i = $this->input;
+		$prov = $i->post('prov');
+		$kab = $i->post('kab');
+		$kec = $i->post('kec');
+		if((!empty($prov)) and (!empty($kab)) and (!empty($kec))){
+		$data = array( 'kode_transaksi' => $kode_transaksi,
+						'nama_pelanggan' => $i->post('nama_pelanggan'),
+						'no_hp' => $i->post('no_hp'),
+						'alamat' => $i->post('alamat'),
+						'kecamatan' => $i->post('kec'),
+						'provinsi' => $i->post('prov'),
+						'kabupaten' => $i->post('kab')
+		);
+	}else{
+		$data = array( 'kode_transaksi' => $kode_transaksi,
+						'nama_pelanggan' => $i->post('nama_pelanggan'),
+						'no_hp' => $i->post('no_hp'),
+						'alamat' => $i->post('alamat')
+		);
+	}
+		//print_r($data);
+		$this->order_model->edit_detail($data);
+		redirect(base_url('admin/order/detail/'.$kode_transaksi), 'refresh');
+	}
+
+	public function hapus($kode_transaksi){
+		//1. stok
+		$this->order_model->delete_stok($kode_transaksi);
+		//2. order
+		$this->order_model->delete_order($kode_transaksi);
+		//3. detail order
+		$this->order_model->delete_detail($kode_transaksi);
+		redirect(base_url('admin/order'), 'refresh');
 	}
 	
 	//untuk check produk berdasarkan kode produk

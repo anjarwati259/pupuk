@@ -86,6 +86,8 @@
                 <?php }else{ ?>
                    <?php include('konfirmasi_cod.php') ?>
                 <?php } ?>
+                <a href="<?php echo base_url('admin/order/edit/'.$order->kode_transaksi) ?>" class="btn btn-info btn-xs"><i class="fa fa-print" target="_blank"></i> Edit</a>
+                <a href="<?php echo base_url('admin/order/hapus/'.$order->kode_transaksi) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" ><i class="fa fa-print" target="_blank"></i> Hapus</a>
                  </td>
               </tr>
             <?php } ?>
