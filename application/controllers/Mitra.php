@@ -92,12 +92,12 @@ class Mitra extends CI_Controller
 
 			$keranjang = $this->cart->contents();
 			//membuat kode transaksi
-			$id = $this->order_model->get_last_id();
-				if($id){
-					$id = $id[0]->kode_transaksi;
-					$kode_transaksi = generate_invoice('INV0',$id);
+			$id_SO = $this->order_model->get_last_id();
+				if($id_SO){
+					$id = substr($id_SO[0]->kode_transaksi, 19);
+					$kode_transaksi = generate_SO($id);
 				}else{
-					$kode_transaksi = 'INV0001';
+					$kode_transaksi = generate_else();
 				}
 
 			$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
@@ -126,6 +126,15 @@ class Mitra extends CI_Controller
 	//update cart
 	public function checkout(){
 		//cek sudah loggin atau belum, jika belum restrasi sekaligus login
+		//membuat kode transaksi
+		$id_SO = $this->order_model->get_last_id();
+			if($id_SO){
+				$id = substr($id_SO[0]->kode_transaksi, 19);
+				$kode_transaksi = generate_SO($id);
+			}else{
+				$kode_transaksi = generate_else();
+			}			
+			//end validation
 		//kondisi sudah login
 		$provinsi = $this->wilayah_model->listing();
 		if($this->session->userdata('username')){
@@ -154,15 +163,7 @@ class Mitra extends CI_Controller
 				array(	'required' 		=> '%s harus diisi'));
 
 		if($valid->run()===FALSE){
-			//membuat kode transaksi
-			$id = $this->order_model->get_last_id();
-				if($id){
-					$id = $id[0]->kode_transaksi;
-					$kode_transaksi = generate_code('INV0',$id);
-				}else{
-					$kode_transaksi = 'INV0001';
-				}
-			//end validation
+
 
 			$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
 						'keranjang' => $keranjang,
@@ -176,13 +177,12 @@ class Mitra extends CI_Controller
 			//masuk database
 			}else{
 			$i = $this->input;
-			$kode_transaksi = $i->post('kode_transaksi');
 			$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
 							'id_user'			=> $id_user,
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 							'no_hp'				=> $i->post('no_telp'),
 							'alamat'			=> $i->post('alamat'),
-							'kode_transaksi'	=> $i->post('kode_transaksi'), 
+							'kode_transaksi'	=> $kode_transaksi, 
 							'tanggal_transaksi'	=> $i->post('tanggal_transaksi'),
 							'total_transaksi'	=> $i->post('total_transaksi'),
 							'total_item'		=> $i->post('total_item'),
@@ -206,7 +206,7 @@ class Mitra extends CI_Controller
 				if($keranjang['id_produk'] != 'PK001'){//jika bukan POC 1 liter
 					array_push($data,
 					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//cart resmi
-						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'kode_transaksi'	=> $kode_transaksi,
 						'id_produk'			=> $keranjang['id_produk'],
 						'id_promo'			=> $keranjang['id_promo'],
 						'harga'				=> $keranjang['price'],
@@ -215,7 +215,7 @@ class Mitra extends CI_Controller
 						'status'			=> $keranjang['option'],
 						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')), 
 					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//bonus
-						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'kode_transaksi'	=> $kode_transaksi,
 						'id_produk'			=> $keranjang['id_produk'],
 						'id_promo'			=> $keranjang['id_promo'],
 						'harga'				=> 0,
@@ -227,7 +227,7 @@ class Mitra extends CI_Controller
 				}else{//jika POC 1 liter
 					array_push($data,
 					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//cart resmi
-						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'kode_transaksi'	=> $kode_transaksi,
 						'id_produk'			=> $keranjang['id_produk'],
 						'id_promo'			=> $keranjang['id_promo'],
 						'harga'				=> $keranjang['price'],
@@ -236,7 +236,7 @@ class Mitra extends CI_Controller
 						'status'			=> $keranjang['option'],
 						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')), 
 					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//bonus
-						'kode_transaksi'	=> $i->post('kode_transaksi'),
+						'kode_transaksi'	=> $kode_transaksi,
 						'id_produk'			=> 'PK002',
 						'id_promo'			=> $keranjang['id_promo'],
 						'harga'				=> 0,
@@ -249,8 +249,8 @@ class Mitra extends CI_Controller
 				
 				$this->order_model->tambahorder($data);
 				//update stok
-				if($i->post('kode_transaksi')){
-					$this->_insert_stok_data($i->post('kode_transaksi'),$data,$pelanggan->id_pelanggan);
+				if($kode_transaksi){
+					$this->_insert_stok_data($kode_transaksi,$data,$pelanggan->id_pelanggan);
 				}
 			}
 			//end proses masuk ke tabel transaksi

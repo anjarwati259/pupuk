@@ -56,14 +56,14 @@ class Login extends CI_Controller
       //end validation
     $this->load->view('login/register');
     }else{
-      $id = $this->pelanggan_model->get_last_id();
+      $pelanggan_id = $this->pelanggan_model->get_last_id();
       $provinsi = $this->wilayah_model->listing();
 
-      if($id){
-        $id = $id[0]->id_pelanggan;
-        $id_pelanggan = generate_code('cus',$id);
+      if($pelanggan_id){
+        $id = substr($pelanggan_id[0]->id_pelanggan, 1);
+        $id_pelanggan = generate_code('C', $id);
       }else{
-        $id_pelanggan = 'cus001';
+        $id_pelanggan = 'C001';
       }
       //masuk database
       $i = $this->input;

@@ -307,6 +307,27 @@ class Order extends CI_Controller
 						'provinsi' => $i->post('prov'),
 						'kabupaten' => $i->post('kab')
 		);
+	}else if(!empty($prov)){
+		$data = array( 'kode_transaksi' => $kode_transaksi,
+						'nama_pelanggan' => $i->post('nama_pelanggan'),
+						'no_hp' => $i->post('no_hp'),
+						'alamat' => $i->post('alamat'),
+						'provinsi' => $i->post('prov')
+		);
+	}else if(!empty($kab)){
+		$data = array( 'kode_transaksi' => $kode_transaksi,
+						'nama_pelanggan' => $i->post('nama_pelanggan'),
+						'no_hp' => $i->post('no_hp'),
+						'alamat' => $i->post('alamat'),
+						'kabupaten' => $i->post('kab')
+		);
+	}else if(!empty($kec)){
+		$data = array( 'kode_transaksi' => $kode_transaksi,
+						'nama_pelanggan' => $i->post('nama_pelanggan'),
+						'no_hp' => $i->post('no_hp'),
+						'alamat' => $i->post('alamat'),
+						'kecamatan' => $i->post('kec')
+		);
 	}else{
 		$data = array( 'kode_transaksi' => $kode_transaksi,
 						'nama_pelanggan' => $i->post('nama_pelanggan'),
@@ -314,7 +335,7 @@ class Order extends CI_Controller
 						'alamat' => $i->post('alamat')
 		);
 	}
-		//print_r($data);
+		print_r($data);
 		$this->order_model->edit_detail($data);
 		redirect(base_url('admin/order/detail/'.$kode_transaksi), 'refresh');
 	}
@@ -623,7 +644,6 @@ class Order extends CI_Controller
             }
         }
 	}
-
 	//detail 
 	public function detail($kode_transaksi)
 	{
@@ -790,7 +810,7 @@ class Order extends CI_Controller
 							'kecamatan'			=> $i->post('kec'),
 							'jenis_pelanggan'	=> $i->post('jenis_pelanggan')
 						);
-			$this->pelanggan_model->tambah($data);
+			$id_customer = $this->pelanggan_model->tambah($data);
 			$this->session->set_flashdata('sukses','Data telah ditambah');
 			redirect(base_url('admin/order/tambah_order'), 'refresh');
 		}

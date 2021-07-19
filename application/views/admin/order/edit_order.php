@@ -216,9 +216,9 @@
               </select>
             </div>
           </div>
-          <input type="hidden" name="kab" id="kab">
-          <input type="hidden" name="kec" id="kec">
-          <input type="hidden" name="prov" id="prov">
+          <input type="text" name="kab" id="kab">
+          <input type="text" name="kec" id="kec">
+          <input type="text" name="prov" id="prov">
           <button class="btn btn-info pull-right" type="submit">Save</button>
           <?php echo form_close(); ?>
         </div>

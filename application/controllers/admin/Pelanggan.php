@@ -193,6 +193,33 @@ class Pelanggan extends CI_Controller
 								'kabupaten'			=> $i->post('kab'),
 								'kecamatan'			=> $i->post('kec')
 							);
+			}else if(!empty($prov)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'komoditi'		=> $i->post('komoditi'),
+								'provinsi'			=> $i->post('prov')
+							);
+			}else if(!empty($kab)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'komoditi'		=> $i->post('komoditi'),
+								'kabupaten'			=> $i->post('kab')
+							);
+			}else if(!empty($kec)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'komoditi'		=> $i->post('komoditi'),
+								'kecamatan'			=> $i->post('kec')
+							);
 			}else{
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),

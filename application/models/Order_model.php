@@ -305,6 +305,10 @@ class Order_model extends CI_Model
 		$this->db->where('kode_transaksi', $data['kode_transaksi']);
 		$this->db->update('tb_detail_order',$data);
 	}
+	public function edit_customer($data){
+		$this->db->where('id_pelanggan', $data['id_pelanggan']);
+		$this->db->update('tb_detail_order',$data);
+	}
 	public function edit_order($data){
 		$this->db->update_batch('tb_order',$data, 'id_order'); 
 	}

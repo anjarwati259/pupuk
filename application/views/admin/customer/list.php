@@ -204,7 +204,7 @@
                   <!-- /.box-body -->
                   <div class="box-footer">
                     <div class="col-md-3 col-md-offset-4">
-                      <a href="<?php echo base_url('admin/pelanggan') ?>" class="btn btn-default">Cancel</a>
+                      <a href="<?php echo base_url('admin/pelanggan/customer') ?>" class="btn btn-default">Cancel</a>
                       <button class="btn btn-info pull-right" type="submit">Save</button>
                     </div>
                   </div>

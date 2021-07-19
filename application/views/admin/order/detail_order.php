@@ -48,9 +48,13 @@ function tanggal_indo($tanggal, $cetak_hari = false)
   </style>
 <section class="content">
   <div class="button">
-    <a href="<?php echo base_url('admin/order/edit/'.$detail_order->kode_transaksi) ?>" class="btn btn-success"><i class="fa fa-print" target="_blank"></i> Edit</a>
-    <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-success"><i class="fa fa-print" target="_blank"></i> Print</a>
+    <a href="<?php echo base_url('admin/order/edit/'.$detail_order->kode_transaksi) ?>" class="btn btn-info"><i class="fa fa-trash-o" aria-hidden="true"></i> Edit</a>
+    <a href="<?php echo base_url('admin/order/print/'.$detail_order->kode_transaksi) ?>" class="btn btn-success" target="_blank"><i class="fa fa-print"></i> Print</a>
+    <?php if($this->session->userdata('hak_akses')=='1'){ ?>
     <a href="<?php echo base_url('admin/order') ?>" class="btn btn-warning"> Kembali</a>
+    <?php }else{ ?>
+      <a href="<?php echo base_url('marketing/belum_bayar') ?>" class="btn btn-warning"> Kembali</a>
+    <?php } ?>
   </div>
   
   <div class="row">
@@ -162,6 +166,10 @@ function tanggal_indo($tanggal, $cetak_hari = false)
             <tr>
               <td width="40%">Alamat</td>
               <th><?php echo $detail_order->alamat ?></th>
+            </tr>
+            <tr>
+              <td width="40%">Kecamatan</td>
+              <th><?php echo $detail_order->kecamatan ?></th>
             </tr>
             <tr>
               <td width="40%">Kabupaten</td>
