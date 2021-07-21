@@ -111,6 +111,7 @@
                               echo form_hidden('jumlah', 20);
                               echo form_hidden('bonus', 5);
                               echo form_hidden('price', 2700000);
+                              echo form_hidden('harga', 135000);
                               echo form_hidden('name', 'Pupuk Kilat 1L');
                               echo form_hidden('nama', 'Paket POC 1 Liter');
                               echo form_hidden('gambar', 'POC.jpg');
@@ -152,6 +153,7 @@
                               echo form_hidden('jumlah', 40);
                               echo form_hidden('bonus', 5);
                               echo form_hidden('price', 3200000);
+                              echo form_hidden('harga', 80000);
                               echo form_hidden('name', 'Pupuk Kilat 500ml');
                               echo form_hidden('nama', 'Paket POC 500ml');
                               echo form_hidden('gambar', 'POC.jpg');
@@ -193,6 +195,7 @@
                               echo form_hidden('jumlah', 40);
                               echo form_hidden('bonus', 5);
                               echo form_hidden('price', 2700000);
+                              echo form_hidden('harga', 85000);
                               echo form_hidden('name', 'Nutrisi Ternak');
                               echo form_hidden('nama', 'Paket Nutrisi Ternak');
                               echo form_hidden('gambar', 'ternak.webp');
@@ -234,6 +237,7 @@
                               echo form_hidden('jumlah', 40);
                               echo form_hidden('bonus', 5);
                               echo form_hidden('price', 3400000);
+                              echo form_hidden('harga', 85000);
                               echo form_hidden('name', 'Nutrisi Ikan');
                               echo form_hidden('nama', 'Paket Nutrisi Ikan');
                               echo form_hidden('gambar', 'ikan.webp');

@@ -325,7 +325,7 @@
               <div class="row">
                 <div class="col-md-6">
                    <label >No Handphone</label>
-                    <input type="number" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
+                    <input type="text" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
                 </div>
                 <div class="col-md-6">
                    <label >Marketing</label>
@@ -720,6 +720,8 @@
                     $('[name="kecamatan"]').val(ui.item.kecamatan);
                     $('[name="kabupaten"]').val(ui.item.kabupaten);
                     $('[name="provinsi"]').val(ui.item.provinsi);
+                    $('#id_marketing').val(ui.item.id_marketing);
+                    //alert(marketing);
                 }
       });
 

@@ -50,6 +50,7 @@ class Mitra extends CI_Controller
 		$id 			= $this->input->post('id');
 		$qty 			= $this->input->post('qty');
 		$price 			= $this->input->post('price');
+		$harga 			= $this->input->post('harga');
 		$name 			= $this->input->post('name');
 		$nama 			= $this->input->post('nama');
 		$id_promo 		= $this->input->post('id_promo');
@@ -65,6 +66,7 @@ class Mitra extends CI_Controller
 						'id'	=> $id,
 						'qty'	=> $qty,
 						'price'	=> $price,
+						'harga'	=> $harga,
 						'name'	=> $name,
 						'nama'	=> $nama,
 						'id_promo' => $id_promo,
@@ -209,9 +211,11 @@ class Mitra extends CI_Controller
 						'kode_transaksi'	=> $kode_transaksi,
 						'id_produk'			=> $keranjang['id_produk'],
 						'id_promo'			=> $keranjang['id_promo'],
-						'harga'				=> $keranjang['price'],
+						'harga'				=> $keranjang['harga'],
 						'jml_beli'			=> $qty,
 						'total_harga'		=> $sub_total,
+						'potongan'			=> 0,
+						'total_transaksi'	=> $sub_total,
 						'status'			=> $keranjang['option'],
 						'tanggal_transaksi'	=> $i->post('tanggal_transaksi')), 
 					array('id_pelanggan'	=> $pelanggan->id_pelanggan,//bonus
@@ -219,6 +223,8 @@ class Mitra extends CI_Controller
 						'id_produk'			=> $keranjang['id_produk'],
 						'id_promo'			=> $keranjang['id_promo'],
 						'harga'				=> 0,
+						'total_transaksi'	=> 0,
+						'potongan'			=> 0,
 						'jml_beli'			=> $bonus,
 						'total_harga'		=> 0,
 						'status'			=> $keranjang['option'],
@@ -230,7 +236,8 @@ class Mitra extends CI_Controller
 						'kode_transaksi'	=> $kode_transaksi,
 						'id_produk'			=> $keranjang['id_produk'],
 						'id_promo'			=> $keranjang['id_promo'],
-						'harga'				=> $keranjang['price'],
+						'total_transaksi'	=> $sub_total,
+						'harga'				=> $keranjang['harga'],
 						'jml_beli'			=> $qty,
 						'total_harga'		=> $sub_total,
 						'status'			=> $keranjang['option'],
@@ -240,6 +247,7 @@ class Mitra extends CI_Controller
 						'id_produk'			=> 'PK002',
 						'id_promo'			=> $keranjang['id_promo'],
 						'harga'				=> 0,
+						'total_transaksi'	=> 0,
 						'jml_beli'			=> $bonus,
 						'total_harga'		=> 0,
 						'status'			=> $keranjang['option'],

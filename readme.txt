@@ -27,6 +27,7 @@ catatan status
 7. JENIS TRANSAKSI
 	1 = ads
 	2 = organik
+	3 = sistem
 8. KODE ID
 	M001 = kode marketing
 	C = customer

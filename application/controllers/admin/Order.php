@@ -383,7 +383,7 @@ class Order extends CI_Controller
 
 		$get_product_detail =  $this->produk_model->detail_by_id($id_produk);
 		$get_bonus_detail =  $this->produk_model->detail_by_id($id_bonus);
-		if($id_produk=='POC'){
+		if($id_produk=='PK001'){
 			if($get_product_detail){
 				$data = array(
 					array(
@@ -507,7 +507,6 @@ class Order extends CI_Controller
 		$subtotal = $this->cart->total();
 		$ongkir = $this->input->post('ongkir');
 		$potongan = $this->input->post('sub_potongan');
-
 		//get total item
 		$total = 0;
 		$total_item = 0;
@@ -639,6 +638,7 @@ class Order extends CI_Controller
                 	'kabupaten' => $row->kabupaten,
                 	'provinsi'	=> $row->provinsi,
                 	'no_hp'	=> $row->no_hp,
+                	'id_marketing'	=> $row->id_marketing,
                 );
                 echo json_encode($arr_result);
             }

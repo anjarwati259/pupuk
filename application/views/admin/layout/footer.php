@@ -264,8 +264,9 @@
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : false
-    })
+      'autoWidth'   : false,
+      pagingType: "simple"
+    });
   //Date picker
     $('#datepicker').datepicker({
       autoclose: true,

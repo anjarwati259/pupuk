@@ -62,7 +62,7 @@ class Pelanggan extends CI_Controller
 		
 		//get provinsi
 		$id_user 	= $this->session->userdata('id_user');
-		$market 	=  $this->marketing_model->get_marketing($id_user);
+		$market 	= $this->marketing_model->get_marketing($id_user);
 		$provinsi = $this->wilayah_model->listing();
 		$id = $this->pelanggan_model->get_last_id();
 		$marketing = $this->pelanggan_model->marketing();
