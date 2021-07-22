@@ -30,7 +30,7 @@
                     </div>
                     <div class="signin-form">
                         <!-- alert -->
-                        <?php 
+                        <?php  
                         //notifikasi gagal login
                         if($this->session->flashdata('warning')){
                             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';

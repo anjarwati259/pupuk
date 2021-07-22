@@ -140,6 +140,7 @@
               <input type="hidden" name="kab" id="kab" value="<?php echo $pelanggan->kabupaten ?>">
               <input type="hidden" name="kec" id="kec" value="<?php echo $pelanggan->kecamatan ?>">
               <input type="hidden" name="prov" id="prov" value="<?php echo $pelanggan->provinsi ?>">
+              <input type="text" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
             	<button type="submit" class="btn btn-primary check" data-toggle="modal" >Checkout Sekarang</button>
             	<?php echo form_close(); ?>
 	        </div>

@@ -116,4 +116,12 @@ class Pelanggan_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function get_invoice($id_pelanggan){
+		$this->db->select('tb_pelanggan.*, tb_detail_order.kode_transaksi');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('tb_pelanggan.id_pelanggan', $id_pelanggan);
+		$this->db->join('tb_detail_order','tb_detail_order.id_pelanggan = tb_pelanggan.id_pelanggan', 'left');
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

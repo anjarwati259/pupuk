@@ -87,9 +87,6 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('komoditi', 'komoditi','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
 
 		if($valid->run()===FALSE){
 			//end validation
@@ -120,7 +117,6 @@ class Pelanggan extends CI_Controller
 							'id_marketing'		=> $i->post('id_marketing'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
-							'komoditi'			=> $i->post('komoditi'),
 							'tanggal_daftar'	=> $i->post('tanggal_daftar'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
@@ -161,10 +157,6 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('komoditi', 'komoditi','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
-
 
 		if($valid->run()===FALSE){
 			//end validation
@@ -188,7 +180,6 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
-								'komoditi'		=> $i->post('komoditi'),
 								'provinsi'			=> $i->post('prov'),
 								'kabupaten'			=> $i->post('kab'),
 								'kecamatan'			=> $i->post('kec')
@@ -199,7 +190,6 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
-								'komoditi'		=> $i->post('komoditi'),
 								'provinsi'			=> $i->post('prov')
 							);
 			}else if(!empty($kab)){
@@ -208,7 +198,6 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
-								'komoditi'		=> $i->post('komoditi'),
 								'kabupaten'			=> $i->post('kab')
 							);
 			}else if(!empty($kec)){
@@ -217,7 +206,6 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
-								'komoditi'		=> $i->post('komoditi'),
 								'kecamatan'			=> $i->post('kec')
 							);
 			}else{
@@ -226,7 +214,6 @@ class Pelanggan extends CI_Controller
 								'id_marketing'		=> $i->post('id_marketing'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
-								'komoditi'		=> $i->post('komoditi')
 							);
 			}
 			$this->pelanggan_model->edit($data);
@@ -236,10 +223,23 @@ class Pelanggan extends CI_Controller
 	}
 	//delete data customer
 	public function delete($id_pelanggan){
-		$data = array('id_pelanggan' => $id_pelanggan);
-		$this->pelanggan_model->delete($data);
-		$this->session->set_flashdata('sukses', 'Data telah dihapus');
-		redirect(base_url('admin/pelanggan/customer'), 'refresh');
+		$kode = $this->pelanggan_model->get_invoice($id_pelanggan);
+		$kode_transaksi = $kode->kode_transaksi;
+		//print_r($kode_transaksi);
+		if(!empty($kode_transaksi)){
+			$data = array('id_pelanggan' => $id_pelanggan);
+			$this->pelanggan_model->delete($data);
+			$this->order_model->delete_stok($kode_transaksi);
+			$this->order_model->delete_order($kode_transaksi);
+			$this->order_model->delete_detail($kode_transaksi);
+			$this->session->set_flashdata('sukses', 'Data telah dihapus');
+			redirect(base_url('admin/pelanggan/customer'), 'refresh');
+		}else{
+			$data = array('id_pelanggan' => $id_pelanggan);
+			$this->pelanggan_model->delete($data);
+			$this->session->set_flashdata('sukses', 'Data telah dihapus');
+			redirect(base_url('admin/pelanggan/customer'), 'refresh');
+		}
 	}
 	//menampilkan data mitra
 	public function mitra(){
@@ -305,9 +305,6 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('komoditi', 'komoditi','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
 
 		if($valid->run()===FALSE){
 			//end validation
@@ -339,7 +336,6 @@ class Pelanggan extends CI_Controller
 							'id_marketing'		=> $i->post('id_marketing'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
-							'komoditi'			=> $i->post('komoditi'),
 							'tanggal_daftar'	=> $i->post('tanggal_daftar'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
@@ -380,9 +376,6 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('komoditi', 'komoditi','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
 
 
 		if($valid->run()===FALSE){
@@ -407,7 +400,6 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'id_marketing'		=> $i->post('id_marketing'),
 								'no_hp'				=> $i->post('no_hp'),
-								'komoditi'		=> $i->post('komoditi'),
 								'provinsi'			=> $i->post('prov'),
 								'kabupaten'			=> $i->post('kab'),
 								'kecamatan'			=> $i->post('kec')
@@ -418,7 +410,6 @@ class Pelanggan extends CI_Controller
 								'id_marketing'		=> $i->post('id_marketing'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
-								'komoditi'		=> $i->post('komoditi'),
 							);
 			}
 			$this->pelanggan_model->edit($data);
@@ -428,9 +419,20 @@ class Pelanggan extends CI_Controller
 	}
 	//delete data mitra
 	public function delete_mitra($id_pelanggan){
-		$data = array('id_pelanggan' => $id_pelanggan);
-		$this->pelanggan_model->delete($data);
-		$this->session->set_flashdata('sukses', 'Data telah dihapus');
+		$kode = $this->pelanggan_model->get_invoice($id_pelanggan);
+		$kode_transaksi = $kode->kode_transaksi;
+		//print_r($kode_transaksi);
+		if(!empty($kode_transaksi)){
+			$data = array('id_pelanggan' => $id_pelanggan);
+			$this->pelanggan_model->delete($data);
+			$this->order_model->delete_stok($kode_transaksi);
+			$this->order_model->delete_order($kode_transaksi);
+			$this->order_model->delete_detail($kode_transaksi);
+		}else{
+			$data = array('id_pelanggan' => $id_pelanggan);
+			$this->pelanggan_model->delete($data);
+		}
+		 $this->session->set_flashdata('sukses', 'Data telah dihapus');
 		redirect(base_url('admin/pelanggan/mitra'), 'refresh');
 	}
 	//menampilkan data distributor
@@ -496,9 +498,6 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('komoditi', 'komoditi','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
 
 		if($valid->run()===FALSE){
 			//end validation
@@ -526,7 +525,6 @@ class Pelanggan extends CI_Controller
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
-							'komoditi'		=> $i->post('komoditi'),
 							'tanggal_daftar'	=> $i->post('tanggal_daftar'),
 							'id_marketing'		=> $i->post('id_marketing'),
 							'provinsi'			=> $i->post('prov'),
@@ -568,9 +566,6 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('komoditi', 'komoditi','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
 
 
 		if($valid->run()===FALSE){
@@ -592,7 +587,6 @@ class Pelanggan extends CI_Controller
 			if((!empty($prov)) and (!empty($kab)) and (!empty($kec))){
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-								'komoditi'			=> $i->post('komoditi'),
 								'id_marketing'			=> $i->post('id_marketing'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
@@ -604,7 +598,6 @@ class Pelanggan extends CI_Controller
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'id_marketing'			=> $i->post('id_marketing'),
-								'komoditi'		=> $i->post('komoditi'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 							);
@@ -616,9 +609,20 @@ class Pelanggan extends CI_Controller
 	}
 	//delete data distributor
 	public function delete_distributor($id_pelanggan){
-		$data = array('id_pelanggan' => $id_pelanggan);
-		$this->pelanggan_model->delete($data);
-		$this->session->set_flashdata('sukses', 'Data telah dihapus');
+		$kode = $this->pelanggan_model->get_invoice($id_pelanggan);
+		$kode_transaksi = $kode->kode_transaksi;
+		//print_r($kode_transaksi);
+		if(!empty($kode_transaksi)){
+			$data = array('id_pelanggan' => $id_pelanggan);
+			$this->pelanggan_model->delete($data);
+			$this->order_model->delete_stok($kode_transaksi);
+			$this->order_model->delete_order($kode_transaksi);
+			$this->order_model->delete_detail($kode_transaksi);
+		}else{
+			$data = array('id_pelanggan' => $id_pelanggan);
+			$this->pelanggan_model->delete($data);
+		}
+		 $this->session->set_flashdata('sukses', 'Data telah dihapus');
 		redirect(base_url('admin/pelanggan/distributor'), 'refresh');
 	}
 	// ============================= Marketing====================//

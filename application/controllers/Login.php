@@ -80,7 +80,6 @@ class Login extends CI_Controller
                       'id_user'       => $id_user,
                       'nama_pelanggan'=> $i->post('nama_pelanggan'),
                       'no_hp'         => $i->post('no_hp'),
-                      'komoditi'      => $i->post('komoditi'),
                       'alamat'        => $i->post('alamat'),
                       'provinsi'      => $i->post('provinsi'),
                       'kabupaten'     => $i->post('kabupaten'),
@@ -90,9 +89,7 @@ class Login extends CI_Controller
             );
       $this->pelanggan_model->tambah($data);
       //create session login 
-      $this->session->set_userdata('username',$i->post('username'));
-      $this->session->set_userdata('nama_pelanggan',$i->post('nama_pelanggan'));
-      $this->session->set_userdata('hak_akses','4');
+      $this->simple_login->login($i->post('username'),$i->post('password'));
       //end create session
       $this->session->set_flashdata('sukses','Registrasi berhasil');
       redirect(base_url('home'), 'refresh');

@@ -52,29 +52,26 @@
 			                </div>
                     </div>
                     <div class="signup-form">
-                            <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-accounts"></i></i></label>
-                                <input type="text" name="komoditi" id="komoditi" placeholder="Komoditi"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-pin"></i></label>
-                                <input type="text" name="alamat" id="alamat" placeholder="ALamat Lengkap"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-pin"></i></label>
-                                <input type="text" name="provinsi" id="provinsi" placeholder="Provinsi"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-pin"></i></label>
-                                <input type="text" name="kabupaten" id="kabupaten" placeholder="Kabupaten/Kota"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-pin"></i></label>
-                                <input type="text" name="kecamatan" id="kecamatan" placeholder="Kecamatan"/>
-                            </div>
-                            <div class="form-group form-button">
-			                    <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
-			                </div>
+                            
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-pin"></i></label>
+                            <input type="text" name="alamat" id="alamat" placeholder="ALamat Lengkap"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-pin"></i></label>
+                            <input type="text" name="provinsi" id="provinsi" placeholder="Provinsi"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-pin"></i></label>
+                            <input type="text" name="kabupaten" id="kabupaten" placeholder="Kabupaten/Kota"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-pin"></i></label>
+                            <input type="text" name="kecamatan" id="kecamatan" placeholder="Kecamatan"/>
+                        </div>
+                        <div class="form-group form-button">
+		                    <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+		                </div>
                         </form>
                         <?php echo form_close() ?>
                     </div>

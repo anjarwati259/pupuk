@@ -83,7 +83,7 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_customer/'.$customer->id
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="no_hp">No Telp</label>
                         <div class="col-sm-8">
-                          <input type="number" value="<?php echo $customer->no_hp ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
+                          <input type="text" value="<?php echo $customer->no_hp ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
                         </div>
                       </div>
                       <?php if($this->session->userdata('hak_akses')=='1'){ ?>
@@ -100,12 +100,6 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_customer/'.$customer->id
                     <?php }else{ ?>
                       <input type="hidden" name="id_marketing" value="<?php echo $market->id_marketing ?>">
                     <?php } ?>
-                      <div class="form-group">
-                        <label class="col-sm-4 control-label" for="komoditi">Komoditi</label>
-                        <div class="col-sm-8">
-                          <input type="text" value="<?php echo $customer->komoditi ?>" name="komoditi" placeholder="Komoditi" class="form-control"/>
-                        </div>
-                      </div>
                     </div>
                   </div>
                   <!-- /.box-body -->

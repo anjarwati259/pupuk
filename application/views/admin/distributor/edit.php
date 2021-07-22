@@ -100,12 +100,6 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_distributor/'.$distribut
                     <?php }else{ ?>
                       <input type="hidden" name="id_marketing" value="<?php echo $market->id_marketing ?>">
                     <?php } ?>
-                      <div class="form-group">
-                        <label class="col-sm-4 control-label" for="komoditi">Komoditi</label>
-                        <div class="col-sm-8">
-                          <input type="text" value="<?php echo $distributor->komoditi ?>" name="komoditi" placeholder="Komoditi" class="form-control"/>
-                        </div>
-                      </div>
                     </div>
                   </div>
                   <!-- /.box-body -->

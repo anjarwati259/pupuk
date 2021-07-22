@@ -97,7 +97,7 @@
                         <td><?php echo tanggal_indo(date('Y-m-d',strtotime($mitra->tanggal_daftar))); ?></td>
                         <td>
                           <a href="<?php echo base_url('admin/pelanggan/edit_mitra/'.$mitra->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
-                          <a href="<?php echo base_url('admin/pelanggan/delete_mitra/'.$mitra->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" ><i class="fa fa-trash"></i> Hapus</a>
+                          <a href="<?php echo base_url('admin/pelanggan/delete_mitra/'.$mitra->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" ><i class="fa fa-trash"></i> Hapus</a>
                         </td>
                       </tr>
                     <?php } ?>
@@ -174,7 +174,7 @@
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="no_hp">No Telp</label>
                         <div class="col-sm-8">
-                          <input type="number" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
+                          <input type="text" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
                         </div>
                       </div>
                       <?php if($this->session->userdata('hak_akses')=='1'){ ?>
@@ -191,12 +191,6 @@
                     <?php }else{ ?>
                       <input type="hidden" name="id_marketing" value="<?php echo $market->id_marketing ?>">
                     <?php } ?>
-                      <div class="form-group">
-                        <label class="col-sm-4 control-label" for="komoditi">Komoditi</label>
-                        <div class="col-sm-8">
-                          <input type="text" value="<?php echo set_value('komoditi') ?>" name="komoditi" placeholder="Komoditi" class="form-control"/>
-                        </div>
-                      </div>
                     </div>
                   </div>
                   <!-- /.box-body -->
