@@ -256,7 +256,6 @@ class Order extends CI_Controller
 		$i = $this->input;
 
 		$data = array( 'kode_transaksi' => $kode_transaksi,
-						'tanggal_transaksi' => $i->post('tanggal_transaksi'),
 						'id_marketing' => $i->post('id_marketing'),
 						'jenis_order' => $i->post('jenis_order'),
 						'expedisi' => $i->post('ekspedisi'),
@@ -512,16 +511,16 @@ class Order extends CI_Controller
 		$total_item = 0;
 		foreach ($carts as $value) {
 			if($value['price']!=0){
-				$total = $total + $value['qty'];
-				$total_item += $value['qty'];
+				$total = $total + (int)$value['qty'];
+				$total_item += (int)$value['qty'];
 			}
 		}
 
 		//cek id pelanggan
 		if(!empty($carts) && is_array($carts) && $ongkir != null){
 
-			$total = $subtotal - $potongan;
-			$total_bayar = $total + $ongkir;
+			$total = (int)$subtotal - (int)$potongan;
+			$total_bayar = (int)$total + (int)$ongkir;
 			$id_pelanggan = $this->input->post('id_pelanggan');
 			$komoditi = $this->input->post('komoditi');
 			$no_hp = $this->input->post('no_hp');

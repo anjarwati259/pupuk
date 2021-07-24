@@ -95,44 +95,13 @@
       <div class="row">
         <div class="col-md-6">
           <!-- <button class="btn btn-block btn-default"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Ubah Password</button> -->
-          <a type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-default"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
-            Ubah Password
-          </a>
+          <?php include "change_password.php" ?>
+          <div style="padding-top: 5px;"></div>
           <button type="submit" class="btn btn-block btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan Perubahan</button>
         </div>
       </div>
     </div>
     <!-- /.box-body -->
-  </div>
-</div>
-
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #F0F8FF;">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp; <strong>Ubah Password</strong></h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Password Lama</label>
-          <input type="text" name="pass_lama" class="form-control" value="<?php echo set_value('pass_lama') ?>" placeholder="Masukkan Password Lama Anda">
-        </div>
-        <div class="form-group">
-          <label>Password Baru</label>
-          <input type="text" name="pass_baru" class="form-control" value="<?php echo set_value('pass_baru') ?>" placeholder="Masukkan Password Baru">
-        </div>
-        <div class="form-group">
-          <label>Ulangi Password</label>
-          <input type="text" name="rep_pass" class="form-control" value="<?php echo set_value('rep_pass') ?>" placeholder="Ulangi Password Baru">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a href="<?php echo base_url('') ?>" type="button" class="btn btn-primary">Ubah Password</a>
-      </div>
-    </div>
   </div>
 </div>
 <script type="text/javascript">

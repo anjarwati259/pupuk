@@ -129,6 +129,11 @@ class Dashboard extends CI_Controller
 		$this->form_validation->set_rules('pass_lama', "Password Lama", 'required|trim');
 		$this->form_validation->set_rules('pass_baru', "Password Baru", 'required|trim|min_length[3]|matches[rep_pass]');
 		$this->form_validation->set_rules('rep_pass', "Password Lama", 'required|trim|min_length[3]|matches[pass_baru]');
+		if($this->form_validation->run() == false){
+			$this->session->set_flashdata('error','data Kosong');
+			redirect(base_url('admin/dashbord/profil'), 'refresh');
+		} else{
+		}
 		
 	}
 }
