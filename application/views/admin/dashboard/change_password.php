@@ -9,25 +9,27 @@
         <h4 class="modal-title"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp; <strong>Ubah Password</strong></h4>
       </div>
       <div class="modal-body">
+        <?php echo form_open(base_url('admin/dashboard/change_password/'.$id_user)); ?>
         <div class="form-group">
           <label>Password Lama</label>
-          <input type="text" name="pass_lama" class="form-control" value="<?php echo set_value('pass_lama') ?>" placeholder="Masukkan Password Lama Anda">
+          <input type="text" name="pass_lama" class="form-control" value="<?php echo set_value('pass_lama') ?>" placeholder="Masukkan Password Lama Anda" required>
         </div>
         <div class="form-group">
           <label>Password Baru</label>
-          <input type="password" id="pass_baru" name="pass_baru" class="form-control" value="<?php echo set_value('pass_baru') ?>" placeholder="Masukkan Password Baru">
+          <input type="password" id="pass_baru" name="pass_baru" class="form-control" value="<?php echo set_value('pass_baru') ?>" placeholder="Masukkan Password Baru" required>
           <div id="msg1"></div>
         </div>
         <div class="form-group">
           <label>Ulangi Password</label>
-          <input type="password" id="rep_pass" name="rep_pass" class="form-control" value="<?php echo set_value('rep_pass') ?>" placeholder="Ulangi Password Baru">
+          <input type="password" id="rep_pass" name="rep_pass" class="form-control" value="<?php echo set_value('rep_pass') ?>" placeholder="Ulangi Password Baru" required>
           <div id="msg"></div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a id="coba" href="<?php //echo base_url('admin/dashboard/change_password') ?>" type="button" class="btn btn-primary">Ubah Password</a>
+        <button id="coba" type="submit" class="btn btn-primary">Ubah Password</button>
       </div>
+      <?php echo form_close() ?>
     </div>
   </div>
 </div>
@@ -42,8 +44,11 @@
   });
   $('#pass_baru').on('keyup', function () {
     var pass_baru = $('#pass_baru').val();
-    if(pass_baru.length() > 3){
-      $('#msg1').html('Password Minimal 3 Karakter').css('color', 'red');
+    var panjang = pass_baru.length;
+    if(panjang < 3){
+      $('#msg1').html('Panjang Password Minimal 3').css('color', 'red');
+    }else{
+      $('#msg1').html('').css('color', 'red');
     }
   });
 </script>

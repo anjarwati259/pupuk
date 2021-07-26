@@ -97,13 +97,24 @@
           <!-- <button class="btn btn-block btn-default"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Ubah Password</button> -->
           <?php include "change_password.php" ?>
           <div style="padding-top: 5px;"></div>
-          <button type="submit" class="btn btn-block btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan Perubahan</button>
+          <button type="submit" id="submit" class="btn btn-block btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan Perubahan</button>
         </div>
       </div>
     </div>
     <!-- /.box-body -->
   </div>
 </div>
+<?php if($this->session->flashdata('sukses')) { ?>
+  <script type="text/javascript">
+    var pesan = '<?php echo $this->session->flashdata('sukses') ?>'
+    toastr.success(pesan);
+  </script>
+<?php }else if($this->session->flashdata('error')){ ?>
+  <script type="text/javascript">
+    var pesan = '<?php echo $this->session->flashdata('error') ?>'
+    toastr.error(pesan);
+  </script>
+<?php }; ?>
 <script type="text/javascript">
   function showPreview(event){
     if(event.target.files.length > 0 ){
@@ -111,8 +122,6 @@
       var preview = document.getElementById("file-ip-1-preview");
       preview.src = src;
       preview.style.display = "block";
-      //alert(src);
     }
-    
   }
 </script>

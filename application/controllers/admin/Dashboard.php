@@ -118,22 +118,26 @@ class Dashboard extends CI_Controller
 		$marketing = $this->dashboard_model->user_market($id_user);
 		$user = $this->user_model->user('id_user');
 		$data = array(	'title' => 'Profil',
+						'id_user' => $id_user,
 						'user'	=> $user,
 						'marketing' => $marketing,
 						'isi'	 => 'admin/dashboard/profil'
 						);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
-	public function change_password(){
-		$valid = $this-> form_validation;
-		$this->form_validation->set_rules('pass_lama', "Password Lama", 'required|trim');
-		$this->form_validation->set_rules('pass_baru', "Password Baru", 'required|trim|min_length[3]|matches[rep_pass]');
-		$this->form_validation->set_rules('rep_pass', "Password Lama", 'required|trim|min_length[3]|matches[pass_baru]');
-		if($this->form_validation->run() == false){
-			$this->session->set_flashdata('error','data Kosong');
-			redirect(base_url('admin/dashbord/profil'), 'refresh');
-		} else{
+	public function change_password($id_user){
+		$pass_lama = sha1($this->input->post('pass_lama'));
+		$cek_pass = $this->dashboard_model->old_pass($pass_lama);
+		if (!empty($cek_pass)){
+			$data = array( 'id_user' => $id_user,
+				'password' => sha1($this->input->post('pass_baru'))
+			);
+			$this->dashboard_model->update_password($data);
+			$this->session->set_flashdata('sukses','Password telah berhasil diubah' );
+			redirect(base_url('admin/dashboard/profil'),'refresh');
+		}else{
+			$this->session->set_flashdata('error','password lama tidak sama' );
+			redirect(base_url('admin/dashboard/profil'), 'refresh');
 		}
-		
 	}
 }

@@ -293,4 +293,13 @@ class Dashboard_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	public function old_pass($data){
+		$this->db->where('password', $data);
+		$query = $this->db->get('tb_user');
+		return $query->result();
+	}
+	public function update_password($data){
+		$this->db->where('id_user', $data['id_user']);
+		$this->db->update('tb_user',$data);
+	}
 }
