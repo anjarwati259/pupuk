@@ -96,7 +96,7 @@ class Mitra extends CI_Controller
 			//membuat kode transaksi
 			$id_SO = $this->order_model->get_last_id();
 				if($id_SO){
-					$id = substr($id_SO[0]->kode_transaksi, 19);
+					$id = substr($id_SO[0]->kode_transaksi, 20);
 					$kode_transaksi = generate_SO($id);
 				}else{
 					$kode_transaksi = generate_else();
@@ -131,12 +131,13 @@ class Mitra extends CI_Controller
 		//membuat kode transaksi
 		$id_SO = $this->order_model->get_last_id();
 			if($id_SO){
-				$id = substr($id_SO[0]->kode_transaksi, 19);
+				$id = substr($id_SO[0]->kode_transaksi, 20);
 				$kode_transaksi = generate_SO($id);
 			}else{
 				$kode_transaksi = generate_else();
 			}			
 			//end validation
+			print_r($id_SO);
 		//kondisi sudah login
 		$provinsi = $this->wilayah_model->listing();
 		if($this->session->userdata('username')){

@@ -189,12 +189,12 @@ class Order extends CI_Controller
 		//last id pelanggan
 		$id_SO = $this->order_model->get_last_id();
 		if($id_SO){
-			$id = substr($id_SO[0]->kode_transaksi, 19);
+			$id = substr($id_SO[0]->kode_transaksi, 20);
 			$kode_transaksi = generate_SO($id);
 		}else{
 			$kode_transaksi = generate_else();
 		}
-
+		//print_r($id_SO);
 		//last id pelanggan
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		if($pelanggan_id){
@@ -486,7 +486,7 @@ class Order extends CI_Controller
 		//SO
 		$id_SO = $this->order_model->get_last_id();
 		if($id_SO){
-			$id = substr($id_SO[0]->kode_transaksi, 19);
+			$id = substr($id_SO[0]->kode_transaksi, 20);
 			$kode_transaksi = generate_SO($id);
 		}else{
 			$kode_transaksi = generate_else();
@@ -753,6 +753,7 @@ class Order extends CI_Controller
 	}
 	public function add_pelanggan()
 	{
+		// print_r($no_hp);
 		//get provinsi
 		$provinsi = $this->wilayah_model->listing();
 		//last id pelanggan
@@ -798,11 +799,23 @@ class Order extends CI_Controller
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		}else{
 			$i 	= $this->input;
+			//konfigurasi no hp
+			$nohp = $i->post('no_hp');
+			$hp = preg_replace("/[^0-9]/", "", $nohp);
+			$no = substr($hp,0,1);
+			$a = substr($hp,1);
+			
+			if($no == '0'){
+				$no_hp = '62'.$a;
+			}else{
+				$no_hp = $hp;
+			}
+
 			$data = array(	'id_pelanggan'		=> $id_pelanggan,
 							'nama_pelanggan'	=> $i->post('namapelanggan'),
 							'alamat'			=> $i->post('alamat'),
 							'id_marketing'			=> $i->post('id_marketing'),
-							'no_hp'				=> $i->post('no_hp'),
+							'no_hp'				=> $no_hp,
 							'tanggal_daftar'	=> date('Y-m-d'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
@@ -942,5 +955,16 @@ class Order extends CI_Controller
 						'detail'	=> $detail,
 					);
 		$this->load->view('admin/order/print_invoice', $data, FALSE);
+	}
+	public function follow_up(){
+		$text = $this->input->post('text_wa');
+		//$nohp = $this->input->post('no_hp');
+		$enter = nl2br($text);
+		$nohp = '6282139995426';
+		$encode = '&text=' . urlencode($text);
+		$linkWA = 'https://web.whatsapp.com/send?phone=' . $nohp . $encode;
+		//print_r($linkWA);
+		echo '<a href="$linkWA">Click here</a>';
+		
 	}
 }

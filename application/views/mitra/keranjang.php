@@ -135,12 +135,12 @@
             	</div>
             	<input type="hidden" name="kode_transaksi" class="form-control" value="<?php echo $kode_transaksi ?>">
               <input type="hidden" name="total_transaksi" value="<?php echo $this->cart->total() ?>">
-              <input type="hidden" name="tanggal_transaksi" value="<?php echo date('Y-m-d'); ?>">
+              <input type="text" name="tanggal_transaksi" value="<?php echo date('Y-m-d H:i:s');?>">
               <input type="hidden" name="total_item" value="<?php echo $total_item ?>">
               <input type="hidden" name="kab" id="kab" value="<?php echo $pelanggan->kabupaten ?>">
               <input type="hidden" name="kec" id="kec" value="<?php echo $pelanggan->kecamatan ?>">
               <input type="hidden" name="prov" id="prov" value="<?php echo $pelanggan->provinsi ?>">
-              <input type="text" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
+              <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
             	<button type="submit" class="btn btn-primary check" data-toggle="modal" >Checkout Sekarang</button>
             	<?php echo form_close(); ?>
 	        </div>

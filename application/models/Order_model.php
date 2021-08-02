@@ -160,7 +160,7 @@ class Order_model extends CI_Model
 	}
 	//digunakan untuk mencari kode transaksi terakhir
 	public function get_last_id(){
-		$this->db->order_by('kode_transaksi', 'DESC');
+		$this->db->order_by('tanggal_transaksi', 'DESC');
 
 		$query = $this->db->get("tb_detail_order",1,0);
 		return $query->result();
