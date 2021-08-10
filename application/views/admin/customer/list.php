@@ -12,7 +12,7 @@
      <div id="success-alert" style="display:none;" class="alert alert-success alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
       <?php echo $this->session->flashdata('sukses'); ?>
-</div>
+    </div>
 <!-- START CUSTOM TABS -->
       <div class="row">
         <div class="col-md-12">

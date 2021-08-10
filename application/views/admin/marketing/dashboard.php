@@ -12,7 +12,7 @@
             <div class="icon">
               <i class="fa fa-cart-arrow-down"></i>
             </div>
-            <a href="<?php echo base_url('admin/order') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('marketing/belum_bayar') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

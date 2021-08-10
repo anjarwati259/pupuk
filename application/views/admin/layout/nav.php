@@ -80,6 +80,20 @@
             <li><a href="<?php echo base_url('admin/dashboard/pencairan_reward') ?>"><i class="fa fa-plus-square-o"></i> Pencairan Reward</a></li>
           </ul>
         </li>
+        <!-- setting -->
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>Setting</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('admin/dashboard/follow_up') ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i> Follow UP</a></li>
+            <!-- <li><a href="<?php echo base_url('admin/dashboard/pencairan_reward') ?>"><i class="fa fa-plus-square-o"></i> Pencairan Reward</a></li> -->
+          </ul>
+        </li>
 
         <!-- pengguna -->
         <!-- <li class="treeview">

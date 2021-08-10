@@ -257,15 +257,15 @@
 
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
+    //$('#example1').DataTable()
+    $('#example1').DataTable({
       'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
+      'lengthChange': true,
+      'searching'   : true,
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false,
-      pagingType: "simple"
+      'pageLength'  : 50
     });
   //Date picker
     $('#datepicker').datepicker({

@@ -107,17 +107,23 @@ $getdataorder= $this->db->get()->result();
         </div>
         <div class="form-group">
           <label>Text</label>
-          <textarea style="height: 100px; white-space: pre-line;" name="text_wa" id="text_wa<?php echo $i; ?>" placeholder="Isikan Text" class="form-control text"/>
-<?php 
-$text = $welcome->text;
-echo gettype($text);
-// $str = <<<EOF
-// {$text}
-// EOF;
-//     echo $str;
-?>
-      </textarea>
-          <input type="hidden" name="url" id="url">
+          <textarea style="height: 100px;white-space: pre-line;" name="text_wa" id="text_wa<?php echo $i; ?>" placeholder="Isikan Text" class="form-control text"/> <?php
+
+           if ($follow->metode_pembayaran=='1') {
+            echo "Transfer Bank";
+
+           }
+           if ($follow->metode_pembayaran=='0') {
+            echo "COD";
+
+           }
+           ?> welcome
+            <?php foreach ($getdataorder as $key => $value): ?>
+              
+              <?php echo $value->nama_produk; ?> jumlah <?php echo $value->jml_beli; ?> X <?php echo rupiah($value->harga); ?> = <?php echo rupiah(($value->jml_beli*$value->harga)); ?>,
+            <?php endforeach ?>
+yeayyy yuhuuu  <?php echo $follow->no_hp; ?></textarea>
+          <input type="text" name="url" id="url">
         </div>
       </div>
       <div class="modal-footer">
@@ -141,3 +147,4 @@ echo gettype($text);
 </script>
 <?php $i++; } ?>
 <!-- Modal Follow Up 2 -->
+

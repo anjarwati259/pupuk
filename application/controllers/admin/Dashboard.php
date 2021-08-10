@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('dashboard_model');
 		$this->load->model('pelanggan_model');
 		$this->load->model('order_model');
+		$this->load->model('produk_model');
 	}
 	public function index(){
 		$tanggal = date('Y-m-d');
@@ -39,7 +40,7 @@ class Dashboard extends CI_Controller
                         'dist' => $dist,
                         'customer' => $customer,
                         'stok'    => $stok,
-                        'harian'    => $harian,
+                        'harian'    => $harian, 
                         'mingguan'    => $mingguan,
                         'bulanan' => $bulanan,
                         'order_baru' => $order_baru,
@@ -49,6 +50,7 @@ class Dashboard extends CI_Controller
                         'ikan' => $ikan,
                         'ternak' => $ternak,
                         'isi' => 'admin/dashboard/list' );
+		//print_r($harian);
         $this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 	//reward
@@ -140,4 +142,58 @@ class Dashboard extends CI_Controller
 			redirect(base_url('admin/dashboard/profil'), 'refresh');
 		}
 	}
+
+	public function follow_up(){
+		//$produk = $this->produk_model->produk();
+		$follow_up = $this->dashboard_model->follow_up();
+		$welcome = $this->dashboard_model->text_follow('Welcome');
+		$order_detail = $this->dashboard_model->text_follow('Order Detail');
+		$follow1 = $this->dashboard_model->text_follow('Follow Up 1');
+		$follow2 = $this->dashboard_model->text_follow('Follow Up 2');
+		$follow3 = $this->dashboard_model->text_follow('Follow Up 3');
+		$follow4 = $this->dashboard_model->text_follow('Follow Up 4');
+		$proses = $this->dashboard_model->text_follow('Proses');
+		$complate = $this->dashboard_model->text_follow('Complate');
+		$up_selling = $this->dashboard_model->text_follow('Up Selling');
+		$redirect = $this->dashboard_model->text_follow('Redirect');
+		$data = array(	'title' => 'Setting Follow UP',
+						'follow' => $follow_up,
+						'welcome' => $welcome,
+						'order_detail' =>$order_detail,
+						'follow1' =>$follow1,
+						'follow2' =>$follow2,
+						'follow3' =>$follow3,
+						'follow4' =>$follow4,
+						'proses' => $proses,
+						'complate' => $complate,
+						'up_selling' => $up_selling,
+						'redirect' => $redirect,
+						'isi'	 => 'admin/setting/follow_up'
+						);
+		//print_r($welcome);
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+
+	public function save_follow(){
+		//save data follow up
+		$follow_up = $this->dashboard_model->follow_up();
+		$i=1;
+		foreach ($follow_up as $follow_up) {
+			$data = array();
+				array_push($data,
+					array(
+					'id_follow_up'	=> $this->input->post('kode' . $i),
+					'text'			=> $this->input->post('text_follow' . $i)
+				)
+			);
+			$i++;
+			//print_r($data);
+			$this->dashboard_model->save_follow($data);
+		}
+		 // $this->produk_model->update_produk($data);
+		  $this->session->set_flashdata('sukses','Setting Follow up berhasil');
+		  redirect(base_url('admin/dashboard/follow_up'), 'refresh');
+	}
+
+
 }

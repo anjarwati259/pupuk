@@ -15,7 +15,7 @@ class Produk_model extends CI_Model
 	public function produk(){
 		$this->db->select('*');
 		$this->db->from('tb_produk');
-		$this->db->order_by('kode_produk','desc');
+		$this->db->order_by('kode_produk','asc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -129,5 +129,9 @@ class Produk_model extends CI_Model
 	public function update($data){
 		$this->db->where('kode_transaksi', $data['kode_transaksi']);
 		$this->db->update('tb_stok',$data);
+	}
+	public function update_produk($data){
+		$this->db->where('kode_produk', $data['kode_produk']);
+		$this->db->update('tb_produk',$data);
 	}
 }

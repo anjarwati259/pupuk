@@ -7,7 +7,14 @@ function generate_code($suffix,$id){
 	$kode = $kode + 1;
 	return $suffix .str_pad($kode, 3, "0",  STR_PAD_LEFT);
 }
-
+function rupiah($angka){
+    if ($angka==''||$angka==null||$angka=='-') {
+       $rupiah = 0;
+   }else{
+    $rupiah=number_format($angka,0,',','.');
+}
+return "Rp ".$rupiah;
+}
 function generate_invoice($prefix,$num,$length = 3){
 	$add_code = (int)filter_var($num, FILTER_SANITIZE_NUMBER_INT) + 1;
 	$num_code = str_pad($add_code,$length,"0",STR_PAD_LEFT);

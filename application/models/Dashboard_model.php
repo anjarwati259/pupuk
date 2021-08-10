@@ -68,7 +68,7 @@ class Dashboard_model extends CI_Model
 	public function harian(){
 		$this->db->select('SUM(total_item) as total');
 		$this->db->from('tb_detail_order');
-		$this->db->where('tanggal_transaksi',date('Y-m-d'));
+		$this->db->where('tanggal_transaksi >=',date('Y-m-d'));
 		$this->db->order_by('tanggal_transaksi','desc');
 		$query = $this->db->get();
 		return $query->row();
@@ -78,7 +78,7 @@ class Dashboard_model extends CI_Model
 		$this->db->select('SUM(total_item) as total');
 		$this->db->from('tb_detail_order');
 		$this->db->where('id_marketing',$id_marketing);
-		$this->db->where('tanggal_transaksi',date('Y-m-d'));
+		$this->db->where('tanggal_transaksi >=',date('Y-m-d'));
 		$this->db->order_by('tanggal_transaksi','desc');
 		$query = $this->db->get();
 		return $query->row();
@@ -301,5 +301,21 @@ class Dashboard_model extends CI_Model
 	public function update_password($data){
 		$this->db->where('id_user', $data['id_user']);
 		$this->db->update('tb_user',$data);
+	}
+	public function follow_up(){
+		$this->db->select('*');
+		$this->db->from('tb_follow_up');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function text_follow($nama){
+		$this->db->select('*');
+		$this->db->from('tb_follow_up');
+		$this->db->where('nama', $nama);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function save_follow($data){
+	$this->db->update_batch('tb_follow_up', $data, 'id_follow_up'); 
 	}
 }

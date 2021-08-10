@@ -67,7 +67,6 @@ class Belanja extends CI_Controller
 	//hapus isi keranjang belanja
 	public function hapus($rowid)
 	{
-		
 		//hapus per item
 		$this->cart->remove($rowid);
 		$this->session->set_flashdata('sukses','Data keranjang belanja telah dihapus');

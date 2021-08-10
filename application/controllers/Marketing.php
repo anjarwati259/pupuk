@@ -17,6 +17,7 @@ class Marketing extends CI_Controller
 		$this->load->model('wilayah_model');
 		//load helper random string
 		$this->load->helper('string');
+		$this->load->library('parser');
 		//proteksi halaman
 		$this->simple_login->cek_login();
 		$this->simple_login->marketing();
@@ -97,6 +98,7 @@ class Marketing extends CI_Controller
 						'isi'	=> 'admin/marketing/tambah_order'
 						);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
+		
 	}
 	//tambah data pelanggan
 	public function add_pelanggan()
@@ -128,28 +130,28 @@ class Marketing extends CI_Controller
 				array(	'required' 		=> '%s harus diisi',
 						));
 
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
+		}else{
+			$id_pelanggan = 'C001';
+		}
+
 		if($valid->run()===FALSE){
 			//end validation
 			$customer = $this->pelanggan_model->customer();
-			$id = $this->pelanggan_model->get_last_id();
-
-			if($id){
-				$id = $id[0]->id_pelanggan;
-				$id_pelanggan = generate_code('ID20220',$id);
-			}else{
-				$id_pelanggan = 'ID202201';
-			}
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'customer'	=> $customer,
-							'id'		=> $id,
+							'id'		=> $id_pelanggan,
 							'provinsi'	=> $provinsi,
 							'isi'		=> 'admin/customer/list'
 						);
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		}else{
 			$i 	= $this->input;
-			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
+			$data = array(	'id_pelanggan'		=> $id_pelanggan,
 							'nama_pelanggan'	=> $i->post('namapelanggan'),
 							'alamat'			=> $i->post('alamat'),
 							'id_marketing'			=> $i->post('id_marketing'),
@@ -219,11 +221,17 @@ class Marketing extends CI_Controller
 		$id_user = $this->session->userdata('id_user');
 		$marketing =  $this->marketing_model->get_marketing($id_user);
 		$id_marketing = $marketing->id_marketing;
-		$order 	= $this->order_model->list_belum($id_marketing,1);
+		$produk = $this->marketing_model->produk($id_user);
+		$order 	= $this->order_model->list_order($id_marketing,1);
+
+		$welcome = $this->dashboard_model->text_follow('Welcome');
 		$data = array(	'title'	=> 'Data Order',
 						'sudah_bayar'	=> $order,
+						'follow'	=> $order,
+						'welcome'	=> $welcome,
 						'isi'	=> 'admin/marketing/sudah_bayar'
 						);
+
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 	public function semua_order(){
