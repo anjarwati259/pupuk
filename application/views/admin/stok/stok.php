@@ -18,6 +18,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                       <thead>
                       <tr>
+                        <th>No</th>
                         <th>Tanggal</th>
                         <th>Nama</th>
                         <th>Produk</th>
@@ -64,6 +65,7 @@
                   }
                       $no=1; foreach ($stok as $stok) { ?>
                       <tr>
+                        <td><?php echo $no++; ?></td>
                         <td><?php echo tanggal_indo(date('Y-m-d',strtotime($stok->tanggal)),FALSE); ?></td>
                         <td><?php if($stok->status == 'in'){
                           echo "Pabrik";

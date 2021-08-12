@@ -183,6 +183,24 @@ class Order extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+	//data order customer
+	public function customer(){
+		$order 	= $this->order_model->allorder('Customer');
+		$data = array(	'title'		=> 'Data Pesanan',
+						'order'		=> $order,
+						'isi'		=> 'admin/order/order_customer'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	//data order Mitra
+	public function mitra(){
+		$order 	= $this->order_model->allorder('Mitra');
+		$data = array(	'title'		=> 'Data Pesanan',
+						'order'		=> $order,
+						'isi'		=> 'admin/order/order_mitra'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
 	//menampilkan form tambah order
 	public function tambah_order()
 	{ 
@@ -955,16 +973,5 @@ class Order extends CI_Controller
 						'detail'	=> $detail,
 					);
 		$this->load->view('admin/order/print_invoice', $data, FALSE);
-	}
-	public function follow_up(){
-		$text = $this->input->post('text_wa');
-		//$nohp = $this->input->post('no_hp');
-		$enter = nl2br($text);
-		$nohp = '6282139995426';
-		$encode = '&text=' . urlencode($text);
-		$linkWA = 'https://web.whatsapp.com/send?phone=' . $nohp . $encode;
-		//print_r($linkWA);
-		echo '<a href="$linkWA">Click here</a>';
-		
 	}
 }

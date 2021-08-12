@@ -53,11 +53,19 @@
           </ul>
         </li>
         <!-- Order -->
-        <li>
-          <a href="<?php echo base_url('admin/order') ?>">
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-cart-plus"></i>
             <span>Order</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('admin/order') ?>"><i class="fa fa-plus-square-o"></i> Tambah Order</a></li>
+            <li><a href="<?php echo base_url('admin/order/customer') ?>"><i class="fa fa-user"></i> Customer</a></li>
+            <li><a href="<?php echo base_url('admin/order/mitra') ?>"><i class="fa fa-users"></i> Mitra</a></li>
+          </ul>
         </li>
         <!-- Order -->
         <li>

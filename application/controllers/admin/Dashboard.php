@@ -195,5 +195,7 @@ class Dashboard extends CI_Controller
 		  redirect(base_url('admin/dashboard/follow_up'), 'refresh');
 	}
 
-
+	public function follow(){
+		
+	}
 }

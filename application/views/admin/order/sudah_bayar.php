@@ -23,6 +23,7 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
+                <th>No</th>
                 <th>Kode Invoice</th>
                 <th>Marketing</th>
                 <th>Nama</th>
@@ -70,8 +71,10 @@
                       }
                       return $tgl_indo;
                     }
+                    $no=1;
                 foreach ($sudah_bayar as $sudah_bayar) { ?>
                     <tr>
+                      <td><?php echo $no++; ?></td>
                       <td><a href="<?php echo base_url('admin/order/detail/'.$sudah_bayar->kode_transaksi) ?>"><?php echo $sudah_bayar->kode_transaksi ?></a></td>
                       <td><?php echo $sudah_bayar->nama_marketing ?></td>
                       <td><?php echo $sudah_bayar->nama_pelanggan ?></td>

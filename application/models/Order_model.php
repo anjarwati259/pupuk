@@ -108,8 +108,20 @@ class Order_model extends CI_Model
 	}
 	//menampilkan semua data order
 	public function Alllisting(){
-		$this->db->select('*');
+		$this->db->select('tb_detail_order.*, tb_marketing.nama_marketing');
 		$this->db->from('tb_detail_order');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
+		$this->db->order_by('tanggal_transaksi','desc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//menampilkan semua data order customer
+	public function allorder($data){
+		$this->db->select('tb_detail_order.*, tb_marketing.nama_marketing, tb_pelanggan.jenis_pelanggan');
+		$this->db->from('tb_detail_order');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->where('tb_pelanggan.jenis_pelanggan', $data);
 		$this->db->order_by('tanggal_transaksi','desc');
 		$query = $this->db->get();
 		return $query->result();

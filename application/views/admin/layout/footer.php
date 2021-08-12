@@ -265,7 +265,7 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false,
-      'pageLength'  : 50
+      'pageLength'  : 25
     });
   //Date picker
     $('#datepicker').datepicker({

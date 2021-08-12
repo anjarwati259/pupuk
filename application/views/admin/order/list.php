@@ -12,6 +12,7 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
+              <th>No</th>
               <th>Kode Invoice</th>
               <th>Marketing</th>
               <th>Nama</th>
@@ -59,8 +60,10 @@
                     }
                     return $tgl_indo;
                   }
+                  $i=1;
               foreach ($order as $order) { ?>
               <tr>
+                <td><?php echo $i ?></td>
                 <td><a href="<?php echo base_url('admin/order/detail/'.$order->kode_transaksi) ?>"><?php echo $order->kode_transaksi ?></a></td>
                 <td><?php echo $order->nama_marketing ?></td>
                 <td><?php echo $order->nama_pelanggan ?></td>
@@ -90,7 +93,7 @@
                 <a href="<?php echo base_url('admin/order/hapus/'.$order->kode_transaksi) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" ><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
                  </td>
               </tr>
-            <?php } ?>
+            <?php $i++; } ?>
             </tbody>
           </table>
         </div>

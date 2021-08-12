@@ -30,6 +30,7 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr class="table-primary">
+              <th>No</th>
               <th>Kode Invoice</th>
               <th>Tanggal</th>
               <th>Marketing</th>
@@ -45,8 +46,9 @@
             </tr>
             </thead>
             <tbody>
-              <?php foreach ($laporan as $laporan) { ?>
+              <?php $no=1; foreach ($laporan as $laporan) { ?>
               <tr>
+                <td><?php echo $no++; ?></td>
                 <td><?php echo $laporan->kode_transaksi ?></td>
                 <td><?php echo $laporan->tanggal_transaksi ?></td>
                 <td><?php echo $laporan->nama_marketing ?></td>

@@ -35,6 +35,7 @@
               </thead>
               <tbody>
                 <?php
+                $j = 1;
                 foreach ($sudah_bayar as $sudah_bayar) { ?>
                     <tr>
                       <td><a href="<?php echo base_url('admin/order/detail/'.$sudah_bayar->kode_transaksi) ?>"><?php echo $sudah_bayar->kode_transaksi ?></a></td>
@@ -50,7 +51,7 @@
                           echo "<span class='alert-success'>COD</span>";
                         }
                     ?></td>
-                    <td><button id="follow" class="btn btn-info" style="border-radius: 50%;" data-toggle="modal" data-target="#follow<?= $sudah_bayar->kode_transaksi?>" type="button" role="button">1</button></td>
+                    <td><button id="follow" class="btn btn-warning" data-toggle="modal" data-target="#follow<?= $sudah_bayar->kode_transaksi?>" type="button" role="button">Follow Up</button></td>
                     </tr>
               <?php } ?>
               </tbody>
@@ -77,7 +78,7 @@ $this->db->join('tb_produk', 'tb_produk.kode_produk = tb_order.id_produk', 'left
 $getdataorder= $this->db->get()->result();
  ?>
 <div class="modal fade" id="follow<?= $follow->kode_transaksi?>">
-  <div class="modal-dialog" style="max-width: 450px;">
+  <div class="modal-dialog" style="max-width: 600px;">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #F0F8FF;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -85,7 +86,7 @@ $getdataorder= $this->db->get()->result();
         <h4 class="modal-title">&nbsp; <strong>Welcome <?php echo $i ?></strong></h4>
       </div> 
       <div class="modal-body">
-        <!-- <?php echo form_open('admin/order/follow_up') ?> -->
+        <form name="form" action="" method="get">
         <div class="form-group">
           <label>Nama :&nbsp; <?php echo $follow->nama_pelanggan ?></label>
         </div>
@@ -103,26 +104,42 @@ $getdataorder= $this->db->get()->result();
         ?>
         <div class="form-group">
           <label>No Handphone (WhatsApp)</label>
-          <input type="text" name="no_hp" class="form-control" value="<?php echo $no_hp ?>" placeholder="Masukkan Password Lama Anda" required>
+          <input type="text" name="no_hp" id="telp<?php echo $i; ?>" class="form-control" value="<?php echo $no_hp ?>" placeholder="Masukkan Password Lama Anda" required>
         </div>
         <div class="form-group">
           <label>Text</label>
-          <textarea style="height: 100px; white-space: pre-line;" name="text_wa" id="text_wa<?php echo $i; ?>" placeholder="Isikan Text" class="form-control text"/>
-<?php 
-$text = $welcome->text;
-echo gettype($text);
-// $str = <<<EOF
-// {$text}
-// EOF;
-//     echo $str;
-?>
-      </textarea>
-          <input type="hidden" name="url" id="url">
+          <textarea style="height: 200px;" name="text_wa" id="text_wa<?php echo $i; ?>" placeholder="Isikan Text" class="form-control text"/>
+Selamat Pagi Bapak/Ibu <?php echo $follow->nama_pelanggan ?>
+
+
+Bagaimana Kabarnya?
+          </textarea>
         </div>
+      </form>
+        <!-- <div class="input-group margin" style="width: 50%;">
+          <select class="form-control" id="insert_text" name="insert_text2">
+            <option>Select Auto Text</option>
+            <option value="{nama_produk}">Nama Produk</option>
+            <option value="{harga}">Harga Produk</option>
+            <option value="{ongkir}">Ongkir</option>
+            <option value="{metode_bayar}">Metode Bayar</option>
+            <option value="{total_bayar}">Total Bayar</option>
+            <option value="{alamat}">Alamat</option>
+            <option value="{metode_bayar}">Metode Bayar</option>
+            <option value="{nama_pelanggan}">Nama Pelanggan</option>
+            <option value="{no_hp}">No. Telp</option>
+            <option value="{ekspedisi}">Ekspedisi</option>
+            <option value="{nama_pelanggan}">Nama Pelanggan</option>
+            <option value="{no_resi}">No Resi</option>
+          </select>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-flat" id="tap_2">Insert</button>
+          </span>
+        </div> -->
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" id="follow">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button class="btn btn-info">Follow Up</button>
+        <a href="#" id="fol<?php echo $i; ?>" class="btn btn-info" target="_blank">Follow Up</a>
       </div>
       <!-- <?php echo form_close() ?> -->
     </div>
@@ -130,14 +147,21 @@ echo gettype($text);
 </div>
 
 <script type="text/javascript">
-  var text = $("#text_wa1<?php echo $i; ?>").val();
-  var php = '<'+'?'+'php echo $follow->nama_pelanggan'+'?>';
-  var rep = text.replaceAll('{',php);
-  //var html = php.html();
-  var dom_nodes = $($.parseHTML('<div><input type="text" value="val" /></div>'));
-  //alert(dom_nodes);
-  $('#text_wa<?php echo $i; ?>').val(dom_nodes);
-  //alert(text);
+  
+   $('body').on("click","#tap_10",function(){
+      var text = $('select[name=insert_text10] option').filter(':selected').val()
+      var textareaid = 'text_follow10';
+      insertAtCaret(textareaid, text);
+    });
+
+   $('body').on("click","#fol<?php echo $i; ?>",function(){
+    var telp = $('#telp<?php echo $i; ?>').val();
+    var text = $('#text_wa<?php echo $i; ?>').val();
+    
+    $("#fol<?php echo $i; ?>").attr('href','https://www.w3resource.com/');
+    //alert(telp);
+   });
+
 </script>
 <?php $i++; } ?>
 <!-- Modal Follow Up 2 -->
