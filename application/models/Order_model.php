@@ -14,7 +14,7 @@ class Order_model extends CI_Model
 	//menampilkan data order berdasarkan status bayar
 	public function listing_admin($data){
 		$this->db->select('tb_detail_order.*,
-							tb_pelanggan.nama_pelanggan, tb_pembayaran.jumlah_bayar, tb_marketing.nama_marketing');
+							tb_pelanggan.nama_pelanggan, tb_pembayaran.jumlah_bayar, tb_marketing.nama_marketing, tb_pelanggan.jenis_pelanggan');
 		$this->db->from('tb_detail_order');
 		$this->db->where('status_bayar', $data);
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');

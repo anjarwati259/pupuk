@@ -267,6 +267,15 @@
       'autoWidth'   : false,
       'pageLength'  : 25
     });
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+      'pageLength'  : 25
+    });
   //Date picker
     $('#datepicker').datepicker({
       autoclose: true,

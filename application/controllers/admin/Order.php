@@ -623,9 +623,8 @@ class Order extends CI_Controller
 				'sisa'	=> $sisa->stok,
 				'status' => 'proses'
 			);
-			$this->order_model->tambah_stok($stok);
-			
 			$this->produk_model->update_qty_min($cart['id'],array('stok' => $cart['qty']));
+			$this->order_model->tambah_stok($stok);
 		}
 		$this->cart->destroy();
 	}
