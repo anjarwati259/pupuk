@@ -53,21 +53,13 @@
           </ul>
         </li>
         <!-- Order -->
-        <li class="treeview">
-          <a href="#">
+        <li>
+          <a href="<?php echo base_url('admin/order') ?>">
             <i class="fa fa-cart-plus"></i>
             <span>Order</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('admin/order') ?>"><i class="fa fa-plus-square-o"></i> Tambah Order</a></li>
-            <li><a href="<?php echo base_url('admin/order/customer') ?>"><i class="fa fa-user"></i> Customer</a></li>
-            <li><a href="<?php echo base_url('admin/order/mitra') ?>"><i class="fa fa-users"></i> Mitra</a></li>
-          </ul>
         </li>
-        <!-- Order -->
+        <!-- laporan Order -->
         <li>
           <a href="<?php echo base_url('admin/order/laporan') ?>">
             <i class="fa fa-file" aria-hidden="true"></i>
@@ -89,7 +81,7 @@
           </ul>
         </li>
         <!-- setting -->
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-cogs" aria-hidden="true"></i>
             <span>Setting</span>
@@ -99,9 +91,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('admin/dashboard/follow_up') ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i> Follow UP</a></li>
-            <!-- <li><a href="<?php echo base_url('admin/dashboard/pencairan_reward') ?>"><i class="fa fa-plus-square-o"></i> Pencairan Reward</a></li> -->
           </ul>
-        </li>
+        </li> -->
 
         <!-- pengguna -->
         <!-- <li class="treeview">

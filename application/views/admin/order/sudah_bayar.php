@@ -1,6 +1,6 @@
 <style type="text/css">
   .label_filter{
-    width: 200px;
+    width: 50px;
   }
   .filter{
     width: 200px;
@@ -36,41 +36,42 @@
         <!-- /.tab-pane -->
         <div class="tab-pane active" id="tab_1">
           <div class="scrollmenu">
-            <div class="filter_group" style="display: flex;">
+            <div class="filter_group" style="display: flex; margin-top: 20px; margin-bottom: 20px;">
               <!-- filter -->
-              <div class="form-group" style="padding-right: 20px;">
-                <label class="control-label label_filter">Filter</label>
+              <div class="form-group" style="padding-right: 20px; display: flex;">
+                <label class="control-label label_filter">Filter : </label>
                 <div class="filter">
                   <select class="form-control" id="filter" name="filter">
-                    <option value="">--Pilih--</option>
+                    <option value="">Semua</option>
                     <option value="Customer">Customer</option>
                     <option value="Mitra">Mitra</option>
                   </select>
                 </div>
               </div>
               <!-- date from -->
-              <div class="form-group" style="padding-right: 20px;">
+              <!-- <div class="form-group" style="padding-right: 20px;">
                 <label class="control-label label_filter">Date From</label>
                 <div class="filter">
-                  <input type="text" class="form-control" name="">
+                  <input type="text" class="form-control" name="date_from" id="min">
                 </div>
-              </div>
+              </div> -->
               <!-- date End -->
-              <div class="form-group" style="padding-right: 20px;">
+              <!-- <div class="form-group" style="padding-right: 20px;">
                 <label class="control-label label_filter">Date End</label>
                 <div class="filter">
-                  <input type="text" class="form-control" name="">
+                  <input type="text" class="form-control" name="date_end" id="max">
                 </div>
-              </div>
+              </div> -->
               <!-- button -->
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label class="control-label label_filter" style="padding-top: 16px;"></label>
                 <div class="button-filter">
                   <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
-              </div>
+              </div> -->
             </div>
-            <table id="example2" class="table table-bordered table-striped">
+            <div class="garis"></div>
+            <table id="example" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th>No</th>
@@ -96,7 +97,7 @@
                       <td><?php echo $sudah_bayar->nama_marketing ?></td>
                       <td><?php echo $sudah_bayar->nama_pelanggan ?></td>
                       <td><?php echo $sudah_bayar->no_hp ?></td>
-                      <td><?php echo tanggal(date('Y-m-d',strtotime($sudah_bayar->tanggal_transaksi)),FALSE); ?></td>
+                      <td><!-- <?php echo tanggal(date('Y-m-d',strtotime($sudah_bayar->tanggal_transaksi)),FALSE); ?> --><?php echo date('Y-m-d', strtotime($sudah_bayar->tanggal_transaksi)) ?></td>
                       <td><?php echo $sudah_bayar->total_item ?></td>
                       <td>Rp. <?php echo number_format($sudah_bayar->total_bayar,'0',',','.') ?></td>
                       <?php if($sudah_bayar->metode_pembayaran==2){ ?>
@@ -130,16 +131,3 @@
 </div>
 <!-- /.row -->
 <!-- END CUSTOM TABS -->
-<script type="text/javascript">
-  $(document).ready(function() {
-      //$('#tabelData').DataTable();
-      function filterData () {
-        $('#example2').DataTable().search(
-            $('#filter').val()
-          ).draw();
-    }
-    $('#filter').on('change', function () {
-          filterData();
-      });
-  });
-</script>

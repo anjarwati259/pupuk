@@ -255,6 +255,30 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function laporan(){
+		$this->db->select('tb_order.*,
+							tb_pelanggan.nama_pelanggan, 
+							tb_pelanggan.jenis_pelanggan,
+							tb_produk.nama_produk, 
+							tb_marketing.nama_marketing,tb_detail_order.metode_pembayaran, tb_detail_order.jenis_order,tb_detail_order.status_bayar,tb_detail_order.ongkir');
+		$this->db->from('tb_order');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->join('tb_produk','tb_produk.kode_produk = tb_order.id_produk', 'left');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_order.id_marketing', 'left');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->order_by('tb_order.kode_transaksi','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function report($kode, $jenis){
+		$this->db->select('tb_order.*,sum(jml_beli) as total, tb_pelanggan.jenis_pelanggan');
+		$this->db->from('tb_order');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->where("id_produk", $kode);
+		$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
+		$query = $this->db->get();
+		return $query->row();
+	}
 	//laporan order
 	public function lap_harian($awal, $akhir){
 		$this->db->select('tb_order.*,

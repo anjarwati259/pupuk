@@ -118,6 +118,11 @@ class Produk_model extends CI_Model
 		$this->db->where('kode_produk', $id);
 		$this->db->update('tb_produk');
 	}
+	public function stok_min($id,$data){
+		$this->db->set('stok', 'stok-'.$data['stok'], FALSE);
+		$this->db->where('kode_produk', $id);
+		$this->db->update('tb_produk');
+	}
 	public function getby_produk($id){
 		$this->db->select('*');
 		$this->db->from('tb_produk');

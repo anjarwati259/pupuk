@@ -26,8 +26,8 @@
         <h2><STRONG>PT Agrikultur Gemilang Indonesia</STRONG></h2>
         <h4>Dari Tahun <b><?php echo $tahun ?></b></h4>
       </div>
-      <div class="table">
-        <table class="table table-bordered table-striped">
+      <div class="scrollmenu">
+        <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr class="table-primary">
               <th>No</th>

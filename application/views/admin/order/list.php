@@ -1,3 +1,19 @@
+<style type="text/css">
+  .label_filter{
+    width: 50px;
+  }
+  .filter{
+    width: 200px;
+  }
+  @media screen and (max-width: 640px) {
+    .filter{
+      margin-left: auto;
+      margin-right: auto;
+      top: 0px;
+      width: 250px;
+    }
+    })
+</style>
 <div class="row">
   <div class="col-md-12">
     <!-- Custom Tabs -->
@@ -9,7 +25,20 @@
       </ul>
       <div class="tab-content">
         <div class="tab-pane active scrollmenu" id="tab_1">
-          <table id="example1" class="table table-bordered table-striped">
+          <div class="filter_group" style="display: flex; margin-top: 20px; margin-bottom: 20px;">
+              <!-- filter -->
+              <div class="form-group" style="padding-right: 20px; display: flex;">
+                <label class="control-label label_filter">Filter : </label>
+                <div class="filter">
+                  <select class="form-control" id="filter" name="filter">
+                    <option value="">Semua</option>
+                    <option value="Customer">Customer</option>
+                    <option value="Mitra">Mitra</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          <table id="example" class="table table-bordered table-striped">
             <thead>
             <tr>
               <th>No</th>
@@ -22,44 +51,11 @@
               <th>Jumlah Belanja</th>
               <th>Status</th>
               <th>Action</th>
+              <th style="display: none;">Action</th>
             </tr>
             </thead>
             <tbody>
               <?php 
-              //format tanggal
-              function tanggal_indo($tanggal, $cetak_hari = false)
-                  {
-                    $hari = array ( 1 =>    'Senin',
-                          'Selasa',
-                          'Rabu',
-                          'Kamis',
-                          'Jumat',
-                          'Sabtu',
-                          'Minggu'
-                        );
-                        
-                    $bulan = array (1 =>   'Januari',
-                          'Februari',
-                          'Maret',
-                          'April',
-                          'Mei',
-                          'Juni',
-                          'Juli',
-                          'Agustus',
-                          'September',
-                          'Oktober',
-                          'November',
-                          'Desember'
-                        );
-                    $split    = explode('-', $tanggal);
-                    $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
-                    
-                    if ($cetak_hari) {
-                      $num = date('N', strtotime($tanggal));
-                      return $hari[$num] . ', ' . $tgl_indo;
-                    }
-                    return $tgl_indo;
-                  }
                   $i=1;
               foreach ($order as $order) { ?>
               <tr>
@@ -68,7 +64,7 @@
                 <td><?php echo $order->nama_marketing ?></td>
                 <td><?php echo $order->nama_pelanggan ?></td>
                 <td><?php echo $order->no_hp ?></td>
-                <td><?php echo tanggal_indo(date('Y-m-d',strtotime($order->tanggal_transaksi)),FALSE); ?></td>
+                <td><?php echo tanggal(date('Y-m-d',strtotime($order->tanggal_transaksi)),FALSE); ?></td>
                 <td><?php echo $order->total_item ?></td>
                 <td>Rp. <?php echo number_format($order->total_bayar,'0',',','.') ?></td> 
                 <td><?php if($order->status_bayar==0 && $order->metode_pembayaran ==1){
@@ -92,6 +88,7 @@
                 <a href="<?php echo base_url('admin/order/edit/'.$order->kode_transaksi) ?>" class="btn btn-info btn-xs"><i class="fa fa-print" target="_blank"></i> Edit</a>
                 <a href="<?php echo base_url('admin/order/hapus/'.$order->kode_transaksi) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" ><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
                  </td>
+                 <td style="display: none;"><?php echo $order->jenis_pelanggan ?></td>
               </tr>
             <?php $i++; } ?>
             </tbody>

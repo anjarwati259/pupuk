@@ -285,11 +285,33 @@
       autoclose: true,
       format:'yyyy-mm-dd'
     });
+    $('#min').datepicker({
+      autoclose: true,
+      format:'yyyy-mm-dd'
+    });
+    $('#max').datepicker({
+      autoclose: true,
+      format:'yyyy-mm-dd'
+    });
     $('#tanggal_transaksi').datepicker({
       autoclose: true,
       format:'yyyy-mm-dd'
     });
 
+    $(document).ready(function() {
+      var tabel = $('#example').DataTable({
+        'lengthChange': true,
+        'pageLength'  : 25
+      });
+      function filterData () {
+        tabel.search(
+            $('#filter').val()
+          ).draw();
+    }
+    $('#filter').on('change', function () {
+          filterData();
+      });
+  });
   })
 </script>
 </body>

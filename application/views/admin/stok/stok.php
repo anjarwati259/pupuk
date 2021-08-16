@@ -69,6 +69,8 @@
                         <td><?php echo tanggal_indo(date('Y-m-d',strtotime($stok->tanggal)),FALSE); ?></td>
                         <td><?php if($stok->status == 'in'){
                           echo "Pabrik";
+                        }else if($stok->status != 'in' && $stok->id_pelanggan == null){
+                          echo "-";
                         }else{
                           echo $stok->nama_pelanggan;
                         } ?></td>
