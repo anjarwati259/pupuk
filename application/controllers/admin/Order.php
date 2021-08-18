@@ -889,19 +889,36 @@ class Order extends CI_Controller
 	public function laporan(){
 		$laporan = $this->order_model->laporan();
 		$produk = $this->produk_model->produk();
+		$report = $this->order_model->report2();
+		$ongkir = $this->order_model->total_ongkir();
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'produk'	=> $produk,
+						'report'	=> $report,
+						'ongkir'	=> $ongkir,
 						'isi'		=> 'admin/order/laporan'
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 	public function report(){
-		$kode = $this->input->post('kode');
-		$jenis = $this->input->post('jenis');
+		 $kode = $this->input->post('kode');
+		 $jenis = $this->input->post('jenis');
 
-		$report = $this->order_model->report('PK003','Customer');
-		echo json_encode($report);
+		if($kode=='' and $jenis=='Semua Pelanggan'){
+		 	$report = $this->order_model->report2();
+		 	$ongkir = $this->order_model->total_ongkir2($kode,$jenis);
+		 	$total_report['total'] = $report->total;
+		 }else if($kode!='' and $jenis=='Semua Pelanggan'){
+		 	$report = $this->order_model->report4($kode);
+		 	$total_report['total'] = $report->total;
+		 }else if($kode=='' and $jenis!='Semua Pelanggan'){
+		 	$report = $this->order_model->report3($jenis);
+		 	$total_report['total'] = $report->total;
+		 }else{
+		 	$report = $this->order_model->report($kode,$jenis);
+		 	$total_report['total'] = $report->total;
+		 }
+		echo json_encode($total_report);
 	}
 	public function laporan1(){
 

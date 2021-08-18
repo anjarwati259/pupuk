@@ -40,15 +40,15 @@
     <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
     <div class="info-box-content">
       <span class="info-box-text">Total Penjualan</span>
-      <span class="info-box-number"><label id="total"></label></span>
+      <span class="info-box-number"><label id="total"><?php echo $report->total ?></label></span>
     </div>
-  </div> 
+  </div>
   <!-- Total Ongkos Kirim -->
   <div class="info-box">
     <span class="info-box-icon bg-green"><i class="fa fa-truck"></i></span>
     <div class="info-box-content">
       <span class="info-box-text">Total Ongkos Kirim</span>
-      <span class="info-box-number">1,410</span>
+      <span class="info-box-number"><label id="ongkir"><?php echo $ongkir->ongkir ?></label></span>
     </div>
   </div>
   <!-- total Adsense -->
@@ -166,7 +166,12 @@
         success: function(hasil) {
           var response = $.parseJSON(hasil);
           var total = response.total;
-          $("#total").html(total);
+          //alert(total);
+          if(total == null){
+            $("#total").html('0');
+          }else{
+            $("#total").html(total);
+          }
         }
       });
     }

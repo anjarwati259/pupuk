@@ -51,6 +51,7 @@
   background-color: none;
   overflow: auto;
   white-space: nowrap;
+
 }
 .scrollmenu table {
   /*display: inline-block;*/

@@ -173,7 +173,7 @@ footer {
       <h1>INVOICE : <?php echo $kode_transaksi ?></h1>
       <div id="company" class="clearfix">
         <div style="font-size: 20px;"><strong>Agrikultur Gemilang Indonesia</strong></div>
-        <div>Jl. Manggis Raya No.11 Jemberlor Patrang, <br /> Jember Jawa Timur</div>
+        <div>Jl. Manggis Raya No.11 Jemberlor Patrang, Jember Jawa Timur</div>
         <div>+6233 1510 8758</div>
         <div><a href="#" style="color: blue;">support@ptagi.co.id</a></div>
       </div>
@@ -181,9 +181,11 @@ footer {
       	<br>
         <div><span>Nama</span> <?php echo $detail->nama_pelanggan ?></div>
         <div><span>No. Telp</span> <?php echo $detail->no_hp ?></div>
-        <div><span>Alamat</span> <?php echo $detail->alamat ?>, <?php echo $detail->kecamatan ?>, <?php echo $detail->kabupaten ?></div>
+        <div><span>Alamat</span> Jl H Ismail No 17 DSN Parimono 
+        <div><span></span>RT/RW 002/001 Kec jombang,Jombang, 
+          <div><span></span><?php echo $detail->kecamatan ?>, <?php echo $detail->kabupaten ?></div>
         <div><span></span> <?php echo $detail->provinsi ?></div>
-        <div><span>Tanggal</span> <?php echo tanggal(date('Y-m-d',strtotime($detail->tanggal_transaksi))); ?></div>
+        <div><span>Tanggal</span> <?php echo tanggal(date('Y-m-d',strtotime('2021-06-17'))); ?></div>
       </div>
     </header>
     <main>
@@ -240,7 +242,7 @@ footer {
 			  	<span>A/N : Agrikultur Gemilang Indonesia</span>
 			  </div>
 			  <div id="item3">
-			  	<span>Jember, <?php $date = date('Y-m-d');
+			  	<span>Jember, <?php $date = date('2021-06-17');
 			  	 echo tanggal(date('Y-m-d',strtotime($date))); ?></span><br>
 			  	 <br>
 			  	 <br>
@@ -251,6 +253,11 @@ footer {
 			  	 <span>Melina</span>
 			  </div>
 			</div>
+      <div style="padding-top: 100px; line-height: 1.4em;">
+        <b>Catatan:</b>
+        <br><br>
+        <b>19 Juni 2021</b> <br>Pembayaran 15 Botol kemasan 1 Liter Rp. 1.800.000
+      </div>
         </div>
       </div>
     </main>

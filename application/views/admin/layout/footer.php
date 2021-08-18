@@ -265,7 +265,7 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false,
-      'pageLength'  : 25
+      'pageLength'  : 10
     });
     $('#example2').DataTable({
       'paging'      : true,
@@ -274,7 +274,7 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false,
-      'pageLength'  : 25
+      'pageLength'  : 10
     });
   //Date picker
     $('#datepicker').datepicker({
@@ -301,7 +301,7 @@
     $(document).ready(function() {
       var tabel = $('#example').DataTable({
         'lengthChange': true,
-        'pageLength'  : 25
+        'pageLength'  : 10
       });
       function filterData () {
         tabel.search(

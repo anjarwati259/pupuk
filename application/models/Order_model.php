@@ -271,11 +271,46 @@ class Order_model extends CI_Model
 		return $query->result();
 	}
 	public function report($kode, $jenis){
-		$this->db->select('tb_order.*,sum(jml_beli) as total, tb_pelanggan.jenis_pelanggan');
+		$this->db->select('sum(jml_beli) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
 		$this->db->from('tb_order');
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
 		$this->db->where("id_produk", $kode);
 		$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function report2(){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function report3($jenis){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function report4($kode){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("id_produk", $kode);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function total_ongkir(){
+		$this->db->select('sum(tb_detail_order.ongkir) as ongkir');
+		$this->db->from('tb_detail_order');
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function total_ongkir2($kode,$jenis){
+		$this->db->select('sum(tb_detail_order.ongkir) as ongkir');
+		$this->db->from('tb_detail_order');
 		$query = $this->db->get();
 		return $query->row();
 	}
