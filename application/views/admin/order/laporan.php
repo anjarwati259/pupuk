@@ -48,7 +48,7 @@
     <span class="info-box-icon bg-green"><i class="fa fa-truck"></i></span>
     <div class="info-box-content">
       <span class="info-box-text">Total Ongkos Kirim</span>
-      <span class="info-box-number"><label id="ongkir"><?php echo $ongkir->ongkir ?></label></span>
+      <span class="info-box-number"><label id="ongkir"><?php echo rupiah($ongkir->ongkir) ?></label></span>
     </div>
   </div>
   <!-- total Adsense -->
@@ -56,7 +56,7 @@
     <span class="info-box-icon bg-yellow"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
     <div class="info-box-content">
       <span class="info-box-text">Total Adsense</span>
-      <span class="info-box-number">1,410</span>
+      <span class="info-box-number"><label id="ads">120</label></span>
     </div>
   </div>
   <!-- Total Organik -->
@@ -64,7 +64,7 @@
     <span class="info-box-icon bg-red"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
     <div class="info-box-content">
       <span class="info-box-text">Total Organik</span>
-      <span class="info-box-number">1,410</span>
+      <span class="info-box-number"><label id="organik">120</label></span>
     </div>
   </div>
 </div>
@@ -142,6 +142,7 @@
     $('#filter-produk').on('change', function(e){
       var produk = $(this).val();
       var filter = $('#filter option:selected').text();
+      //alert(id);
       $('#filter-produk').val(produk)
       dataTable.column(12).search(produk).draw();
       report(produk,filter);
@@ -149,9 +150,12 @@
 
     $('#filter').on('change', function(e){
       var filter = $(this).val();
+      var produk = $('#filter-produk option:selected').val();
       //alert(status);
       $('#filter').val(filter)
+      //alert(produk);
       dataTable.column(11).search(filter).draw();
+      report(produk,filter);
     })
 
     function report(kode, jenis){
@@ -166,12 +170,12 @@
         success: function(hasil) {
           var response = $.parseJSON(hasil);
           var total = response.total;
-          //alert(total);
-          if(total == null){
-            $("#total").html('0');
-          }else{
+          var ads = response.ads;
+          var organik = response.organik;
+          //alert(hasil);
             $("#total").html(total);
-          }
+            $("#ads").html(ads);
+            $("#organik").html(organik);
         }
       });
     }

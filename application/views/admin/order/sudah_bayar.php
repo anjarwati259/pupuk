@@ -48,30 +48,9 @@
                   </select>
                 </div>
               </div>
-              <!-- date from -->
-              <!-- <div class="form-group" style="padding-right: 20px;">
-                <label class="control-label label_filter">Date From</label>
-                <div class="filter">
-                  <input type="text" class="form-control" name="date_from" id="min">
-                </div>
-              </div> -->
-              <!-- date End -->
-              <!-- <div class="form-group" style="padding-right: 20px;">
-                <label class="control-label label_filter">Date End</label>
-                <div class="filter">
-                  <input type="text" class="form-control" name="date_end" id="max">
-                </div>
-              </div> -->
-              <!-- button -->
-              <!-- <div class="form-group">
-                <label class="control-label label_filter" style="padding-top: 16px;"></label>
-                <div class="button-filter">
-                  <button type="submit" class="btn btn-primary">Cari</button>
-                </div>
-              </div> -->
             </div>
             <div class="garis"></div>
-            <table id="example" class="table table-bordered table-striped">
+            <table id="sudah_bayar" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th>No</th>
@@ -118,6 +97,8 @@
               <?php } ?>
               </tbody>
             </table>
+            <div class="scroll">
+            </div>
           </div>
           <!-- /.box -->
         </div>

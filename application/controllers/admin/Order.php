@@ -903,21 +903,31 @@ class Order extends CI_Controller
 	public function report(){
 		 $kode = $this->input->post('kode');
 		 $jenis = $this->input->post('jenis');
+		 $ads = $this->order_model->jenis_order($kode,$jenis,'1');
+		 $organik = $this->order_model->jenis_order($kode,$jenis,'2');
+		 $total = $this->order_model->report($kode,$jenis);
 
-		if($kode=='' and $jenis=='Semua Pelanggan'){
-		 	$report = $this->order_model->report2();
-		 	$ongkir = $this->order_model->total_ongkir2($kode,$jenis);
-		 	$total_report['total'] = $report->total;
-		 }else if($kode!='' and $jenis=='Semua Pelanggan'){
-		 	$report = $this->order_model->report4($kode);
-		 	$total_report['total'] = $report->total;
-		 }else if($kode=='' and $jenis!='Semua Pelanggan'){
-		 	$report = $this->order_model->report3($jenis);
-		 	$total_report['total'] = $report->total;
+		 if($total->total==''){
+		 	$tot = 0;
 		 }else{
-		 	$report = $this->order_model->report($kode,$jenis);
-		 	$total_report['total'] = $report->total;
+		 	$tot = $total->total;
 		 }
+
+		 if($ads->total==''){
+		 	$adsense = 0;
+		 }else{
+		 	$adsense = $ads->total;
+		 }
+
+		 if($organik->total==''){
+		 	$org = 0;
+		 }else{
+		 	$org = $organik->total;
+		 }
+
+		 $total_report['total'] = $tot;
+		 $total_report['ads'] = $adsense;
+		 $total_report['organik'] = $org;
 		echo json_encode($total_report);
 	}
 	public function laporan1(){

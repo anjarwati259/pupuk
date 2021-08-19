@@ -265,7 +265,7 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false,
-      'pageLength'  : 10
+      'pageLength'  : 25
     });
     $('#example2').DataTable({
       'paging'      : true,
@@ -274,7 +274,7 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false,
-      'pageLength'  : 10
+      'pageLength'  : 25
     });
   //Date picker
     $('#datepicker').datepicker({
@@ -303,13 +303,24 @@
         'lengthChange': true,
         'pageLength'  : 10
       });
+      var tabel2 = $('#sudah_bayar').DataTable({
+        'lengthChange': true,
+        'pageLength'  : 25,
+        'fixedHeader' : true
+      });
       function filterData () {
         tabel.search(
             $('#filter').val()
           ).draw();
     }
+    function filterData2 () {
+        tabel2.search(
+            $('#filter').val()
+          ).draw();
+    }
     $('#filter').on('change', function () {
           filterData();
+          filterData2();
       });
   });
   })
