@@ -194,6 +194,7 @@
         <h4 class="modal-title">Filter By Tanggal</h4>
       </div>
       <div class="modal-body">
+        <?php echo form_open(base_url('admin/order/lap_tanggal')); ?>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -216,7 +217,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" name="tgl_awal" class="form-control pull-right" id="datepicker" required>
+                <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepicker" required>
               </div>
               <!-- /.input group -->
             </div>
@@ -227,8 +228,9 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-defaul" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Filter</button>
+        <button type="submit" class="btn btn-primary">Filter</button>
       </div>
+      <?php echo form_close(); ?>
     </div>
     <!-- /.modal-content -->
   </div>
@@ -245,6 +247,7 @@
         <h4 class="modal-title">Filter By Bulan</h4>
       </div>
       <div class="modal-body">
+        <?php echo form_open(base_url('admin/order/lap_bulan')); ?>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -288,8 +291,9 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-defaul" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Filter</button>
+        <button type="submit" class="btn btn-primary">Filter</button>
       </div>
+      <?php echo form_close(); ?>
     </div>
     <!-- /.modal-content -->
   </div>

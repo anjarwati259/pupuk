@@ -33,21 +33,6 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?php echo $dist->total ?></h3>
-
-              <p>Distributor</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a href="<?php echo base_url('admin/pelanggan/distributor') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
               <h3><?php echo $customer->total ?></h3>
@@ -87,34 +72,6 @@
               <div class="chart" id="line" style="height: 300px;"></div>
             </div>
             <!-- /.box-body -->
-            <!-- <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($POC) ? $POC->total : '0';?>" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">POC 1 Liter</div>
-                </div>
-                <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($POC500) ? $POC500->total : '0';?>" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">POC 500ml</div>
-                </div>
-                <div class="col-xs-3 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($ternak) ? $ternak->total : '0';?>" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Nutrisi Ternak</div>
-                </div>
-                <div class="col-xs-3 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($ikan) ? $ikan->total : '0';?>" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Nutrisi Ikan</div>
-                </div>
-              </div>
-            </div> -->
           </div>
         </section>
 

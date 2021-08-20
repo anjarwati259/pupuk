@@ -29,7 +29,6 @@
                       <thead>
                       <tr>
                         <th>No</th>
-                        <th>ID</th>
                         <th>Nama</th>
                         <th>No. Hp</th>
                         <th>Alamat</th>
@@ -40,7 +39,9 @@
                         <th>Marketing</th>
                       <?php } ?>
                         <th>Tanggal Gabung</th>
+                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Action</th>
+                      <?php } ?>
                       </tr>
                       </thead>
                       <tbody>
@@ -48,7 +49,6 @@
                       $no=1; foreach ($mitra as $mitra) { ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $mitra->id_pelanggan ?></td>
                         <td><?php echo $mitra->nama_pelanggan ?></td>
                         <td><?php echo $mitra->no_hp ?></td>
                         <td>
@@ -61,10 +61,12 @@
                         <td><?php echo $mitra->nama_marketing ?></td>
                       <?php } ?>
                         <td><?php echo tanggal(date('Y-m-d',strtotime($mitra->tanggal_daftar))); ?></td>
+                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td>
                           <a href="<?php echo base_url('admin/pelanggan/edit_mitra/'.$mitra->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
                           <a href="<?php echo base_url('admin/pelanggan/delete_mitra/'.$mitra->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" ><i class="fa fa-trash"></i> Hapus</a>
                         </td>
+                      <?php } ?>
                       </tr>
                     <?php } ?>
                       </tbody>

@@ -34,7 +34,6 @@
                       <thead>
                       <tr>
                         <th>No</th>
-                        <th>ID</th>
                         <th>Nama</th>
                         <th>No. Hp</th>
                         <th width="300px">Alamat</th>
@@ -54,7 +53,6 @@
                       foreach ($customer as $customer) { ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $customer->id_pelanggan ?></td>
                         <td><?php echo $customer->nama_pelanggan ?></td>
                         <td><?php echo $customer->no_hp ?></td>
                         <td>
