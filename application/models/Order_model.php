@@ -302,6 +302,14 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	public function jenis($jenis){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("tb_detail_order.jenis_order", $jenis);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$query = $this->db->get();
+		return $query->row();
+	}
 	public function jenis_order($kode, $cus, $jenis){
 		if(($kode=='' and $cus=='Semua Pelanggan') or ($kode=='Semua Produk' and $cus=='')){
 			$this->db->select('sum(jml_beli) as total');

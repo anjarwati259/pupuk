@@ -18,7 +18,7 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_distributor/'.$distribut
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li role="presentation" class="active"><a href="#tab_1">Edit Distributor</a></li>
-            <li role="presentation"><a href="<?php echo site_url('admin/customer');?>">Data Distributor</a></li>
+            <li role="presentation"><a href="<?php echo site_url('admin/pelanggan/distributor');?>">Data Distributor</a></li>
             </ul>
             <div class="tab-content">
               <!-- /.tab-pane -->
@@ -94,6 +94,17 @@ echo form_open_multipart(base_url('admin/pelanggan/edit_distributor/'.$distribut
                             <?php foreach ($marketing as $market) { ?>
                             <option value="<?php echo $market->id_marketing ?>" <?php if($distributor->id_marketing==$market->id_marketing){ echo "selected"; } ?>> <?php echo $market->nama_marketing ?></option>
                           <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="no_hp">Jenis Pelanggan</label>
+                        <div class="col-sm-8">
+                          <select class="form-control" name="jenis_pelanggan">
+                            <option value="Distributor">Distributor</option>
+                            <option value="Customer">Customer</option>
+                            <option value="Mitra">Mitra</option>
+                            
                           </select>
                         </div>
                       </div>

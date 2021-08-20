@@ -59,77 +59,74 @@ class Pelanggan extends CI_Controller
 	//tambah data customer
 	public function add_customer()
 	{
-		$i 	= $this->input;
-		$alamat = $i->post('alamat');
-		print_r($alamat);
 		
-		// //get provinsi
-		// $id_user 	= $this->session->userdata('id_user');
-		// $market 	= $this->marketing_model->get_marketing($id_user);
-		// $provinsi = $this->wilayah_model->listing();
-		// $id = $this->pelanggan_model->get_last_id();
-		// $marketing = $this->pelanggan_model->marketing();
-		// //validation
-		// $valid = $this-> form_validation;
+		//get provinsi
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	= $this->marketing_model->get_marketing($id_user);
+		$provinsi = $this->wilayah_model->listing();
+		$id = $this->pelanggan_model->get_last_id();
+		$marketing = $this->pelanggan_model->marketing();
+		//validation
+		$valid = $this-> form_validation;
 
-		// $valid->set_rules('nama_pelanggan', 'Nama Pelanggan','required',
-		// 		array(	'required' 		=> '%s harus diisi'
-		// 				));
-		// $valid->set_rules('alamat', 'Alamat','required',
-		// 		array(	'required' 		=> '%s harus diisi'
-		// 				));
-		// $valid->set_rules('no_hp', 'No. Telp','required',
-		// 		array(	'required' 		=> '%s harus diisi',
-		// 				));
-		// $valid->set_rules('provinsi', 'provinsi','required',
-		// 		array(	'required' 		=> '%s harus diisi'
-		// 				));
-		// $valid->set_rules('kabupaten', 'kabupaten','required',
-		// 		array(	'required' 		=> '%s harus diisi'
-		// 				));
-		// $valid->set_rules('kecamatan', 'kecamatan','required',
-		// 		array(	'required' 		=> '%s harus diisi',
-		// 				));
+		$valid->set_rules('nama_pelanggan', 'Nama Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('alamat', 'Alamat','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('no_hp', 'No. Telp','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$valid->set_rules('provinsi', 'provinsi','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kabupaten', 'kabupaten','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kecamatan', 'kecamatan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
 
-		// if($valid->run()===FALSE){
-		// 	//end validation
-		// 	$customer = $this->pelanggan_model->customer();
-		// 	$pelanggan_id = $this->pelanggan_model->get_last_id();
+		if($valid->run()===FALSE){
+			//end validation
+			$customer = $this->pelanggan_model->customer();
+			$pelanggan_id = $this->pelanggan_model->get_last_id();
 
-		// 	//last id pelanggan
-		// 	if($pelanggan_id){
-		// 		$id = substr($pelanggan_id[0]->id_pelanggan, 1);
-		// 		$id_pelanggan = generate_code('C', $id);
-		// 	}else{
-		// 		$id_pelanggan = 'C001';
-		// 	}
+			//last id pelanggan
+			if($pelanggan_id){
+				$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+				$id_pelanggan = generate_code('C', $id);
+			}else{
+				$id_pelanggan = 'C001';
+			}
 			
-		// 	$data = array(	'title'		=> 'Tambah Data Pelanggan',
-		// 					'customer'	=> $customer,
-		// 					'marketing' => $marketing,
-		// 					'market'	=> $market,
-		// 					'id'		=> $id,
-		// 					'provinsi'	=> $provinsi,
-		// 					'isi'		=> 'admin/customer/list'
-		// 				);
-		// 	$this->load->view('admin/layout/wrapper', $data, FALSE);
-		// }else{
-		// 	$i 	= $this->input;
-		// 	$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
-		// 					'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-		// 					'id_marketing'		=> $i->post('id_marketing'),
-		// 					'alamat'			=> $i->post('alamat'),
-		// 					'no_hp'				=> $i->post('no_hp'),
-		// 					'tanggal_daftar'	=> $i->post('tanggal_daftar'),
-		// 					'provinsi'			=> $i->post('prov'),
-		// 					'kabupaten'			=> $i->post('kab'),
-		// 					'kecamatan'			=> $i->post('kec'),
-		// 					'jenis_pelanggan'	=>'Customer'
-		// 				);
-		// 	$this->pelanggan_model->tambah($data);
-		// 	$this->session->set_flashdata('sukses','Data telah ditambah');
-		// 	redirect(base_url('admin/pelanggan/customer'), 'refresh');
-		// }
+			$data = array(	'title'		=> 'Tambah Data Pelanggan',
+							'customer'	=> $customer,
+							'marketing' => $marketing,
+							'market'	=> $market,
+							'id'		=> $id,
+							'provinsi'	=> $provinsi,
+							'isi'		=> 'admin/customer/list'
+						);
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		}else{
+			$i 	= $this->input;
+			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
+							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+							'id_marketing'		=> $i->post('id_marketing'),
+							'alamat'			=> $i->post('alamat'),
+							'no_hp'				=> $i->post('no_hp'),
+							'tanggal_daftar'	=> $i->post('tanggal_daftar'),
+							'provinsi'			=> $i->post('prov'),
+							'kabupaten'			=> $i->post('kab'),
+							'kecamatan'			=> $i->post('kec'),
+							'jenis_pelanggan'	=>'Customer'
+						);
+			$this->pelanggan_model->tambah($data);
+			$this->session->set_flashdata('sukses','Data telah ditambah');
+			redirect(base_url('admin/pelanggan/customer'), 'refresh');
+		}
 	}
 	//edit data customer
 	public function edit_customer($id_pelanggan){
@@ -160,6 +157,9 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
+		$valid->set_rules('jenis_pelanggan', 'Jenis Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
 
 		if($valid->run()===FALSE){
 			//end validation
@@ -183,6 +183,7 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'provinsi'			=> $i->post('prov'),
 								'kabupaten'			=> $i->post('kab'),
 								'kecamatan'			=> $i->post('kec')
@@ -193,6 +194,7 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'provinsi'			=> $i->post('prov')
 							);
 			}else if(!empty($kab)){
@@ -201,6 +203,7 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'kabupaten'			=> $i->post('kab')
 							);
 			}else if(!empty($kec)){
@@ -209,12 +212,14 @@ class Pelanggan extends CI_Controller
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'kecamatan'			=> $i->post('kec')
 							);
 			}else{
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 							);
@@ -379,6 +384,9 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
+		$valid->set_rules('jenis_pelanggan', 'Jenis Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
 
 
 		if($valid->run()===FALSE){
@@ -401,16 +409,45 @@ class Pelanggan extends CI_Controller
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'alamat'			=> $i->post('alamat'),
-								'id_marketing'		=> $i->post('id_marketing'),
 								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'provinsi'			=> $i->post('prov'),
 								'kabupaten'			=> $i->post('kab'),
+								'kecamatan'			=> $i->post('kec')
+							);
+			}else if(!empty($prov)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
+								'provinsi'			=> $i->post('prov')
+							);
+			}else if(!empty($kab)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
+								'kabupaten'			=> $i->post('kab')
+							);
+			}else if(!empty($kec)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'kecamatan'			=> $i->post('kec')
 							);
 			}else{
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 							);
@@ -569,6 +606,9 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
+		$valid->set_rules('jenis_pelanggan', 'Jenis Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
 
 
 		if($valid->run()===FALSE){
@@ -590,17 +630,46 @@ class Pelanggan extends CI_Controller
 			if((!empty($prov)) and (!empty($kab)) and (!empty($kec))){
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-								'id_marketing'			=> $i->post('id_marketing'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'provinsi'			=> $i->post('prov'),
 								'kabupaten'			=> $i->post('kab'),
+								'kecamatan'			=> $i->post('kec')
+							);
+			}else if(!empty($prov)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
+								'provinsi'			=> $i->post('prov')
+							);
+			}else if(!empty($kab)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
+								'kabupaten'			=> $i->post('kab')
+							);
+			}else if(!empty($kec)){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'kecamatan'			=> $i->post('kec')
 							);
 			}else{
 				$data = array(	'id_pelanggan'		=> $id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-								'id_marketing'			=> $i->post('id_marketing'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'jenis_pelanggan'		=> $i->post('jenis_pelanggan'),
 								'alamat'			=> $i->post('alamat'),
 								'no_hp'				=> $i->post('no_hp'),
 							);

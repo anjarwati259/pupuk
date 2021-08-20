@@ -37,52 +37,20 @@
                         <th>ID</th>
                         <th>Nama</th>
                         <th>No. Hp</th>
-                        <th>Alamat</th>
+                        <th width="300px">Alamat</th>
                         <th>Kabupaten</th>
                         <th>Provinsi</th>
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
                         <th>Tanggal Gabung</th>
+                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Action</th>
+                      <?php } ?>
                       </tr>
                       </thead>
                       <tbody>
                       <?php $no=1; 
-                       //format tanggal
-                        function tanggal_indo($tanggal, $cetak_hari = false)
-                            {
-                              $hari = array ( 1 =>    'Senin',
-                                    'Selasa',
-                                    'Rabu',
-                                    'Kamis',
-                                    'Jumat',
-                                    'Sabtu',
-                                    'Minggu'
-                                  );
-                                  
-                              $bulan = array (1 =>   'Januari',
-                                    'Februari',
-                                    'Maret',
-                                    'April',
-                                    'Mei',
-                                    'Juni',
-                                    'Juli',
-                                    'Agustus',
-                                    'September',
-                                    'Oktober',
-                                    'November',
-                                    'Desember'
-                                  );
-                              $split    = explode('-', $tanggal);
-                              $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
-                              
-                              if ($cetak_hari) {
-                                $num = date('N', strtotime($tanggal));
-                                return $hari[$num] . ', ' . $tgl_indo;
-                              }
-                              return $tgl_indo;
-                            }
                       foreach ($customer as $customer) { ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
@@ -97,11 +65,13 @@
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td><?php echo $customer->nama_marketing ?></td>
                       <?php } ?>
-                        <td><?php echo tanggal_indo(date('Y-m-d',strtotime($customer->tanggal_daftar))); ?></td>
+                        <td><?php echo tanggal(date('Y-m-d',strtotime($customer->tanggal_daftar))); ?></td>
+                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td>
                           <a href="<?php echo base_url('admin/pelanggan/edit_customer/'.$customer->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
                           <a href="<?php echo base_url('admin/pelanggan/delete/'.$customer->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini? Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" ><i class="fa fa-trash"></i> Hapus</a>
                         </td>
+                      <?php } ?>
                       </tr>
                     <?php } ?>
                       </tbody>

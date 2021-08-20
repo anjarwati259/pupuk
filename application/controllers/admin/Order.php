@@ -890,12 +890,16 @@ class Order extends CI_Controller
 		$laporan = $this->order_model->laporan();
 		$produk = $this->produk_model->produk();
 		$report = $this->order_model->report2();
+		$ads = $this->order_model->jenis_order('Semua Produk','','1');
+		$organik = $this->order_model->jenis_order('Semua Produk','','2');
 		$ongkir = $this->order_model->total_ongkir();
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'produk'	=> $produk,
 						'report'	=> $report,
 						'ongkir'	=> $ongkir,
+						'ads'		=> $ads,
+						'organik'	=> $organik,
 						'isi'		=> 'admin/order/laporan'
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);

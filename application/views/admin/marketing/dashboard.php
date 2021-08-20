@@ -87,7 +87,7 @@
               <div class="chart" id="line" style="height: 300px;"></div>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer no-border">
+            <!-- <div class="box-footer no-border">
               <div class="row">
                 <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
                   <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($POC) ? $POC->total : '0';?>" data-width="60" data-height="60"
@@ -95,21 +95,18 @@
 
                   <div class="knob-label">POC 1 Liter</div>
                 </div>
-                <!-- ./col -->
                 <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
                   <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($POC500) ? $POC500->total : '0';?>" data-width="60" data-height="60"
                          data-fgColor="#39CCCC">
 
                   <div class="knob-label">POC 500ml</div>
                 </div>
-                <!-- ./col -->
                 <div class="col-xs-3 text-center">
                   <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($ternak) ? $ternak->total : '0';?>" data-width="60" data-height="60"
                          data-fgColor="#39CCCC">
 
                   <div class="knob-label">Nutrisi Ternak</div>
                 </div>
-                <!-- ./col -->
                 <div class="col-xs-3 text-center">
                   <input type="text" class="knob" data-readonly="true" value="<?php echo !empty($ikan) ? $ikan->total : '0';?>" data-width="60" data-height="60"
                          data-fgColor="#39CCCC">
@@ -117,11 +114,8 @@
                   <div class="knob-label">Nutrisi Ikan</div>
                 </div>
               </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
+            </div> -->
           </div>
-          <!-- /.box -->
         </section>
 
         <div class="col-md-4">
