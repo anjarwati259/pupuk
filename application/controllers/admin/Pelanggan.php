@@ -710,6 +710,27 @@ class Pelanggan extends CI_Controller
 		 $this->session->set_flashdata('sukses', 'Data telah dihapus');
 		redirect(base_url('admin/pelanggan/distributor'), 'refresh');
 	}
-	// ============================= Marketing====================//
 
+	public function detail($id_pelanggan){
+		$pelanggan = $this->pelanggan_model->detail($id_pelanggan);
+		$data = array(	'title' => 'Detail Pelanggan',
+						'pelanggan' => $pelanggan,
+						'isi' => 'admin/customer/detail' );
+		//print_r($pelanggan);
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function follow(){
+		$id_pelanggan = $this->input->post('id_pelanggan');
+		$id_marketing = $this->input->post('id_marketing');
+		$status = $this->input->post('status');
+
+		$data = array(	'id_pelanggan' => $id_pelanggan,
+						'id_marketing' => $id_marketing,
+						'status'		=> $status,
+						'last_kontak'	=> date('Y-m-d h:i:s')
+					);
+		$this->pelanggan_model->insert_aktivitas($data);
+		echo json_encode(array('statusCode' => 200 ));
+	}
+	// ============================= Marketing====================//
 }

@@ -53,7 +53,7 @@
                       foreach ($customer as $customer) { ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $customer->nama_pelanggan ?></td>
+                        <td><a href="<?php echo base_url('admin/pelanggan/detail/'.$customer->id_pelanggan) ?>"><?php echo $customer->nama_pelanggan ?></a></td>
                         <td><?php echo $customer->no_hp ?></td>
                         <td>
                           <?php echo $customer->alamat ?><br> 

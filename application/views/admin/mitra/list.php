@@ -34,7 +34,6 @@
                         <th>Alamat</th>
                         <th>Kabupaten</th>
                         <th>Provinsi</th>
-                        <th>Komoditi</th>
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
@@ -56,7 +55,6 @@
                         </td>
                         <td><?php echo $mitra->kabupaten ?></td>
                         <td><?php echo $mitra->provinsi ?></td>
-                        <td><?php echo $mitra->komoditi ?></td>
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td><?php echo $mitra->nama_marketing ?></td>
                       <?php } ?>

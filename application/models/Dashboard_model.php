@@ -302,20 +302,4 @@ class Dashboard_model extends CI_Model
 		$this->db->where('id_user', $data['id_user']);
 		$this->db->update('tb_user',$data);
 	}
-	public function follow_up(){
-		$this->db->select('*');
-		$this->db->from('tb_follow_up');
-		$query = $this->db->get();
-		return $query->result();
-	}
-	public function text_follow($nama){
-		$this->db->select('*');
-		$this->db->from('tb_follow_up');
-		$this->db->where('nama', $nama);
-		$query = $this->db->get();
-		return $query->row();
-	}
-	public function save_follow($data){
-	$this->db->update_batch('tb_follow_up', $data, 'id_follow_up'); 
-	}
 }

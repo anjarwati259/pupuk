@@ -51,9 +51,10 @@ class Pelanggan_model extends CI_Model
 	}
 	//digunakan untuk mengambil detail data pelanggan
 	public function detail($id_pelanggan){
-		$this->db->select('*');
+		$this->db->select('tb_pelanggan.*,tb_pelanggan.id_pelanggan as id, tb_marketing.nama_marketing');
 		$this->db->from('tb_pelanggan');
-		$this->db->where('id_pelanggan', $id_pelanggan);
+		$this->db->where('tb_pelanggan.id_pelanggan', $id_pelanggan);
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_pelanggan.id_marketing', 'left');
 		$this->db->order_by('id_pelanggan','desc');
 		$query = $this->db->get();
 		return $query->row();
@@ -123,5 +124,8 @@ class Pelanggan_model extends CI_Model
 		$this->db->join('tb_detail_order','tb_detail_order.id_pelanggan = tb_pelanggan.id_pelanggan', 'left');
 		$query = $this->db->get();
 		return $query->row();
+	}
+	public function insert_aktivitas($data){
+		$this->db->insert('tb_ativitas', $data);
 	}
 }
