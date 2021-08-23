@@ -87,9 +87,10 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-
-		if($valid->run()===FALSE){
-			//end validation
+		$valid->set_rules('jenis_pelanggan', 'Jenis Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		//end validation
 			$customer = $this->pelanggan_model->customer();
 			$pelanggan_id = $this->pelanggan_model->get_last_id();
 
@@ -100,6 +101,9 @@ class Pelanggan extends CI_Controller
 			}else{
 				$id_pelanggan = 'C001';
 			}
+			
+
+		if($valid->run()===FALSE){
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'customer'	=> $customer,
@@ -112,7 +116,7 @@ class Pelanggan extends CI_Controller
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		}else{
 			$i 	= $this->input;
-			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
+			$data = array(	'id_pelanggan'		=> $id_pelanggan,
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 							'id_marketing'		=> $i->post('id_marketing'),
 							'alamat'			=> $i->post('alamat'),
@@ -121,7 +125,7 @@ class Pelanggan extends CI_Controller
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
 							'kecamatan'			=> $i->post('kec'),
-							'jenis_pelanggan'	=>'Customer'
+							'jenis_pelanggan'	=> $i->post('jenis_pelanggan')
 						);
 			$this->pelanggan_model->tambah($data);
 			$this->session->set_flashdata('sukses','Data telah ditambah');
@@ -313,9 +317,11 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
+		$valid->set_rules('jenis_pelanggan', 'Jenis Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
 
-		if($valid->run()===FALSE){
-			//end validation
+		//end validation
 			$mitra = $this->pelanggan_model->mitra();
 			$pelanggan_id = $this->pelanggan_model->get_last_id();
 
@@ -326,6 +332,9 @@ class Pelanggan extends CI_Controller
 		}else{
 			$id_pelanggan = 'C001';
 		}
+
+		if($valid->run()===FALSE){
+			
 			
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'mitra'		=> $mitra,
@@ -339,7 +348,7 @@ class Pelanggan extends CI_Controller
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		}else{
 			$i 	= $this->input;
-			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
+			$data = array(	'id_pelanggan'		=> $id_pelanggan,
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 							'id_marketing'		=> $i->post('id_marketing'),
 							'alamat'			=> $i->post('alamat'),
@@ -348,7 +357,7 @@ class Pelanggan extends CI_Controller
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
 							'kecamatan'			=> $i->post('kec'),
-							'jenis_pelanggan'	=>'Mitra'
+							'jenis_pelanggan'	=> $i->post('jenis_pelanggan')
 						);
 			$this->pelanggan_model->tambah($data);
 			$this->session->set_flashdata('sukses','Data telah ditambah');
@@ -538,9 +547,11 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('kecamatan', 'kecamatan','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
+		$valid->set_rules('jenis_pelanggan', 'Jenis Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
 
-		if($valid->run()===FALSE){
-			//end validation
+		//end validation
 			$distributor = $this->pelanggan_model->distributor();
 			$pelanggan_id = $this->pelanggan_model->get_last_id();
 		//last id pelanggan
@@ -550,6 +561,8 @@ class Pelanggan extends CI_Controller
 		}else{
 			$id_pelanggan = 'C001';
 		}
+
+		if($valid->run()===FALSE){
 			$data = array(	'title'		=> 'Tambah Data Pelanggan',
 							'distributor'	=> $distributor,
 							'id'		=> $id,
@@ -561,7 +574,7 @@ class Pelanggan extends CI_Controller
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		}else{
 			$i 	= $this->input;
-			$data = array(	'id_pelanggan'		=> $i->post('id_pelanggan'),
+			$data = array(	'id_pelanggan'		=> $id_pelanggan,
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
@@ -570,7 +583,7 @@ class Pelanggan extends CI_Controller
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
 							'kecamatan'			=> $i->post('kec'),
-							'jenis_pelanggan'	=>'Distributor'
+							'jenis_pelanggan'	=> $i->post('jenis_pelanggan')
 						);
 			$this->pelanggan_model->tambah($data);
 			$this->session->set_flashdata('sukses','Data telah ditambah');

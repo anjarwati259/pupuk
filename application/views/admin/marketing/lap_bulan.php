@@ -187,7 +187,7 @@
       //alert(data);
       $.ajax({
         type: 'POST',
-        url: "<?php echo base_url('admin/order/report_bulan'); ?>",
+        url: "<?php echo base_url('marketing/report_bulan'); ?>",
         data: data,
         success: function(hasil) {
           var response = $.parseJSON(hasil);

@@ -83,8 +83,8 @@
   </div>
 </div>
 
-<input type="hidden" name="tahun" id="tahun1" value="<?php echo $tahun ?>">
-<input type="hidden" name="bulan" id="bulan1" value="<?php echo $bulan ?>">
+<input type="hidden" name="tgl_awal" id="tgl_awal" value="<?php echo $awal ?>">
+<input type="hidden" name="tgl_akhir" id="tgl_akhir" value="<?php echo $akhir ?>">
 <!-- rincian -->
 <div class="box box-primary">
   <div class="box-header with-border">
@@ -150,9 +150,7 @@
     </div>
   </div>
 </div>
-
 <?php include "filter.php"; ?>
-
 <script type="text/javascript">
   $(document).ready(function(){
     dataTable = $("#example3").DataTable({
@@ -180,14 +178,14 @@
 
     function report(kode, jenis){
       var id = $(this).find(':selected').attr('dataid');
-      var bulan = $('#bulan1').val();
-      var tahun = $('#tahun1').val();
+      var awal = $('#tgl_awal').val();
+      var akhir = $('#tgl_akhir').val();
 
-      var data = "kode="+kode+"&jenis="+jenis+"&bulan="+bulan+"&tahun="+tahun;
+      var data = "kode="+kode+"&jenis="+jenis+"&awal="+awal+"&akhir="+akhir;
       //alert(data);
       $.ajax({
         type: 'POST',
-        url: "<?php echo base_url('admin/order/report_bulan'); ?>",
+        url: "<?php echo base_url('marketing/report_hari'); ?>",
         data: data,
         success: function(hasil) {
           var response = $.parseJSON(hasil);

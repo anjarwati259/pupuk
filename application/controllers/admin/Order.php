@@ -967,6 +967,71 @@ class Order extends CI_Controller
 		 $total_report['organik'] = $org;
 		echo json_encode($total_report);
 	}
+	public function report_bulan(){
+		 $bulan = $this->input->post('bulan');
+		 $tahun = $this->input->post('tahun');
+		 $kode = $this->input->post('kode');
+		 $jenis = $this->input->post('jenis');
+
+		 $ads = $this->order_model->jenisorder_bulan($kode,$jenis,'1', $bulan, $tahun);
+		 $organik = $this->order_model->jenisorder_bulan($kode,$jenis,'2', $bulan, $tahun);
+		 $total = $this->order_model->report_bulan($kode,$jenis, $bulan, $tahun);
+
+		 if($total->total==''){
+		 	$tot = 0;
+		 }else{
+		 	$tot = $total->total;
+		 }
+
+		 if($ads->total==''){
+		 	$adsense = 0;
+		 }else{
+		 	$adsense = $ads->total;
+		 }
+
+		 if($organik->total==''){
+		 	$org = 0;
+		 }else{
+		 	$org = $organik->total;
+		 }
+
+		 $total_report['total'] = $tot;
+		 $total_report['ads'] = $adsense;
+		 $total_report['organik'] = $org;
+		echo json_encode($total_report);
+	}
+	public function report_tahun(){
+		 $tahun = $this->input->post('tahun');
+		 $kode = $this->input->post('kode');
+		 $jenis = $this->input->post('jenis');
+
+		 $ads = $this->order_model->jenisorder_tahun($kode,$jenis,'1', $tahun);
+		 $organik = $this->order_model->jenisorder_tahun($kode,$jenis,'2', $tahun);
+		 $total = $this->order_model->report_tahun($kode,$jenis, $tahun);
+
+		 if($total->total==''){
+		 	$tot = 0;
+		 }else{
+		 	$tot = $total->total;
+		 }
+
+		 if($ads->total==''){
+		 	$adsense = 0;
+		 }else{
+		 	$adsense = $ads->total;
+		 }
+
+		 if($organik->total==''){
+		 	$org = 0;
+		 }else{
+		 	$org = $organik->total;
+		 }
+
+		 $total_report['total'] = $tot;
+		 $total_report['ads'] = $adsense;
+		 $total_report['organik'] = $org;
+		echo json_encode($total_report);
+	}
 	public function laporan1(){
 
 		$data = array(	'title'		=> 'Laporan Penjualan',
@@ -1004,7 +1069,7 @@ class Order extends CI_Controller
 		$tahun = $this->input->post('tahun');
 
 		$produk = $this->produk_model->produk();
-		$lap_bulan = $this->order_model->report_bulan($bulan,$tahun);
+		$lap_bulan = $this->order_model->report_bulanan($bulan,$tahun);
 		$ongkir = $this->order_model->ongkir_bulan($bulan, $tahun);
 		$laporan = $this->order_model->lap_bulan($bulan, $tahun);
 		$ads = $this->order_model->jenis_bulan('1',$bulan, $tahun);
@@ -1021,17 +1086,28 @@ class Order extends CI_Controller
 						'report'	=> $lap_bulan,
 						'isi'		=> 'admin/order/lap_bulan'
 					);
-		//print_r($format);
+		//print_r($ads);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 	public function lap_tahun(){
 		$tahun = $this->input->post('tahun2');
+
+		$produk = $this->produk_model->produk();
+		$lap_tahun = $this->order_model->report_tahunan($tahun);
 		$laporan = $this->order_model->lap_tahun($tahun);
+		$ongkir = $this->order_model->ongkir_tahun( $tahun);
 		$total = $this->order_model->total_tahun($tahun);
+		$ads = $this->order_model->jenis_tahun('1', $tahun);
+		$organik = $this->order_model->jenis_tahun('2', $tahun);
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'total'		=> $total,
 						'tahun'		=> $tahun,
+						'report'	=> $lap_tahun,
+						'ongkir'	=> $ongkir,
+						'ads'		=> $ads,
+						'organik'	=> $organik,
+						'produk'	=> $produk,
 						'isi'		=> 'admin/order/lap_tahun'
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);

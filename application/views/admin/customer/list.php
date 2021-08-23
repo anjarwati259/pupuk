@@ -19,7 +19,7 @@
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li><a href="#tab_1" data-toggle="tab">Tambah Data Customer</a></li>
+              <li><a href="#tab_1" data-toggle="tab">Tambah Data Pelanggan</a></li>
               <li class="active"><a href="#tab_2" data-toggle="tab">Data Customer</a></li>
             </ul>
             <div class="tab-content">
@@ -163,6 +163,16 @@
                     <?php }else{ ?>
                       <input type="hidden" name="id_marketing" value="<?php echo $market->id_marketing ?>">
                     <?php } ?>
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label" for="no_hp">Jenis Pelanggan</label>
+                      <div class="col-sm-8">
+                        <select class="form-control" name="jenis_pelanggan">
+                          <option value="Customer">Customer</option>
+                          <option value="Mitra">Mitra</option>
+                          <option value="Distributor">Distributor</option>
+                        </select>
+                      </div>
+                    </div>
                     </div>
                   </div>
                   <!-- /.box-body -->

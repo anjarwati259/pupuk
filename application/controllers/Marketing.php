@@ -17,7 +17,6 @@ class Marketing extends CI_Controller
 		$this->load->model('wilayah_model');
 		//load helper random string
 		$this->load->helper('string');
-		$this->load->library('parser');
 		//proteksi halaman
 		$this->simple_login->cek_login();
 		$this->simple_login->marketing();
@@ -30,8 +29,8 @@ class Marketing extends CI_Controller
 		$tanggal = date('Y-m-d');
 	    $order = $this->dashboard_model->order_market($id_marketing);
 	    $mitra = $this->dashboard_model->pelanggan_market('Mitra',$id_marketing);
-	    $dist = $this->dashboard_model->pelanggan('Distributor',$id_marketing);
-	    $customer = $this->dashboard_model->pelanggan('Customer',$id_marketing);
+	    $dist = $this->dashboard_model->pelanggan_market('Distributor',$id_marketing);
+	    $customer = $this->dashboard_model->pelanggan_market('Customer',$id_marketing);
 	    $harian = $this->dashboard_model->harian_market($id_marketing);
 	    $mingguan = $this->dashboard_model->mingguan_market($id_marketing);
 	    $bulanan = $this->dashboard_model->bulanan_market($id_marketing);
@@ -98,7 +97,6 @@ class Marketing extends CI_Controller
 						'isi'	=> 'admin/marketing/tambah_order'
 						);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
-		
 	}
 	//tambah data pelanggan
 	public function add_pelanggan()
@@ -222,13 +220,11 @@ class Marketing extends CI_Controller
 		$marketing =  $this->marketing_model->get_marketing($id_user);
 		$id_marketing = $marketing->id_marketing;
 		$produk = $this->marketing_model->produk($id_user);
-		$order 	= $this->order_model->list_order($id_marketing,1);
-
-		$welcome = $this->dashboard_model->text_follow('Welcome');
+		$order 	= $this->order_model->list_belum($id_marketing,1);
+		//$produk = $this->marketing_model->produk($id_user);
 		$data = array(	'title'	=> 'Data Order',
 						'sudah_bayar'	=> $order,
-						'follow'	=> $order,
-						'welcome'	=> $welcome,
+						//'follow'	=> $produk,
 						'isi'	=> 'admin/marketing/sudah_bayar'
 						);
 
@@ -245,4 +241,259 @@ class Marketing extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
+// ============================= Report ========================//
+	public function laporan(){
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$laporan = $this->marketing_model->laporan($id_marketing);
+		$produk = $this->produk_model->produk();
+		$report = $this->marketing_model->report2($id_marketing);
+		$ads = $this->marketing_model->jenis_order('Semua Produk','','1',$id_marketing);
+		$organik = $this->marketing_model->jenis_order('Semua Produk','','2', $id_marketing);
+		$ongkir = $this->marketing_model->total_ongkir($id_marketing);
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'laporan'	=> $laporan,
+						'produk'	=> $produk,
+						'report'	=> $report,
+						'ongkir'	=> $ongkir,
+						'ads'		=> $ads,
+						'organik'	=> $organik,
+						'isi'		=> 'admin/marketing/laporan'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function report(){
+		 $kode = $this->input->post('kode');
+		 $jenis = $this->input->post('jenis');
+
+		 $id_user = $this->session->userdata('id_user');
+		 $marketing =  $this->marketing_model->get_marketing($id_user);
+		 $id_marketing = $marketing->id_marketing;
+
+		 $ads = $this->marketing_model->jenis_order($kode,$jenis,'1', $id_marketing);
+		 $organik = $this->marketing_model->jenis_order($kode,$jenis,'2', $id_marketing);
+		 $total = $this->marketing_model->report($kode,$jenis, $id_marketing);
+
+		 if($total->total==''){
+		 	$tot = 0;
+		 }else{
+		 	$tot = $total->total;
+		 }
+
+		 if($ads->total==''){
+		 	$adsense = 0;
+		 }else{
+		 	$adsense = $ads->total;
+		 }
+
+		 if($organik->total==''){
+		 	$org = 0;
+		 }else{
+		 	$org = $organik->total;
+		 }
+
+		 $total_report['total'] = $tot;
+		 $total_report['ads'] = $adsense;
+		 $total_report['organik'] = $org;
+		echo json_encode($total_report);
+	}
+
+	public function lap_tanggal(){
+		$awal = $this->input->post('tgl_awal');
+		$akhir = $this->input->post('tgl_akhir');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$produk = $this->produk_model->produk();
+		$laporan = $this->marketing_model->lap_harian($awal,$akhir, $id_marketing);
+		$lap_hari = $this->marketing_model->report_harian($awal,$akhir, $id_marketing);
+		$ongkir = $this->marketing_model->ongkir_hari($awal, $akhir, $id_marketing);
+		$ads = $this->marketing_model->jenis_hari('1',$awal, $akhir, $id_marketing);
+		$organik = $this->marketing_model->jenis_hari('2',$awal, $akhir, $id_marketing);
+
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'laporan'	=> $laporan,
+						'report'	=> $lap_hari,
+						'ongkir'	=> $ongkir,
+						'ads'		=> $ads,
+						'awal'		=> $awal,
+						'akhir'		=> $akhir,
+						'produk'	=> $produk,
+						'organik'	=> $organik,
+						'isi'		=> 'admin/marketing/lap_tanggal'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		 //print_r($laporan);
+	}
+	public function report_hari(){
+		 $awal = $this->input->post('awal');
+		 $akhir = $this->input->post('akhir');
+		 $kode = $this->input->post('kode');
+		 $jenis = $this->input->post('jenis');
+
+		 $id_user = $this->session->userdata('id_user');
+		 $marketing =  $this->marketing_model->get_marketing($id_user);
+		 $id_marketing = $marketing->id_marketing;
+
+		 $ads = $this->marketing_model->jenisorder_hari($kode,$jenis,'1', $awal, $akhir, $id_marketing);
+		 $organik = $this->marketing_model->jenisorder_hari($kode,$jenis,'2', $awal, $akhir, $id_marketing);
+		 $total = $this->marketing_model->report_hari($kode,$jenis, $awal, $akhir, $id_marketing);
+
+		 if($total->total==''){
+		 	$tot = 0;
+		 }else{
+		 	$tot = $total->total;
+		 }
+
+		 if($ads->total==''){
+		 	$adsense = 0;
+		 }else{
+		 	$adsense = $ads->total;
+		 }
+
+		 if($organik->total==''){
+		 	$org = 0;
+		 }else{
+		 	$org = $organik->total;
+		 }
+
+		 $total_report['total'] = $tot;
+		 $total_report['ads'] = $adsense;
+		 $total_report['organik'] = $org;
+		echo json_encode($total_report);
+	}
+	public function lap_bulan(){
+		$bulan = $this->input->post('bulan');
+		$tahun = $this->input->post('tahun');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$produk = $this->produk_model->produk();
+		$lap_bulan = $this->marketing_model->report_bulanan($bulan,$tahun,$id_marketing);
+		$ongkir = $this->marketing_model->ongkir_bulan($bulan, $tahun, $id_marketing);
+		$laporan = $this->marketing_model->lap_bulan($bulan, $tahun, $id_marketing);
+		$ads = $this->marketing_model->jenis_bulan('1',$bulan, $tahun, $id_marketing);
+		$organik = $this->marketing_model->jenis_bulan('2',$bulan, $tahun, $id_marketing);
+
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'laporan'	=> $laporan,
+						'produk'	=> $produk,
+						'bulan'		=> $bulan,
+						'tahun'		=> $tahun,
+						'ongkir'	=> $ongkir,
+						'ads'		=> $ads,
+						'organik'	=> $organik,
+						'report'	=> $lap_bulan,
+						'isi'		=> 'admin/marketing/lap_bulan'
+					);
+		//print_r($ads);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function report_bulan(){
+		 $bulan = $this->input->post('bulan');
+		 $tahun = $this->input->post('tahun');
+		 $kode = $this->input->post('kode');
+		 $jenis = $this->input->post('jenis');
+
+		 $id_user = $this->session->userdata('id_user');
+		 $marketing =  $this->marketing_model->get_marketing($id_user);
+		 $id_marketing = $marketing->id_marketing;
+
+		 $ads = $this->marketing_model->jenisorder_bulan($kode,$jenis,'1', $bulan, $tahun, $id_marketing);
+		 $organik = $this->marketing_model->jenisorder_bulan($kode,$jenis,'2', $bulan, $tahun, $id_marketing);
+		 $total = $this->marketing_model->report_bulan($kode,$jenis, $bulan, $tahun, $id_marketing);
+
+		 if($total->total==''){
+		 	$tot = 0;
+		 }else{
+		 	$tot = $total->total;
+		 }
+
+		 if($ads->total==''){
+		 	$adsense = 0;
+		 }else{
+		 	$adsense = $ads->total;
+		 }
+
+		 if($organik->total==''){
+		 	$org = 0;
+		 }else{
+		 	$org = $organik->total;
+		 }
+
+		 $total_report['total'] = $tot;
+		 $total_report['ads'] = $adsense;
+		 $total_report['organik'] = $org;
+		echo json_encode($total_report);
+	}
+	public function lap_tahun(){
+		$tahun = $this->input->post('tahun2');
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$produk = $this->produk_model->produk();
+		$lap_tahun = $this->marketing_model->report_tahunan($tahun, $id_marketing);
+		$laporan = $this->marketing_model->lap_tahun($tahun, $id_marketing);
+		$ongkir = $this->marketing_model->ongkir_tahun($tahun, $id_marketing);
+		//$total = $this->marketing_model->total_tahun($tahun, $id_marketing);
+		$ads = $this->marketing_model->jenis_tahun('1', $tahun, $id_marketing);
+		$organik = $this->marketing_model->jenis_tahun('2', $tahun, $id_marketing);
+		$data = array(	'title'		=> 'Laporan Penjualan',
+						'laporan'	=> $laporan,
+						//'total'		=> $total,
+						'tahun'		=> $tahun,
+						'report'	=> $lap_tahun,
+						'ongkir'	=> $ongkir,
+						'ads'		=> $ads,
+						'organik'	=> $organik,
+						'produk'	=> $produk,
+						'isi'		=> 'admin/marketing/lap_tahun'
+					);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function report_tahun(){
+		 $tahun = $this->input->post('tahun');
+		 $kode = $this->input->post('kode');
+		 $jenis = $this->input->post('jenis');
+
+		 $id_user = $this->session->userdata('id_user');
+		 $marketing =  $this->marketing_model->get_marketing($id_user);
+		 $id_marketing = $marketing->id_marketing;
+
+		 $ads = $this->marketing_model->jenisorder_tahun($kode,$jenis,'1', $tahun, $id_marketing);
+		 $organik = $this->marketing_model->jenisorder_tahun($kode,$jenis,'2', $tahun, $id_marketing);
+		 $total = $this->marketing_model->report_tahun($kode,$jenis, $tahun, $id_marketing);
+
+		 if($total->total==''){
+		 	$tot = 0;
+		 }else{
+		 	$tot = $total->total;
+		 }
+
+		 if($ads->total==''){
+		 	$adsense = 0;
+		 }else{
+		 	$adsense = $ads->total;
+		 }
+
+		 if($organik->total==''){
+		 	$org = 0;
+		 }else{
+		 	$org = $organik->total;
+		 }
+
+		 $total_report['total'] = $tot;
+		 $total_report['ads'] = $adsense;
+		 $total_report['organik'] = $org;
+		echo json_encode($total_report);
+	}
+	
+
 }

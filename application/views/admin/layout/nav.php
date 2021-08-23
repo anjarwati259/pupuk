@@ -126,6 +126,7 @@
 <!-- end admin -->
 <?php }else if($this->session->userdata('hak_akses')=='5'){ ?>
 <!-- marketing -->
+
 <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -168,6 +169,13 @@
           <a href="<?php echo base_url('marketing/order') ?>">
             <i class="fa fa-cart-plus"></i>
             <span>Order</span>
+          </a>
+        </li>
+         <!-- laporan Order -->
+        <li>
+          <a href="<?php echo base_url('marketing/laporan') ?>">
+            <i class="fa fa-file" aria-hidden="true"></i>
+            <span>Laporan Penjualan</span>
           </a>
         </li>
       </ul>

@@ -84,7 +84,6 @@
 </div>
 
 <input type="hidden" name="tahun" id="tahun1" value="<?php echo $tahun ?>">
-<input type="hidden" name="bulan" id="bulan1" value="<?php echo $bulan ?>">
 <!-- rincian -->
 <div class="box box-primary">
   <div class="box-header with-border">
@@ -180,14 +179,13 @@
 
     function report(kode, jenis){
       var id = $(this).find(':selected').attr('dataid');
-      var bulan = $('#bulan1').val();
       var tahun = $('#tahun1').val();
 
-      var data = "kode="+kode+"&jenis="+jenis+"&bulan="+bulan+"&tahun="+tahun;
+      var data = "kode="+kode+"&jenis="+jenis+"&tahun="+tahun;
       //alert(data);
       $.ajax({
         type: 'POST',
-        url: "<?php echo base_url('admin/order/report_bulan'); ?>",
+        url: "<?php echo base_url('marketing/report_tahun'); ?>",
         data: data,
         success: function(hasil) {
           var response = $.parseJSON(hasil);
