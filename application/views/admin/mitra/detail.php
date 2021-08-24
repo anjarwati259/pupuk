@@ -17,8 +17,7 @@
           <li><a href="#"><b>Kabupaten/Kota</b> <br><span><?php echo $pelanggan->kabupaten ?></span></a></li>
           <li><a href="#"><b>Kecamatan</b> <br><span><?php echo $pelanggan->kecamatan ?></span></a></li>
           <li><a href="#"><b>Marketing</b> <br><span><?php echo $pelanggan->nama_marketing ?></span></a></li>
-          <li><a href="#"><b>Last Contact</b> <br><span> <?php if(!isset($report->total)){ echo $pelanggan->last_update;}else{ ?>
-            <?php echo tanggal(date('Y-m-d',strtotime($last_contact->last_kontak)),FALSE); ?> <?php echo date('g:i', strtotime($last_contact->last_kontak)); }?></span></a></li>
+          <li><a href="#"><b>Last Contact</b> <br><span><?php echo tanggal(date('Y-m-d',strtotime($last_contact->last_kontak)),FALSE); ?> <?php echo date('g:i', strtotime($last_contact->last_kontak)); ?></span></a></li>
         </ul>
       </div>
     </div>
@@ -67,13 +66,8 @@
           </div>
         </div>
       </div>
-
       <input type="hidden" name="id_Pelanggan" id="id_pelanggan" value="<?php echo $pelanggan->id ?>">
-      <?php if($this->session->userdata('hak_akses')=='1'){ ?>
-        <input type="text" name="id_marketing" id="id_marketing" value="<?php echo $this->session->userdata('id_user') ?>">
-      <?php }else{ ?>
-        <input type="text" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
-      <?php } ?>
+      <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
       <!-- /.box-body -->
       <div class="box-footer">
         <button type="submit" id="btn-submit" class="btn btn-primary pull-right"><i class="fa fa-paper-plane"></i> &nbsp;&nbsp;Kirim</button>

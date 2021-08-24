@@ -128,4 +128,29 @@ class Pelanggan_model extends CI_Model
 	public function insert_aktivitas($data){
 		$this->db->insert('tb_ativitas', $data);
 	}
+	public function follow($id_pelanggan){
+		$this->db->select('tb_ativitas.*, tb_marketing.nama_marketing, tb_pelanggan.nama_pelanggan');
+		$this->db->from('tb_ativitas');
+		$this->db->where('tb_ativitas.id_pelanggan', $id_pelanggan);
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_ativitas.id_pelanggan', 'left');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_ativitas.id_marketing', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function total_follow($id_pelanggan){
+		$this->db->select('count(*) as total');
+		$this->db->from('tb_ativitas');
+		$this->db->where('id_pelanggan', $id_pelanggan);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function last_contact($id_pelanggan){
+		$this->db->select('last_kontak');
+		$this->db->from('tb_ativitas');
+		$this->db->where('id_pelanggan', $id_pelanggan);
+		$this->db->order_by('id_pelanggan','desc');
+		$this->db->limit(1);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

@@ -297,6 +297,7 @@ class Order extends CI_Controller
 		foreach ($kode_produk as $key) {
 			$data2[] = array( 'id_order' => $id_order[$index],
 							'id_produk' => $key,
+							'id_marketing' => $i->post('id_marketing'),
 							'kode_transaksi' => $kode_transaksi,
 							'jml_beli' => $jml_beli[$index],
 							'potongan' => $potongan[$index],

@@ -713,8 +713,14 @@ class Pelanggan extends CI_Controller
 
 	public function detail($id_pelanggan){
 		$pelanggan = $this->pelanggan_model->detail($id_pelanggan);
+		$follow = $this->pelanggan_model->follow($id_pelanggan);
+		$total = $this->pelanggan_model->total_follow($id_pelanggan);
+		$last_contact = $this->pelanggan_model->last_contact($id_pelanggan);
 		$data = array(	'title' => 'Detail Pelanggan',
 						'pelanggan' => $pelanggan,
+						'follow'	=> $follow,
+						'total'		=> $total,
+						'last_contact' => $last_contact,
 						'isi' => 'admin/customer/detail' );
 		//print_r($pelanggan);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
@@ -722,15 +728,21 @@ class Pelanggan extends CI_Controller
 	public function follow(){
 		$id_pelanggan = $this->input->post('id_pelanggan');
 		$id_marketing = $this->input->post('id_marketing');
+		$text = $this->input->post('text_follow');
 		$status = $this->input->post('status');
 
 		$data = array(	'id_pelanggan' => $id_pelanggan,
 						'id_marketing' => $id_marketing,
 						'status'		=> $status,
+						'text'			=> $text,
 						'last_kontak'	=> date('Y-m-d h:i:s')
 					);
 		$this->pelanggan_model->insert_aktivitas($data);
-		echo json_encode(array('statusCode' => 200 ));
+		if($text != null){
+			echo json_encode(array('statusCode' => 200 ));
+		}else{
+			echo json_encode(array('statusCode' => 210 ));
+		}
 	}
 	// ============================= Marketing====================//
 }

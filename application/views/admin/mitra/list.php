@@ -48,7 +48,7 @@
                       $no=1; foreach ($mitra as $mitra) { ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $mitra->nama_pelanggan ?></td>
+                        <td ><a href="<?php echo base_url('admin/pelanggan/detail/'.$mitra->id_pelanggan) ?>"><?php echo $mitra->nama_pelanggan ?></a></td>
                         <td><?php echo $mitra->no_hp ?></td>
                         <td>
                           <?php echo $mitra->alamat ?><br>  
