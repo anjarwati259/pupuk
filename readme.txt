@@ -42,3 +42,10 @@ catatan status
 	PK004 = NUTRISI IKAN
 11. KODE INVOICE/SO
 	NO/SO/AGI/VII/2021/kodecustomer
+12. STATUS CALON
+	1 = ads
+	0 = organik
+	2 = pindah
+13. STATUS AKTIVITAS
+	1 = pelanggan
+	2 = calon

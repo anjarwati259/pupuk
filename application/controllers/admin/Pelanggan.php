@@ -744,5 +744,92 @@ class Pelanggan extends CI_Controller
 			echo json_encode(array('statusCode' => 210 ));
 		}
 	}
-	// ============================= Marketing====================//
+	// ============================= Colon customer ====================//
+	public function calon_customer(){
+		$calon = $this->pelanggan_model->listcalon();
+		$data = array(	'title' => 'Data Calon Customer',
+						'calon'	=> $calon,
+						'isi' => 'admin/calon/list' );
+		//print_r($pelanggan);
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function add_calon(){
+		$calon = $this->pelanggan_model->listcalon();
+		//get provinsi
+		$marketing = $this->pelanggan_model->marketing();
+		$provinsi = $this->wilayah_model->listing();
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
+
+		$valid = $this-> form_validation;
+
+		$valid->set_rules('nama_pelanggan', 'Nama Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('alamat', 'Alamat','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('no_hp', 'No. Telp','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$valid->set_rules('provinsi', 'provinsi','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kabupaten', 'kabupaten','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kecamatan', 'kecamatan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$valid->set_rules('status', 'Sumber','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$calon_id = $this->pelanggan_model->get_last_calon();
+		//last id pelanggan
+		if($calon_id){
+			$id = substr($calon_id[0]->id_calon, 1);
+			$id_calon = generate_code('P', $id);
+		}else{
+			$id_calon = 'P001';
+		}
+
+		if($valid->run()===FALSE){
+			$data = array(	'title' => 'Data Calon Customer',
+							'calon'	=> $calon,
+							'marketing' => $marketing,
+							'provinsi' => $provinsi,
+							'id'	=> $id_calon,
+							'market' =>$market,
+							'isi' => 'admin/calon/tambah' );
+			//print_r($pelanggan);
+			$this->load->view('admin/layout/wrapper',$data, FALSE);
+		}else{
+			$i 	= $this->input;
+			$data = array(	'id_calon'		=> $id_calon,
+							'nama_calon'	=> $i->post('nama_pelanggan'),
+							'alamat'			=> $i->post('alamat'),
+							'no_hp'				=> $i->post('no_hp'),
+							'tanggal'	=> $i->post('tanggal_daftar'),
+							'id_marketing'		=> $i->post('id_marketing'),
+							'provinsi'			=> $i->post('prov'),
+							'kabupaten'			=> $i->post('kab'),
+							'kecamatan'			=> $i->post('kec'),
+							'komoditi'			=> $i->post('komoditi'),
+							'keterangan'		=> $i->post('keterangan'),
+							'status'			=> $i->post('status'),
+						);
+			//print_r($data);
+			$this->pelanggan_model->tambah_calon($data);
+			$this->session->set_flashdata('sukses','Data telah ditambah');
+			redirect(base_url('admin/pelanggan/calon_customer'), 'refresh');
+		}
+	}
+	public function reminder($id_pelanggan){
+		$calon = $this->pelanggan_model->listcalon();
+		$data = array(	'title' => 'Reminder',
+						'calon'	=> $calon,
+						'isi' => 'admin/calon/reminder' );
+		//print_r($pelanggan);
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
 }

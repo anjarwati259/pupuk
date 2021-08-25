@@ -162,6 +162,7 @@
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('admin/pelanggan/customer') ?>"><i class="fa fa-user"></i> Data Customer</a></li>
             <li><a href="<?php echo base_url('admin/pelanggan/mitra') ?>"><i class="fa fa-users"></i> Data Mitra</a></li>
+            <li><a href="<?php echo base_url('admin/pelanggan/calon_customer') ?>"><i class="fa fa-users"></i> Calon Customer</a></li>
           </ul>
         </li>
         <!-- Order -->

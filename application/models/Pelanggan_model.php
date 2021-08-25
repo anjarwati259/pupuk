@@ -134,6 +134,7 @@ class Pelanggan_model extends CI_Model
 		$this->db->where('tb_ativitas.id_pelanggan', $id_pelanggan);
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_ativitas.id_pelanggan', 'left');
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_ativitas.id_marketing', 'left');
+		$this->db->order_by('id_aktivitas','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -152,5 +153,23 @@ class Pelanggan_model extends CI_Model
 		$this->db->limit(1);
 		$query = $this->db->get();
 		return $query->row();
+	}
+// =========================== Calon =======================================//
+	public function listcalon(){
+		$this->db->select('*');
+		$this->db->from('tb_calon_pelanggan');
+		//$this->db->where('jenis_pelanggan', 'Calon');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//digunakan untuk mencari id pelanggan terakhir
+	public function get_last_calon(){
+		$this->db->order_by('id_calon', 'DESC');
+
+		$query = $this->db->get("tb_calon_pelanggan",1,0);
+		return $query->result();
+	}
+	public function tambah_calon($data){
+		$this->db->insert('tb_calon_pelanggan', $data);
 	}
 }

@@ -51,10 +51,10 @@
         <div class="group" style="padding: 10px;">
           <div class="form-group">
             <label for="exampleInputEmail1">Tanggal</label>
-            <input type="text" class="form-control" value="<?php echo tanggal(date('Y-m-d',strtotime($tgl)),FALSE); ?>" id="no_hp" readonly>
+            <input type="text" class="form-control" value="<?php echo tanggal(date('Y-m-d',strtotime($tgl)),FALSE); ?>" id="tanggal" readonly>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1" style="padding-right: 10%;">Follow Up Ke:</label><span class="badge bg-blue"><?php $tot = $total->total + 1;
+            <label for="exampleInputEmail1" style="padding-right: 2%;">Follow Up Ke:</label><span class="badge bg-blue"><?php $tot = $total->total + 1;
             echo $tot ?></span>
           </div>
           <div class="form-group">
@@ -69,10 +69,17 @@
       </div>
 
       <input type="hidden" name="id_Pelanggan" id="id_pelanggan" value="<?php echo $pelanggan->id ?>">
-      <?php if($this->session->userdata('hak_akses')=='1'){ ?>
-        <input type="text" name="id_marketing" id="id_marketing" value="<?php echo $this->session->userdata('id_user') ?>">
+      <?php
+       if($this->session->userdata('hak_akses')=='1'){ 
+        $id_user = $this->session->userdata('id_user');
+        $this->db->select('id_marketing');
+        $this->db->where('id_user', $id_user);
+        $this->db->from('tb_marketing');
+        $id = $this->db->get()->row();
+        ?>
+        <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $id->id_marketing ?>">
       <?php }else{ ?>
-        <input type="text" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
+        <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
       <?php } ?>
       <!-- /.box-body -->
       <div class="box-footer">

@@ -1,85 +1,28 @@
-  <?php 
-    //error upload
-    if(isset($error)){
-      echo '<p class="alert alert-warning">';
-      echo $error;
-      echo '</p>';
-    }
-    //Notifikasi error
-    echo validation_errors('<div class = "alert alert-warning">','</div>');
+<?php 
+//error upload
+if(isset($error)){
+  echo '<p class="alert alert-warning">';
+  echo $error;
+  echo '</p>';
+}
+//Notifikasi error
+echo validation_errors('<div class = "alert alert-warning">','</div>');
 
-    
-     ?>
+// Form open
+echo form_open_multipart(base_url('admin/pelanggan/add_calon'), ' class="form-horizontal"');
+ ?>
 <!-- START CUSTOM TABS -->
       <div class="row">
         <div class="col-md-12">
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li><a href="#tab_1" data-toggle="tab">Tambah Data Pelanggan</a></li>
-              <li class="active"><a href="#tab_2" data-toggle="tab">Data Distributor</a></li>
+              <li role="presentation" class="active"><a href="#tab_1">Tambah Calon Customer</a></li>
+            <li role="presentation"><a href="<?php echo site_url('admin/pelanggan/calon_customer');?>">Data Calon Customer</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="tab_2">
-                <div class="box">
-                  <div class="box-header">
-                    <h3 class="box-title">Data Table With Full Features</h3>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body scrollmenu">
-                    <table id="example1" class="table table-bordered table-striped">
-                      <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Nama </th>
-                        <th>No. Hp</th>
-                        <th>Alamat</th>
-                        <th>Kabupaten</th>
-                        <th>Provinsi</th>
-                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
-                        <th>Marketing</th>
-                      <?php } ?>
-                        <th>Tanggal Gabung</th>
-                        <th>Action</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <?php 
-                      $no=1; 
-                      foreach ($distributor as $distributor) { ?>
-                      <tr>
-                        <td><?php echo $no++ ?></td>
-                        <td><a href="<?php echo base_url('admin/pelanggan/detail/'.$distributor->id_pelanggan) ?>"><?php echo $distributor->nama_pelanggan ?></a></td>
-                        <td><?php echo $distributor->no_hp ?></td>
-                        <td>
-                          <?php echo $distributor->alamat ?><br> 
-                          
-                        </td>
-                        <td><?php echo $distributor->kabupaten ?></td>
-                        <td><?php echo $distributor->provinsi ?></td>
-                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
-                        <td><?php echo $distributor->nama_marketing ?></td>
-                      <?php } ?>
-                        <td><?php echo tanggal(date('Y-m-d',strtotime($distributor->tanggal_daftar))); ?></td>
-                        <td>
-                          <a href="<?php echo base_url('admin/pelanggan/edit_distributor/'.$distributor->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
-                          <a href="<?php echo base_url('admin/pelanggan/delete_distributor/'.$distributor->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?, Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" ><i class="fa fa-trash"></i> Hapus</a>
-                        </td>
-                      </tr>
-                    <?php } ?>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-              </div>
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_1">
-                <?php 
-                // Form open
-              echo form_open_multipart(base_url('admin/pelanggan/add_distributor'), ' class="form-horizontal"');
-                 ?>
+              <div class="tab-pane active" id="tab_1">
                 <form class="form-horizontal" method="POST">
                   <div class="box-body">
                     <div class="col-md-6">
@@ -91,7 +34,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">Nama Mitra</label>
+                        <label class="col-sm-4 control-label">Nama Customer</label>
                         <div class="col-sm-8">
                           <input type="text" value="<?php echo set_value('nama_pelanggan') ?>" name="nama_pelanggan" placeholder="Nama Customer" class="form-control" required/>
                         </div>
@@ -143,6 +86,18 @@
                           <input type="text" value="<?php echo set_value('no_hp') ?>" name="no_hp" placeholder="No. HP" class="form-control"/>
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">Komoditi</label>
+                        <div class="col-sm-8">
+                          <input type="text" value="<?php echo set_value('komoditi') ?>" name="komoditi" placeholder="Komoditi" class="form-control" required/>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="alamat">Keterangan</label>
+                        <div class="col-sm-8">
+                          <textarea style="height: 100px;" name="keterangan" value="<?php echo set_value('keterangan') ?>" placeholder="Keterangan" class="form-control"/></textarea>
+                        </div>
+                      </div>
                       <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="no_hp">Marketing</label>
@@ -158,12 +113,11 @@
                       <input type="hidden" name="id_marketing" value="<?php echo $market->id_marketing ?>">
                     <?php } ?>
                     <div class="form-group">
-                      <label class="col-sm-4 control-label" for="no_hp">Jenis Pelanggan</label>
+                      <label class="col-sm-4 control-label" for="no_hp">Sumber</label>
                       <div class="col-sm-8">
-                        <select class="form-control" name="jenis_pelanggan">
-                          <option value="Customer">Customer</option>
-                          <option value="Mitra">Mitra</option>
-                          <option value="Distributor">Distributor</option>
+                        <select class="form-control" name="status">
+                          <option value="0">Organik</option>
+                          <option value="1">Adsense</option>
                         </select>
                       </div>
                     </div>
@@ -172,7 +126,7 @@
                   <!-- /.box-body -->
                   <div class="box-footer">
                     <div class="col-md-3 col-md-offset-4">
-                      <a href="<?php echo base_url('admin/pelanggan/distributor') ?>" class="btn btn-default">Cancel</a>
+                      <a href="<?php echo base_url('admin/pelanggan/customer') ?>" class="btn btn-default">Cancel</a>
                       <button class="btn btn-info pull-right" type="submit">Save</button>
                     </div>
                   </div>
@@ -181,8 +135,6 @@
                   <input type="hidden" name="kec" id="kec">
                   <input type="hidden" name="prov" id="prov">
                 </form>
-                <?php echo form_close(); ?>
-                <!-- /.box -->
               </div>
               <!-- /.tab-pane -->
             </div>
@@ -192,6 +144,7 @@
         </div>
         <!-- /.col -->
       </div>
+      <?php echo form_close(); ?>
       <!-- /.row -->
       <!-- END CUSTOM TABS -->
 <script type="text/javascript">
