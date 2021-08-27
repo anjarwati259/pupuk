@@ -138,6 +138,16 @@ class Pelanggan_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function follow_calon($id_calon){
+		$this->db->select('tb_ativitas.*, tb_marketing.nama_marketing, tb_calon_pelanggan.nama_calon');
+		$this->db->from('tb_ativitas');
+		$this->db->where('tb_ativitas.id_pelanggan', $id_calon);
+		$this->db->join('tb_calon_pelanggan','tb_calon_pelanggan.id_calon = tb_ativitas.id_pelanggan', 'left');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_ativitas.id_marketing', 'left');
+		$this->db->order_by('id_aktivitas','desc');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	public function total_follow($id_pelanggan){
 		$this->db->select('count(*) as total');
 		$this->db->from('tb_ativitas');
@@ -155,10 +165,18 @@ class Pelanggan_model extends CI_Model
 		return $query->row();
 	}
 // =========================== Calon =======================================//
-	public function listcalon(){
+	public function listcalon($id_marketing){
 		$this->db->select('*');
 		$this->db->from('tb_calon_pelanggan');
-		//$this->db->where('jenis_pelanggan', 'Calon');
+		$this->db->where('id_marketing', $id_marketing);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function list_calon(){
+		$this->db->select('tb_calon_pelanggan.*,tb_marketing.nama_marketing');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_calon_pelanggan.id_marketing', 'left');
+		//$this->db->where('id_marketing', $id_marketing);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -171,5 +189,17 @@ class Pelanggan_model extends CI_Model
 	}
 	public function tambah_calon($data){
 		$this->db->insert('tb_calon_pelanggan', $data);
+	}
+	public function edit_calon($data){
+		$this->db->where('id_calon', $data['id_calon']);
+		$this->db->update('tb_calon_pelanggan',$data);
+	}
+	public function calon($id_calon){
+		$this->db->select('tb_calon_pelanggan.*, tb_marketing.nama_marketing');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_calon_pelanggan.id_marketing', 'left');
+		$this->db->where('id_calon', $id_calon);
+		$query = $this->db->get();
+		return $query->row();
 	}
 }

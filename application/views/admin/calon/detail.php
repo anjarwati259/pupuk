@@ -8,16 +8,16 @@
           <img class="img-circle" src="<?php echo base_url() ?>assets/img/logo/logo_2.png" alt="User Avatar">
         </div>
         <!-- /.widget-user-image -->
-        <h3 class="widget-user-username" style="padding-top: 12px; padding-bottom: 10px;"><?php echo $pelanggan->nama_pelanggan ?></h3>
+        <h3 class="widget-user-username" style="padding-top: 12px; padding-bottom: 10px;"><?php echo $calon->nama_calon ?></h3>
       </div>
       <div class="box-footer no-padding">
         <ul class="nav nav-stacked">
-          <li><a href="#"><b>Alamat</b> <br><span><?php echo $pelanggan->alamat ?></span></a></li>
-          <li><a href="#"><b>Provinsi</b> <br><span><?php echo $pelanggan->provinsi ?></span></a></li>
-          <li><a href="#"><b>Kabupaten/Kota</b> <br><span><?php echo $pelanggan->kabupaten ?></span></a></li>
-          <li><a href="#"><b>Kecamatan</b> <br><span><?php echo $pelanggan->kecamatan ?></span></a></li>
-          <li><a href="#"><b>Marketing</b> <br><span><?php echo $pelanggan->nama_marketing ?></span></a></li>
-          <li><a href="#"><b>Last Contact</b> <br><span> <?php if($total->total==0){ echo tanggal(date('Y-m-d',strtotime($pelanggan->tanggal_daftar)),FALSE);}else{ ?>
+          <li><a href="#"><b>Alamat</b> <br><span><?php echo $calon->alamat ?></span></a></li>
+          <li><a href="#"><b>Provinsi</b> <br><span><?php echo $calon->provinsi ?></span></a></li>
+          <li><a href="#"><b>Kabupaten/Kota</b> <br><span><?php echo $calon->kabupaten ?></span></a></li>
+          <li><a href="#"><b>Kecamatan</b> <br><span><?php echo $calon->kecamatan ?></span></a></li>
+          <li><a href="#"><b>Marketing</b> <br><span><?php echo $calon->nama_marketing ?></span></a></li>
+          <li><a href="#"><b>Last Contact</b> <br><span> <?php if($total->total==0){ echo tanggal(date('Y-m-d',strtotime($calon->tanggal)),FALSE);}else{ ?>
             <?php echo tanggal(date('Y-m-d',strtotime($last_contact->last_kontak)),FALSE); ?> <?php echo date('g:i', strtotime($last_contact->last_kontak)); }?></span></a></li>
         </ul>
       </div>
@@ -35,7 +35,7 @@
       <!-- /.box-header -->
       <!-- <?php echo form_open(base_url('admin/pelanggan/follow')); ?> -->
       <?php 
-        $nohp = $pelanggan->no_hp;
+        $nohp = $calon->no_hp;
         $hp = preg_replace("/[^0-9]/", "", $nohp);
         $no = substr($hp,0,1);
         $a = substr($hp,1);
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <input type="hidden" name="id_Pelanggan" id="id_pelanggan" value="<?php echo $pelanggan->id ?>">
+      <input type="hidden" name="id_calon" id="id_calon" value="<?php echo $calon->id_calon ?>">
       <?php
        if($this->session->userdata('hak_akses')=='1'){ 
         $id_user = $this->session->userdata('id_user');
@@ -79,11 +79,15 @@
         ?>
         <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $id->id_marketing ?>">
       <?php }else{ ?>
-        <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $pelanggan->id_marketing ?>">
+        <input type="hidden" name="id_marketing" id="id_marketing" value="<?php echo $calon->id_marketing ?>">
       <?php } ?>
       <!-- /.box-body -->
       <div class="box-footer">
+        <?php if($calon->status==2){?>
+        <button type="submit" id="btn-submit" class="btn btn-primary pull-right disabled"><i class="fa fa-paper-plane"></i> &nbsp;&nbsp;Kirim</button>
+      <?php }else{ ?>
         <button type="submit" id="btn-submit" class="btn btn-primary pull-right"><i class="fa fa-paper-plane"></i> &nbsp;&nbsp;Kirim</button>
+      <?php } ?>
       </div>
       <!-- /.box-footer-->
     </div>
@@ -114,7 +118,7 @@
           <div class="timeline-item">
             <span class="time"><i class="fa fa-clock-o"></i> <?php echo tanggal(date('Y-m-d',strtotime($follow->last_kontak)),FALSE); ?>, <?php echo date('g:i', strtotime($follow->last_kontak)); ?></span>
 
-            <h3 class="timeline-header"><a href="#"><?php echo $follow->nama_marketing ?></a> Mengirim Pesan WhatsApp ke <a href="#"><?php echo $follow->nama_pelanggan ?></a></h3>
+            <h3 class="timeline-header"><a href="#"><?php echo $follow->nama_marketing ?></a> Mengirim Pesan WhatsApp ke <a href="#"><?php echo $follow->nama_calon ?></a></h3>
 
             <div class="timeline-body">
               <?php echo $follow->text ?>
@@ -126,7 +130,7 @@
           <i class="fa fa-clock-o bg-gray"></i>
           <?php if(isset($follow)){ ?>
           <div class="timeline-item">
-            <h3 class="timeline-header no-border"><a href="#"><?php echo $pelanggan->nama_pelanggan ?></a> Belum Pernah Di follow Up</h3>
+            <h3 class="timeline-header no-border"><a href="#"><?php echo $calon->nama_calon ?></a> Belum Pernah Di follow Up</h3>
           </div>
         <?php } ?>
         </li>
@@ -136,10 +140,11 @@
 
 </section>
 <!-- /.content -->
+<?php if($calon->status!=2){ ?>
 <script type="text/javascript">
   $(document).ready(function() {
     $('#btn-submit').on('click', function() {
-      var id_Pelanggan = $('#id_pelanggan').val();
+      var id_Pelanggan = $('#id_calon').val();
       var id_marketing = $('#id_marketing').val();
       var no_hp = $('#no_hp').val();
       var text = $('#text-follow').val();
@@ -154,7 +159,7 @@
           id_pelanggan: id_Pelanggan,
           id_marketing: id_marketing,
           text_follow: text,
-          status: 1,     
+          status: 2,     
         },
         cache: false,
         success: function(dataResult){
@@ -174,3 +179,4 @@
     });
   });
 </script>
+<?php } ?>

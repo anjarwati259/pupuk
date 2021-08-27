@@ -746,20 +746,32 @@ class Pelanggan extends CI_Controller
 	}
 	// ============================= Colon customer ====================//
 	public function calon_customer(){
-		$calon = $this->pelanggan_model->listcalon();
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+		$marketing = $this->pelanggan_model->marketing();
+		if($this->session->userdata('hak_akses')=='1'){
+			$calon = $this->pelanggan_model->list_calon();
+		}else{
+			$calon = $this->pelanggan_model->listcalon($id_marketing);
+		}
+		
+
 		$data = array(	'title' => 'Data Calon Customer',
 						'calon'	=> $calon,
+						'reminder' => $calon,
+						'marketing' => $marketing,
 						'isi' => 'admin/calon/list' );
-		//print_r($pelanggan);
+		//print_r($calon);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 	public function add_calon(){
-		$calon = $this->pelanggan_model->listcalon();
 		//get provinsi
 		$marketing = $this->pelanggan_model->marketing();
 		$provinsi = $this->wilayah_model->listing();
 		$id_user 	= $this->session->userdata('id_user');
 		$market 	=  $this->marketing_model->get_marketing($id_user);
+		$calon = $this->pelanggan_model->listcalon($market->id_marketing);
 
 		$valid = $this-> form_validation;
 
@@ -825,11 +837,167 @@ class Pelanggan extends CI_Controller
 		}
 	}
 	public function reminder($id_pelanggan){
-		$calon = $this->pelanggan_model->listcalon();
-		$data = array(	'title' => 'Reminder',
+		$data = array(	'id_pelanggan'	=> $id_pelanggan,
+						'judul'		=> $this->input->post('judul'),
+						'tanggal'	=> $this->input->post('tanggal'),
+						'deskripsi'	=> $this->input->post('deskripsi'),
+						);
+		print_r($data);
+	}
+	public function ubah($id_calon){
+		$pelanggan_id = $this->pelanggan_model->get_last_id();
+		//last id pelanggan
+		if($pelanggan_id){
+			$id = substr($pelanggan_id[0]->id_pelanggan, 1);
+			$id_pelanggan = generate_code('C', $id);
+		}else{
+			$id_pelanggan = 'C001';
+		}
+
+		$data = array(	'id_pelanggan'	  => $id_pelanggan,
+						'id_marketing'	  => $this->input->post('id_marketing'),
+						'nama_pelanggan'=> $this->input->post('nama_pelanggan'),
+						'no_hp'	  => $this->input->post('no_hp'),
+						'alamat'	  => $this->input->post('alamat'),
+						'kecamatan'	  => $this->input->post('kecamatan'),
+						'kabupaten'	  => $this->input->post('kabupaten'),
+						'provinsi'	  => $this->input->post('provinsi'),
+						'komoditi'	  => $this->input->post('komoditi'),
+						'tanggal_daftar'	 => date('Y-m-d'),
+						'jenis_pelanggan' => $this->input->post('jenis_pelanggan'),
+						);
+		$data_2 = array('id_calon'	  => $id_calon,
+						'keterangan'	=> 'Sudah Menjadi Pelanggan',
+						'status'	=> 2,
+
+		);
+		//print_r($data);
+		$this->pelanggan_model->tambah($data);
+		$this->pelanggan_model->edit_calon($data_2);
+		$this->session->set_flashdata('sukses','Data telah ditambah');
+		redirect(base_url('admin/pelanggan/calon_customer'), 'refresh');
+	}
+	public function edit_calon($id_calon){
+		$marketing = $this->pelanggan_model->marketing();
+		$provinsi = $this->wilayah_model->listing();
+		$id_user 	= $this->session->userdata('id_user');
+		$market 	=  $this->marketing_model->get_marketing($id_user);
+		$calon = $this->pelanggan_model->calon($id_calon);
+
+		$valid = $this-> form_validation;
+
+		$valid->set_rules('nama_pelanggan', 'Nama Pelanggan','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('alamat', 'Alamat','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('no_hp', 'No. Telp','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$valid->set_rules('provinsi', 'provinsi','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kabupaten', 'kabupaten','required',
+				array(	'required' 		=> '%s harus diisi'
+						));
+		$valid->set_rules('kecamatan', 'kecamatan','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+		$valid->set_rules('status', 'Sumber','required',
+				array(	'required' 		=> '%s harus diisi',
+						));
+
+
+		if($valid->run()===FALSE){
+			$data = array(	'title' => 'Data Calon Customer',
+							'calon'	=> $calon,
+							'marketing' => $marketing,
+							'provinsi' => $provinsi,
+							'market' =>$market,
+							'isi' => 'admin/calon/edit' );
+			//print_r($pelanggan);
+			$this->load->view('admin/layout/wrapper',$data, FALSE);
+		}else{
+			$i = $this->input;
+			$prov = $i->post('prov');
+			$kab = $i->post('kab');
+			$kec = $i->post('kec');
+			if((!empty($prov)) and (!empty($kab)) and (!empty($kec))){
+				$data = array(	'id_calon'		=> $id_calon,
+								'nama_calon'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'provinsi'			=> $i->post('prov'),
+								'kabupaten'			=> $i->post('kab'),
+								'kecamatan'			=> $i->post('kec'),
+								'komoditi'			=> $i->post('komoditi'),
+								'keterangan'		=> $i->post('keterangan'),
+								'status'			=> $i->post('status')
+							);
+			}else if(!empty($prov)){
+				$data = array(	'id_calon'		=> $id_calon,
+								'nama_calon'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'provinsi'			=> $i->post('prov'),
+								'komoditi'			=> $i->post('komoditi'),
+								'keterangan'		=> $i->post('keterangan'),
+								'status'			=> $i->post('status')
+							);
+			}else if(!empty($kab)){
+				$data = array(	'id_calon'		=> $id_calon,
+								'nama_calon'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'kabupaten'			=> $i->post('kab'),
+								'komoditi'			=> $i->post('komoditi'),
+								'keterangan'		=> $i->post('keterangan'),
+								'status'			=> $i->post('status')
+							);
+			}else if(!empty($kec)){
+				$data = array(	'id_calon'		=> $id_calon,
+								'nama_calon'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'kecamatan'			=> $i->post('kec'),
+								'komoditi'			=> $i->post('komoditi'),
+								'keterangan'		=> $i->post('keterangan'),
+								'status'			=> $i->post('status')
+							);
+			}else{
+				$data = array(	'id_calon'		=> $id_calon,
+								'nama_calon'	=> $i->post('nama_pelanggan'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'id_marketing'		=> $i->post('id_marketing'),
+								'komoditi'			=> $i->post('komoditi'),
+								'keterangan'		=> $i->post('keterangan'),
+								'status'			=> $i->post('status')
+							);
+			}
+			//print_r($data);
+			$this->pelanggan_model->edit_calon($data);
+			$this->session->set_flashdata('sukses','Data telah diedit');
+			redirect(base_url('admin/pelanggan/calon_customer'), 'refresh');
+		}
+	}
+	public function detail_calon($id_calon){
+		$calon = $this->pelanggan_model->calon($id_calon);
+		$follow = $this->pelanggan_model->follow_calon($id_calon);
+		$total = $this->pelanggan_model->total_follow($id_calon);
+		$last_contact = $this->pelanggan_model->last_contact($id_calon);
+		$data = array(	'title' => 'Data Calon Customer',
 						'calon'	=> $calon,
-						'isi' => 'admin/calon/reminder' );
-		//print_r($pelanggan);
-		$this->load->view('admin/layout/wrapper',$data, FALSE);
+						'total'	=> $total,
+						'follow' => $follow,
+						'last_contact' => $last_contact,
+						'isi' => 'admin/calon/detail' );
+			//print_r($pelanggan);
+			$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 }

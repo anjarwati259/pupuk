@@ -44,24 +44,37 @@
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
-                        <th style="width: 120px;">Action</th>
+                        <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
                         <?php $no=1; foreach ($calon as $calon) { ?>
                         <tr>
                           <td><?php echo $no++; ?></td>
-                          <td><?php echo tanggal(date('Y-m-d',strtotime($calon->tanggal)),FALSE); ?></td>
-                          <td><a href="<?php echo base_url('admin/pelanggan/detail_calon/'.$calon->id_calon) ?>"><?php echo $calon->nama_calon ?></a></td>
+                          <td><?php echo $calon->tanggal ?></td>
+                          <td><?php echo $calon->nama_calon ?></td>
                           <td><?php echo $calon->no_hp ?></td>
                           <td><?php echo $calon->komoditi ?></td>
                           <td><?php echo $calon->kabupaten ?></td>
                           <td><?php echo $calon->keterangan ?></td>
                           <td><?php if($calon->status=='1'){ echo 'Adsense';}else{ echo 'Organik';} ?></td>
                           <?php if($this->session->userdata('hak_akses')=='1'){ ?>
-                          <td><?php echo $calon->nama_marketing ?></td>
+                          <td></td>
                           <?php } ?>
-                          <td><?php include "action.php"; ?></td>
+                          <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-success">Action</button>
+                              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="<?php echo base_url('admin/pelanggan/reminder/'.$calon->id_calon);?>">Reminder</a></li>
+                                <li><a href="#">Ubah</a></li>
+                                <li><a href="#">Edit</a></li>
+                              </ul>
+                            </div>
+                          </td>
                         </tr>
                       <?php } ?>
                       </tbody>
@@ -82,11 +95,6 @@
       </div>
       <!-- /.row -->
       <!-- END CUSTOM TABS -->
-
-      <!-- modal reminder -->
-
-       <!-- modal ubah -->
-
       <?php if($this->session->flashdata('sukses')) { ?>
       <script>
         $('#success-alert').slideDown('slow');
