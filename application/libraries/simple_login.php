@@ -38,6 +38,8 @@ class Simple_login
         redirect(base_url('home'),'refresh');
       }else if($hak_akses=='5'){
         redirect(base_url('marketing'),'refresh');
+      }else if($hak_akses=='6'){
+        redirect(base_url('pengiriman'),'refresh');
       }
     }else{
       //kalau tidak ada, maka suruh login lagi
@@ -88,6 +90,15 @@ class Simple_login
   {
     //memeriksa apakah session sudah atau belum, jika belum alihkan ke halaman login
     if($this->CI->session->userdata('hak_akses')!="5"){
+      $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
+      redirect(base_url('login'),'refresh');
+      //echo "anda tidak memiliki akses";
+    }
+  }
+  public function pengiriman()
+  {
+    //memeriksa apakah session sudah atau belum, jika belum alihkan ke halaman login
+    if($this->CI->session->userdata('hak_akses')!="6"){
       $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
       redirect(base_url('login'),'refresh');
       //echo "anda tidak memiliki akses";

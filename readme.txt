@@ -46,6 +46,7 @@ catatan status
 	1 = ads
 	0 = organik
 	2 = pindah
+	3 = blacklist
 13. STATUS AKTIVITAS
 	1 = pelanggan
 	2 = calon
