@@ -10,7 +10,7 @@ if(isset($error)){
 echo validation_errors('<div class = "alert alert-warning">','</div>');
 
 // Form open
-echo form_open_multipart(base_url('admin/order/tambah_stok'), ' class="form-horizontal"');
+echo form_open_multipart(base_url('admin/produk/tambah_stok'), ' class="form-horizontal"');
  ?>
 <!-- START CUSTOM TABS -->
       <div class="row">
@@ -18,8 +18,9 @@ echo form_open_multipart(base_url('admin/order/tambah_stok'), ' class="form-hori
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li role="presentation"><a href="<?php echo site_url('admin/order/stok_awal');?>">Data Stok</a></li>
+              <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_awal');?>">Data Stok</a></li>
             <li role="presentation" class="active"><a href="#tab_1">Tambah Stok</a></li>
+            <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_keluar');?>">Stok Keluar</a></li>
             </ul>
             <div class="tab-content">
               <!-- /.tab-pane -->

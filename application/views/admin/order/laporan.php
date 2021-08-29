@@ -2,6 +2,7 @@
   .group-filter{
     margin-top: 25px;
     display: flex;
+    flex-direction: row;
   }
   .report{
     display: flex;
@@ -9,10 +10,21 @@
   .info-box{
     margin-right: 15px;
   }
+  /* Responsive layout - makes a one column layout instead of a two-column layout */
+    @media (max-width: 500px) {
+      .group-filter {
+        flex-direction: column;
+      }
+      .filter-2{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
 </style>
 <div class="group-filter">
   <!-- produk -->
-  <div class="form-group" style="padding-right: 20px; display: flex;">
+  <div class="form-group" style="padding-right: 20px;">
     <div class="filter">
       <select class="form-control" id="filter-produk" name="filter-produk">
         <option value="">Semua Produk</option>
@@ -23,9 +35,9 @@
     </div>
   </div>
   <!-- filter pelanggan -->
-  <div class="form-group" style="padding-right: 20px; display: flex;">
+  <div class="form-group" style="padding-right: 20px;">
     <div class="filter">
-      <select class="form-control" id="filter" name="filter" style="width: 180px;">
+      <select class="form-control" id="filter" name="filter">
         <option value="">Semua Pelanggan</option>
         <option value="Customer">Customer</option>
         <option value="Mitra">Mitra</option>
@@ -33,7 +45,7 @@
     </div>
   </div>
   <!-- filter -->
-  <div class="form-group" style="padding-right: 20px; display: flex;">
+  <div class="form-group filter-2" style="padding-right: 20px;">
     <div class="filter">
       <div class="input-group-btn">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Filter
@@ -47,38 +59,45 @@
     </div>
   </div>
 </div>
-
-<div class="report">
-  <!-- Total Penjualan -->
-  <div class="info-box">
-    <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
-    <div class="info-box-content">
-      <span class="info-box-text">Total Penjualan</span>
-      <span class="info-box-number"><label id="total"><?php if(!isset($report->total)){ echo "0";}else{echo $report->total;} ?></label></span>
+<div class="row">
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <!-- Total Penjualan -->
+    <div class="info-box">
+      <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Total Penjualan</span>
+        <span class="info-box-number"><label id="total"><?php if(!isset($report->total)){ echo "0";}else{echo $report->total;} ?></label></span>
+      </div>
     </div>
   </div>
   <!-- Total Ongkos Kirim -->
-  <div class="info-box">
-    <span class="info-box-icon bg-green"><i class="fa fa-truck"></i></span>
-    <div class="info-box-content">
-      <span class="info-box-text">Total Ongkos Kirim</span>
-      <span class="info-box-number"><label id="ongkir"><?php echo rupiah($ongkir->ongkir) ?></label></span>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-green"><i class="fa fa-truck"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Total Ongkos Kirim</span>
+        <span class="info-box-number"><label id="ongkir"><?php echo rupiah($ongkir->ongkir) ?></label></span>
+      </div>
     </div>
   </div>
   <!-- total Adsense -->
-  <div class="info-box">
-    <span class="info-box-icon bg-yellow"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
-    <div class="info-box-content">
-      <span class="info-box-text">Total Adsense</span>
-      <span class="info-box-number"><label id="ads"><?php if(!isset($ads->total)){ echo "0";}else{echo $ads->total;} ?></label></span>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-yellow"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Total Adsense</span>
+        <span class="info-box-number"><label id="ads"><?php if(!isset($ads->total)){ echo "0";}else{echo $ads->total;} ?></label></span>
+      </div>
     </div>
   </div>
   <!-- Total Organik -->
-  <div class="info-box">
-    <span class="info-box-icon bg-red"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
-    <div class="info-box-content">
-      <span class="info-box-text">Total Organik</span>
-      <span class="info-box-number"><label id="organik"><?php if(!isset($organik->total)){ echo "0";}else{echo $organik->total;} ?></label></span>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-red"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Total Organik</span>
+        <span class="info-box-number"><label id="organik"><?php if(!isset($organik->total)){ echo "0";}else{echo $organik->total;} ?></label></span>
+      </div>
     </div>
   </div>
 </div>

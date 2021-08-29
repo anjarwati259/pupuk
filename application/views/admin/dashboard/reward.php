@@ -4,6 +4,7 @@
   </div>
   <!-- /.box-header -->
   <div class="box-body">
+    <div class="scrollmenu">
     <table id="example1" class="table table-bordered table-striped">
       <thead>
       <tr>
@@ -25,7 +26,9 @@
         <td><a href="<?php echo base_url('admin/dashboard/detail_reward/'.$reward->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-search"></i> Detail</a></td>
       </tr>
     <?php $no++; } ?>
+      </tbody>
     </table>
+  </div>
   </div>
   <!-- /.box-body -->
 </div>

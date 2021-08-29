@@ -49,8 +49,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('admin/order/stok_awal') ?>"><i class="fa fa-users"></i> Data Stok</a></li>
-            <li><a href="<?php echo base_url('admin/order/stok') ?>"><i class="fa fa-plus-square-o"></i> Riwayat Stok</a></li>
+            <li><a href="<?php echo base_url('admin/produk/stok_awal') ?>"><i class="fa fa-users"></i> Data Stok</a></li>
+            <li><a href="<?php echo base_url('admin/produk/stok') ?>"><i class="fa fa-plus-square-o"></i> Riwayat Stok</a></li>
           </ul>
         </li>
         <!-- Order -->

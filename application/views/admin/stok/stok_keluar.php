@@ -10,7 +10,7 @@ if(isset($error)){
 echo validation_errors('<div class = "alert alert-warning">','</div>');
 
 // Form open
-echo form_open_multipart(base_url('admin/order/stok_keluar'), ' class="form-horizontal"');
+echo form_open_multipart(base_url('admin/produk/stok_keluar'), ' class="form-horizontal"');
  ?>
 <!-- START CUSTOM TABS -->
       <div class="row">
@@ -18,8 +18,8 @@ echo form_open_multipart(base_url('admin/order/stok_keluar'), ' class="form-hori
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li role="presentation"><a href="<?php echo site_url('admin/order/stok_awal');?>">Data Stok</a></li>
-            <li role="presentation" ><a href="<?php echo site_url('admin/order/stok_keluar');?>">Tambah Stok</a></li>
+              <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_awal');?>">Data Stok</a></li>
+            <li role="presentation" ><a href="<?php echo site_url('admin/produk/stok_keluar');?>">Tambah Stok</a></li>
             <li role="presentation" class="active"><a href="#tab_1">Stok Keluar</a></li>
             </ul>
             <div class="tab-content">
@@ -58,6 +58,7 @@ echo form_open_multipart(base_url('admin/order/stok_keluar'), ' class="form-hori
                             <option>--Pilih Status--</option>
                               <option value="out">Out</option>
                               <option value="sample">Sample</option>
+                              <option value="bonus">Bonus</option>
                           </select>
                         </div>
                       </div>

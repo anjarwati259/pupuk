@@ -6,8 +6,8 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#tab_1">Data Stok</a></li>
-      <li role="presentation"><a href="<?php echo site_url('admin/order/tambah_stok');?>">Tambah Stok</a></li>
-      <li role="presentation"><a href="<?php echo site_url('admin/order/stok_keluar');?>">Stok Keluar</a></li>
+      <li role="presentation"><a href="<?php echo site_url('admin/produk/tambah_stok');?>">Tambah Stok</a></li>
+      <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_keluar');?>">Stok Keluar</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="tab_1">
