@@ -40,7 +40,7 @@ class Pengiriman extends CI_Controller
 	    $POC500 = $this->dashboard_model->chart_market('PK002',$id_marketing);
 	    $ikan = $this->dashboard_model->chart_market('PK004',$id_marketing);
 	    $ternak = $this->dashboard_model->chart_market('PK003',$id_marketing);
-		$data = array('title' => 'Admin',
+		$data = array('title' => 'Pengiriman',
                         'order' => $order,
                         'mitra' => $mitra,
                         'dist' => $dist,
@@ -56,5 +56,20 @@ class Pengiriman extends CI_Controller
                         'ternak' => $ternak,
                         'isi' => 'admin/marketing/dashboard' );
         $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+
+	public function data_kirim(){
+		$belum_kirim = $this->order_model->data_kirim('');
+		$data = array('title' => 'Data Pengiriman',
+					  'belum_kirim' => $belum_kirim,
+                      'isi' => 'admin/pengiriman/belum_kirim' );
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function sudah_dikirim(){
+		$sudah_kirim = $this->order_model->sudah_kirim();
+		$data = array('title' => 'Data Pengiriman',
+					  'sudah_kirim' => $sudah_kirim,
+                      'isi' => 'admin/pengiriman/sudah_kirim' );
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 }

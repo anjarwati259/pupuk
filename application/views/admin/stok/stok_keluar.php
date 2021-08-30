@@ -19,7 +19,7 @@ echo form_open_multipart(base_url('admin/produk/stok_keluar'), ' class="form-hor
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_awal');?>">Data Stok</a></li>
-            <li role="presentation" ><a href="<?php echo site_url('admin/produk/stok_keluar');?>">Tambah Stok</a></li>
+            <li role="presentation" ><a href="<?php echo site_url('admin/produk/tambah_stok');?>">Tambah Stok</a></li>
             <li role="presentation" class="active"><a href="#tab_1">Stok Keluar</a></li>
             </ul>
             <div class="tab-content">

@@ -96,8 +96,8 @@ class Produk_model extends CI_Model
 		$this->db->from('tb_stok');
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
 		$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
-		$this->db->group_by('tb_stok.id_stok');
-		$this->db->order_by('tanggal','asc');
+		//$this->db->group_by('tb_stok.id_stok');
+		$this->db->order_by('tb_stok.id_stok','asc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -171,19 +171,23 @@ class Produk_model extends CI_Model
 		if(($kode=='' and $jenis=='Semua') or ($kode=='' and $jenis=='')){
 			$this->db->select('sum(qty) as total');
 			$this->db->from('tb_stok');
+			$this->db->order_by('id_stok','asc');
 		}else if(($kode!='' and $jenis=='Semua') or ($kode!='' and $jenis=='')){
 			$this->db->select('sum(qty) as total');
 			$this->db->from('tb_stok');
 			$this->db->where("kode_produk", $kode);
+			$this->db->order_by('id_stok','asc');
 		}else if(($kode=='' and $jenis!='Semua') or ($kode=='' and $jenis!='')){
 			$this->db->select('sum(qty) as total');
 			$this->db->from('tb_stok');
 			$this->db->where("status", $jenis);
+			$this->db->order_by('id_stok','asc');
 		}else{
 			$this->db->select('sum(qty) as total');
 			$this->db->from('tb_stok');
 			$this->db->where("kode_produk", $kode);
 			$this->db->where("status", $jenis);
+			$this->db->order_by('id_stok','asc');
 		}
 		$query = $this->db->get();
 		return $query->row();
@@ -248,7 +252,7 @@ class Produk_model extends CI_Model
 		$this->db->where('tb_stok.tanggal <=', $akhir);
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
 		$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
-		$this->db->order_by('tb_stok.tanggal','asc');
+		$this->db->order_by('tb_stok.id_stok','asc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -368,7 +372,7 @@ class Produk_model extends CI_Model
 		$this->db->where("DATE_FORMAT(tanggal,'%m')", $bulan);
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
 		$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
-		$this->db->order_by('tb_stok.tanggal','asc');
+		$this->db->order_by('tb_stok.id_stok','asc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -487,7 +491,7 @@ class Produk_model extends CI_Model
 		$this->db->where("DATE_FORMAT(tb_stok.tanggal,'%Y')", $tahun);
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
 		$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
-		$this->db->order_by('tb_stok.tanggal','asc');
+		$this->db->order_by('tb_stok.id_stok','asc');
 		$query = $this->db->get();
 		return $query->result();
 	}

@@ -19,7 +19,7 @@ class Marketing extends CI_Controller
 		$this->load->helper('string');
 		//proteksi halaman
 		$this->simple_login->cek_login();
-		$this->simple_login->marketing();
+		//$this->simple_login->marketing();
 	}
 	public function index(){
 		$id_user = $this->session->userdata('id_user');
@@ -494,7 +494,7 @@ class Marketing extends CI_Controller
 		 $total_report['organik'] = $org;
 		echo json_encode($total_report);
 	}
-
+// ============================ Pengiriman =============================//
 	public function pengiriman(){
 		$id_user = $this->session->userdata('id_user');
 		$marketing =  $this->marketing_model->get_marketing($id_user);
@@ -532,5 +532,4 @@ class Marketing extends CI_Controller
         $this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 	
-
 }
