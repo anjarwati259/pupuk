@@ -140,6 +140,8 @@
       <?php } ?>
       </tbody>
      </table>
+     <input type="hidden" name="tgl_awal" id="tgl_awal" value="<?php echo $awal ?>">
+    <input type="hidden" name="tgl_akhir" id="tgl_akhir" value="<?php echo $akhir ?>">
     </div>
   </div>
 </div>
@@ -173,12 +175,15 @@
 
     function report(kode, jenis){
       var id = $(this).find(':selected').attr('dataid');
+      var awal = $('#tgl_awal').val();
+      var akhir = $('#tgl_akhir').val();
 
-      var data = "kode="+kode+"&jenis="+jenis;
+      var data = "kode="+kode+"&jenis="+jenis+"&awal="+awal+"&akhir="+akhir;
+      
       //alert(data);
       $.ajax({
         type: 'POST',
-        url: "<?php echo base_url('admin/produk/report'); ?>",
+        url: "<?php echo base_url('admin/produk/report_tgl'); ?>",
         data: data,
         success: function(hasil) {
           var response = $.parseJSON(hasil);

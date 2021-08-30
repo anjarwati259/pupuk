@@ -140,6 +140,8 @@
       <?php } ?>
       </tbody>
      </table>
+     <input type="hidden" name="bulan" id="bulan" value="<?php echo $bulan ?>">
+    <input type="hidden" name="tahun" id="tahun" value="<?php echo $tahun ?>">
     </div>
   </div>
 </div>
@@ -173,12 +175,15 @@
 
     function report(kode, jenis){
       var id = $(this).find(':selected').attr('dataid');
+      var bulan = $('#bulan').val();
+      var tahun = $('#tahun').val();
 
-      var data = "kode="+kode+"&jenis="+jenis;
+      var data = "kode="+kode+"&jenis="+jenis+"&bulan="+bulan+"&tahun="+tahun;
+      
       //alert(data);
       $.ajax({
         type: 'POST',
-        url: "<?php echo base_url('admin/produk/report'); ?>",
+        url: "<?php echo base_url('admin/produk/report_bln'); ?>",
         data: data,
         success: function(hasil) {
           var response = $.parseJSON(hasil);
