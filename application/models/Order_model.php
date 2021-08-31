@@ -792,7 +792,7 @@ class Order_model extends CI_Model
 	public function data_kirim($resi){
 		$this->db->select('tb_detail_order.*, tb_marketing.nama_marketing');
 		$this->db->from('tb_detail_order');
-		$this->db->where('no_resi', $resi);
+		$this->db->where('status_bayar', 0);
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
 		$query = $this->db->get();
 		return $query->result();
@@ -800,9 +800,10 @@ class Order_model extends CI_Model
 	public function sudah_kirim(){
 		$this->db->select('tb_detail_order.*, tb_marketing.nama_marketing');
 		$this->db->from('tb_detail_order');
-		$this->db->where('no_resi !=','');
+		$this->db->where('status_bayar', 1);
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
 		$query = $this->db->get();
 		return $query->result();
 	}
+	
 }

@@ -72,4 +72,13 @@ class Pengiriman extends CI_Controller
                       'isi' => 'admin/pengiriman/sudah_kirim' );
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
+	public function input_resi(){
+		$data = array(	'kode_transaksi' => $this->input->post('kode_transaksi'),
+						'no_resi'		=> $this->input->post('no_resi')
+					);
+		//print_r($data);
+		$this->order_model->update_status($data);
+		$this->session->set_flashdata('sukses','Resi Telah ditambah');
+		redirect(base_url('pengiriman/data_kirim'), 'refresh');
+	}
 }
