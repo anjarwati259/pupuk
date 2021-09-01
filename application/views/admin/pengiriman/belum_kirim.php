@@ -84,7 +84,7 @@
                         data-kab="<?php echo $belum_kirim->kabupaten; ?>"
                         data-resi="<?php echo $belum_kirim->no_resi; ?>">
                       Input Resi</a></li>
-                      <li><a href="#" class="edit_button"
+                      <li><a href="#" class="follow_button"
                         data-toggle="modal" data-target="#follow"
                         data-id="<?php echo $belum_kirim->kode_transaksi; ?>"
                         data-nama="<?php echo $belum_kirim->nama_pelanggan; ?>"
@@ -160,8 +160,7 @@
               </div>
               <div class="form-group">
                 <label>Nomor Resi Pengiriman</label>
-                <input type="text" name="no_resi" id="no_resi" class="form-control" placeholder="No Resi">
-                <input type="text" name="kode_transaksi" id="kode_transaksi">
+                <textarea class="form-control" style="height: 180px;"></textarea>
                 <!-- /.input group -->
               </div>
             </div>
@@ -181,16 +180,25 @@
 
   <script type="text/javascript">
     $(document).on( "click", '.edit_button',function(e) {
-    var id = $(this).data('id');
-    var nama = $(this).data('nama');
-    var kab = $(this).data('kab');
-    var resi = $(this).data('resi');
-    //alert(resi);
-    $("#nama").text(nama);
-    $("#kab").text(kab);
-    $("#kode_transaksi").val(id);
-    $("#no_resi").val(resi);
-    // $(".business_skill_quote").val(quote);
-    // tinyMCE.get('business_skill_content').setContent(content);   
-  });
+      var id = $(this).data('id');
+      var nama = $(this).data('nama');
+      var kab = $(this).data('kab');
+      var resi = $(this).data('resi');
+      //alert(resi);
+      $("#nama").text(nama);
+      $("#kab").text(kab);
+      $("#kode_transaksi").val(id);
+      $("#no_resi").val(resi); 
+    });
+    $(document).on( "click", '.follow_button',function(e) {
+      var id = $(this).data('id');
+      var nama = $(this).data('nama');
+      var kab = $(this).data('kab');
+      var resi = $(this).data('resi');
+      //alert(resi);
+      $("#nama").text(nama);
+      $("#kab").text(kab);
+      $("#kode_transaksi").val(id);
+      $("#no_resi").val(resi); 
+    });
   </script>

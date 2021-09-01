@@ -26,6 +26,24 @@ class Produk extends CI_Controller
 	public function index(){
 
 	}
+	public function keluar(){
+		$produk = $this->produk_model->produk();
+		$stok 	= $this->produk_model->getstok('out','sampel');
+		$total = $this->produk_model->allstok('out','sampel');
+		$bonus = $this->produk_model->allbonus();
+		$sample	= $this->produk_model->allsampel();
+		$sisa = $this->produk_model->allsisa();
+		$data = array(	'title'			=> 'Data Stok',
+						'stok'			=> $stok,
+						'total'			=> $total,
+						'produk'		=> $produk,
+						'bonus'			=> $bonus,
+						'sampel'		=> $sample,
+						'sisa'			=> $sisa,
+						'isi'			=> 'admin/stok/stok_keluar'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
 	//tampilkan data stok awal dari masing masing produk
 	public function stok_awal(){
 		$produk = $this->produk_model->produk();
@@ -70,29 +88,29 @@ class Produk extends CI_Controller
 
 			$this->produk_model->update_stok($kode_produk,array('stok' => $stok));
 			$this->session->set_flashdata('sukses','Data telah ditambah');
-			redirect(base_url('admin/order/stok_awal'), 'refresh');
+			redirect(base_url('admin/produk/stok_awal'), 'refresh');
 		}
 	}
 	//tapilkan riwayat stok
-	public function stok()
-	{ 
-		$produk = $this->produk_model->produk();
-		$stok 	= $this->produk_model->getstok();
-		$total = $this->produk_model->allstok();
-		$bonus = $this->produk_model->allbonus();
-		$sample	= $this->produk_model->allsampel();
-		$sisa = $this->produk_model->allsisa();
-		$data = array(	'title'			=> 'Data Stok',
-						'stok'			=> $stok,
-						'total'			=> $total,
-						'produk'		=> $produk,
-						'bonus'			=> $bonus,
-						'sampel'		=> $sample,
-						'sisa'			=> $sisa,
-						'isi'			=> 'admin/stok/stok'
-						);
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-	}
+	// public function stok()
+	// { 
+	// 	$produk = $this->produk_model->produk();
+	// 	$stok 	= $this->produk_model->getstok();
+	// 	$total = $this->produk_model->allstok();
+	// 	$bonus = $this->produk_model->allbonus();
+	// 	$sample	= $this->produk_model->allsampel();
+	// 	$sisa = $this->produk_model->allsisa();
+	// 	$data = array(	'title'			=> 'Data Stok',
+	// 					'stok'			=> $stok,
+	// 					'total'			=> $total,
+	// 					'produk'		=> $produk,
+	// 					'bonus'			=> $bonus,
+	// 					'sampel'		=> $sample,
+	// 					'sisa'			=> $sisa,
+	// 					'isi'			=> 'admin/stok/stok'
+	// 					);
+	// 	$this->load->view('admin/layout/wrapper', $data, FALSE);
+	// }
 	public function stok_keluar(){
 		$produk = $this->produk_model->produk();
 		//validation
@@ -129,7 +147,7 @@ class Produk extends CI_Controller
 
 			$this->produk_model->stok_min($kode_produk,array('stok' => $stok));
 			$this->session->set_flashdata('sukses','Data telah ditambah');
-			redirect(base_url('admin/order/stok_awal'), 'refresh');
+			redirect(base_url('admin/produk/stok_awal'), 'refresh');
 		}
 	}
 	public function report(){
@@ -183,11 +201,12 @@ class Produk extends CI_Controller
 	public function stok_tanggal(){
 		$awal = $this->input->post('tgl_awal');
 		$akhir = $this->input->post('tgl_akhir');
-
+		$status = $this->input->post('status');
+ 
 		$produk = $this->produk_model->produk();
-		$stok = $this->produk_model->stok_harian($awal,$akhir);
+		$stok = $this->produk_model->stok_harian($awal,$akhir,$status,'sampel');
 		$total = $this->produk_model->stok_hari($awal,$akhir);
-		$bonus = $this->produk_model->bonus_hari($awal, $akhir);
+		$bonus = $this->produk_model->bonus_hari($awal,$akhir);
 		$sample	= $this->produk_model->sampel_hari($awal, $akhir);
 		$sisa = $this->produk_model->allsisa();
 

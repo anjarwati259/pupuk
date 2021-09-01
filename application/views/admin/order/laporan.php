@@ -115,6 +115,7 @@
         <th>No</th>
         <th>Tanggal</th>
         <th>Jenis Order</th>
+        <th>Marketing</th>
         <th>Nama Pelanggan</th>
         <th>Produk</th>
         <th>Jumlah</th>
@@ -138,9 +139,10 @@
                 echo "organik";
               }
                ?></td>
+          <td><?php echo $laporan->nama_marketing ?></td>
           <td><?php echo $laporan->nama_pelanggan ?></td>
           <td><?php echo $laporan->nama_produk ?></td>
-          <td><?php echo $laporan->jml_beli ?></td>
+          <td style="text-align: center;"><?php echo $laporan->jml_beli ?></td>
           <td>Rp. <?php echo number_format($laporan->harga,'0',',','.') ?></td>
           <td>Rp. <?php echo number_format($laporan->ongkir,'0',',','.') ?></td>
           <td>Rp. <?php echo number_format($laporan->total_transaksi,'0',',','.') ?></td>
@@ -163,6 +165,16 @@
         </tr>
         <?php } ?>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6" style="text-align: center;"><b>TOTAL</b></td>
+          <td style="text-align: center;"><strong><label id="total1"><?php echo number_format($report->total, '0',',','.') ?></label></strong></td>
+          <td></td>
+          <td id="total"><strong><?php echo rupiah($ongkir->ongkir) ?></label></strong></td>
+          <td><strong><label id="total_harga"><?php echo rupiah($total_harga->total) ?></label></strong></td>
+          <td colspan="2"></td>
+        </tr>
+      </tfoot>
      </table>
     </div>
   </div>
@@ -179,9 +191,10 @@
     $('#filter-produk').on('change', function(e){
       var produk = $(this).val();
       var filter = $('#filter option:selected').text();
+      
       //alert(id);
       $('#filter-produk').val(produk)
-      dataTable.column(12).search(produk).draw();
+      dataTable.column(13).search(produk).draw();
       report(produk,filter);
     })
 
@@ -191,7 +204,7 @@
       //alert(status);
       $('#filter').val(filter)
       //alert(produk);
-      dataTable.column(11).search(filter).draw();
+      dataTable.column(12).search(filter).draw();
       report(produk,filter);
     })
 
@@ -209,12 +222,30 @@
           var total = response.total;
           var ads = response.ads;
           var organik = response.organik;
-          //alert(hasil);
+          var total_harga = (response.total_harga/1000).toFixed(3);
+          alert(total_harga);
             $("#total").html(total);
+            $("#total1").html(total);
             $("#ads").html(ads);
             $("#organik").html(organik);
+            $("#total_harga").html(total_harga);
         }
       });
     }
   });
+
+  function rupiah(){
+    var bilangan = 23456789;
+  
+    var number_string = bilangan.toString(),
+      sisa  = number_string.length % 3,
+      rupiah  = number_string.substr(0, sisa),
+      ribuan  = number_string.substr(sisa).match(/\d{3}/g);
+        
+    if (ribuan) {
+      separator = sisa ? '.' : '';
+      rupiah += separator + ribuan.join('.');
+    }
+    return rupiah;
+  }
 </script>

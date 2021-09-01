@@ -56,6 +56,7 @@
                   <i class="fa fa-calendar"></i>
                 </div>
                 <input type="text" name="tgl_awal" class="form-control pull-right" id="datepicker2" required>
+                <input type="hidden" name="status" id="status">
               </div>
               <!-- /.input group -->
             </div>

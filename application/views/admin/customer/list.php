@@ -36,9 +36,9 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>No. Hp</th>
-                        <th width="300px">Alamat</th>
+                        <!-- <th width="300px">Alamat</th> -->
                         <th>Kabupaten</th>
-                        <th>Provinsi</th>
+                        <!-- <th>Provinsi</th> -->
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
@@ -55,11 +55,11 @@
                         <td><?php echo $no++ ?></td>
                         <td><a href="<?php echo base_url('admin/pelanggan/detail/'.$customer->id_pelanggan) ?>"><?php echo $customer->nama_pelanggan ?></a></td>
                         <td><?php echo $customer->no_hp ?></td>
-                        <td>
+                        <!-- <td>
                           <?php echo $customer->alamat ?><br> 
-                        </td>
+                        </td> -->
                         <td><?php echo $customer->kabupaten ?></td>
-                        <td><?php echo $customer->provinsi ?></td>
+                        <!-- <td><?php echo $customer->provinsi ?></td> -->
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td><?php echo $customer->nama_marketing ?></td>
                       <?php } ?>

@@ -13,7 +13,7 @@
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
       <?php echo $this->session->flashdata('sukses'); ?>
     </div>
-<!-- START CUSTOM TABS -->
+
       <div class="row">
         <div class="col-md-12">
           <!-- Custom Tabs -->
@@ -24,13 +24,29 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_2">
+                <div class="filter_group" style="display: flex; margin-top: 20px; margin-bottom: 20px;">
+              <!-- filter -->
+              <div class="form-group" style="padding-right: 20px; display: flex;">
+                <label class="control-label label_filter">Filter : </label>
+                <div class="filter">
+                  <select class="form-control" id="filter" name="filter">
+                    <option value="">Semua</option>
+                    <option value="Tunggul">Tunggul</option>
+                    <option value="Raisa Bani">Raisa Bani</option>
+                    <option value="Ardhino Okta">Ardhino Okta</option>
+                    <option value="Poppy">Poppy</option>
+                    <option value="Frendi Junaidi">Frendi Junaidi</option>
+                  </select>
+                </div>
+              </div>
+            </div>
                 <div class="box">
                   <div class="box-header">
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body">
                     <div class="scrollmenu">
-                      <table id="example1" class="table table-bordered table-striped">
+                      <table id="example" class="table table-bordered table-striped">
                       <thead>
                       <tr>
                         <th>No</th>
@@ -80,12 +96,6 @@
         </div>
         <!-- /.col -->
       </div>
-      <!-- /.row -->
-      <!-- END CUSTOM TABS -->
-
-      <!-- modal reminder -->
-
-       <!-- modal ubah -->
 
       <?php if($this->session->flashdata('sukses')) { ?>
       <script>

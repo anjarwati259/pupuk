@@ -798,11 +798,13 @@ class Order extends CI_Controller
 		$ads = $this->order_model->jenis_order('Semua Produk','','1');
 		$organik = $this->order_model->jenis_order('Semua Produk','','2');
 		$ongkir = $this->order_model->total_ongkir();
+		$total_harga = $this->order_model->total_harga();
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'produk'	=> $produk,
 						'report'	=> $report,
 						'ongkir'	=> $ongkir,
+						'total_harga' => $total_harga,
 						'ads'		=> $ads,
 						'organik'	=> $organik,
 						'isi'		=> 'admin/order/laporan'
@@ -815,6 +817,7 @@ class Order extends CI_Controller
 		 $ads = $this->order_model->jenis_order($kode,$jenis,'1');
 		 $organik = $this->order_model->jenis_order($kode,$jenis,'2');
 		 $total = $this->order_model->report($kode,$jenis);
+		 $total_harga = $this->order_model->report_harga($kode,$jenis);
 
 		 if($total->total==''){
 		 	$tot = 0;
@@ -837,6 +840,7 @@ class Order extends CI_Controller
 		 $total_report['total'] = $tot;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
+		 $total_report['total_harga'] = $total_harga->total;
 		echo json_encode($total_report);
 	}
 	public function report_hari(){

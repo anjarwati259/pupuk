@@ -98,6 +98,7 @@
         <th>No</th>
         <th>Tanggal</th>
         <th>Jenis Order</th>
+        <th>Marketing</th>
         <th>Nama Pelanggan</th>
         <th>Produk</th>
         <th>Jumlah</th>
@@ -121,6 +122,7 @@
                 echo "organik";
               }
                ?></td>
+          <td><?php echo $laporan->nama_marketing ?></td>
           <td><?php echo $laporan->nama_pelanggan ?></td>
           <td><?php echo $laporan->nama_produk ?></td>
           <td><?php echo $laporan->jml_beli ?></td>
@@ -162,7 +164,7 @@
       var filter = $('#filter option:selected').text();
       //alert(id);
       $('#filter-produk').val(produk)
-      dataTable.column(12).search(produk).draw();
+      dataTable.column(13).search(produk).draw();
       report(produk,filter);
     })
 
@@ -172,7 +174,7 @@
       //alert(status);
       $('#filter').val(filter)
       //alert(produk);
-      dataTable.column(11).search(filter).draw();
+      dataTable.column(12).search(filter).draw();
       report(produk,filter);
     })
 
