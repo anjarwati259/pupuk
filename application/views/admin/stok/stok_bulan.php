@@ -166,7 +166,7 @@
     $('#filter-inout').on('change', function(e){
       var filter = $(this).val();
       var produk = $('#filter-produk option:selected').val();
-      //alert(status);
+      //alert(filter);
       $('#filter-inout').val(filter)
       //alert(produk);
       dataTable.column(5).search(filter).draw();
