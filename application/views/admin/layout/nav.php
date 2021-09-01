@@ -250,6 +250,13 @@
             <li><a href="<?php echo base_url('admin/order/stok') ?>"><i class="fa fa-plus-square-o"></i> Barang Masuk</a></li>
           </ul>
         </li>
+        <!-- Pegiriman -->
+        <li>
+          <a href="<?php echo base_url('pengiriman/data_kirim') ?>">
+            <i class="fa fa-cart-plus"></i>
+            <span>Pengiriman</span>
+          </a>
+        </li>
         <!-- Order -->
         <li>
           <a href="<?php echo base_url('marketing/order') ?>">

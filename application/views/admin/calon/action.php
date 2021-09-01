@@ -3,7 +3,7 @@
     <button type="button" class="btn btn-success dropdown-toggle disabled" data-toggle="dropdown">Action
       <span class="fa fa-caret-down"></span></button>
     <ul class="dropdown-menu">
-      <li><a href="#" data-toggle="modal" data-target="#ubah<?php echo $calon->id_calon ?>">Ubah</a></li>
+      <li><a href="#">Ubah</a></li>
       <li><a href="#">Edit</a></li>
     </ul>
   </div>
