@@ -784,15 +784,7 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('no_hp', 'No. Telp','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('provinsi', 'provinsi','required',
-				array(	'required' 		=> '%s harus diisi'
-						));
-		$valid->set_rules('kabupaten', 'kabupaten','required',
-				array(	'required' 		=> '%s harus diisi'
-						));
-		$valid->set_rules('kecamatan', 'kecamatan','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
+
 		$valid->set_rules('status', 'Sumber','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
@@ -821,7 +813,7 @@ class Pelanggan extends CI_Controller
 							'nama_calon'	=> $i->post('nama_pelanggan'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
-							'tanggal'	=> $i->post('tanggal_daftar'),
+							'tanggal'			=> $i->post('tanggal_daftar'),
 							'id_marketing'		=> $i->post('id_marketing'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
@@ -863,7 +855,7 @@ class Pelanggan extends CI_Controller
 						'kabupaten'	  => $this->input->post('kabupaten'),
 						'provinsi'	  => $this->input->post('provinsi'),
 						'komoditi'	  => $this->input->post('komoditi'),
-						'tanggal_daftar'	 => date('Y-m-d'),
+						'tanggal_daftar'=> $this->input->post('tanggal_daftar'),
 						'jenis_pelanggan' => $this->input->post('jenis_pelanggan'),
 						);
 		$data_2 = array('id_calon'	  => $id_calon,
@@ -895,15 +887,6 @@ class Pelanggan extends CI_Controller
 		$valid->set_rules('no_hp', 'No. Telp','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
-		$valid->set_rules('provinsi', 'provinsi','required',
-				array(	'required' 		=> '%s harus diisi'
-						));
-		$valid->set_rules('kabupaten', 'kabupaten','required',
-				array(	'required' 		=> '%s harus diisi'
-						));
-		$valid->set_rules('kecamatan', 'kecamatan','required',
-				array(	'required' 		=> '%s harus diisi',
-						));
 		$valid->set_rules('status', 'Sumber','required',
 				array(	'required' 		=> '%s harus diisi',
 						));
@@ -933,6 +916,7 @@ class Pelanggan extends CI_Controller
 								'kabupaten'			=> $i->post('kab'),
 								'kecamatan'			=> $i->post('kec'),
 								'komoditi'			=> $i->post('komoditi'),
+								'tanggal_daftar'	=> $this->input->post('tanggal'),
 								'keterangan'		=> $i->post('keterangan'),
 								'status'			=> $i->post('status')
 							);
@@ -945,6 +929,7 @@ class Pelanggan extends CI_Controller
 								'provinsi'			=> $i->post('prov'),
 								'komoditi'			=> $i->post('komoditi'),
 								'keterangan'		=> $i->post('keterangan'),
+								'tanggal'=> $this->input->post('tanggal_daftar'),
 								'status'			=> $i->post('status')
 							);
 			}else if(!empty($kab)){
@@ -956,6 +941,7 @@ class Pelanggan extends CI_Controller
 								'kabupaten'			=> $i->post('kab'),
 								'komoditi'			=> $i->post('komoditi'),
 								'keterangan'		=> $i->post('keterangan'),
+								'tanggal'=> $this->input->post('tanggal_daftar'),
 								'status'			=> $i->post('status')
 							);
 			}else if(!empty($kec)){
@@ -966,6 +952,7 @@ class Pelanggan extends CI_Controller
 								'id_marketing'		=> $i->post('id_marketing'),
 								'kecamatan'			=> $i->post('kec'),
 								'komoditi'			=> $i->post('komoditi'),
+								'tanggal'=> $this->input->post('tanggal_daftar'),
 								'keterangan'		=> $i->post('keterangan'),
 								'status'			=> $i->post('status')
 							);
@@ -976,6 +963,7 @@ class Pelanggan extends CI_Controller
 								'no_hp'				=> $i->post('no_hp'),
 								'id_marketing'		=> $i->post('id_marketing'),
 								'komoditi'			=> $i->post('komoditi'),
+								'tanggal'=> $this->input->post('tanggal_daftar'),
 								'keterangan'		=> $i->post('keterangan'),
 								'status'			=> $i->post('status')
 							);

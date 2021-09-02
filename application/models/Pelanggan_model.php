@@ -169,6 +169,7 @@ class Pelanggan_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tb_calon_pelanggan');
 		$this->db->where('id_marketing', $id_marketing);
+		$this->db->order_by('tanggal','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -177,6 +178,7 @@ class Pelanggan_model extends CI_Model
 		$this->db->from('tb_calon_pelanggan');
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_calon_pelanggan.id_marketing', 'left');
 		//$this->db->where('id_marketing', $id_marketing);
+		$this->db->order_by('tanggal','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}

@@ -76,8 +76,8 @@ echo form_open_multipart(base_url('admin/pelanggan/add_calon'), ' class="form-ho
                       <div class="form-group">
                         <label class="col-sm-4 control-label">Tanggal Daftar</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" value="<?php echo date('Y-m-d'); ?>" disabled/>
-                          <input type="hidden" name="tanggal_daftar" value="<?php echo date("Y-m-d");?>">
+                          <!-- <input type="text" class="form-control" value="<?php echo date('Y-m-d'); ?>" disabled/> -->
+                          <input type="text" class="form-control" id="datepicker" name="tanggal_daftar" value="<?php echo date("Y-m-d");?>">
                         </div>
                       </div>
                       <div class="form-group">

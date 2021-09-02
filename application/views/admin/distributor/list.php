@@ -31,6 +31,7 @@
                       <thead>
                       <tr>
                         <th>No</th>
+                        <th>Tanggal Gabung</th>
                         <th>Nama </th>
                         <th>No. Hp</th>
                         <th>Alamat</th>
@@ -39,7 +40,6 @@
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
-                        <th>Tanggal Gabung</th>
                         <th>Action</th>
                       </tr>
                       </thead>
@@ -49,6 +49,7 @@
                       foreach ($distributor as $distributor) { ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
+                        <td><?php echo tanggal(date('Y-m-d',strtotime($distributor->tanggal_daftar))); ?></td>
                         <td><a href="<?php echo base_url('admin/pelanggan/detail/'.$distributor->id_pelanggan) ?>"><?php echo $distributor->nama_pelanggan ?></a></td>
                         <td><?php echo $distributor->no_hp ?></td>
                         <td>
@@ -60,7 +61,7 @@
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td><?php echo $distributor->nama_marketing ?></td>
                       <?php } ?>
-                        <td><?php echo tanggal(date('Y-m-d',strtotime($distributor->tanggal_daftar))); ?></td>
+                        
                         <td>
                           <a href="<?php echo base_url('admin/pelanggan/edit_distributor/'.$distributor->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
                           <a href="<?php echo base_url('admin/pelanggan/delete_distributor/'.$distributor->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?, Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" ><i class="fa fa-trash"></i> Hapus</a>

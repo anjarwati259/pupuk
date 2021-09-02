@@ -29,6 +29,7 @@
                       <thead>
                       <tr>
                         <th>No</th>
+                        <th>Tanggal Gabung</th>
                         <th>Nama</th>
                         <th>No. Hp</th>
                         <th>Alamat</th>
@@ -37,7 +38,6 @@
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
-                        <th>Tanggal Gabung</th>
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Action</th>
                       <?php } ?>
@@ -48,6 +48,7 @@
                       $no=1; foreach ($mitra as $mitra) { ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
+                        <td><?php echo tanggal(date('Y-m-d',strtotime($mitra->tanggal_daftar))); ?></td>
                         <td ><a href="<?php echo base_url('admin/pelanggan/detail/'.$mitra->id_pelanggan) ?>"><?php echo $mitra->nama_pelanggan ?></a></td>
                         <td><?php echo $mitra->no_hp ?></td>
                         <td>
@@ -58,7 +59,7 @@
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td><?php echo $mitra->nama_marketing ?></td>
                       <?php } ?>
-                        <td><?php echo tanggal(date('Y-m-d',strtotime($mitra->tanggal_daftar))); ?></td>
+                        
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td>
                           <a href="<?php echo base_url('admin/pelanggan/edit_mitra/'.$mitra->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
