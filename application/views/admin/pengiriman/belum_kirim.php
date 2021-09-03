@@ -53,14 +53,26 @@
             </tr>
             </thead>
             <tbody>
-              <?php $no=1; foreach ($belum_kirim as $belum_kirim) { ?>
+              <?php $no=1; foreach ($belum_kirim as $belum_kirim) { 
+                  $nohp = $belum_kirim->no_hp;
+                  $hp = preg_replace("/[^0-9]/", "", $nohp);
+                  $no = substr($hp,0,1);
+                  $a = substr($hp,1);
+                  
+                  if($no == '0'){
+                    $no_hp = '62'.$a;
+                  }else{
+                    $no_hp = $hp;
+                  }
+                  $tgl = date('Y-m-d');
+                ?>
               <tr>
-                <td><?php echo $no++ ?></td>
+                <td><?php echo $no++; ?></td>
                 <td><?php echo tanggal(date('Y-m-d',strtotime($belum_kirim->tanggal_transaksi)),FALSE) ?></td>
                 <td><a href="<?php echo base_url('admin/order/detail/'.$belum_kirim->kode_transaksi) ?>"><?php echo $belum_kirim->kode_transaksi ?></a></td>
                 <td><?php echo $belum_kirim->nama_marketing ?></td>
                 <td><?php echo $belum_kirim->nama_pelanggan ?></td>
-                <td><?php echo $belum_kirim->no_hp ?></td>
+                <td><?php echo $no_hp ?></td>
                 <td><?php echo $belum_kirim->expedisi ?></td>
                 <td><?php echo $belum_kirim->total_item ?></td>
                 <td>
@@ -72,6 +84,19 @@
                     echo "<span class='alert-success'>Cash</span>";
                   } ?>
                 </td>
+
+                <?php
+                 if($this->session->userdata('hak_akses')=='1' || $this->session->userdata('hak_akses')=='6'){ 
+                  $id_user = $this->session->userdata('id_user');
+                  $this->db->select('id_marketing');
+                  $this->db->where('id_user', $id_user);
+                  $this->db->from('tb_marketing');
+                  $id = $this->db->get()->row();
+                  $id_marketing = $id->id_marketing;
+                }else{
+                  $id_marketing = $belum_kirim->id_marketing;
+                }
+                ?>
                 <td>
                   <div class="input-group-btn">
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
@@ -86,9 +111,12 @@
                       Input Resi</a></li>
                       <li><a href="#" class="follow_button"
                         data-toggle="modal" data-target="#follow"
+                        data-ekspedisi="<?php echo $belum_kirim->expedisi; ?>"
                         data-id="<?php echo $belum_kirim->kode_transaksi; ?>"
                         data-nama="<?php echo $belum_kirim->nama_pelanggan; ?>"
-                        data-kab="<?php echo $belum_kirim->kabupaten; ?>"
+                        data-hp="<?php echo $no_hp; ?>"
+                        data-market="<?php echo $id_marketing; ?>"
+                        data-pelanggan="<?php echo $belum_kirim->id_pelanggan; ?>"
                         data-resi="<?php echo $belum_kirim->no_resi; ?>">Follow Up</a></li>
                     </ul>
                   </div>
@@ -149,28 +177,33 @@
           <h4 class="modal-title"><label>Clossing</label></h4>
         </div>
         <div class="modal-body">
-          <?php echo form_open(base_url('pengiriman/input_resi')); ?>
+          <!-- <?php echo form_open(base_url('pengiriman/follow')); ?> -->
           <form role="form">
             <div class="box-body">
               <label style="margin-bottom: 20px;">Nama : <label id="nama_pelanggan"></label></label>
               <div class="form-group">
-                <label>Nomor Resi Pengiriman</label>
-                <input type="text" name="no_resi" id="no_resi" class="form-control" placeholder="No Resi">
+                <label>No. Telp</label>
+                <input type="text" name="no_hp" id="no_hp" class="form-control" placeholder="No Telp" style="font-size: 18px;">
                 <!-- /.input group -->
               </div>
               <div class="form-group">
-                <label>Nomor Resi Pengiriman</label>
-                <textarea class="form-control" style="height: 180px;"></textarea>
+                <label>Text</label>
+                <textarea class="form-control" style="height: 180px; font-size: 18px;" id="text"></textarea>
                 <!-- /.input group -->
               </div>
             </div>
 
+            <input type="hidden" name="id_pelanggan" id="id_pelanggan" class="form-control">
+
+            <input type="hidden" name="id_marketing" id="id_marketing" class="form-control">
+                <!-- /.input group -->
+              </div>
             <!-- /.box-body -->
             <div class="box-footer">
-              <button type="submit" class="btn btn-primary pull-right">Save</button>
+              <button type="submit" class="btn btn-primary pull-right" id="btn-submit">Kirim</button>
             </div>
           </form>
-          <?php echo form_close() ?>
+          <!-- <?php echo form_close() ?> -->
         </div>
       </div>
       <!-- /.modal-content -->
@@ -193,12 +226,36 @@
     $(document).on( "click", '.follow_button',function(e) {
       var id = $(this).data('id');
       var nama = $(this).data('nama');
-      var kab = $(this).data('kab');
+      var no_hp = $(this).data('hp');
       var resi = $(this).data('resi');
-      //alert(resi);
-      $("#nama").text(nama);
+      var id_marketing = $(this).data('market');
+      var id_pelanggan = $(this).data('pelanggan');
+      var ekspedisi = $(this).data('ekspedisi');
+
+      var text = 'Selamat sore Bapak/ibu '+nama+ ' dengan saya Namira dari PT Agrikultur Gemilang Indonesia..\n\n'+'Terimakasih '+nama+ ' Telah Belanja di toko kami\n' + 'Berikut Nomor Resinya : '+resi+'\n'+'Menggunakan Ekspedisi : '+ekspedisi+'\n\n'+'Kami tunggu kabar baiknya, semoga pupuk kilat bisa membantu menyuburkan tanaman bapak/ibu '+nama;
+
+      $('#text').text(text);
+      //alert(id_marketing);
+      $("#nama_pelanggan").text(nama);
       $("#kab").text(kab);
-      $("#kode_transaksi").val(id);
+      $("#no_hp").val(no_hp);
       $("#no_resi").val(resi); 
+      $("#id_marketing").val(id_marketing);
+      $("#id_pelanggan").val(id_pelanggan);
     });
+
+    $(document).ready(function() {
+    $('#btn-submit').on('click', function() {
+      var id_Pelanggan = $('#id_pelanggan').val();
+      var id_marketing = $('#id_marketing').val();
+      var no_hp = $('#no_hp').val();
+      var text = $('#text').val();
+      var text2 = encodeURI(text);
+
+      var url =  'https://api.whatsapp.com/send?phone='+no_hp+'&text='+text2;
+      window.open(url);
+      location.reload();
+
+    });
+  });
   </script>

@@ -204,12 +204,15 @@
           var total = response.total;
           var ads = response.ads;
           var organik = response.organik;
+          var ongkir = rupiah1(response.ongkir);
           var total_harga = response.total_harga;
           var harga = rupiah1(total_harga);
-          //alert(hasil);
+          //alert(ongkir);
             $("#total").html(total);
+            $("#total1").html(total);
             $("#ads").html(ads);
             $("#organik").html(organik);
+            $("#ongkir1").html(ongkir);
             $("#total_harga").html(harga);
         }
       });

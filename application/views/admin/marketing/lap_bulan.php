@@ -146,6 +146,7 @@
         </tr>
         <?php } ?>
       </tbody>
+      </tfoot>
      </table>
     </div>
   </div>

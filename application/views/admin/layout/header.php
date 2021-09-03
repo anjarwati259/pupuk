@@ -167,7 +167,7 @@ $notif = $this->dashboard_model->data_notif();
 <?php } ?>
 <script type="text/javascript">
   $(document).ready(function(){
-    selesai();
+    //selesai();
   });
   function selesai(){
     setTimeout(function(){

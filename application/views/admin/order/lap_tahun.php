@@ -97,6 +97,7 @@
         <th>No</th>
         <th>Tanggal</th>
         <th>Jenis Order</th>
+        <th>Marketing</th>
         <th>Nama Pelanggan</th>
         <th>Produk</th>
         <th>Jumlah</th>
@@ -120,6 +121,7 @@
                 echo "organik";
               }
                ?></td>
+          <td><?php echo $laporan->nama_marketing ?></td>
           <td><?php echo $laporan->nama_pelanggan ?></td>
           <td><?php echo $laporan->nama_produk ?></td>
           <td><?php echo $laporan->jml_beli ?></td>
@@ -145,6 +147,16 @@
         </tr>
         <?php } ?>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6" style="text-align: center;"><b>TOTAL</b></td>
+          <td style="text-align: center;"><strong><label id="total1"><?php echo number_format($report->total, '0',',','.') ?></label></strong></td>
+          <td></td>
+          <td><strong><label id="ongkir1"><?php echo rupiah($ongkir->ongkir) ?></label></strong></strong></td>
+          <td><strong><label id="total_harga"><?php echo rupiah($total_harga->total) ?></label></strong></td>
+          <td colspan="2"></td>
+        </tr>
+      </tfoot>
      </table>
     </div>
   </div>
@@ -163,7 +175,7 @@
       var filter = $('#filter option:selected').text();
       //alert(id);
       $('#filter-produk').val(produk)
-      dataTable.column(12).search(produk).draw();
+      dataTable.column(13).search(produk).draw();
       report(produk,filter);
     })
 
@@ -173,7 +185,7 @@
       //alert(status);
       $('#filter').val(filter)
       //alert(produk);
-      dataTable.column(11).search(filter).draw();
+      dataTable.column(12).search(filter).draw();
       report(produk,filter);
     })
 
@@ -192,10 +204,16 @@
           var total = response.total;
           var ads = response.ads;
           var organik = response.organik;
+          var ongkir = rupiah1(response.ongkir);
+          var total_harga = response.total_harga;
+          var harga = rupiah1(total_harga);
           //alert(hasil);
             $("#total").html(total);
+            $("#total1").html(total);
             $("#ads").html(ads);
             $("#organik").html(organik);
+            $("#ongkir1").html(ongkir);
+            $("#total_harga").html(harga);
         }
       });
     }

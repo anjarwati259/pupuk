@@ -38,7 +38,7 @@ class Pelanggan extends CI_Controller
 		$hak_akses = $this->session->userdata('hak_akses');
 		if($hak_akses==1){
 			$customer = $this->pelanggan_model->customer();
-		}else if($hak_akses==5){
+		}else if($hak_akses==5 || $hak_akses==6){
 			$marketing =  $this->marketing_model->get_marketing($id_user);
 			$id_marketing = $marketing->id_marketing;
 			$customer = $this->pelanggan_model->get_marketing($id_marketing,'Customer');
@@ -273,7 +273,7 @@ class Pelanggan extends CI_Controller
 		$hak_akses = $this->session->userdata('hak_akses');
 		if($hak_akses==1){
 			$mitra = $this->pelanggan_model->mitra();
-		}else if($hak_akses==5){
+		}else if($hak_akses==5 || $hak_akses==6){
 			$marketing =  $this->marketing_model->get_marketing($id_user);
 			$id_marketing = $marketing->id_marketing;
 			$mitra = $this->pelanggan_model->get_marketing($id_marketing,'Mitra');

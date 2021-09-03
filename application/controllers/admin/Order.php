@@ -856,6 +856,7 @@ class Order extends CI_Controller
 		 $organik = $this->order_model->jenisorder_hari($kode,$jenis,'2', $awal, $akhir);
 		 $total = $this->order_model->report_hari($kode,$jenis, $awal, $akhir);
 		 $total_harga = $this->order_model->report_harga1($kode,$jenis, $awal, $akhir);
+		 $ongkir = $this->order_model->report_ongkir1($kode,$jenis, $awal,$akhir);
 
 		 if($total->total==''){
 		 	$tot = 0;
@@ -874,11 +875,17 @@ class Order extends CI_Controller
 		 }else{
 		 	$org = $organik->total;
 		 }
+		 if($ongkir->total==''){
+		 	$ong = 0;
+		 }else{
+		 	$ong = $ongkir->total;
+		 }
 
 		 $total_report['total'] = $tot;
 		 $total_report['total_harga'] = $total_harga->total;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
+		 $total_report['ongkir'] = $ong;
 		echo json_encode($total_report);
 	}
 	public function report_bulan(){
@@ -890,6 +897,8 @@ class Order extends CI_Controller
 		 $ads = $this->order_model->jenisorder_bulan($kode,$jenis,'1', $bulan, $tahun);
 		 $organik = $this->order_model->jenisorder_bulan($kode,$jenis,'2', $bulan, $tahun);
 		 $total = $this->order_model->report_bulan($kode,$jenis, $bulan, $tahun);
+		 $ongkir = $this->order_model->report_ongkir2($kode,$jenis, $bulan, $tahun);
+		 $total_harga = $this->order_model->report_harga2($kode,$jenis, $bulan, $tahun);
 
 		 if($total->total==''){
 		 	$tot = 0;
@@ -909,6 +918,14 @@ class Order extends CI_Controller
 		 	$org = $organik->total;
 		 }
 
+		 if($ongkir->total==''){
+		 	$ong = 0;
+		 }else{
+		 	$ong = $ongkir->total;
+		 }
+
+		 $total_report['ongkir'] = $ong;
+		 $total_report['total_harga'] = $total_harga->total;
 		 $total_report['total'] = $tot;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
@@ -922,6 +939,8 @@ class Order extends CI_Controller
 		 $ads = $this->order_model->jenisorder_tahun($kode,$jenis,'1', $tahun);
 		 $organik = $this->order_model->jenisorder_tahun($kode,$jenis,'2', $tahun);
 		 $total = $this->order_model->report_tahun($kode,$jenis, $tahun);
+		 $ongkir = $this->order_model->report_ongkir3($kode,$jenis,$tahun);
+		 $total_harga = $this->order_model->report_harga3($kode,$jenis,$tahun);
 
 		 if($total->total==''){
 		 	$tot = 0;
@@ -940,8 +959,15 @@ class Order extends CI_Controller
 		 }else{
 		 	$org = $organik->total;
 		 }
+		 if($ongkir->total==''){
+		 	$ong = 0;
+		 }else{
+		 	$ong = $ongkir->total;
+		 }
 
 		 $total_report['total'] = $tot;
+		 $total_report['ongkir'] = $ong;
+		 $total_report['total_harga'] = $total_harga->total;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
 		echo json_encode($total_report);
@@ -961,6 +987,7 @@ class Order extends CI_Controller
 		$laporan = $this->order_model->lap_harian($awal,$akhir);
 		$lap_hari = $this->order_model->report_harian($awal,$akhir);
 		$ongkir = $this->order_model->ongkir_hari($awal, $akhir);
+		//$total_harga = $this->order_model->harga_bulanan($awal,$akhir);
 		$ads = $this->order_model->jenis_hari('1',$awal, $akhir);
 		$organik = $this->order_model->jenis_hari('2',$awal, $akhir);
 		$total_harga = $this->order_model->harga_harian($awal,$akhir);
@@ -990,6 +1017,7 @@ class Order extends CI_Controller
 		$laporan = $this->order_model->lap_bulan($bulan, $tahun);
 		$ads = $this->order_model->jenis_bulan('1',$bulan, $tahun);
 		$organik = $this->order_model->jenis_bulan('2',$bulan, $tahun);
+		$total_harga = $this->order_model->harga_bulanan($bulan,$tahun);
 
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
@@ -997,6 +1025,7 @@ class Order extends CI_Controller
 						'bulan'		=> $bulan,
 						'tahun'		=> $tahun,
 						'ongkir'	=> $ongkir,
+						'total_harga' => $total_harga,
 						'ads'		=> $ads,
 						'organik'	=> $organik,
 						'report'	=> $lap_bulan,
@@ -1015,6 +1044,8 @@ class Order extends CI_Controller
 		$total = $this->order_model->total_tahun($tahun);
 		$ads = $this->order_model->jenis_tahun('1', $tahun);
 		$organik = $this->order_model->jenis_tahun('2', $tahun);
+		$total_harga = $this->order_model->harga_tahunan($tahun);
+
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'total'		=> $total,
@@ -1023,6 +1054,7 @@ class Order extends CI_Controller
 						'ongkir'	=> $ongkir,
 						'ads'		=> $ads,
 						'organik'	=> $organik,
+						'total_harga' => $total_harga,
 						'produk'	=> $produk,
 						'isi'		=> 'admin/order/lap_tahun'
 					);

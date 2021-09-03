@@ -148,6 +148,16 @@
         </tr>
         <?php } ?>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6" style="text-align: center;"><b>TOTAL</b></td>
+          <td style="text-align: center;"><strong><label id="total1"><?php echo number_format($report->total, '0',',','.') ?></label></strong></td>
+          <td></td>
+          <td><strong><label id="ongkir1"><?php echo rupiah($ongkir->ongkir) ?></label></strong></strong></td>
+          <td><strong><label id="total_harga"><?php echo rupiah($total_harga->total) ?></label></strong></td>
+          <td colspan="2"></td>
+        </tr>
+      </tfoot>
      </table>
     </div>
   </div>
@@ -196,10 +206,16 @@
           var total = response.total;
           var ads = response.ads;
           var organik = response.organik;
-          //alert(hasil);
+          var ongkir = rupiah1(response.ongkir);
+          var total_harga = response.total_harga;
+          var harga = rupiah1(total_harga);
+          //alert(total_harga);
             $("#total").html(total);
+            $("#total1").html(total);
             $("#ads").html(ads);
             $("#organik").html(organik);
+            $("#ongkir1").html(ongkir);
+            $("#total_harga").html(harga);
         }
       });
     }
