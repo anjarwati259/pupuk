@@ -147,7 +147,7 @@ class Dashboard_model extends CI_Model
 	}
 	public function hari(){
 		$today = date("Y-m-d",strtotime("today"));
-		$yesterday = date("Y-m-d",strtotime("-7 day"));	
+		$yesterday = date("Y-m-d",strtotime("-30 day"));	
 
 		$this->db->select('tanggal_transaksi, SUM(jml_beli) as total');
 		$this->db->from('tb_order');
@@ -301,5 +301,15 @@ class Dashboard_model extends CI_Model
 	public function update_password($data){
 		$this->db->where('id_user', $data['id_user']);
 		$this->db->update('tb_user',$data);
+	}
+	public function bulan(){
+		$tahun = date('Y');
+		$this->db->select("DATE_FORMAT(tanggal_transaksi,'%m') as bulan, sum(jml_beli) as total");
+		$this->db->from('tb_order');
+		$this->db->where('id_produk', 'PK004');
+		$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
+		$this->db->group_by("DATE_FORMAT(tanggal_transaksi,'%Y-%m')");
+		$query = $this->db->get();
+		return $query->result();
 	}
 }

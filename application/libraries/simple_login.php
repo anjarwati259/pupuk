@@ -102,6 +102,8 @@ class Simple_login
       $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
       redirect(base_url('login'),'refresh');
       //echo "anda tidak memiliki akses";
+    }else{
+      $this->CI->session->set_flashdata('warning','bisa');
     }
   }
   //fungsi logout

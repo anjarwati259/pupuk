@@ -63,18 +63,66 @@
         <!-- ./col -->
       </div>
       <!-- /.row -->
+      <div class="row">
+        <div class="col-md-3">
+          <!-- Info Boxes Style 2 -->
+          <div class="info-box bg-aqua">
+            <span class="info-box-icon"><a href="<?php echo base_url('admin/order/stok_awal') ?>" style="color: #fff;"><i class="fa fa-cubes"></i></a></span>
 
+            <div class="info-box-content">
+              <span class="info-box-text">Stok</span>
+              <span class="info-box-number"><?php echo $stok->total ?></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-shopping-bag"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">PENJUALAN HARIAN</span>
+              <span class="info-box-number"><?php echo $harian->total ?></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-shopping-basket"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">PENJUALAN MINGGUAN</span>
+              <span class="info-box-number"><?php echo $mingguan->total?></span>
+
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-shopping-bag"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">PENJUALAN BULANAN</span>
+              <span class="info-box-number"><?php echo $bulanan->total?> </span>
+
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+      </div>
       <!-- Main row -->
       <div class="row">
         
-        <section class="col-lg-7 connectedSortable">
+        <section class="col-lg-12 connectedSortable">
 
           <!-- solid sales graph -->
           <div class="box box-solid bg-teal-gradient">
             <div class="box-header">
               <i class="fa fa-th"></i>
 
-              <h3 class="box-title">Grafik Penjualan</h3>
+              <h3 class="box-title">Grafik Penjualan Harian</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -122,55 +170,35 @@
           </div>
           <!-- /.box -->
         </section>
-
-        <div class="col-md-4">
-          <!-- Info Boxes Style 2 -->
-          <div class="info-box bg-aqua">
-            <span class="info-box-icon"><a href="<?php echo base_url('admin/order/stok_awal') ?>" style="color: #fff;"><i class="fa fa-cubes"></i></a></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Stok</span>
-              <span class="info-box-number"><?php echo $stok->total ?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <!-- Info Boxes Style 2 -->
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="fa fa-shopping-bag"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">PENJUALAN HARIAN</span>
-              <span class="info-box-number"><?php echo $harian->total ?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-green">
-            <span class="info-box-icon"><i class="fa fa-shopping-basket"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">PENJUALAN MINGGUAN</span>
-              <span class="info-box-number"><?php echo $mingguan->total?></span>
-
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="fa fa-shopping-bag"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">PENJUALAN BULANAN</span>
-              <span class="info-box-number"><?php echo $bulanan->total?> </span>
-
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-        </div>
-
       </div>
       <!-- /.row -->
+
+      <!-- grafik perbulan -->
+      <div class="row">
+        
+        <section class="col-lg-12 connectedSortable">
+
+          <!-- solid sales graph -->
+          <div class="box box-solid bg-teal-gradient">
+            <div class="box-header">
+              <i class="fa fa-th"></i>
+
+              <h3 class="box-title">Grafik Penjualan Harian</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body border-radius-none">
+              <div class="chart" id="cart" style="height: 300px;"></div>
+            </div>
+          </div>
+          <!-- /.box -->
+        </section>
+      </div>
 
 <script type="text/javascript">
   $(function () {

@@ -142,4 +142,12 @@ class Dashboard extends CI_Controller
 			redirect(base_url('admin/dashboard/profil'), 'refresh');
 		}
 	}
+	public function bulan(){
+		$bulan = $this->dashboard_model->bulan();
+		
+		// if($bulan->bulan == 'null'){
+		// 	$
+		// }
+		print_r($bulan);
+	}
 }

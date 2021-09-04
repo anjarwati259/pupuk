@@ -53,7 +53,7 @@
             </tr>
             </thead>
             <tbody>
-              <?php $no=1; foreach ($belum_kirim as $belum_kirim) { 
+              <?php $n=1; foreach ($belum_kirim as $belum_kirim) { 
                   $nohp = $belum_kirim->no_hp;
                   $hp = preg_replace("/[^0-9]/", "", $nohp);
                   $no = substr($hp,0,1);
@@ -67,7 +67,7 @@
                   $tgl = date('Y-m-d');
                 ?>
               <tr>
-                <td><?php echo $no++; ?></td>
+                <td><?php echo $n++ ?></td>
                 <td><?php echo tanggal(date('Y-m-d',strtotime($belum_kirim->tanggal_transaksi)),FALSE) ?></td>
                 <td><a href="<?php echo base_url('admin/order/detail/'.$belum_kirim->kode_transaksi) ?>"><?php echo $belum_kirim->kode_transaksi ?></a></td>
                 <td><?php echo $belum_kirim->nama_marketing ?></td>
