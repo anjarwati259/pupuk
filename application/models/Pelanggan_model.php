@@ -113,7 +113,7 @@ class Pelanggan_model extends CI_Model
 	public function marketing(){
 		$this->db->select('*');
 		$this->db->from('tb_marketing');
-		$this->db->order_by('id_marketing','desc');
+		$this->db->order_by('id_marketing','asc');
 		$query = $this->db->get();
 		return $query->result();
 	}

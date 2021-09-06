@@ -207,7 +207,7 @@
           var ongkir = rupiah1(response.ongkir);
           var total_harga = response.total_harga;
           var harga = rupiah1(total_harga);
-          //alert(ongkir);
+          //alert(hasil);
             $("#total").html(total);
             $("#total1").html(total);
             $("#ads").html(ads);

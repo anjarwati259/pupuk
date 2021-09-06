@@ -73,7 +73,13 @@
                 <td><?php echo $belum_kirim->nama_marketing ?></td>
                 <td><?php echo $belum_kirim->nama_pelanggan ?></td>
                 <td><?php echo $no_hp ?></td>
-                <td><?php echo $belum_kirim->expedisi ?></td>
+                <td><?php echo $belum_kirim->expedisi ?><br>
+                    <?php if($belum_kirim->jenis_order==1){
+                    echo "<span class='alert-danger'>Adsense</span>";
+                  }else{
+                    echo "<span class='alert-success'>Organik</span>";
+                  } ?>
+                </td>
                 <td><?php echo $belum_kirim->total_item ?></td>
                 <td>
                   <?php if($belum_kirim->metode_pembayaran==0){
@@ -109,6 +115,9 @@
                         data-kab="<?php echo $belum_kirim->kabupaten; ?>"
                         data-resi="<?php echo $belum_kirim->no_resi; ?>">
                       Input Resi</a></li>
+                      <?php if($belum_kirim->jenis_order==1){ ?>
+                        <li><a href="#" class="follow_button disabled">Follow Up</a></li>
+                      <?php }else{ ?>
                       <li><a href="#" class="follow_button"
                         data-toggle="modal" data-target="#follow"
                         data-ekspedisi="<?php echo $belum_kirim->expedisi; ?>"
@@ -118,6 +127,7 @@
                         data-market="<?php echo $id_marketing; ?>"
                         data-pelanggan="<?php echo $belum_kirim->id_pelanggan; ?>"
                         data-resi="<?php echo $belum_kirim->no_resi; ?>">Follow Up</a></li>
+                      <?php } ?>
                     </ul>
                   </div>
                 </td>

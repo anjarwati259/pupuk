@@ -27,15 +27,13 @@
                 <div class="filter_group" style="display: flex; margin-top: 20px; margin-bottom: 20px;">
               <!-- filter -->
               <div class="form-group" style="padding-right: 20px; display: flex;">
-                <label class="control-label label_filter">Filter : </label>
+                <label class="control-label label_filter">Marketing : </label>
                 <div class="filter">
                   <select class="form-control" id="filter" name="filter">
                     <option value="">Semua</option>
-                    <option value="Tunggul">Tunggul</option>
-                    <option value="Raisa Bani">Raisa Bani</option>
-                    <option value="Ardhino Okta">Ardhino Okta</option>
-                    <option value="Poppy">Poppy</option>
-                    <option value="Frendi Junaidi">Frendi Junaidi</option>
+                    <?php foreach ($marketing as $marketing) { ?>
+                    <option value="<?php echo $marketing->nama_marketing ?>"><?php echo $marketing->nama_marketing ?></option>
+                  <?php } ?>
                   </select>
                 </div>
               </div>

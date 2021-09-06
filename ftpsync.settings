@@ -3,7 +3,7 @@
 	// Remove "//" to uncomment settings directive
 
 	"default": {
-		//"host": "101.50.1.26",
+		"host": "101.50.1.26",
 		"username": "user@ptagi.co.id",  // or null for anonymous login
 		"password": "neB@UaIXchbd",
 		"path": "/order_pupuk",
@@ -11,7 +11,6 @@
 		// "port": 21,
 		// "tls": false,
 		// "timeout": 30, // [seconds]
-
 		// "passive": true,
 		// "download_on_open": false,
 		// "overwrite_newer_prevention": true,

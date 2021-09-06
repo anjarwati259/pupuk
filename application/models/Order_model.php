@@ -316,7 +316,7 @@ class Order_model extends CI_Model
 		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
 			$this->db->select('sum(ongkir) as total');
 			$this->db->from('tb_detail_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
 			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
 		}else{
 			$this->db->select('sum(ongkir) as total');
@@ -988,7 +988,7 @@ class Order_model extends CI_Model
 			$this->db->select('sum(total_harga) as total');
 			$this->db->from('tb_order');
 			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
+			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
 			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
 		}else{
 			$this->db->select('sum(total_harga) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
@@ -997,7 +997,7 @@ class Order_model extends CI_Model
 			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
 			$this->db->where("id_produk", $kode);
 			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
+			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
 		}
 		$query = $this->db->get();
 		return $query->row();
@@ -1018,6 +1018,7 @@ class Order_model extends CI_Model
 			$this->db->select('sum(ongkir) as total');
 			$this->db->from('tb_detail_order');
 			$this->db->join('tb_pelanggan','tb_pelanggan.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
 			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
 			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $tahun);
 			$this->db->where('tb_order.harga !=',0);
@@ -1073,6 +1074,7 @@ class Order_model extends CI_Model
 		$this->db->from('tb_detail_order');
 		$this->db->where('status_bayar', 0);
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_detail_order.id_marketing', 'left');
+		$this->db->order_by('kode_transaksi','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}

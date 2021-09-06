@@ -207,12 +207,11 @@ class Order extends CI_Controller
 		//last id pelanggan
 		$id_SO = $this->order_model->get_last_id();
 		if($id_SO){
-			$id = substr($id_SO[0]->kode_transaksi, 20);
+			$id = substr($id_SO[0]->kode_transaksi, 18);
 			$kode_transaksi = generate_SO($id);
 		}else{
 			$kode_transaksi = generate_else();
 		}
-		//print_r($id_SO);
 		//last id pelanggan
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		if($pelanggan_id){
@@ -221,7 +220,8 @@ class Order extends CI_Controller
 		}else{
 			$id_pelanggan = 'C001';
 		}
-		// destry cart
+
+		//destry cart
 		$this->cart->destroy();
 		$id_user = $this->session->userdata('id_user');
 		$marketing =  $this->pelanggan_model->marketing();
@@ -505,7 +505,7 @@ class Order extends CI_Controller
 		//SO
 		$id_SO = $this->order_model->get_last_id();
 		if($id_SO){
-			$id = substr($id_SO[0]->kode_transaksi, 20);
+			$id = substr($id_SO[0]->kode_transaksi, 18);
 			$kode_transaksi = generate_SO($id);
 		}else{
 			$kode_transaksi = generate_else();
@@ -880,9 +880,14 @@ class Order extends CI_Controller
 		 }else{
 		 	$ong = $ongkir->total;
 		 }
+		 if($total_harga->total==''){
+		 	$to = 0;
+		 }else{
+		 	$to = $total_harga->total;
+		 }
 
 		 $total_report['total'] = $tot;
-		 $total_report['total_harga'] = $total_harga->total;
+		 $total_report['total_harga'] = $to;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
 		 $total_report['ongkir'] = $ong;
@@ -923,9 +928,14 @@ class Order extends CI_Controller
 		 }else{
 		 	$ong = $ongkir->total;
 		 }
+		 if($total_harga->total==''){
+		 	$to = 0;
+		 }else{
+		 	$to = $total_harga->total;
+		 }
 
 		 $total_report['ongkir'] = $ong;
-		 $total_report['total_harga'] = $total_harga->total;
+		 $total_report['total_harga'] = $to;
 		 $total_report['total'] = $tot;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
@@ -964,10 +974,15 @@ class Order extends CI_Controller
 		 }else{
 		 	$ong = $ongkir->total;
 		 }
+		 if($total_harga->total==''){
+		 	$to = 0;
+		 }else{
+		 	$to = $total_harga->total;
+		 }
 
 		 $total_report['total'] = $tot;
 		 $total_report['ongkir'] = $ong;
-		 $total_report['total_harga'] = $total_harga->total;
+		 $total_report['total_harga'] = $to;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
 		echo json_encode($total_report);
