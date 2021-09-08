@@ -521,6 +521,7 @@ class Order extends CI_Controller
 		}
 
 		$user = $this->session->userdata('id_user');
+
 		//grand total
 		$subtotal = $this->cart->total();
 		$ongkir = $this->input->post('ongkir');
@@ -537,7 +538,6 @@ class Order extends CI_Controller
 
 		//cek id pelanggan
 		if(!empty($carts) && is_array($carts) && $ongkir != null){
-
 			$total = (int)$subtotal - (int)$potongan;
 			$total_bayar = (int)$total + (int)$ongkir;
 			$id_pelanggan = $this->input->post('id_pelanggan');

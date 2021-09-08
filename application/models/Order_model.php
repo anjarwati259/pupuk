@@ -88,10 +88,10 @@ class Order_model extends CI_Model
 		return $query->result();
 	}
 	//menampilkan semua data order berdasarkan id user
-	public function listing($id_user){
+	public function listing($id_pelanggan){
 		$this->db->select('*');
 		$this->db->from('tb_detail_order');
-		$this->db->where('id_user', $id_user);
+		$this->db->where('id_pelanggan', $id_pelanggan);
 		$this->db->order_by('kode_transaksi','desc');
 		$query = $this->db->get();
 		return $query->result();

@@ -304,11 +304,14 @@ class Mitra extends CI_Controller
 	}
 	public function order(){
 		$id_user	= $this->session->userdata('id_user');
-		$order 			= $this->order_model->listing($id_user);
+		$pelanggan = $this->pelanggan_model->get_id_pelanggan($id_user);
+		$id_pelanggan = $pelanggan->id_pelanggan;
+		$order 		= $this->order_model->listing($id_pelanggan);
 		$data = array(	'title'	=> 'PT AGI - Website Order Produk Kilat',
 						'order' => $order,
 						'isi'	=> 'mitra/order'
 						);
+		//print_r($id_pelanggan);
 			$this->load->view('mitra/layout/wrapper', $data, FALSE);
 	}
 	public function batal($kode_transaksi){

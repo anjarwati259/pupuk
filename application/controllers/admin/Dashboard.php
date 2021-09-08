@@ -16,6 +16,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('pelanggan_model');
 		$this->load->model('order_model');
 		$this->load->model('produk_model');
+		$this->load->model('marketing_model');
 	}
 	public function index(){
 		$tanggal = date('Y-m-d');
@@ -149,5 +150,39 @@ class Dashboard extends CI_Controller
 		// 	$
 		// }
 		print_r($bulan);
+	}
+	public function pop_up(){
+		$data = array(	'title' => 'Profil',
+						'isi'	 => 'admin/dashboard/pop_up'
+						);
+
+		// require APPPATH . 'views/vendor/autoload.php';
+		// 	  $options = array(
+		// 	    'cluster' => 'ap1',
+		// 	    'useTLS' => true
+		// 	  );
+		// 	  $pusher = new Pusher\Pusher(
+		// 	    '195f2f8525152075f786',
+		// 	    'd1b3e40e8ec462d83c86',
+		// 	    '1263280',
+		// 	    $options
+		// 	  );
+
+		// 	  $data['message'] = 'hello world';
+		// 	  $pusher->trigger('my-channel', 'my-event', $data);
+
+		$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function add_chat(){
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+		$chat = $this->input->post('message');
+
+		$data = array(	'id_marketing'	=> $id_marketing,
+						'chat'			=> $chat
+						);
+
+		$this->dashboard_model->add_chat($data);
 	}
 }

@@ -189,7 +189,7 @@ class Dashboard_model extends CI_Model
 		$this->db->order_by('tanggal_transaksi','asc');
 		$query = $this->db->get();
 		return $query->row();
-	} 
+	}
 	public function chart_market($id_produk, $id_marketing){
 		$today = date("Y-m-d",strtotime("today"));
 		$yesterday = date("Y-m-d",strtotime("-7 day"));	
@@ -311,5 +311,8 @@ class Dashboard_model extends CI_Model
 		$this->db->group_by("DATE_FORMAT(tanggal_transaksi,'%Y-%m')");
 		$query = $this->db->get();
 		return $query->result();
+	}
+	public function add_chat($data){
+		$this->db->insert('tb_chat', $data);
 	}
 }

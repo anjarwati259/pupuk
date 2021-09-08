@@ -100,6 +100,13 @@ class Pelanggan_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row(); 
 	}
+	public function get_id_pelanggan($id_user){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_user', $id_user);
+		$query = $this->db->get();
+		return $query->row(); 
+	}
 	//get pelanggan
 	public function get_marketing($id_marketing,$data){
 		$this->db->select('*');
