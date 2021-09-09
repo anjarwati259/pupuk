@@ -254,7 +254,23 @@
 <!-- bootstrap color picker -->
 <script src="<?php echo base_url()?>assets/admin/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 <!-- <script src="<?php echo base_url();?>assets/js/jquery-price-format/jquery.price_format.2.0.min.js"></script> -->
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script type="text/javascript">
+  Pusher.logToConsole = true;
 
+    var pusher = new Pusher('195f2f8525152075f786', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+      // xhr = $.ajax({
+      //   method : 'POST',
+      //   url : "<?= base_url('') ?>"
+      // })
+    });
+</script>
 <script>
   $(function () {
     //$('#example1').DataTable()

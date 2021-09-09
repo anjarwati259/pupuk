@@ -10,7 +10,7 @@ class Dashboard extends CI_Controller
 		parent::__construct();
 		//proteksi halaman
 		$this->simple_login->cek_login();
-		$this->simple_login->admin();
+		//$this->simple_login->admin();
 		$this->load->model('wilayah_model');
 		$this->load->model('dashboard_model');
 		$this->load->model('pelanggan_model');
@@ -152,26 +152,13 @@ class Dashboard extends CI_Controller
 		print_r($bulan);
 	}
 	public function pop_up(){
-		$data = array(	'title' => 'Profil',
+		$chat = $this->dashboard_model->chat();
+
+		$data1 = array(	'title' => 'Profil',
+						'chat'	=> $chat,
 						'isi'	 => 'admin/dashboard/pop_up'
 						);
-
-		// require APPPATH . 'views/vendor/autoload.php';
-		// 	  $options = array(
-		// 	    'cluster' => 'ap1',
-		// 	    'useTLS' => true
-		// 	  );
-		// 	  $pusher = new Pusher\Pusher(
-		// 	    '195f2f8525152075f786',
-		// 	    'd1b3e40e8ec462d83c86',
-		// 	    '1263280',
-		// 	    $options
-		// 	  );
-
-		// 	  $data['message'] = 'hello world';
-		// 	  $pusher->trigger('my-channel', 'my-event', $data);
-
-		$this->load->view('admin/layout/wrapper',$data, FALSE);
+		$this->load->view('admin/layout/wrapper',$data1, FALSE);
 	}
 	public function add_chat(){
 		$id_user = $this->session->userdata('id_user');
@@ -179,10 +166,27 @@ class Dashboard extends CI_Controller
 		$id_marketing = $marketing->id_marketing;
 		$chat = $this->input->post('message');
 
-		$data = array(	'id_marketing'	=> $id_marketing,
+		$data1 = array(	'id_marketing'	=> $id_marketing,
 						'chat'			=> $chat
 						);
+		$this->dashboard_model->add_chat($data1);
+		require APPPATH . 'views/vendor/autoload.php';
+			  $options = array(
+			    'cluster' => 'ap1',
+			    'useTLS' => true
+			  );
+			  $pusher = new Pusher\Pusher(
+			    '195f2f8525152075f786',
+			    'd1b3e40e8ec462d83c86',
+			    '1263280',
+			    $options
+			  );
 
-		$this->dashboard_model->add_chat($data);
+			  $data['message'] = 'hello world';
+			  $pusher->trigger('my-channel', 'my-event', $data);
+	}
+	public function read_chat(){
+		$chat = $this->dashboard_model->chat();
+		echo json_encode($chat);
 	}
 }

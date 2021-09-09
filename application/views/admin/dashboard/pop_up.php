@@ -42,48 +42,41 @@
       <!-- /.box-header -->
       <div class="box-body no-padding">
         <div class="direct-chat-messages">
-          <div class="direct-chat-msg">
+          <!-- from -->
+          <?php foreach ($chat as $chat) { 
+            $id_user = $this->session->userdata('id_user');
+            $this->db->select('id_marketing');
+            $this->db->where('id_user', $id_user);
+            $this->db->from('tb_marketing');
+            $id = $this->db->get()->row();
+          ?>
+          <?php if($id->id_marketing != $chat->id_marketing){ ?>
+          <div class="direct-chat-msg" >
             <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name pull-left">Alexander Pierce</span>
+              <span class="direct-chat-name pull-left" style="font-size: 15px;"><?php echo $chat->nama_marketing ?></span>
               <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
             </div>
             <!-- /.direct-chat-info -->
             <!-- <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image"> --><!-- /.direct-chat-img -->
             <div class="direct-chat-text">
-              <span>Is this template really for free? That's unbelievable!</span>
+              <span><?php echo $chat->chat ?></span>
             </div>
             <!-- /.direct-chat-text -->
           </div>
-          <!-- /.direct-chat-msg -->
-
-          <!-- Message to the right -->
+          <!-- to -->
+        <?php }else{ ?>
           <div class="direct-chat-msg right">
             <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name pull-right">Sarah Bullock</span>
+              <span class="direct-chat-name pull-right" style="font-size: 15px;"><?php echo $chat->nama_marketing ?></span>
               <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
             </div>
             <!-- /.direct-chat-info -->
             <!-- <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"> --><!-- /.direct-chat-img -->
-            <div class="direct-chat-text">
+            <div class="direct-chat-text bg-green">
+              <?php echo $chat->chat ?>
             </div>
           </div>
-          <div class="direct-chat-msg right">
-            <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name pull-right">Sarah Bullock</span>
-              <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-            </div>
-            <!-- /.direct-chat-info -->
-            <!-- <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"> --><!-- /.direct-chat-img -->
-            <div class="direct-chat-text">
-              You better believe it!
-            </div>
-          </div>
-          <div class="direct-chat-msg right">
-            <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name pull-right">Sarah Bullock</span>
-              <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-            </div>
-          </div>
+        <?php }} ?>
         </div>
         <div class="box-footer">
           <form action="#" method="post">
@@ -119,17 +112,3 @@
     });
   })
 </script>
-
-<!-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script>
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('195f2f8525152075f786', {
-      cluster: 'ap1'
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      alert(JSON.stringify(data));
-    });
-  </script> -->

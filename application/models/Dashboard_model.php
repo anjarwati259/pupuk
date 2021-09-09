@@ -315,4 +315,11 @@ class Dashboard_model extends CI_Model
 	public function add_chat($data){
 		$this->db->insert('tb_chat', $data);
 	}
+	public function chat(){
+		$this->db->select('tb_chat.*, tb_marketing.nama_marketing');
+		$this->db->from('tb_chat');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_chat.id_marketing', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
