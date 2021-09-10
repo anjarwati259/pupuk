@@ -153,9 +153,10 @@ class Dashboard extends CI_Controller
 	}
 	public function pop_up(){
 		$chat = $this->dashboard_model->chat();
-
+		$getmember = $this->dashboard_model->getmember();
 		$data1 = array(	'title' => 'Profil',
 						'chat'	=> $chat,
+						'member' => $getmember,
 						'isi'	 => 'admin/dashboard/pop_up'
 						);
 		$this->load->view('admin/layout/wrapper',$data1, FALSE);
@@ -167,26 +168,31 @@ class Dashboard extends CI_Controller
 		$chat = $this->input->post('message');
 
 		$data1 = array(	'id_marketing'	=> $id_marketing,
-						'chat'			=> $chat
+						'chat'			=> $chat,
+						'id_user'		=> $id_user,
+						'time'			=> date('Y-m-d h:i:sa')
 						);
 		$this->dashboard_model->add_chat($data1);
-		require APPPATH . 'views/vendor/autoload.php';
-			  $options = array(
-			    'cluster' => 'ap1',
-			    'useTLS' => true
-			  );
-			  $pusher = new Pusher\Pusher(
-			    '195f2f8525152075f786',
-			    'd1b3e40e8ec462d83c86',
-			    '1263280',
-			    $options
-			  );
 
-			  $data['message'] = 'hello world';
-			  $pusher->trigger('my-channel', 'my-event', $data);
+		require_once(APPPATH.'views/vendor/autoload.php');
+
+		  $options = array(
+		    'cluster' => 'ap1',
+		    'useTLS' => true
+		  );
+		  $pusher = new Pusher\Pusher(
+		    '195f2f8525152075f786',
+		    'd1b3e40e8ec462d83c86',
+		    '1263280',
+		    $options
+		  );
+
+		  $data['message'] = 'hello world';
+		  $pusher->trigger('my-channel', 'my-event', $data);
 	}
 	public function read_chat(){
-		$chat = $this->dashboard_model->chat();
+		$chat = $this->dashboard_model->chat_update();
+		//$data['chat'] = $chat->chat;
 		echo json_encode($chat);
 	}
 }

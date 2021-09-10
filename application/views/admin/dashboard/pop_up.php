@@ -13,13 +13,9 @@
       </div>
       <div class="box-body no-padding">
         <ul class="nav nav-pills nav-stacked">
-          <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
-            <span class="label label-primary pull-right">12</span></a></li>
-          <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-          <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-          <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-          </li>
-          <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+          <?php foreach ($member as $member) {?>
+          <li><a href="#"><i class="fa fa-user"></i> <?php echo $member->nama_marketing ?></a></li>
+        <?php } ?>
         </ul>
       </div>
       <!-- /.box-body -->
@@ -29,7 +25,7 @@
   <div class="col-md-9">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Inbox</h3>
+        <h3 class="box-title">Pesan</h3>
 
         <div class="box-tools pull-right">
           <div class="has-feedback">
@@ -41,42 +37,8 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body no-padding">
-        <div class="direct-chat-messages">
-          <!-- from -->
-          <?php foreach ($chat as $chat) { 
-            $id_user = $this->session->userdata('id_user');
-            $this->db->select('id_marketing');
-            $this->db->where('id_user', $id_user);
-            $this->db->from('tb_marketing');
-            $id = $this->db->get()->row();
-          ?>
-          <?php if($id->id_marketing != $chat->id_marketing){ ?>
-          <div class="direct-chat-msg" >
-            <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name pull-left" style="font-size: 15px;"><?php echo $chat->nama_marketing ?></span>
-              <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-            </div>
-            <!-- /.direct-chat-info -->
-            <!-- <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image"> --><!-- /.direct-chat-img -->
-            <div class="direct-chat-text">
-              <span><?php echo $chat->chat ?></span>
-            </div>
-            <!-- /.direct-chat-text -->
-          </div>
-          <!-- to -->
-        <?php }else{ ?>
-          <div class="direct-chat-msg right">
-            <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name pull-right" style="font-size: 15px;"><?php echo $chat->nama_marketing ?></span>
-              <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-            </div>
-            <!-- /.direct-chat-info -->
-            <!-- <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"> --><!-- /.direct-chat-img -->
-            <div class="direct-chat-text bg-green">
-              <?php echo $chat->chat ?>
-            </div>
-          </div>
-        <?php }} ?>
+        <div class="direct-chat-messages showchat" style="height: 400px;">
+
         </div>
         <div class="box-footer">
           <form action="#" method="post">
@@ -92,23 +54,62 @@
     </div>
   </div>
 </div>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+$(document).ready(function(){
+  show_chat();
+});
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#sendchat').click(function(){
-      message = $('#textsend').val();
-      //alert(message);
-        $.ajax({
-          url: "<?php echo base_url(); ?>admin/dashboard/add_chat",
-          type: 'POST',
-          data:{
-          message : message, 
-           },
-          success:function()
-          { 
-            $('#textsend').val('');
-          }    
-          });
+  var pusher = new Pusher('195f2f8525152075f786', {
+    cluster: 'ap1'
+  });
+
+  var channel = pusher.subscribe('my-channel');
+  channel.bind('my-event', function(data) {
+    //alert(JSON.stringify(data));
+    show_chat();
+  });
+
+  function show_chat(){
+    var id_user = "<?php echo $this->session->userdata('id_user')?>";
+    //alert(id_user);
+    $.ajax({
+        url   : '<?php echo site_url("admin/dashboard/read_chat");?>',
+        type  : 'GET',
+        async : true,
+        dataType : 'json',
+        success : function(data){
+            var html = '';
+            var count = 1;
+            var i;
+            for(i=0; i<data.length; i++){
+              if(data[i].id_user!= id_user){
+                html += '<div class="direct-chat-msg"> <div class="direct-chat-info clearfix"><span class="direct-chat-name pull-left" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-right"> 23 Jan 2:00 pm</span></div><div class="direct-chat-text" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
+              }else{
+                html += '<div class="direct-chat-msg right"><div class="direct-chat-info clearfix"><span class="direct-chat-name pull-right" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span></div><div class="direct-chat-text bg-green" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
+              }
+            }
+            //alert(data.length);
+
+            $('.showchat').html(html);
+        }
+
     });
-  })
+}
+
+  $('#sendchat').on('click',function(){
+      var textsend = $('#textsend').val();
+
+      $.ajax({
+          url    : '<?php echo site_url("admin/dashboard/add_chat");?>',
+          method : 'POST',
+          data   : {message: textsend},
+          success: function(){
+              $('#textsend').val("");
+              $(".showchat").animate({ scrollTop: $(document).height() }, "slow");
+          }
+      });
+  });  
 </script>

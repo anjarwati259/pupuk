@@ -200,6 +200,7 @@
         url: "<?php echo base_url('admin/order/report_tahun'); ?>",
         data: data,
         success: function(hasil) {
+          //alert(hasil);
           var response = $.parseJSON(hasil);
           var total = response.total;
           var ads = response.ads;

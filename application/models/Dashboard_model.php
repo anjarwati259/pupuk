@@ -322,4 +322,18 @@ class Dashboard_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function chat_update(){
+		$this->db->select('tb_chat.*, tb_marketing.nama_marketing');
+		$this->db->from('tb_chat');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_chat.id_marketing', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function getmember(){
+		$this->db->select('*');
+		$this->db->from('tb_marketing');
+		$this->db->where('chat', 1);
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
