@@ -336,4 +336,20 @@ class Dashboard_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function update_chat(){
+		$this->db->set('total_chat', 'total_chat+1', FALSE);
+		$this->db->update('tb_user_chat');
+	}
+	public function get_chat($id_user){
+		$this->db->select('*');
+		$this->db->from('tb_user_chat');
+		$this->db->where('id_user', $id_user);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	//edit data pelanggan
+	public function up_chat($data){
+		$this->db->where('id_user', $data['id_user']);
+		$this->db->update('tb_user_chat',$data);
+	}
 }

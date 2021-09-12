@@ -55,6 +55,16 @@
             <li><a href="<?php echo base_url('admin/produk/stok_masuk') ?>"><i class="fa fa-plus-square-o"></i> Barang Masuk</a></li> -->
           </ul>
         </li>
+        <!-- Chat -->
+        <li>
+          <a href="<?php echo base_url('admin/dashboard/pop_up') ?>">
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <span>Chat</span>
+            <span class="pull-right-container total_chat">
+              
+            </span>
+          </a>
+        </li>
         <!-- Order -->
         <li>
           <a href="<?php echo base_url('admin/order') ?>">
@@ -175,6 +185,16 @@
             <span>Order</span>
           </a>
         </li>
+        <!-- Chat -->
+        <li>
+          <a href="<?php echo base_url('admin/dashboard/pop_up') ?>">
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <span>Chat</span>
+            <span class="pull-right-container total_chat">
+              
+            </span>
+          </a>
+        </li>
          <!-- laporan Order -->
         <li>
           <a href="<?php echo base_url('marketing/laporan') ?>">
@@ -257,6 +277,16 @@
           <a href="<?php echo base_url('pengiriman/data_kirim') ?>">
             <i class="fa fa-truck"></i>
             <span>Pengiriman</span>
+          </a>
+        </li>
+        <!-- Chat -->
+        <li>
+          <a href="<?php echo base_url('admin/dashboard/pop_up') ?>">
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <span>Chat</span>
+            <span class="pull-right-container total_chat">
+              
+            </span>
           </a>
         </li>
         <!-- Order -->

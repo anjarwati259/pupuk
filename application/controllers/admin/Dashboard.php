@@ -159,7 +159,18 @@ class Dashboard extends CI_Controller
 						'member' => $getmember,
 						'isi'	 => 'admin/dashboard/pop_up'
 						);
+		$this->up_chat();
 		$this->load->view('admin/layout/wrapper',$data1, FALSE);
+	}
+	private function up_chat(){
+		$id_user = $this->session->userdata('id_user');
+		$chat = $this->dashboard_model->get_chat($id_user);
+		$total = ($chat->total_chat) - ($chat->read_chat);
+		$read_chat = ($chat->read_chat)+$total;
+		//print($read_chat);
+		$data = array('id_user' => $id_user,
+						'read_chat' => $read_chat);
+		$this->dashboard_model->up_chat($data);
 	}
 	public function add_chat(){
 		$id_user = $this->session->userdata('id_user');
@@ -173,7 +184,8 @@ class Dashboard extends CI_Controller
 						'time'			=> date('Y-m-d h:i:sa')
 						);
 		$this->dashboard_model->add_chat($data1);
-
+		$this->dashboard_model->update_chat();
+		$this->up_chat();
 		require_once(APPPATH.'views/vendor/autoload.php');
 
 		  $options = array(
@@ -193,6 +205,11 @@ class Dashboard extends CI_Controller
 	public function read_chat(){
 		$chat = $this->dashboard_model->chat_update();
 		//$data['chat'] = $chat->chat;
+		echo json_encode($chat);
+	}
+	public function count_chat(){
+		$id_user = $this->session->userdata('id_user');
+		$chat = $this->dashboard_model->get_chat($id_user);
 		echo json_encode($chat);
 	}
 }

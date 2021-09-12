@@ -257,6 +257,70 @@
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
 <script>
+  $(document).ready(function(){
+    show_chat();
+    count_chat();
+  });
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('195f2f8525152075f786', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      //alert(JSON.stringify(data));
+      show_chat();
+      count_chat();
+    });
+
+    function show_chat(){
+      var id_user = "<?php echo $this->session->userdata('id_user')?>";
+      //alert(id_user);
+      $.ajax({
+          url   : '<?php echo site_url("admin/dashboard/read_chat");?>',
+          type  : 'GET',
+          async : true,
+          dataType : 'json',
+          success : function(data){
+              var html = '';
+              var count = 1;
+              var i;
+              for(i=0; i<data.length; i++){
+                if(data[i].id_user!= id_user){
+                  html += '<div class="direct-chat-msg"> <div class="direct-chat-info clearfix"><span class="direct-chat-name pull-left" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-right"> 23 Jan 2:00 pm</span></div><div class="direct-chat-text" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
+                }else{
+                  html += '<div class="direct-chat-msg right"><div class="direct-chat-info clearfix"><span class="direct-chat-name pull-right" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span></div><div class="direct-chat-text bg-green" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
+                }
+              }
+              //alert(data.length);
+
+              $('.showchat').html(html);
+          }
+
+      });
+    }
+
+    function count_chat(){
+      //alert(id_user);
+      $.ajax({
+          url   : '<?php echo site_url("admin/dashboard/count_chat");?>',
+          type  : 'GET',
+          async : true,
+          dataType : 'json',
+          success : function(data){
+            var total = data.total_chat;
+            var read = data.read_chat;
+            var total_chat = parseInt(total-read);
+            var html ='<span class="label label-warning pull-right">'+total_chat+'</span>';
+            //alert(total_chat);
+              $('.total_chat').html(html);
+          }
+
+      });
+    }
+
   $(function () {
     //$('#example1').DataTable()
     $('#example1').DataTable({
