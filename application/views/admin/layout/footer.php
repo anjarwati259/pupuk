@@ -289,9 +289,9 @@
               var i;
               for(i=0; i<data.length; i++){
                 if(data[i].id_user!= id_user){
-                  html += '<div class="direct-chat-msg"> <div class="direct-chat-info clearfix"><span class="direct-chat-name pull-left" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-right"> 23 Jan 2:00 pm</span></div><div class="direct-chat-text" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
+                  html += '<div class="direct-chat-msg" style="text-color:black;"> <div class="direct-chat-info clearfix"><span class="direct-chat-name pull-left" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-right">'+ data[i].time+'</span></div><div class="direct-chat-text" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
                 }else{
-                  html += '<div class="direct-chat-msg right"><div class="direct-chat-info clearfix"><span class="direct-chat-name pull-right" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span></div><div class="direct-chat-text bg-green" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
+                  html += '<div class="direct-chat-msg right"><div class="direct-chat-info clearfix"><span class="direct-chat-name pull-right" style="font-size: 15px;">'+data[i].nama_marketing+'</span><span class="direct-chat-timestamp pull-left">'+data[i].time+'</span></div><div class="direct-chat-text bg-green" style="white-space: pre-wrap;"><span>'+data[i].chat+'</span></div></div>';
                 }
               }
               //alert(data.length);
