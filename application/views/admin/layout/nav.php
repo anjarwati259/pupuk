@@ -57,7 +57,7 @@
         </li>
         <!-- Chat -->
         <li>
-          <a href="<?php echo base_url('admin/dashboard/pop_up') ?>" target="_blank">
+          <a href="<?php echo base_url('admin/dashboard/pop_up') ?>" id="chat" target="_blank">
             <i class="fa fa-comments" aria-hidden="true"></i>
             <span>Chat</span>
             <span class="pull-right-container total_chat">
@@ -186,15 +186,22 @@
           </a>
         </li>
         <!-- Chat -->
+        <?php 
+        $this->db->select('*');
+        $this->db->from('tb_marketing');
+        $this->db->where('id_user', $this->session->userdata('id_user'));
+        $getchat= $this->db->get()->row(); 
+        ?>
+        <?php if($getchat->chat==1){ ?>
         <li>
           <a href="<?php echo base_url('admin/dashboard/pop_up') ?>">
             <i class="fa fa-comments" aria-hidden="true"></i>
             <span>Chat</span>
             <span class="pull-right-container total_chat">
-              
             </span>
           </a>
         </li>
+      <?php } ?>
          <!-- laporan Order -->
         <li>
           <a href="<?php echo base_url('marketing/laporan') ?>">
@@ -320,3 +327,7 @@
     <section class="content">
 <!-- End marketing -->
 <?php } ?>
+
+<script type="text/javascript">
+    
+</script>

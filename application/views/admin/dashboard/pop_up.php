@@ -1,4 +1,10 @@
-
+<style>
+    #textsend {
+        display: block;
+        overflow: hidden;
+        resize: none;
+    }
+</style>
 <div class="row">
   <div class="col-md-3">
 
@@ -56,6 +62,15 @@
 </div>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
+  $(".showchat").animate({ scrollTop: $(document).height() }, "slow");
+  
+  var textarea = document.querySelector("#textsend");
+      textarea.addEventListener('input', autoResize, false);
+      
+        function autoResize() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        }
 
   $('#sendchat').on('click',function(){
       var textsend = $('#textsend').val();

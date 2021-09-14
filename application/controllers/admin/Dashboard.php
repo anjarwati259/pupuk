@@ -159,7 +159,7 @@ class Dashboard extends CI_Controller
 						);
 		$this->load->view('admin/chat/chat',$data,FALSE);
 	}
-	public function pop_up2(){
+	public function pop_up1(){
 		$chat = $this->dashboard_model->chat();
 		$getmember = $this->dashboard_model->getmember();
 		$data1 = array(	'title' => 'Chatting',
