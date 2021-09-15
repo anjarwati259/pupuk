@@ -51,7 +51,6 @@ class Dashboard extends CI_Controller
                         'ikan' => $ikan,
                         'ternak' => $ternak,
                         'isi' => 'admin/dashboard/list' );
-		//print_r($harian);
         $this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 	//reward
@@ -151,7 +150,7 @@ class Dashboard extends CI_Controller
 		// }
 		print_r($bulan);
 	}
-	public function pop_up(){
+	public function pop_up1(){
 		$getmember = $this->dashboard_model->getmember();
 		$data = array(	'title' => 'Chatting',
 						'member' => $getmember,
@@ -159,7 +158,7 @@ class Dashboard extends CI_Controller
 						);
 		$this->load->view('admin/chat/chat',$data,FALSE);
 	}
-	public function pop_up1(){
+	public function pop_up(){
 		$chat = $this->dashboard_model->chat();
 		$getmember = $this->dashboard_model->getmember();
 		$data1 = array(	'title' => 'Chatting',

@@ -43,7 +43,7 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body no-padding">
-        <div class="direct-chat-messages showchat" style="height: 400px;">
+        <div class="direct-chat-messages showchat" style="height: 100%;">
 
         </div>
         <div class="box-footer">

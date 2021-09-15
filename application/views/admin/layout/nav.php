@@ -57,7 +57,7 @@
         </li>
         <!-- Chat -->
         <li>
-          <a href="<?php echo base_url('admin/dashboard/pop_up') ?>" id="chat" target="_blank">
+          <a href="<?php echo base_url('admin/chat') ?>" id="chat" target="_blank">
             <i class="fa fa-comments" aria-hidden="true"></i>
             <span>Chat</span>
             <span class="pull-right-container total_chat">
