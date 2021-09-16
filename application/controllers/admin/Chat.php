@@ -37,7 +37,10 @@ class Chat extends CI_Controller
 	}
 	public function read_group(){
 		$chat = $this->chat_model->chat_group();
-		//$data['chat'] = $chat->chat;
-		echo json_encode($chat);
+		$data = array(	'title' => 'Chatting',
+						'chat' => 	$chat,
+						'isi'	 => 'admin/chat/chat'
+						);
+		$this->load->view('admin/chat/tampil_group',$data,FALSE);
 	}
 }

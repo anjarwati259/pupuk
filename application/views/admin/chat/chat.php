@@ -99,23 +99,65 @@
             </div>
             <div class="col-md-9 col-12 conversation">
 
-                <div class="row balas py-2">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light" style="min-height: 70px">
 
-                    <div class="col-sm-1 col-2">
+                  <div class="lawan" href="#">
+                    <div class="avatar-lawan" id="">
+                      <img class="avatar-icon" src="<?php echo base_url() ?>assets/chat/gambar/default/user.png">
+                      <span class="ml-2 mt-5">Melina</span>
                     </div>
+                  </div>
+              </nav>
 
-                    <div class="col-sm-8 col-6">
-                        <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .."></textarea>
+              <div class="pesan" id="conversation">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="media pesan-item mb-2 pesan-saya">    
+                      <div class="media-body">
+                        pesanku
+                        <div class="pesan-waktu">
+                          <small>
+                            12:00
+                            <span class="text-primary"><i class="fa fa-check"></i></span>
+                          </small>
+                        </div>
+                      </div>
                     </div>
-
-                    <div class="col-sm-2 col-4">
-                        <button class="btn btn-primary p-2 balas-kirim"><i class="fa fa-send"></i></button>
+                  </div>
+                  <div class="col-12">
+                    <div class="media pesan-item mb-2 pesan-teman">   
+                      <div class="media-body">
+                        pesanku
+                        <div class="pesan-waktu">
+                          <small>
+                            12:00
+                            <span class="text-primary"><i class="fa fa-check"></i></span>
+                          </small>
+                        </div>
+                      </div>
                     </div>
+                  </div>
 
                 </div>
-            </div>
-        </div>
+              </div>
 
+              <div class="row balas py-2">
+
+                <div class="col-sm-1 col-2">
+                </div>
+
+                <div class="col-sm-8 col-6">
+                  <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .."></textarea>
+                </div>
+
+                <div class="col-sm-2 col-4">
+                  <button class="btn btn-primary p-2 balas-kirim"><i class="fa fa-send"></i></button>
+                </div>
+
+              </div>
+
+      </div>
+        </div>
     </div>
 </body>
 </html>
@@ -124,33 +166,6 @@
         show_chat();
       });
     function show_chat(){
-      var id_user = "<?php echo $this->session->userdata('id_user')?>";
-      //alert(id_user);
-      $.ajax({
-          url   : '<?php echo site_url("admin/chat/read_group");?>',
-          type  : 'GET',
-          async : true,
-          dataType : 'json',
-          success : function(data){
-              var html = '<nav class="navbar navbar-expand-lg navbar-light bg-light" style="min-height: 70px"><div class="dropdown"><div class="lawan" href="#"><div class="avatar-lawan" id=""><img class="avatar-icon" src="<?php echo base_url() ?>assets/chat/gambar/default/user.png"><span class="ml-2 mt-5">Kilat Office</span></div></div></div><div class="dropdown float-right ml-4 d-block d-md-none"><button class="btn btn-secondary float-right tombol-tampil-user-mobile"><i class="fa fa-users"></i></button></div></nav><div class="pesan chat" id="conversation"><div class="row">';
-              var tutup = '</div>';
-              var chat = '';
-              var chat2 = '';
-              var count = 1;
-              var i;
-              for(i=0; i<data.length; i++){
-                if(data[i].id_user == id_user){
-               chat += '<div class="col-12"><div class="group-saya" style="float: right; padding-left: 20px;"><span><small><strong>'+data[i].nama_marketing+'</strong></small></span></div><div class="media pesan-item mb-2 pesan-saya"><div class="media-body">'+data[i].chat+'<div class="pesan-waktu"><small>'+'10:20'+'</small> </div></div></div></div></div>'
-               }else{
-                chat += '<div class="col-12"><div class="group-saya" style="float: left; padding-right: 20px;"><span><small><strong>'+data[i].nama_marketing+'</strong></small></span></div><div class="media pesan-item mb-2 pesan-teman"><div class="media-body">'+data[i].chat+'<div class="pesan-waktu"><small>'+'10:20'+'</small> </div></div></div></div></div>'
-               }
-              }
-              chat2 = html+chat+tutup;
-              $('.conversation').html(chat2);
-              //$('.chat').html(chat);
-              alert(chat);
-          }
-
-      });
+     
     }
 </script>
