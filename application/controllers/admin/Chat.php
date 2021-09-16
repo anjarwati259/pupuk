@@ -41,6 +41,58 @@ class Chat extends CI_Controller
 						'chat' => 	$chat,
 						'isi'	 => 'admin/chat/chat'
 						);
+		$this->up_chat();
 		$this->load->view('admin/chat/tampil_group',$data,FALSE);
+	}
+	public function tampil_lawan(){
+		//$chat = $this->chat_model->chat_group();
+		$id = $this->input->post('id');
+		$data = array(	'title' => 'Chatting',
+						//'chat' => 	$chat,
+						'id'	=>$id,
+						'isi'	 => 'admin/chat/tampil_lawan'
+						);
+		$this->load->view('admin/chat/tampil_lawan',$data,FALSE);
+	}
+	public function add_group(){
+		$id_user = $this->session->userdata('id_user');
+		$chat = $this->input->post('ketik');
+		$data1 = array(
+						'chat'			=> $chat,
+						'id_user'		=> $id_user,
+						);
+		$this->chat_model->add_group($data1);
+		$this->chat_model->update_chat();
+		$this->up_chat();
+		require_once(APPPATH.'views/vendor/autoload.php');
+
+		  $options = array(
+		    'cluster' => 'ap1',
+		    'useTLS' => true
+		  );
+		  $pusher = new Pusher\Pusher(
+		    '195f2f8525152075f786',
+		    'd1b3e40e8ec462d83c86',
+		    '1263280',
+		    $options
+		  );
+
+		  $data['message'] = 'chat group';
+		  $pusher->trigger('my-channel', 'my-event', $data);
+	}
+	private function up_chat(){
+		$id_user = $this->session->userdata('id_user');
+		$chat = $this->chat_model->get_chat($id_user);
+		$total = ($chat->total_chat) - ($chat->read_chat);
+		$read_chat = ($chat->read_chat)+$total;
+		//print($read_chat);
+		$data = array(	'id_user' => $id_user,
+						'read_chat' => $read_chat);
+		$this->chat_model->up_chat($data);
+	}
+	public function count_group(){
+		$id_user = $this->session->userdata('id_user');
+		$chat = $this->chat_model->get_chat($id_user);
+		echo json_encode($chat);
 	}
 }

@@ -28,7 +28,7 @@
                         <div>
                             <div class="avatar-saya">
                                 <img src="<?php echo base_url() ?>assets/chat/gambar/user/1607057107_vino.jpg">
-                                <span><strong>Melina</strong></span>
+                                <span><strong><?php echo $this->session->userdata('nama_user'); ?></strong></span>
                             </div>
                         </div>
                     </nav>
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="teman">
-                        <div class="row teman-list" id=""> 
+                        <div class="row teman-list" id="group"> 
                             <div class="col-3 col-sm-3 col-xs-3 teman-avatar">
                                 <div class="avatar-icon">
                                         <img class="avatar-icon" src="<?php echo base_url() ?>assets/chat/gambar/default/user.png">
@@ -62,7 +62,7 @@
                                         <span class="time-meta pull-right">
                                             <!-- 12:00 -->
                                             <!-- <br> -->
-                                            <div class="badge badge-danger">1</div>
+                                            <div class="badge badge-danger count-group">1</div>
                                         </span>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                         </div>
 
                         <?php foreach ($member as $member) { ?>
-                        <div class="row teman-list" id=""> 
+                        <div class="row teman-list" id="<?php echo $member->id_user; ?>"> 
                             <div class="col-3 col-sm-3 col-xs-3 teman-avatar">
                                 <div class="avatar-icon">
                                         <img class="avatar-icon" src="<?php echo base_url() ?>assets/chat/gambar/default/user.png">
@@ -100,48 +100,16 @@
             <div class="col-md-9 col-12 conversation">
 
               <nav class="navbar navbar-expand-lg navbar-light bg-light" style="min-height: 70px">
-
                   <div class="lawan" href="#">
-                    <div class="avatar-lawan" id="">
-                      <img class="avatar-icon" src="<?php echo base_url() ?>assets/chat/gambar/default/user.png">
-                      <span class="ml-2 mt-5">Melina</span>
-                    </div>
+
                   </div>
               </nav>
 
               <div class="pesan" id="conversation">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="media pesan-item mb-2 pesan-saya">    
-                      <div class="media-body">
-                        pesanku
-                        <div class="pesan-waktu">
-                          <small>
-                            12:00
-                            <span class="text-primary"><i class="fa fa-check"></i></span>
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="media pesan-item mb-2 pesan-teman">   
-                      <div class="media-body">
-                        pesanku
-                        <div class="pesan-waktu">
-                          <small>
-                            12:00
-                            <span class="text-primary"><i class="fa fa-check"></i></span>
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                </div>
               </div>
 
-              <div class="row balas py-2">
+              <div class="row balas py-2 d-none">
 
                 <div class="col-sm-1 col-2">
                 </div>
@@ -159,13 +127,7 @@
       </div>
         </div>
     </div>
+
+    <?php include 'ajax.php'; ?>
 </body>
 </html>
-<script type="text/javascript">
-    $(document).ready(function(){
-        show_chat();
-      });
-    function show_chat(){
-     
-    }
-</script>
