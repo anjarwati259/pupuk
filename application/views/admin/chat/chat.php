@@ -69,7 +69,12 @@
                             </div>
                         </div>
 
-                        <?php foreach ($member as $member) { ?>
+                        <?php 
+                        $id_user = $this->session->userdata('id_user');
+                        foreach ($member as $member) { 
+                            if($member->id_user!=$id_user){
+                            ?>
+
                         <div class="row teman-list" id="<?php echo $member->id_user; ?>"> 
                             <div class="col-3 col-sm-3 col-xs-3 teman-avatar">
                                 <div class="avatar-icon">
@@ -87,13 +92,13 @@
                                         <span class="time-meta pull-right">
                                             <!-- 12:00 -->
                                             <!-- <br> -->
-                                            <div class="badge badge-danger">1</div>
+                                            <div class="badge badge-danger count-user-<?php echo $member->id_user?>">1</div>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <?php } ?>
+                        <?php }} ?>
                     </div>
                 </div>
             </div>

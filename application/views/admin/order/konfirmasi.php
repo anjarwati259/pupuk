@@ -82,7 +82,7 @@
               <div class="row">
                 <div class="col-md-12">
                    <label >No Resi</label>
-                    <input type="text" name="no_resi" placeholder="No Resi" class="form-control">
+                    <input type="text" value="<?php echo $order->no_resi ?>" name="no_resi" placeholder="No Resi" class="form-control">
                 </div>
               </div>
             </div>

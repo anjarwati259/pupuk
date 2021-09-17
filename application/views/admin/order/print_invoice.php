@@ -185,7 +185,7 @@ footer {
         <div><span>Alamat</span><?php echo $detail->alamat ?>
         <div><span></span><?php echo $detail->kecamatan ?>, <?php echo $detail->kabupaten ?></div>
         <div><span></span> <?php echo $detail->provinsi ?></div>
-        <div><span>Tanggal</span> <?php echo tanggal(date('2021-07-14',strtotime($detail->tanggal_transaksi))); ?></div>
+        <div><span>Tanggal</span> <?php echo tanggal(date('Y-m-d',strtotime($detail->tanggal_transaksi))); ?></div>
       </div>
     </header>
     <main>
@@ -242,7 +242,7 @@ footer {
 			  	<span>A/N : Agrikultur Gemilang Indonesia</span>
 			  </div>
 			  <div id="item3">
-			  	<span>Jember, <?php $date = date('2021-07-14');
+			  	<span>Jember, <?php $date = date('2021-09-17');
 			  	 echo tanggal(date('Y-m-d',strtotime($date))); ?></span><br>
 			  	 <br>
 			  	 <br>

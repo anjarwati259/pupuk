@@ -2,6 +2,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
         show_data();
+        //show_chat();
+        count_user();
         count_group();
 
         // realtime chat
@@ -16,7 +18,7 @@
           //alert(JSON.stringify(data));
           show_chat();
           count_group();
-          //count_chat();
+          count_user();
         });
         //tampil chat
         function show_data(){
@@ -47,20 +49,68 @@
                     data: data,
                     success: function(html2) {
                         $(".lawan").html(html2);
-                        $(".balas").removeClass('d-none')
+                        $(".balas").removeClass('d-none');
                     }
                 });
+                    count_group();
+                }else{
+                    var id_user = $(this).attr('id');
+                    var data = "&id="+id_user;
+                   $.ajax({
+                        type: 'POST', 
+                        url: "<?php echo base_url('admin/chat/read_chat') ?>",
+                        data: data,
+                        success: function(html) {
+                            //alert(html);
+                            $(".pesan").html(html);
+                            //$(".balas").removeClass('d-none');
+                            //$(".avatar-lawan").attr("id",id_user);
+                             var x = $(".pesan").height()+221000000000;
+                             $(".pesan").scrollTop(x);
+                            // $("#balas-ketik").val("");
+                            // $(".kotak-kiri-mobile").removeClass("d-block");
+                        }
+                    });
+
+                   $.ajax({
+                    type: 'POST',
+                    url: "<?php echo base_url('admin/chat/tampil_lawan') ?>",
+                    data: data,
+                    success: function(html2) {
+                        $(".lawan").html(html2);
+                        $(".balas").removeClass('d-none');
+                        }
+                    });
+                   count_user();
                 }
-                count_group();
+
             });
         }
         function show_chat(){
             var id = $(".avatar-lawan").attr("id");
-            //alert(x);
+            //alert(id);
             if(id=='group'){
                 $.ajax({
                     type: 'POST', 
                     url: "<?php echo base_url('admin/chat/read_group') ?>",
+                    success: function(html) {
+                        //alert(html);
+                        $(".pesan").html(html);
+                        //$(".balas").removeClass('d-none');
+                        // $(".avatar-lawan").attr("id",id_user);
+                        var x = $(".pesan").height()+221000000000;
+                        $(".pesan").scrollTop(x);
+                        $("#balas-ketik").val("");
+                        // $(".kotak-kiri-mobile").removeClass("d-block");
+                    }
+                });
+            }else{
+                var id = $(".avatar-lawan").attr("id");
+                var data = "&id="+id;
+                $.ajax({
+                    type: 'POST', 
+                    data: data,
+                    url: "<?php echo base_url('admin/chat/read_chat') ?>",
                     success: function(html) {
                         //alert(html);
                         $(".pesan").html(html);
@@ -77,21 +127,43 @@
 
         //kirim chat group
         $("body").on("click",".balas-kirim",function(){
+            var id = $(".avatar-lawan").attr("id");
             var ketik = $("#balas-ketik").val();
-            if(ketik.length > 0){
-                //var lawan = $(".avatar-lawan").attr('id');
-                var data = "ketik="+ketik;
-                $.ajax({
-                    type: 'POST',
-                    url: "<?php echo base_url('admin/chat/add_group') ?>",
-                    data: data,
-                    success: function(html) {
-                        // $("#balas-ketik").val("");
-                        // $(".pesan").append(html);
-                        var x = $(".pesan").height()+221000;
-                        $(".pesan").scrollTop(x);
-                    }
-                });
+            //alert(id);
+            if(id=='group'){
+                if(ketik.length > 0){
+                    //var lawan = $(".avatar-lawan").attr('id');
+                    var data = "ketik="+ketik;
+                    $.ajax({
+                        type: 'POST',
+                        url: "<?php echo base_url('admin/chat/add_group') ?>",
+                        data: data,
+                        success: function(html) {
+                            // $("#balas-ketik").val("");
+                            // $(".pesan").append(html);
+                            var x = $(".pesan").height()+221000;
+                            $(".pesan").scrollTop(x);
+                        }
+                    });
+                }
+            }else{
+                if(ketik.length > 0){
+                    //var lawan = $(".avatar-lawan").attr('id');
+                    var data = "ketik="+ketik+"&lawan="+id;
+
+                    //alert(data);
+                    $.ajax({
+                        type: 'POST',
+                        url: "<?php echo base_url('admin/chat/add_chat') ?>",
+                        data: data,
+                        success: function(html) {
+                            // $("#balas-ketik").val("");
+                            // $(".pesan").append(html);
+                            var x = $(".pesan").height()+221000;
+                            $(".pesan").scrollTop(x);
+                        }
+                    });
+                }
             }
 
         });
@@ -113,7 +185,30 @@
                   }
 
               });
-          }
+        }
+        //hitung jumlah chat group
+        function count_user(){
+            var id = $(".teman-list").attr("id");
+            //alert(id);
+            //$('.count-user').html(id);
+              $.ajax({
+                  url   : '<?php echo base_url("admin/chat/count_user");?>',
+                  type  : 'GET',
+                  async : true,
+                  dataType : 'json',
+                  success : function(data){
+                    //alert(data.length);
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        var total = data[i].total;
+                        var read = data[i].read;
+                        var total_chat = parseInt(total-read);
+                        $('.count-user-'+data[i].user2).html(total_chat);
+                    }
+                    
+                  }
+              });
+        }
 
       });
 </script>
