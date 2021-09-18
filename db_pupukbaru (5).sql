@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2021 at 03:07 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.11
+-- Waktu pembuatan: 18 Sep 2021 pada 10.42
+-- Versi server: 10.4.8-MariaDB
+-- Versi PHP: 7.2.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ativitas`
+-- Struktur dari tabel `tb_ativitas`
 --
 
 CREATE TABLE `tb_ativitas` (
@@ -37,7 +38,7 @@ CREATE TABLE `tb_ativitas` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_ativitas`
+-- Dumping data untuk tabel `tb_ativitas`
 --
 
 INSERT INTO `tb_ativitas` (`id_aktivitas`, `id_pelanggan`, `id_marketing`, `text`, `last_kontak`, `status`) VALUES
@@ -47,19 +48,36 @@ INSERT INTO `tb_ativitas` (`id_aktivitas`, `id_pelanggan`, `id_marketing`, `text
 (7, 'C205', 'M004', 'masih ada pupuk nya pak?\n', '2021-08-26 08:55:57', 1),
 (8, 'C306', 'M004', 'selamat pagi mau tanya paket apa sudah sampai', '2021-08-27 04:00:15', 1),
 (12, 'C421', 'M011', 'Selamat pagi Bu. Linda\nSaya popy bu customer service baru pupuk kilat\nBagaimana kabarnya bu ?', '2021-08-31 03:21:43', 1),
-(13, 'C427', 'M011', 'Selamat pagi Bp.Roni\nSaya popy pak customer baru pupuk kilat..\nBagaimana kabarnya pak ?', '2021-08-31 03:23:47', 1);
+(13, 'C427', 'M011', 'Selamat pagi Bp.Roni\nSaya popy pak customer baru pupuk kilat..\nBagaimana kabarnya pak ?', '2021-08-31 03:23:47', 1),
+(14, 'C002', 'M004', 'sido 2 karton iki??? ', '2021-09-01 04:06:17', 1),
+(15, 'C396', 'M004', 'assalamulaikum,,, belum habis mas pupuk nya?\n', '2021-09-01 04:07:26', 1),
+(26, 'C348', 'M001', 'Assalamualaikum bang, saya Tunggul nih bang pake WA kantor, mau tanya bang berarti abang utk statusnya dialihkan sebagai user aja ya bang...? soalnya kan abang pupuknya lebih banyak untuk dipakai sendiri ya bang...?', '2021-09-01 08:42:42', 1),
+(27, 'C359', 'M001', 'Assalamualaikum bang, posisi stok sekarang tinggal berapa ya bang? ini saya Tunggul dari pupuk Kilat ya bang, saya pakai nomor kantor nih bang\n', '2021-09-01 08:45:03', 1),
+(28, 'C356', 'M001', 'Assalamualaikum pak, posisi stock sisa berapa sekarang pak? gimana pak perkembangan per hari ini pak? masih sibuk ga nih pak?', '2021-09-01 08:47:31', 1),
+(29, 'C048', 'M003', 'Promo pupuk kilat September Ceria !!!\nDengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan.\nJadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 06:35:11', 1),
+(30, 'C053', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 06:43:38', 1),
+(31, 'C080', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 06:44:23', 1),
+(32, 'C361', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:26:37', 1),
+(33, 'C361', 'M003', '', '2021-09-03 07:27:03', 1),
+(34, 'C361', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:27:14', 1),
+(35, 'C370', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:31:27', 1),
+(36, 'C379', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:31:48', 1),
+(37, 'C394', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:32:21', 1),
+(38, 'C401', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:34:11', 1),
+(39, 'C001', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:35:19', 1),
+(40, 'C008', 'M003', 'Promo pupuk kilat September Ceria !!! Dengan pembelian produk pupuk kilat dengan banyak manfaat, Anda berkesempatan menang hadiah yang akan di undi pada akhir bulan. Jadi kapan lagi, dapatkan manfaatnya dan menangkan hadiahnya!!', '2021-09-03 07:36:50', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_calon_pelanggan`
+-- Struktur dari tabel `tb_calon_pelanggan`
 --
 
 CREATE TABLE `tb_calon_pelanggan` (
   `id_calon` varchar(9) NOT NULL,
   `id_marketing` varchar(9) NOT NULL,
   `nama_calon` varchar(50) NOT NULL,
-  `no_hp` varchar(15) NOT NULL,
+  `no_hp` varchar(25) NOT NULL,
   `alamat` text NOT NULL,
   `kecamatan` varchar(50) NOT NULL,
   `kabupaten` varchar(50) NOT NULL,
@@ -70,10 +88,199 @@ CREATE TABLE `tb_calon_pelanggan` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_calon_pelanggan`
+--
+
+INSERT INTO `tb_calon_pelanggan` (`id_calon`, `id_marketing`, `nama_calon`, `no_hp`, `alamat`, `kecamatan`, `kabupaten`, `provinsi`, `komoditi`, `keterangan`, `tanggal`, `status`) VALUES
+('P001', 'M006', 'Budi ', '082278068275', 'Palembang', 'Alang-alang Lebar', 'KOTA PALEMBANG', 'SUMATERA SELATAN', '-', 'Belum ada respon', '2021-09-01', 1),
+('P002', 'M006', 'Siswanto', '6285279911104', 'Belum menyebutkan', 'Kurun', 'KAB. GUNUNG MAS', 'KALIMANTAN TENGAH', 'Singkong', 'Tanya Info Aplikasi', '2021-09-01', 1),
+('P003', 'M006', 'Japet Sembiring', '085362297241', 'Belum lengkap', 'Berastagi', 'KAB. KARO', 'SUMATERA UTARA', '-', 'Tanya Harga dan pengiriman', '2021-09-01', 1),
+('P004', 'M003', 'Yanto', '+6281216050848', 'Tuban', '', 'KAB. TUBAN', 'JAWA TIMUR', '-', 'Tanya aplikasi, harga', '2021-09-01', 1),
+('P005', 'M003', 'Suriany', '+62 81250905736', 'belum ada', '', '', '', '-', '', '2021-09-01', 0),
+('P006', 'M003', 'Islahil', '+62 8175752737', 'belum', '', '', '', '-', 'tanya harga, belum respon lebih lanjuut', '2021-09-01', 1),
+('P007', 'M011', 'Bu Sri', '082369307299', '-', '', '', '', '-', 'Tanya cara order dan harga', '2021-09-02', 1),
+('P008', 'M011', 'Ibrahim', '085396647531', '-', '', '', '', '-', 'Mau pesan tapi belum respon lagi', '2021-09-02', 0),
+('P009', 'M011', 'Anurama hlw', '085267005137', 'Binaka (jln pelud binaka km 17\r\nKecamatan : Gunungsitoli Idanoi', 'Gunungsitoli Idanoi', 'KOTA GUNUNGSITOLI', 'SUMATERA UTARA', '-', 'dari order online belum merespon lagi, merasa ongkirnya mahal', '2021-09-02', 1),
+('P010', 'M003', 'Satria', '+62895332001381', '-', '', '', '', 'Jagung', 'Tanya harga, aplikasi, kandungan', '2021-09-01', 1),
+('P011', 'M003', 'Naufil', '+6285106804558', '-', '', '', '', '-', 'tidak respon WM', '2021-09-01', 1),
+('P012', 'M003', 'Dielpiero', '+6285861827155', '-', '', '', '', '-', 'Belum respon WM', '2021-09-01', 1),
+('P013', 'M003', 'Wajiono', '+6282134690922', '-', '', '', '', 'kangkung', 'tanya harga, \r\ntanam kangkung untuk benih belum ada respon lebih lanjut', '2021-09-01', 0),
+('P014', 'M003', 'Wawan', '+6282313588852', '-', '', '', '', 'Jagung', 'aplikasi, harga, ', '2021-09-01', 0),
+('P015', 'M003', 'Dedi', '+6287789085647', '-', '', '', '', 'Jagung Manis', 'tanya harga, dan aplikasi tanaman Jagung manis', '2021-09-02', 0),
+('P016', 'M003', 'Ulum ', '+6285609990166', '-', '', '', '', '-', 'tanya aplikasi, harga produk', '2021-09-01', 1),
+('P017', 'M003', 'Muslim', '+6285783189593', '-', '', '', '', '-', 'belum respon Wm, ', '2021-09-01', 1),
+('P018', 'M004', 'gusti komang', '085812830571', 'buleleng ', 'Busung biu', 'KAB. BULELENG', 'BALI', 'PADI', 'oktober mau tanam', '2021-09-03', 0),
+('P019', 'M011', 'M. Razzak', '082184286332', '-', '', '', '', '-', 'belum direspon lagi', '2021-09-04', 1),
+('P020', 'M011', 'Erbin', '082278237019', 'Komplek gereja', 'Pollung', 'KAB. HUMBANG HASUNDUTAN', 'SUMATERA UTARA', '-', 'Belum respon lagi ', '2021-09-04', 1),
+('P021', 'M011', 'Jefri sandi Flamonia surbakti', '085752325880', '-', '', '', '', '-', 'mau ajak temen dulu', '2021-09-04', 1),
+('P022', 'M011', ' Abdinegara', '082160260832', 'Kec Babul Makmur', 'Babul Makmur', 'KAB. ACEH TENGGARA', 'ACEH', '-', 'belum respon lagi', '2021-09-04', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_detail_order`
+-- Struktur dari tabel `tb_chat`
+--
+
+CREATE TABLE `tb_chat` (
+  `id_chat` int(8) NOT NULL,
+  `id_marketing` varchar(15) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `chat` text NOT NULL,
+  `time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_chat`
+--
+
+INSERT INTO `tb_chat` (`id_chat`, `id_marketing`, `id_user`, `chat`, `time`) VALUES
+(146, 'M008', 1, 'coba', '2021-09-10 11:00:21'),
+(147, 'M008', 1, 'akhirnya', '2021-09-10 11:00:29'),
+(148, 'M003', 4, 'iya mbak', '2021-09-10 11:00:36'),
+(149, 'M008', 1, 'Pesanan anda:\nProduk: Pupuk Kilat 1 Liter\nJumlah : 1\nHarga: Rp170.000\nOngkir: Rp32.000\nCOD Fee : Rp5.100\nFree Ongkir : -Rp20.000\nTotal: Rp187.100\n\nDikirim Ke : \nNama : Popisumanti\nAlamat : Toko Hj etty jl imam Bonjol blok sa no 11 pekanbaru\nKecamatan : Pekanbaru Kota\nKota : Kota Pekanbaru\nProvinsi : Riau\nKode Pos : 28114\nKurir : J&T\nService : EZ\nMetode : COD\nNo. Handphone : +6282169567919', '2021-09-10 11:13:54'),
+(150, 'M008', 1, 'coba', '2021-09-10 11:27:14'),
+(151, 'M008', 1, 'coba', '2021-09-10 11:27:23'),
+(152, 'M008', 1, 'coba lagi', '2021-09-10 11:40:42'),
+(153, 'M003', 4, 'heemm', '2021-09-10 11:41:52'),
+(154, 'M003', 4, 'coba', '2021-09-13 05:13:38'),
+(155, 'M003', 4, 'Pesanan anda:\nProduk: Pupuk Kilat 1 Liter\nJumlah : 1\nHarga: Rp170.000\nOngkir: Rp32.000\nCOD Fee : Rp5.100\nFree Ongkir : -Rp20.000\nTotal: Rp187.100\n\nDikirim Ke : \nNama : Popisumanti\nAlamat : Toko Hj etty jl imam Bonjol blok sa no 11 pekanbaru\nKecamatan : Pekanbaru Kota\nKota : Kota Pekanbaru\nProvinsi : Riau\nKode Pos : 28114\nKurir : J&T\nService : EZ\nMetode : COD\nNo. Handphone : +6282169567919', '2021-09-13 05:41:58'),
+(156, 'M008', 1, 'Pesanan anda:\nProduk: Pupuk Kilat 1 Liter\nJumlah : 1\nHarga: Rp170.000\nOngkir: Rp32.000\nCOD Fee : Rp5.100\nFree Ongkir : -Rp20.000\nTotal: Rp187.100\n\nDikirim Ke : \nNama : Popisumanti\nAlamat : Toko Hj etty jl imam Bonjol blok sa no 11 pekanbaru\nKecamatan : Pekanbaru Kota\nKota : Kota Pekanbaru\nProvinsi : Riau\nKode Pos : 28114\nKurir : J&T\nService : EZ\nMetode : COD\nNo. Handphone : +6282169567919', '2021-09-15 04:15:36');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_chat_group`
+--
+
+CREATE TABLE `tb_chat_group` (
+  `id_chat_group` int(9) NOT NULL,
+  `id_user` int(9) NOT NULL,
+  `chat` text NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_chat_group`
+--
+
+INSERT INTO `tb_chat_group` (`id_chat_group`, `id_user`, `chat`, `tanggal`) VALUES
+(1, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp51.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp206.100\r\n\r\nDikirim Ke : \r\nNama : Aziz\r\nAlamat : Basecam Kinali BBi\r\nKecamatan : Kinali\r\nKota : Kab. Pasaman Barat\r\nProvinsi : Sumatera Barat\r\nKode Pos : 26567\r\nKurir : J&T\r\nService : EZ\r\nMetode : COD\r\nNo. Handphone : +6281268801781', '2021-09-13 02:25:15'),
+(2, 1, 'Nama :Teddyansah ,\r\nAlamat : ipb ,kab cianjur ,kc mnde,dsa kutawaringin kp,cibodas rt00/003 rmh smping msjid ustad jael ,\r\nno tlp/wa : 081320360606\r\n\r\nOngkir J&T= 17.000\r\nSubsi Ongkir = 10.000\r\nAdmin COD = 3.000\r\nTotal = 110.000', '2021-09-13 07:07:43'),
+(3, 6, 'okayy gaskeunn\r\nmlai sesok mlebu kene yaa\r\n', '2021-09-13 07:09:13'),
+(4, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : \r\nHarga: Rp170.000\r\nOngkir: Rp53.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp208.100\r\n\r\nDikirim Ke : \r\nNama : Jamaluddin\r\nAlamat : Dusun lX,Desa Paya pinang,kec,Tebing syahbandar\r\nKecamatan : Bandar Khalifah\r\nKota : Kab. Serdang Bedagai\r\nProvinsi : Sumatera Utara\r\nKode Pos : 20994\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6281263135137', '2021-09-13 07:09:28'),
+(5, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp31.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp186.100\r\n\r\nDikirim Ke : \r\nNama : Desi ramayanti\r\nAlamat : Rumah makan pindang meranjat TAA di samping ASSA rent car arah bandara baru\r\nKecamatan : Alang-Alang Lebar\r\nKota : Kota Palembang\r\nProvinsi : Sumatera Selatan\r\nKode Pos : 30154\r\nKurir : J&T\r\nService : EZ\r\nMetode : COD\r\nNo. Handphone : +6285766057031', '2021-09-13 07:10:11'),
+(6, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp46.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp201.100\r\n\r\nDikirim Ke : \r\nNama : Masyakin\r\nAlamat : Jl.padat karya RT.006 kel.ktw Hulu\r\nKecamatan : Kotawaringin Lama\r\nKota : Kab. Kotawaringin Barat\r\nProvinsi : Kalimantan Tengah\r\nKode Pos : 74161\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6281350428457', '2021-09-13 07:11:00'),
+(7, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp49.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp204.100\r\n\r\nDikirim Ke : \r\nNama : Adi nurman\r\nAlamat : Adelia florist jln raya lintas timur desa labuhanratu dua way Jepara Lampung timur\r\nKecamatan : Way Jepara\r\nKota : Kab. Lampung Timur\r\nProvinsi : Lampung\r\nKode Pos : 34396\r\nKurir : SICEPAT\r\nService : REG\r\nMetode : COD\r\nNo. Handphone : +6281366724426\r\n', '2021-09-18 07:13:04'),
+(8, 6, 'Atikah Putri (Kp. Baru - Jorong Sentosa Kec. Padang Gelugur Kab. Pasaman Timur Prov. Sumatera Barat). +62 852-1723-1300 * COD JNE OKE 1 BOTOL 1L* *(170+(56 -SUBSIDI20= 36Ribu) + Fee COD: 5Ribu Total: 211Ribu* ', '2021-09-18 07:13:26'),
+(9, 4, 'Josep Karo-Karo\r\nAlamat:  Gereja GBKP Desa Sukarame, Kec. Munte, Kab. Karo, Sumatera Utara\r\n+62 812-6914-4889\r\n\r\nJNE OKE COD\r\nOngkir 53 rbu - 20 rbu = 33 rbu\r\nfe cod 5rbu\r\ntotal COD 208.000', '2021-09-13 10:02:48'),
+(10, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp30.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp185.100\r\n\r\nDikirim Ke : \r\nNama : Ida Susilawati\r\nAlamat : Pandan Sari RT 03/07\r\nKecamatan : Moyo Hulu\r\nKota : Kab. Sumbawa\r\nProvinsi : Nusa Tenggara Barat (NTB)\r\nKode Pos : 84371\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6285339107021', '2021-09-13 07:14:51'),
+(11, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : \r\nHarga: Rp170.000\r\nOngkir: Rp41.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp196.100\r\n\r\nDikirim Ke : \r\nNama : I MADE PADU\r\nAlamat : Sumber garunggung rt 03\r\nKecamatan : Dusun Tengah\r\nKota : Kab. Barito Timur\r\nProvinsi : Kalimantan Tengah\r\nKode Pos : 73652\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6282148589647', '2021-09-13 02:47:59'),
+(12, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp46.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp201.100\r\n\r\nDikirim Ke : \r\nNama : mustangin\r\nAlamat : provinsi : kalimantan tengah / kabupaten : kotawaringin barat / kec : pangkalan banteng / desa : simpang berambai / rt 2 / rw 2\r\nKecamatan : Pangkalan Banteng\r\nKota : Kab. Kotawaringin Barat\r\nProvinsi : Kalimantan Tengah\r\nKode Pos : 74183\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6285651916507', '2021-09-18 07:15:43'),
+(13, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp35.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp190.100\r\n\r\nDikirim Ke : \r\nNama : Ahmad\r\nAlamat : Rt011 RW 03 desa margomulyo20 jembatan 01\r\nKecamatan : Muara Padang\r\nKota : Kab. Banyuasin\r\nProvinsi : Sumatera Selatan\r\nKode Pos : 30975\r\nKurir : J&T\r\nService : EZ\r\nMetode : COD\r\nNo. Handphone : +6282278316171', '2021-09-13 02:49:25'),
+(14, 15, '--------- ORDER TANGGAL 14 SEPTEMBER 2021 ----------', '2021-09-18 07:18:38'),
+(15, 4, '[09.38, 14/9/2021] Pak Bowo: COD, sesuai Data Pesan \r\n? format pemesanan silahkan isi :\r\n • Nama.       : suprayitno\r\n • Alamat      :kalimalang\r\n • RT/RW      :01/07\r\n • Kel/Des    :mayangan\r\n • Kec            :gumukmas\r\n • Kota/Kab  :jember\r\n • PROV         :jawa timur\r\nPesan 2 botol Pupuk Kilat 1 ltr\r\nHP : 082335612297\r\n[09.39, 14/9/2021] Pak Bowo: Perincian\r\n2 liter 340.000\r\nTambahan 10.000\r\nJNE 12.000\r\nTotal 362.000\r\n', '2021-09-14 02:50:43'),
+(16, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp34.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp189.100\r\n\r\nDikirim Ke : \r\nNama : Dauri\r\nAlamat : Dusun padang rincang,desa kota dalam,jln way lima(warung ramakasi cell)\r\nKecamatan : Way Lima\r\nKota : Kab. Pesawaran\r\nProvinsi : Lampung\r\nKode Pos : 35367\r\nKurir : J&T\r\nService : EZ\r\nMetode : COD\r\nNo. Handphone : +6288272125849', '2021-09-14 02:51:32'),
+(17, 6, 'Cayo (Desa Ciledug Wetan Blok Genteng RT/RW 02/02 Kec. Ciledug Kab. Cirebon Prov. Jawa Barat) \r\n+6289661581918 *COD JNE OKE 2 BOTOL 1L* *(340+(48 -SUBSIDI40= 8Ribu) + Fee COD: 10Ribu Total: 358 Ribu* \r\n', '2021-09-14 02:53:32'),
+(18, 6, '--------REPEAT ORDER-----------------\r\n', '2021-09-14 07:18:17'),
+(19, 15, '--------- ORDER TANGGAL 15 SEPTEMBER 2021 ----------', '2021-09-14 07:18:55'),
+(20, 9, 'Nama:Herlina\r\nno hp :081254985692\r\nAlamat:Jl.Taisir no ,12.RT 04,RW 05 (Dekat RS.Mutiara Bunda)kelurahan kampung Jawa sekumpul\r\nKec.  : Martapura\r\nKab.  : Banjar\r\nProp  : Kalimantan \r\n             Selatan .\r\nKode pos:70614\r\n\r\nTotal pembayaran 184.000 \r\nPupuk kilat 1 liter 170k\r\nOngkir 34k - 20k = 14k', '2021-09-15 03:51:10'),
+(21, 5, 'I NYOMAN ASTA KARANG\r\nBanjar dinas dangin margi Kelurahan.BULIAN kecamatan. Kubutambahan kabupaten Buleleng Singaraja. \r\nNo.hp 087762806250\r\nPupuk kilat 1 liter 170.000\r\nJNE REG COD 18.000\r\nCOD 5.000\r\nSubsidi 20.000\r\nTotal pembayaran : 175.000', '2021-09-15 07:21:17'),
+(22, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : \r\nHarga: Rp170.000\r\nOngkir: Rp51.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp206.100\r\n\r\nDikirim Ke : \r\nNama : Sudirman\r\nAlamat : Pattallassang RT/RW 001/001 majannang\r\nKecamatan : Parigi\r\nKota : Kab. Gowa\r\nProvinsi : Sulawesi Selatan\r\nKode Pos : 92174\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6281355086630\r\n', '2021-09-15 07:21:06'),
+(23, 15, '--------- ORDER TANGGAL 16 SEPTEMBER 2021 ----------', '2021-09-15 07:21:35'),
+(24, 5, 'Nama : M Suyanto\r\nAlamat : Kunir Lor RT 04 RW 06 Dempet-Demak Jawa Tengah\r\ntlp : 085226547732\r\n1 btl 1 liter 170.000\r\nJNE OKE COD 19.000\r\nCOD 5.000\r\nSUBS. 20.000\r\nTOTAL PEMBAYARAN 175.000\r\n', '2021-09-15 07:21:56'),
+(25, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp17.000\r\nCOD Fee : \r\nFree Ongkir : -Rp17.000\r\nTotal: Rp170.000\r\n\r\nDikirim Ke : \r\nNama : Lamria Silitonga\r\nAlamat : Perum Rawamas indah Blok C1 no 9.\r\nKecamatan : Kotabaru\r\nKota : Kab. Karawang\r\nProvinsi : Jawa Barat\r\nKode Pos : 41374\r\nKurir : JNE\r\nService : OKE\r\nMetode : Bank Transfer\r\nNo. Handphone : +6282260389819', '2021-09-18 07:24:02'),
+(26, 9, 'esanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp47.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp202.100\r\n\r\nDikirim Ke : \r\nNama : Saktiando hutabarat\r\nAlamat : Jln Siantar desa pagar jati no. 511\r\nKecamatan : Lubuk Pakam\r\nKota : Kab. Deli Serdang\r\nProvinsi : Sumatera Utara\r\nKode Pos : 20511\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6281376336024', '2021-09-18 07:25:12'),
+(27, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp.170.000\r\nOngkir: 19000\r\nCOD Fee : 5000\r\nFree Ongkir : -19000\r\nTotal: Rp 175000\r\n\r\nDikirim Ke : \r\nNama : Hartanto Wonokerso\r\nAlamat : Krajan 5 RT 02 RW 03 Kelurahan wonokerso \r\nKecamatan : Pringsurat\r\nKota : Kab. Temanggung \r\nProvinsi : Jawa tengah \r\nKode Pos : 56272\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : 081391424698', '2021-09-18 07:25:12'),
+(28, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp19.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp19.000\r\nTotal: Rp175.100\r\n\r\nDikirim Ke : \r\nNama : Syubi\r\nAlamat : Kaplongan lor rt05 /02 blok pasar minggu, karanganmpel indramayu\r\nKecamatan : Karangampel\r\nKota : Kab. Indramayu\r\nProvinsi : Jawa Barat\r\nKode Pos : 45283\r\nKurir : J&T\r\nService : EZ\r\nMetode : COD\r\nNo. Handphone : +6285220914187', '2021-09-18 07:25:38'),
+(29, 4, 'Ibu iing/bapak opang\r\nBlok: babakan kaler \r\nRt:01 Rw:03 \r\nDesa:argamukti /apuy\r\nKec:argapura\r\nKab: majalengka\r\nJawa barat\r\n\r\nJnt COD\r\nongkir 38 rbu (free)\r\nCod total 350 rbu', '2021-09-18 07:25:38'),
+(30, 6, 'Produk: Pupuk Kilat\r\nHarga: Rp340.000\r\nOngkir: Rp38.000\r\nFree Ongkir : 40.000\r\nFee COD: 10.000\r\nTotal: Rp. 350.000\r\n\r\nDikirim Ke : \r\nNama : Winarsih\r\nAlamat : Depok sibango rt 04 rw 04\r\nKecamatan : Kandeman\r\nKota : Kab. Batang\r\nKode Pos : 51261\r\nNo. Handphone : +6285842331954\r\n\r\n(COD JNE REG  2 Botol 1L)', '2021-09-18 07:26:01'),
+(31, 6, '^^^^^^ COD OKE ^^^^^\r\n', '2021-09-18 07:26:01'),
+(32, 4, 'RALAT \r\n\r\nIbu iing/bapak opang\r\nBlok: babakan kaler \r\nRt:01 Rw:03 \r\nDesa:argamukti /apuy\r\nKec:argapura\r\nKab: majalengka\r\nJawa barat\r\n+62 857-5978-8093\r\n\r\nJnt COD\r\nongkir 38 rbu (free)\r\nCod total 350 rbu', '2021-09-18 07:26:25'),
+(33, 4, 'Enok watiah\r\nPasirkaliki rt.10 rw.12 desa genteng kec.sukasari kab.sumedang\r\n+62 855-5963-5286\r\n\r\n1 btl 1 liter PUPUK KILAt\r\nJNT COD \r\nONgkir 20 rbu (free)\r\n\r\ntotal COD 175.000', '2021-09-18 07:26:25'),
+(34, 5, 'Nutrisi Ternak 1 botol Cod \r\n', '2021-09-18 07:26:52'),
+(35, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : \r\nHarga: Rp170.000\r\nOngkir: Rp46.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp201.100\r\n\r\nDikirim Ke : \r\nNama : Nurbahrianto\r\nAlamat : Sungai cabang barat  RT 06 jl merpati kec pantai lunci kab sukamara\r\nKecamatan : Pantai Lunci\r\nKota : Kab. Sukamara\r\nProvinsi : Kalimantan Tengah\r\nKode Pos : 74171\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6281254496887\r\n', '2021-09-18 07:26:52'),
+(36, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp78.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp233.100\r\n\r\nDikirim Ke : \r\nNama : Lisman\r\nAlamat : Desa balik kec kute panang kab Aceh tengah\r\nKecamatan : Alapan (Alafan)\r\nKota : Kab. Simeulue\r\nProvinsi : Nanggroe Aceh Darussalam (NAD)\r\nKode Pos : 23893\r\nKurir : JNE\r\nService : REG\r\nMetode : COD\r\nNo. Handphone : +6285253013167', '2021-09-18 07:27:21'),
+(37, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp68.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp223.100\r\n\r\nDikirim Ke : \r\nNama : Lisman\r\nAlamat : Desa balik kec kute panang kab Aceh tengah\r\nKecamatan : Kute Panang\r\nKota : Kab. Aceh Tengah\r\nProvinsi : Nanggroe Aceh Darussalam (NAD)\r\nKode Pos : 24568\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6285253013167', '2021-09-18 07:27:21'),
+(38, 15, '--------- ORDER TANGGAL 17 SEPTEMBER 2021 ----------', '2021-09-18 07:27:36'),
+(39, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : \r\nHarga: Rp170.000\r\nOngkir: Rp11.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp11.000\r\nTotal: Rp175.100\r\n\r\nDikirim Ke : \r\nNama : rosyid\r\nAlamat : RT 18 / RW 04 karangsuko desa rejoyoso\r\nKecamatan : Bantur\r\nKota : Kab. Malang\r\nProvinsi : Jawa Timur\r\nKode Pos : 65179\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6281938635400', '2021-09-18 07:27:36'),
+(40, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp.170.000\r\nOngkir: 19000\r\nCOD Fee : 5000\r\nFree Ongkir : -19000\r\nTotal: Rp 175.000\r\n\r\nDikirim Ke : \r\nNama : Asro\r\nAlamat : kangkung karang RT 05 RW 06 \r\nKecamatan : mranggen\r\nKota : demak\r\nProvinsi : Jawa tengah\r\nKode Pos : 59567\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : 081228892630', '2021-09-18 07:27:49'),
+(41, 5, 'ray bagaskara\r\n500ml 1 karton\r\ncod secepat kilat\r\n', '2021-09-18 07:28:24'),
+(42, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp6.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp6.000\r\nTotal: Rp175.100\r\n\r\nDikirim Ke : \r\nNama : P.rini\r\nAlamat : Desa harjomulyo, jln kiyai suna depan masjid Baitul Muttaqin(di timur nya masjid ada toko/ warung)\r\nKecamatan : Silo\r\nKota : Kab. Jember\r\nProvinsi : Jawa Timur\r\nKode Pos : 68184\r\nKurir : JNE\r\nService : REG\r\nMetode : COD\r\nNo. Handphone : +6285234899066', '2021-09-18 07:28:24'),
+(43, 6, 'Syarifuddin (Desa Bontosunggu - Laccu laccu Kec. Bajeng Kab. Gowa Prov. Sulawesi Selatan) \r\n 082217822528 *COD JNE OKE 2 BOTOL 1L* *(340+(78 -SUBSIDI40= 38Ribu) + Fee COD: 10Ribu Total: 388 Ribu* \r\n\r\n', '2021-09-18 07:28:47'),
+(44, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 2\r\nHarga: Rp340.000\r\nOngkir: Rp82.000\r\nCOD Fee : Rp10.200\r\nFree Ongkir : -Rp40.000\r\nTotal: Rp392.200\r\n\r\nDikirim Ke : \r\nNama : Joko Turahyo\r\nAlamat : Roham raya jalur 4. Rt.09. Rw.02\r\nKecamatan : Wanaraya\r\nKota : Kab. Barito Kuala\r\nProvinsi : Kalimantan Selatan\r\nKode Pos : 70562\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6282159898490', '2021-09-18 07:28:47'),
+(45, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp11.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp11.000\r\nTotal: Rp175.100\r\n\r\nDikirim Ke : \r\nNama : Hadori\r\nAlamat : Dsn nangkelleng lantek timur galis bangkalan rt04 rw05\r\nKecamatan : Galis\r\nKota : Kab. Bangkalan\r\nProvinsi : Jawa Timur\r\nKode Pos : 69173\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6285855675102', '2021-09-18 07:29:05'),
+(46, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp16.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp16.000\r\nTotal: Rp175.100\r\n\r\nDikirim Ke : \r\nNama : I ketut baruna\r\nAlamat : kantor bumdes tunjung mekar,desa tunjung\r\nKecamatan : Kubutambahan\r\nKota : Kab. Buleleng\r\nProvinsi : Bali\r\nKode Pos : 81172\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6285858521171', '2021-09-18 07:29:05'),
+(47, 5, 'Nama: M.inggir ( Rozaq ) \r\nNo WA:085732962046\r\nAlamat Lengkap:Jalan sido mukti rt 41 Kel:Lempake\r\nKec :Samarinda utara\r\nKota :Samarinda\r\nProvinsi :Kaltim\r\nPupuk kilat 1 liter 170.000\r\nJNT COD 49.000\r\nCOD 5.000\r\nSUBS. 20.000\r\nTOTAL PEMBAYARAN 204.000', '2021-09-18 07:29:32'),
+(48, 5, 'KASIH  NOTE  : RUMAH No.44 di depan rumah ada tandon air dari Kayu... \\\r\n', '2021-09-18 07:29:32'),
+(49, 15, '--------- ORDER TANGGAL 18 SEPTEMBER 2021 ----------', '2021-09-18 07:29:51'),
+(50, 4, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp41.000\r\nCOD Fee : \r\nFree Ongkir : -Rp20.000\r\nTotal: Rp191.000\r\n\r\nDikirim Ke : \r\nNama : M.chafidin\r\nAlamat : Balam km 20 pasar balak rt 19 rw09 bultrim kepenghulua bangko lestari kec.bangko pusako\r\nKecamatan : Bangko Pusaka (Pusako)\r\nKota : Kab. Rokan Hilir\r\nProvinsi : Riau\r\nKode Pos : 28992\r\nKurir : J&T\r\nService : EZ\r\nMetode : Bank Transfer\r\nNo. Handphone : +6283167313773', '2021-09-18 07:29:51'),
+(51, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp53.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp208.100\r\n\r\nDikirim Ke : \r\nNama : Leo Whibin Mega\r\nAlamat : Jalan Karya Bhakti CU. (Credit Union) SEMARONG (cc: +62 856-5207-6910) Rusli\r\nKecamatan : Meliau\r\nKota : Kab. Sanggau\r\nProvinsi : Kalimantan Barat\r\nKode Pos : 78571\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6285652192605\r\n', '2021-09-18 07:30:12'),
+(52, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp26.000\r\nCOD Fee : Rp.5000\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp181.000\r\n\r\nDikirim Ke : \r\nNama : Jatmoko\r\nAlamat : BTN Olat Rarang Blok A4, Kecamatan Sumbawa, Kabupaten Sumbawa, Ptovinsi NTB\r\nKecamatan : Labuhan Badas\r\nKota : Kab. Sumbawa\r\nProvinsi : Nusa Tenggara Barat (NTB)\r\nKode Pos : 84316\r\nKurir : J&T\r\nService : EZ\r\nMetode : COD\r\nNo. Handphone : +6281360244446', '2021-09-18 07:30:12'),
+(53, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp.170.000\r\nOngkir: 19000\r\nCOD Fee : 5000\r\nFree Ongkir : -19000\r\nTotal: Rp 175.000\r\n\r\nDikirim Ke : \r\nNama : Hanuri\r\nAlamat : Kebon Batur RT 08 RW 06 \r\nKecamatan : Mranggen \r\nKota : Kab. Demak\r\nProvinsi : Jawa Tengah\r\nKode Pos : 59567\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone :  085878540744', '2021-09-18 07:30:33'),
+(54, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp54.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp209.100\r\n\r\nDikirim Ke : \r\nNama : Mahyan AS\r\nAlamat : Kantor Pengadilan Tinggi Agama Kupang\r\nKecamatan : Oebobo\r\nKota : Kota Kupang\r\nProvinsi : Nusa Tenggara Timur (NTT)\r\nKode Pos : 85116\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6281239354219', '2021-09-18 07:30:33'),
+(55, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp30.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp185.100\r\n\r\nDikirim Ke : \r\nNama : Ikank ade kantari\r\nAlamat : Jln lintas sbw bima\r\nKecamatan : Asakota\r\nKota : Kota Bima\r\nProvinsi : Nusa Tenggara Barat (NTB)\r\nKode Pos : 84119\r\nKurir : SICEPAT\r\nService : REG\r\nMetode : COD\r\nNo. Handphone : +6282341471949', '2021-09-18 07:30:54'),
+(56, 6, 'Darmalis (Taiwan Cell - Padang Koto Gadang Kec. Palembayan Kab. Agam Prov. Sumatera Barat) \r\n082284085875 *COD JNT EZ 1 BOTOL 500ml* *(100+(48 -SUBSIDI10= 38Ribu) + Fee COD: 3Ribu Total: 141 Ribu* \r\n', '2021-09-18 07:30:54'),
+(57, 6, 'Tarmana (Kp. Dano RT 03 RW 01 Desa Cipada Kec. Cikalong Wetan Kab. Bandung Barat). \r\n+62 813-9857-4654 *COD JNE OKE 2 BOTOL 1L* *(340Ribu (harga pupuk) + 42ribu (ongkir) - 40Ribu (Subsidi ongkir)= 2ribu + COD Fee: 10ribuRibu) Total: 352Ribu* (RO)', '2021-09-18 07:31:14'),
+(58, 6, 'Cep Sukirman (Kp. Cibitung Desa Kertamukti RT/RW 1/2 Kec. Cikelet Kab. Garut Prov. Jawa Barat) \r\n082118469988 *COD JNE OKE 1 BOTOL 1L* *(170+(24 -SUBSIDI20= 4Ribu) + Fee COD: 5Ribu Total: 179 Ribu* \r\n', '2021-09-18 07:31:14'),
+(59, 6, 'Harga: Rp170.000\r\nOngkir: Rp12.000\r\nFree Ongkir : FREE ONGKIR SUBS.20\r\nFee COD: 5.000\r\nTotal: Rp175.000\r\n\r\nDikirim Ke : \r\nNama : Brama\r\nAlamat : DS Sukoharjo DSn plosorjo punthuk RT/RW 20/10 kec wilangan\r\nKecamatan : Bagor\r\nKota : Kab. Nganjuk\r\nKode Pos : 64461\r\nNo. Handphone : +6281316027435\r\n\r\n(COD JNE REG 1botol 1L)', '2021-09-18 07:31:41'),
+(60, 6, 'Pesanan anda:\r\nProduk: Pupuk Kilat 1 Liter\r\nJumlah : 1\r\nHarga: Rp170.000\r\nOngkir: Rp34.000\r\nCOD Fee : Rp5.100\r\nFree Ongkir : -Rp20.000\r\nTotal: Rp189.100\r\n\r\nDikirim Ke : \r\nNama : Nurmalik\r\nAlamat : Jln. A yani rt 05 b rw 02 no 56 kel. Angsau . Kec. Pelaihari kab. Tanah Laut KAL-SEL\r\nKecamatan : Pelaihari\r\nKota : Kab. Tanah Laut\r\nProvinsi : Kalimantan Selatan\r\nKode Pos : 70815\r\nKurir : JNE\r\nService : OKE\r\nMetode : COD\r\nNo. Handphone : +6285387122643', '2021-09-18 07:31:41'),
+(61, 9, 'Pesanan anda:\r\nProduk: Pupuk Kilat 500ml\r\nJumlah : 1\r\nHarga: Rp.100.000\r\nOngkir: Rp. 19000\r\nCOD Fee : 3000\r\nFree Ongkir : -10000\r\nTotal: Rp112.000\r\n\r\nDikirim Ke : \r\nNama : Amirudin\r\nAlamat : jl.SMPN3 Gabuswetan blok dangdur ds.Babakanjaya\r\nKecamatan : Gabus Wetan\r\nKota : Kab. Indramayu\r\nProvinsi : Jawabarat\r\nKode Pos : 45263\r\nKurir : J&T\r\nService : EZ\r\nMetode : COD\r\nNo. Handphone : +62 853-5125-2387', '2021-09-18 07:31:54');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_chat_user`
+--
+
+CREATE TABLE `tb_chat_user` (
+  `id_chat_user` int(9) NOT NULL,
+  `chat` text NOT NULL,
+  `dari` int(9) NOT NULL,
+  `ke` int(9) NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` tinyint(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_chat_user`
+--
+
+INSERT INTO `tb_chat_user` (`id_chat_user`, `chat`, `dari`, `ke`, `tanggal`, `status`) VALUES
+(1, 'hallo world', 1, 2, '2021-09-17 03:02:30', 0),
+(2, 'iya', 2, 1, '2021-09-17 03:02:30', 0),
+(3, 'coba', 1, 2, '2021-09-17 04:36:41', 0),
+(4, 'coba', 1, 2, '2021-09-17 04:39:09', 0),
+(5, 'coba', 1, 2, '2021-09-17 04:46:14', 0),
+(6, 'halo mas ren', 1, 5, '2021-09-17 04:46:38', 0),
+(27, 'user', 1, 2, '2021-09-17 09:55:02', 0),
+(28, 'pak tunggul', 1, 2, '2021-09-17 09:59:38', 0),
+(29, 'pak tungg', 1, 2, '2021-09-18 02:14:34', 0),
+(30, 'pak tungg', 1, 2, '2021-09-18 02:14:59', 0),
+(31, 'iya mel', 2, 1, '2021-09-18 02:15:12', 0),
+(32, 'iya mel', 2, 1, '2021-09-18 02:15:21', 0),
+(33, 'iya mel', 2, 1, '2021-09-18 02:18:39', 0),
+(34, 'gk', 1, 2, '2021-09-18 02:26:04', 0),
+(35, 'p', 1, 2, '2021-09-18 02:32:21', 0),
+(36, 'p', 1, 2, '2021-09-18 02:36:04', 0),
+(37, 'coba', 1, 2, '2021-09-18 02:37:00', 0),
+(38, 'tunggul', 1, 2, '2021-09-18 02:41:39', 0),
+(39, 'coba', 1, 2, '2021-09-18 02:59:51', 0),
+(40, 'tung', 1, 2, '2021-09-18 03:00:26', 0),
+(41, 'ping', 1, 2, '2021-09-18 03:05:16', 0),
+(42, 'meli', 1, 2, '2021-09-18 03:27:02', 0),
+(43, 'tunggul', 1, 2, '2021-09-18 03:32:29', 0),
+(44, 'pak tunggul', 1, 2, '2021-09-18 03:36:33', 0),
+(45, 'a', 1, 2, '2021-09-18 03:41:24', 0),
+(46, 'p', 1, 2, '2021-09-18 03:42:52', 0),
+(47, 'pak tung', 1, 2, '2021-09-18 03:50:21', 0),
+(48, 'iya mel', 2, 1, '2021-09-18 03:50:39', 0),
+(49, 'iya mel', 2, 1, '2021-09-18 03:50:51', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_detail_order`
 --
 
 CREATE TABLE `tb_detail_order` (
@@ -83,7 +290,7 @@ CREATE TABLE `tb_detail_order` (
   `id_rekening` int(3) DEFAULT NULL,
   `id_marketing` varchar(5) DEFAULT NULL,
   `nama_pelanggan` varchar(50) NOT NULL,
-  `no_hp` varchar(15) NOT NULL,
+  `no_hp` varchar(30) NOT NULL,
   `alamat` text NOT NULL,
   `provinsi` varchar(50) NOT NULL,
   `kecamatan` varchar(50) NOT NULL,
@@ -104,25 +311,50 @@ CREATE TABLE `tb_detail_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_detail_order`
+-- Dumping data untuk tabel `tb_detail_order`
 --
 
 INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `potongan`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `jenis_order`, `status_bayar`, `no_resi`, `status_baca`) VALUES
+('01-SO-AGI-IX-2021-449', 'C506', 6, NULL, 'M006', 'Dia', '087854083064', 'Ds.sambong rt17 rw04 kec. Gondang kab. Bojonegoro\r\nKecamatan : Gondang\r\nKota : Kab. Bojonegoro\r\nProvinsi : Jawa Timur\r\nKode Pos : 62172', 'JAWA TIMUR', 'Gondang', 'KAB. BOJONEGORO', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-09-01 05:45:13', 0, 1, 0, NULL, 0),
+('01-SO-AGI-IX-2021-450', 'C507', 6, NULL, 'M006', 'Khairil Anwar', '081375592047', 'Jalan Pertanian Kelurahan Sibuluan Raya\r\nKecamatan : Pandan\r\nKota : Kab. Tapanuli Tengah\r\nProvinsi : Sumatera Utara\r\nKode Pos : 22616', 'SUMATERA UTARA', 'Pandan', 'KAB. TAPANULI TENGAH', NULL, 1, 100000, 'JNE', 63000, NULL, 163000, '2021-09-01 05:47:51', 0, 1, 0, NULL, 0),
+('01-SO-AGI-IX-2021-451', 'C508', 6, NULL, 'M006', 'Muhammad Chairul', '085245596630', ' Desa sungai Melayu baru Rt 13 Rw 04 kec. Sungai Melayu rayak kab. Ketapang kalbar\r\nKecamatan : Sungai Melayu Rayak\r\nKota : Kab. Ketapang\r\nProvinsi : Kalimantan Barat\r\nKode Pos : 78874', 'KALIMANTAN BARAT', 'Sungai Melayu Rayak', 'KAB. KETAPANG', NULL, 1, 170000, 'JNE', 53000, NULL, 223000, '2021-09-01 05:49:48', 0, 1, 0, NULL, 0),
+('01-SO-AGI-IX-2021-452', 'C509', 4, NULL, 'M003', ' Ahmad Rifai', '6282358464178', 'Jl jonggon a desa margahayu kec. Loa kulu rt22 dusun pondok ulin\r\nKecamatan : Tenggarong\r\nKota : Kab. Kutai Kartanegara\r\nProvinsi : Kalimantan Timur\r\nKode Pos : 75511', 'KALIMANTAN TIMUR', 'Tenggarong', 'KAB. KUTAI KARTANEGARA', NULL, 1, 170000, 'JNE', 48000, NULL, 218000, '2021-09-01 08:02:44', 0, 1, 0, NULL, 0),
+('01-SO-AGI-IX-2021-453', 'C229', 4, NULL, 'M003', 'Untung Budiman', '6281334518050', ' Dorok, Manggis, Puncu RT 03 RW 02 Kediri', 'JAWA TIMUR', 'Puncu', 'KAB. KEDIRI', NULL, 2, 340000, 'JNE', 22000, NULL, 362000, '2021-09-01 08:03:13', 0, 1, 0, NULL, 0),
+('01-SO-AGI-IX-2021-454', 'C510', 5, NULL, 'M004', 'mohammad jenal ridawan', '082316404626', 'Kbuten:Cianjur\r\nKcmtn:Takokak\r\nDeasa Hegarmanah\r\nRT 001\r\nRw 011', 'JAWA BARAT', 'Takokak', 'KAB. CIANJUR', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-09-01 08:46:04', 0, 2, 0, NULL, 0),
+('01-SO-AGI-IX-2021-455', 'C518', 1, NULL, 'M001', 'Ibu Mila', '6285314122255', 'ds.susukan\r\nkp.babakan ciherang\r\nrt 05/08\r\nKec. Campaka\r\nKab. Cianjur', 'JAWA BARAT', 'Campaka', 'KAB. CIANJUR', NULL, 1, 170000, 'JNE', 24000, 0, 194000, '2021-09-01 09:28:09', 0, 2, 0, NULL, 1),
+('01-SO-AGI-IX-2021-488', 'C505', 9, NULL, 'M011', 'Aprianto', '082253636188', 'Jalan gang ponpes alfalah putri , dusun 1 ,rt 003 ,rw 001 desa jadimulyo sekampung lampungtimur', 'LAMPUNG', 'Sekampung', 'KAB. LAMPUNG TIMUR', NULL, 1, 170000, 'JNE', 45000, NULL, 215000, '2021-09-01 04:24:14', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-456', 'C514', 4, NULL, 'M003', 'Gunnes Sipahutar', '6282364176665', 'Dinas Pendidikan Kabupaten Tapanuli Utara\r\nKecamatan : Tarutung\r\nKota : Kab. Tapanuli Utara\r\nProvinsi : Sumatera Utara\r\nKode Pos : 22413', 'SUMATERA UTARA', 'Tarutung', 'KAB. TAPANULI UTARA', NULL, 1, 170000, 'JNE', 47000, NULL, 217000, '2021-09-02 06:46:18', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-457', 'C513', 4, NULL, 'M003', 'Fatimah', '6281110652523', 'Komplek Pertamina EP Jatibarang, Jalan Melati C6 Mundu Karangampel Indramayu\r\nKecamatan : Karangampel\r\nKota : Kab. Indramayu\r\nProvinsi : Jawa Barat\r\nKode Pos : 45283', 'JAWA BARAT', 'Karangampel', 'KAB. INDRAMAYU', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-09-02 06:46:57', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-458', 'C515', 9, NULL, 'M011', 'Murti Kasih', '085349938870', 'Jl.semangka,labanan makmur RT 09', 'KALIMANTAN TIMUR', 'Teluk Bayur', 'KAB. BERAU', NULL, 1, 170000, 'JNE', 50000, NULL, 220000, '2021-09-02 06:48:29', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-459', 'C516', 9, NULL, 'M011', 'Gede suwardike', '085380333963', 'Sadar seriwijaya dusun 8 RT 36/14 kecamatan bandar seribawono lampung timur Lampung', 'LAMPUNG', 'Bandar Sribhawono', 'KAB. LAMPUNG TIMUR', NULL, 1, 100000, 'JNE', 45000, NULL, 145000, '2021-09-02 06:50:54', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-460', 'C512', 4, NULL, 'M003', 'Suleman', '085278561996', 'Sungai manis jorong V111 tingkarang,nagari tarung tarung,kec rao,kab pasaman,prov sumbar,kode pos 26353', 'SUMATERA BARAT', 'Rao', 'KAB. PASAMAN', NULL, 1, 170000, 'J&T', 51000, NULL, 221000, '2021-09-02 06:52:45', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-461', 'C511', 4, NULL, 'M003', 'Ismanto', '6285723867251', ' KEC Sindangkasih Desa Budiharja kamp kalangari RT 05 RW 01\r\nKecamatan : Cikoneng\r\nKota : Kab. Ciamis\r\nProvinsi : Jawa Barat\r\nKode Pos : 46261', 'JAWA BARAT', 'Sindangkasih', 'KAB. CIAMIS', NULL, 1, 100000, 'JNE', 23000, NULL, 123000, '2021-09-02 06:54:02', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-462', 'C517', 9, NULL, 'M011', 'Judianto sormin', '081277557233', 'Desa lontung jae1.Dusun 3 Rambasiala. Kec:Garoga Kab.tapanuli utara', 'SUMATERA UTARA', 'Garoga', 'KAB. TAPANULI UTARA', NULL, 1, 170000, 'JNE', 53000, NULL, 223000, '2021-09-02 06:54:20', 0, 1, 0, NULL, 0),
+('02-SO-AGI-IX-2021-463', 'C150', 1, NULL, 'M002', 'Ibrahim', '6285396647531', 'jl g. Latimojong lr 103 no 23 SMP SMA Kristen yhs kec .Bontoala kel.gaddon makassar sulawesi selatan', 'SULAWESI SELATAN', 'Bontoala', 'KOTA MAKASSAR', NULL, 1, 170000, 'JNE', 36000, 0, 206000, '2021-09-02 09:20:44', 0, 2, 0, NULL, 1),
+('02-SO-AGI-IX-2021-464', 'C099', 1, NULL, 'M002', 'Bapak Ansori/Bapak Dona', '085231720928', 'jln raya situbondo-banyuwangi (depan rumah makan istana lele Banyuputih)\r\nDesa, RT/RW Kelurahan banyuputih, Rt 3 rw 2 kecamatan Banyuputih  Kabupaten Situbondo', 'JAWA TIMUR', 'Banyuputih', 'KAB. SITUBONDO', NULL, 20, 2700000, 'SiCepat', 116000, 0, 2816000, '2021-09-02 09:23:47', 1, 2, 0, NULL, 1),
 ('02-SO-AGI-VIII-2021-190', 'C189', 1, NULL, 'M003', 'Hamzah', '6282146435992', 'Dusun sagena desa kiantar RT 14 RW 8\nKecamatan : Poto Tano\nKota : Kab. Sumbawa Barat\nProvinsi : Nusa Tenggara Barat (NTB)\nKode Pos : 84454', 'NUSA TENGGARA BARAT', 'Poto Tano', 'KAB. SUMBAWA BARAT', NULL, 1, 170000, 'JNE', 30000, 0, 200000, '2021-08-02 14:02:38', 0, 1, 1, '003967', 1),
 ('02-SO-AGI-VIII-2021-191', 'C182', 4, NULL, 'M003', 'Achmad erfan  shodiq', '6285257675852', 'pondok lalang jengawah JEMBER\nKecamatan : Jenggawah\nKota : Kab. Jember\nProvinsi : Jawa Timur\nKode Pos : 68171', 'JAWA TIMUR', 'Jenggawah', 'KAB. JEMBER', NULL, 1, 170000, 'JNE', 6000, NULL, 176000, '2021-08-02 14:02:39', 0, 1, 1, '003816', 1),
 ('02-SO-AGI-VIII-2021-192', 'C183', 4, NULL, 'M003', 'I Made pebri arianto', '6281373817795', ' Rama dewa 3 RT/ RW 002/003\nKecamatan : Seputih Raman\nKota : Kab. Lampung Tengah\nProvinsi : Lampung\nKode Pos : 34155', 'LAMPUNG', 'Seputih Raman', 'KAB. LAMPUNG TENGAH', NULL, 1, 170000, 'JNE', 45000, NULL, 215000, '2021-08-02 14:07:16', 0, 1, 1, '003824', 1),
 ('02-SO-AGI-VIII-2021-193', 'C184', 4, NULL, 'M003', 'Cecep ishak', '6285693058486', ' jl masjid darussalam rt 03 rw 15 no 13 kelurahan kedaung kecamatan pamulang kota tangerang selatan 15415\nKecamatan : Pamulang\nKota : Kota Tangerang Selatan\nProvinsi : Banten\nKode Pos : 15415', 'BANTEN', 'Pamulang', 'KOTA TANGERANG SELATAN', NULL, 1, 100000, 'JNE', 15000, NULL, 115000, '2021-08-02 14:08:45', 0, 1, 1, '003881', 1),
 ('02-SO-AGI-VIII-2021-194', 'C185', 4, NULL, 'M003', 'Suyoto', '6282234141997', 'DS Besuki RT 06rw 02 kec besuki\nKecamatan : Besuki\nKota : Kab. Tulungagung\nProvinsi : Jawa Timur\nKode Pos : 66275', 'JAWA TIMUR', 'Besuki', 'KAB. TULUNGAGUNG', NULL, 1, 170000, 'JNE', 11000, NULL, 181000, '2021-08-02 14:09:41', 0, 1, 1, '3832', 1),
-('02-SO-AGI-VIII-2021-195', 'C186', 4, NULL, 'M003', 'Iwan', '6282148081869', 'jln sungai tendang. RT 4 RW 1 Arah pelabuhan tempenek. Di depan pabrik sinar mas.\nKecamatan=Kumai\nKabupaten=pangkalan Bun', 'KALIMANTAN TENGAH', 'Kumai', 'KAB. KOTAWARINGIN BARAT', NULL, 2, 340000, 'JNE', 110000, NULL, 450000, '2021-08-02 14:11:55', 0, 1, 1, '002921', 1),
+('02-SO-AGI-VIII-2021-195', 'C186', 4, NULL, 'M003', 'Iwan', '6282148081869', 'jln sungai tendang. RT 4 RW 1 Arah pelabuhan tempenek. Di depan pabrik sinar mas.\nKecamatan=Kumai\nKabupaten=pangkalan Bun', 'KALIMANTAN TENGAH', 'Kumai', 'KAB. KOTAWARINGIN BARAT', NULL, 2, 340000, 'JNE', 110000, NULL, 450000, '2021-08-02 14:11:55', 0, 2, 1, '002921', 1),
 ('02-SO-AGI-VIII-2021-196', 'C187', 4, NULL, 'M003', 'SARBAWA', '6281999729873', ' Jl.tukad badung IX no 18 renon, Denpasar, Bali\nKecamatan : Denpasar Selatan\nKota : Kota Denpasar\nKode Pos : 80225', 'BALI', 'Denpasar Selatan', 'KOTA DENPASAR', NULL, 3, 510000, 'JNE', 40000, NULL, 550000, '2021-08-02 14:13:40', 0, 1, 1, '003865', 1),
 ('02-SO-AGI-VIII-2021-197', 'C188', 4, NULL, 'M003', 'Imam mukholik', '6282334150210', 'brebek industri 7/7b\nKecamatan : Waru\nKota : Kab. Sidoarjo\nProvinsi : Jawa Timur\nKode Pos : 61256', 'JAWA TIMUR', 'Waru', 'KAB. SIDOARJO', NULL, 1, 170000, 'JNE', 7000, NULL, 177000, '2021-08-02 14:15:14', 0, 1, 1, '003899', 1),
 ('02-SO-AGI-VIII-2021-198', 'C190', 6, 1, 'M006', 'Dwi Giatno', '6282133737739', 'RT. 02 RW. 01 Desa Sonokidul\nKec. Kunduran\nKab. Blora\nJawa Tengah', 'JAWA TENGAH', 'Kunduran', 'KAB. BLORA', NULL, 1, 170000, 'JNE', 23000, NULL, 193000, '2021-08-02 14:18:05', 1, 1, 1, '160009', 1),
 ('02-SO-AGI-VIII-2021-199', 'C191', 6, 1, 'M006', 'Muhammad Imam S', '6287878990789', 'Taman Palem lestari blok CC2 no 68 RT 005/016 Kel Tegal alur\nKecamatan : Kalideres\nKota : Kota Jakarta Barat\nProvinsi : DKI Jakarta', 'DKI JAKARTA', 'Kalideres', 'KOTA ADM. JAKARTA BARAT', NULL, 1, 170000, 'SiCepat', 13500, NULL, 183500, '2021-08-02 14:19:58', 1, 1, 1, '150000', 1),
 ('02-SO-AGI-VIII-2021-200', 'C192', 6, NULL, 'M006', 'Nurani / slamet', '6282316574220', 'desa jayamulya blok cip Dasir rt 17 rw 06 kec kroya\nKecamatan : Kroya\nKota : Kab. Indramayu\nProvinsi : Jawa Barat\nKode Pos : 45265', 'JAWA BARAT', 'Kroya', 'KAB. INDRAMAYU', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-08-02 14:21:44', 0, 1, 1, '003840', 1),
 ('02-SO-AGI-VIII-2021-201', 'C193', 6, NULL, 'M006', 'Deki beruh', '6282276653950', 'Desa kute seri\nKecamatan : Bambel\nKota : Kab. Aceh Tenggara\nProvinsi : Nanggroe Aceh Darussalam (NAD)', 'ACEH', 'Bambel', 'KAB. ACEH TENGGARA', NULL, 1, 170000, 'JNE', 68000, NULL, 238000, '2021-08-02 14:23:29', 0, 1, 1, '003857', 1),
-('02-SO-AGI-VIII-2021-202', 'C194', 1, NULL, 'M004', 'Ramos Sihombing', '6285297008318', ' jl sidikalang- parongil no 70 desa berampu 22251 kec Berampu, Dairi Sumatra Utara ', 'SUMATERA UTARA', 'Berampu', 'KAB. DAIRI', NULL, 1, 170000, 'JNE', 48000, 0, 218000, '2021-08-02 14:27:30', 0, 1, 1, '003915', 1),
-('02-SO-AGI-VIII-2021-431', 'C450', 1, NULL, 'M004', 'Parmadi', '6282136594688', ' desa Soko bengkel las pandean\r\nKecamatan : bagelen\r\nKota : Kab. Purworejo', 'JAWA TENGAH', 'Bagelen', 'KAB. PURWOREJO', NULL, 1, 170000, 'JNE', 19000, 0, 189000, '2021-08-02 11:48:41', 0, 1, 1, '003782', 1),
+('02-SO-AGI-VIII-2021-202', 'C194', 1, NULL, 'M004', 'Ramos Sihombing', '6285297008318', ' jl sidikalang- parongil no 70 desa berampu 22251 kec Berampu, Dairi Sumatra Utara ', 'SUMATERA UTARA', 'Berampu', 'KAB. DAIRI', NULL, 1, 170000, 'JNE', 48000, 0, 218000, '2021-08-02 14:27:30', 0, 2, 1, '003915', 1),
+('02-SO-AGI-VIII-2021-431', 'C450', 1, NULL, 'M004', 'Parmadi', '6282136594688', ' desa Soko bengkel las pandean\r\nKecamatan : bagelen\r\nKota : Kab. Purworejo', 'JAWA TENGAH', 'Bagelen', 'KAB. PURWOREJO', NULL, 1, 170000, 'JNE', 19000, 0, 189000, '2021-08-02 11:48:41', 0, 2, 1, '003782', 1),
 ('02-SO-AGI-VIII-2021-432', 'C451', 1, NULL, 'M006', 'Wayan Sukadana', '6281916277222', 'Dsn. Bangbang Banjar Nyanglan Kaja Kec. Tembuku Kota Bangli Prov. BALI)', 'BALI', 'Tembuku', 'KAB. BANGLI', NULL, 1, 170000, 'JNE', 16000, 0, 186000, '2021-08-02 11:56:50', 0, 1, 1, '003790', 1),
+('03-SO-AGI-IX-2021-465', 'C519', 5, NULL, 'M004', 'ikbal', '085333457879', ' dusun rona masa\r\nDesa: parangina \r\nKecematan: SAPE\r\nKAB.WOHA NTB ', 'NUSA TENGGARA BARAT', 'Sape', 'KAB. BIMA', NULL, 1, 170000, 'JNE', 30000, NULL, 200000, '2021-09-03 07:50:31', 0, 2, 0, NULL, 0),
+('03-SO-AGI-IX-2021-466', 'C520', 5, NULL, 'M004', 'Tutik', '082338858560', 'Alasmalang motor\r\nRt3\r\nRW2\r\nDam umbul bondoyudo\r\nJln lintas timur\r\nKC . Sukodono \r\nKB .  Lumajang', 'JAWA TIMUR', 'Sukodono', 'KAB. LUMAJANG', NULL, 1, 170000, 'J&T', 13000, NULL, 183000, '2021-09-03 07:54:14', 0, 2, 0, NULL, 0),
+('03-SO-AGI-IX-2021-467', 'C521', 4, NULL, 'M003', 'Mangajak siagian', '6285306320192', 'desa hutagurgur II (Depan kantor kepala desa hutagurgur II )\r\nKecamatan : Silaen\r\nKota : Kab. Toba Samosir\r\nProvinsi : Sumatera Utara', 'SUMATERA UTARA', 'Silaen', 'KAB. TOBA SAMOSIR', NULL, 1, 170000, 'J&T', 58000, NULL, 228000, '2021-09-03 08:09:44', 0, 1, 0, NULL, 0),
+('03-SO-AGI-IX-2021-468', 'C522', 1, NULL, 'M009', 'Ridwan', '6285378156311', 'T. Angin rt 001 rw 001 dusun 4 kecamatan punggur', 'LAMPUNG', 'Punggur', 'KAB. LAMPUNG TENGAH', NULL, 1, 170000, 'J&T', 29000, 0, 199000, '2021-09-03 09:24:49', 0, 2, 0, NULL, 1),
+('03-SO-AGI-IX-2021-469', 'C523', 1, NULL, 'M008', 'Diyan riyanto', '6282225236765', 'Upt.kandan desa kandan kecmatan,kota besi. kab,kota warigin timur', 'KALIMANTAN TENGAH', 'Kota Besi', 'KAB. KOTAWARINGIN TIMUR', NULL, 20, 2700000, 'Indah Cargo', 0, 0, 2700000, '2021-09-03 09:35:43', 1, 2, 0, NULL, 1),
+('03-SO-AGI-IX-2021-470', 'C524', 1, NULL, 'M006', 'Susantie', '6287720324551', 'Amin Jaya RT 016 RW 004\r\nPangkalan Banteng\r\nKota : Kab. Kotawaringin Barat\r\nProvinsi : Kalimantan Tengah\r\nKode Pos : 74183', 'KALIMANTAN TENGAH', 'Pangkalan Banteng', 'KAB. KOTAWARINGIN BARAT', NULL, 1, 170000, 'JNE', 46000, 0, 216000, '2021-09-03 09:41:23', 0, 1, 0, NULL, 1),
+('03-SO-AGI-IX-2021-471', 'C525', 1, NULL, 'M009', 'Deka', '-', 'Jl. Kamboja timur no. 23 (Yuby shop) timur balai desa padomasan kec. Jombang kab. Jember 6', 'JAWA TIMUR', 'Jombang', 'KAB. JEMBER', NULL, 20, 2700000, 'Indah Cargo', 0, 0, 2700000, '2021-09-03 09:45:05', 1, 2, 0, '', 1),
+('03-SO-AGI-IX-2021-472', 'C527', 1, NULL, 'M005', 'Atang', '6281318688540', 'kampung bapung RT. 001/009.kel Ciakar, kec Cibeureum, Tasikmalaya, Jabar', 'JAWA BARAT', 'Cibeureum', 'KOTA TASIKMALAYA', NULL, 1, 170000, 'JNE', 22000, 0, 192000, '2021-09-03 09:47:39', 0, 2, 0, NULL, 1),
 ('03-SO-AGI-VIII-2021-203', 'C195', 9, NULL, 'M011', 'Gede Suparma', '6281918060189', 'Alamat : Jl yeh gangga.Ds Gubug.Br Gubug Belodan.ToSerba(Toko Serba).Ruko lt 3.warna krem\nKecamatan : Kediri\nKota : Kab. Tabanan\nProvinsi : Bali\nKode Pos : 82121', 'BALI', 'Kediri', 'KAB. TABANAN', NULL, 2, 340000, 'JNE', 32000, NULL, 372000, '2021-08-03 03:48:58', 0, 1, 1, '003972', 1),
 ('03-SO-AGI-VIII-2021-204', 'C196', 2, NULL, 'M001', 'M. Iman', '085719015879', 'Kp. ciporokoy rt03 rw 03 desa sinar jaya kec. Mandalawangi kab Pandeglang', 'BANTEN', 'Mandalawangi', 'KAB. PANDEGLANG', NULL, 1, 170000, 'JNE', 23000, NULL, 193000, '2021-08-03 05:08:12', 0, 2, 1, '003964', 1),
 ('03-SO-AGI-VIII-2021-205', 'C198', 9, NULL, 'M011', 'paiman', '087762026690', 'Jl. Kakatua RT 08 RW 04 Desa Glundengan', 'JAWA TIMUR', 'Wuluhan', 'KAB. JEMBER', NULL, 1, 170000, 'JNE', 6000, NULL, 176000, '2021-08-03 08:06:07', 0, 2, 1, '004004', 1),
@@ -133,29 +365,40 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('03-SO-AGI-VIII-2021-210', 'C202', 4, NULL, 'M003', 'IIN KHOLIDIN', '6282123264979', 'Kp Pule Rt03/04 Desa Karang Setia..\nKec Karang Bahagia, Kab. Bekasi Jawa Barat', 'JAWA BARAT', 'Karang Bahagia', 'KAB. BEKASI', NULL, 1, 170000, 'JNE', 10000, NULL, 180000, '2021-08-03 08:35:34', 0, 1, 1, '03998', 1),
 ('03-SO-AGI-VIII-2021-211', 'C203', 4, NULL, 'M003', 'I nyoman noko', '6285237891577', ' Desa pinggan kec kintani kab bangli pro bali\nKecamatan : Kintamani\nKota : Kab. Bangli\nProvinsi : Bali', 'BALI', 'Kintamani', 'KAB. BANGLI', NULL, 1, 170000, 'JNE', 16000, NULL, 186000, '2021-08-03 08:38:47', 0, 1, 1, '003980', 1),
 ('03-SO-AGI-VIII-2021-212', 'C205', 1, NULL, 'M004', 'Hendra S', '6282330620407', 'Ponjen kencong', 'JAWA TIMUR', 'Kencong', 'KAB. JEMBER', NULL, 1, 170000, 'Office', 0, 0, 170000, '2021-08-03 08:46:55', 2, 2, 1, NULL, 1),
-('03-SO-AGI-VIII-2021-213', 'C206', 1, NULL, 'M004', 'ARYA ( I NYOMAN YUDANA )', '6282144314068', 'Desa BENGKEL KEDIRI \nKecamatan : KEDIRI\nKota : TABANAN\nProvinsi : Bali', 'BALI', 'Kediri', 'KAB. TABANAN', NULL, 1, 170000, 'JNE', 6000, 0, 176000, '2021-08-03 08:48:17', 0, 1, 1, '003923', 1),
+('03-SO-AGI-VIII-2021-213', 'C206', 1, NULL, 'M004', 'ARYA ( I NYOMAN YUDANA )', '6282144314068', 'Desa BENGKEL KEDIRI \nKecamatan : KEDIRI\nKota : TABANAN\nProvinsi : Bali', 'BALI', 'Kediri', 'KAB. TABANAN', NULL, 1, 170000, 'JNE', 6000, 0, 176000, '2021-08-03 08:48:17', 0, 2, 1, '003923', 1),
 ('03-SO-AGI-VIII-2021-433', 'C389', 1, 2, 'M008', 'Lukman', '0853-8444-4259', 'RT 01, RW 01, Desa Muara Burnai 2, Lempuing Jaya, OKI, Sumsel', 'SUMATERA SELATAN', 'Lempuing Jaya', 'KAB. OGAN KOMERING ILIR', NULL, 60, 5900000, 'JNE', 200000, 0, 6100000, '2021-08-03 12:32:45', 1, 2, 1, '200002', 1),
+('04-SO-AGI-IX-2021-473', 'C530', 9, NULL, 'M011', 'Supar', '628124923777', 'Perumahan bulu indah blok e7 desa bulu', 'JAWA TIMUR', 'Kraksaan', 'KAB. PROBOLINGGO', NULL, 1, 170000, 'JNE', 8000, NULL, 178000, '2021-09-04 03:14:58', 0, 1, 0, NULL, 0),
+('04-SO-AGI-IX-2021-474', 'C531', 9, NULL, 'M011', 'Maman Rahman', '081809461404', 'Dusun Wage RT 12 RW 04, Desa Setianegara', 'JAWA BARAT', 'Cilimus', 'KAB. KUNINGAN', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-09-04 03:17:46', 0, 2, 0, NULL, 0),
+('04-SO-AGI-IX-2021-475', 'C532', 9, NULL, 'M011', 'Iswadi ', '083176087021', 'Gunung Dempo,  Dempo makmur, desa dempo rejo, Rt 7 Rw 3, gang simin', 'SUMATERA SELATAN', 'Pagar Alam Utara', 'KOTA PAGAR ALAM', NULL, 1, 100000, 'JNE', 46000, NULL, 146000, '2021-09-04 03:25:58', 1, 1, 0, NULL, 0),
+('04-SO-AGI-IX-2021-476', 'C533', 9, NULL, 'M011', 'Sutrisno', '085368163525', 'Jl. kasmowiyono RT.04 dusun 1 Desa Rejodadi', 'SUMATERA SELATAN', 'Sembawa', 'KAB. BANYUASIN', NULL, 1, 170000, 'JNE', 35000, NULL, 205000, '2021-09-04 03:43:33', 0, 1, 0, NULL, 0),
+('04-SO-AGI-IX-2021-477', 'C539', 6, NULL, 'M006', 'Sirbayan', '087849155950', ' Dusun Labang kara desa sukadana kecamatan bayan kabupaten Lombok Utara NTB', 'NUSA TENGGARA BARAT', 'Parado', 'KAB. BIMA', NULL, 1, 170000, 'JNE', 39000, NULL, 209000, '2021-09-04 03:55:00', 0, 1, 0, NULL, 0),
+('04-SO-AGI-IX-2021-478', 'C292', 4, NULL, 'M003', 'Ramlan Sihombing', '6285358417447', 'Desa Lobutua (dekat gereja HKBP LOBUTUA) kecamatan lintongnihuta\r\nKecamatan : Lintong Nihuta\r\nKota : Kab. Humbang Hasundutan\r\nProvinsi : Sumatera Utara\r\nKode Pos : 22475', 'SUMATERA UTARA', 'Lintong Nihuta', 'KAB. HUMBANG HASUNDUTAN', NULL, 5, 850000, 'JNE', 15000, NULL, 865000, '2021-09-04 05:53:20', 0, 1, 0, NULL, 0),
+('04-SO-AGI-IX-2021-479', 'C534', 4, NULL, 'M003', 'Ngatmanto', '6285648745688', ' Sidowayah RT 01 RW 02 kel.jenggrik kec Kedunggalar,kab Ngawi,prov Jawa timur.kode pos 63254\r\nKecamatan : Kedunggalar\r\nKota : Kab. Ngawi\r\nProvinsi : Jawa Timur\r\nKode Pos : 63254', 'JAWA TIMUR', 'Kedunggalar', 'KAB. NGAWI', NULL, 1, 170000, 'J&T', 16000, NULL, 186000, '2021-09-04 07:51:50', 0, 1, 0, NULL, 0),
+('04-SO-AGI-IX-2021-480', 'C535', 9, NULL, 'M011', 'Hj Adah', '085348296357', ' Jln.Handil mesjid Des.Tinggiran Tengah RT.02 No.19 Kec.mekarsari Kab.barito kuala', 'KALIMANTAN SELATAN', 'Mekarsari', 'KAB. BARITO KUALA', NULL, 3, 510000, 'JNE', 164000, NULL, 674000, '2021-09-04 08:10:49', 0, 1, 0, NULL, 0),
+('04-SO-AGI-IX-2021-481', 'C536', 1, NULL, 'M009', 'Bismillahhirohmanirrohim', '6285279022220', 'karang mulya RT 08 RW 03 Lempuing, kab OKI Sumatera Selatan', 'SUMATERA SELATAN', 'Lempuing', 'KAB. OGAN KOMERING ILIR', NULL, 1, 170000, 'J&T', 32000, 0, 202000, '2021-09-04 08:38:27', 0, 2, 0, NULL, 1),
+('04-SO-AGI-IX-2021-482', 'C538', 14, NULL, 'M007', 'Pur toye', '6281217985584', 'Sumber mulyo pesanggaran', 'JAWA TIMUR', 'Pesanggaran', 'KAB. BANYUWANGI', NULL, 3, 510000, 'Office', 0, NULL, 510000, '2021-09-04 08:47:56', 2, 2, 0, NULL, 0),
 ('04-SO-AGI-VIII-2021-214', 'C207', 6, NULL, 'M006', 'Zaenal Arifin', '081359675910', 'Jl Stroberry Rt 01 Rw 09 Jombangan Tertek Pare Kediri Nkp 64215\nKecamatan : Pare\nKota :  Kediri\nProvinsi : Jawa Timur', 'JAWA TIMUR', 'Pare', 'KAB. KEDIRI', NULL, 1, 170000, 'JNE', 8000, NULL, 178000, '2021-08-04 09:04:05', 0, 1, 1, '002396', 1),
 ('04-SO-AGI-VIII-2021-215', 'C017', 6, 2, 'M006', 'Winarsih', '085842331954', 'Depok Sibango RT/RW 04/04 ', 'JAWA TENGAH', 'Kandeman', 'KAB. BATANG', NULL, 2, 340000, 'JNE', 38000, NULL, 378000, '2021-08-04 09:04:56', 1, 1, 1, '002446', 1),
-('04-SO-AGI-VIII-2021-216', 'C208', 1, 2, 'M009', 'Anik Rianti', '6285736250061', 'Ds. Kedungrejo RT 15 RW 04 kec. Pilangkenceng kab. Madiun', 'JAWA TIMUR', 'Pilangkenceng', 'KAB. MADIUN', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-08-04 09:08:13', 1, 1, 1, '', 1),
+('04-SO-AGI-VIII-2021-216', 'C208', 1, 2, 'M009', 'Anik Rianti', '6285736250061', 'Ds. Kedungrejo RT 15 RW 04 kec. Pilangkenceng kab. Madiun', 'JAWA TIMUR', 'Pilangkenceng', 'KAB. MADIUN', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-08-04 09:08:13', 1, 2, 1, '', 1),
 ('05-SO-AGI-VIII-2021-217', 'C209', 4, 1, 'M003', 'Mulyadi, ', '6285717710726', ',kp Mandala Rt004/002 depan SMAN8 Gg durian No 34 kota Bogor kec.Bogor utara', 'JAWA BARAT', 'Bogor Utara', 'KOTA BOGOR', NULL, 1, 170000, 'JNE', 15000, NULL, 185000, '2021-08-05 08:58:47', 1, 1, 1, '', 1),
 ('05-SO-AGI-VIII-2021-218', 'C033', 1, NULL, 'M004', 'Darib', '085333008766', 'DS Banyuputih Lor DSN Pondoktelo RT/RW 28/8 Randuangung Lumajang', 'JAWA TIMUR', 'Randuagung', 'KAB. LUMAJANG', NULL, 2, 200000, 'Office', 0, 0, 200000, '2021-08-05 02:14:29', 2, 2, 1, NULL, 1),
 ('05-SO-AGI-VIII-2021-219', 'C210', 1, NULL, 'M004', 'Firdaus ', '6285339079211', 'Wuluhan Jember Jawa timur ', 'JAWA TIMUR', 'Wuluhan', 'KAB. JEMBER', NULL, 1, 100000, 'Office', 0, 0, 100000, '2021-08-05 02:16:11', 2, 2, 1, NULL, 1),
 ('05-SO-AGI-VIII-2021-220', 'C211', 6, NULL, 'M006', 'Festa riadi', '6285204554274', ' Fotocopy senyum kp kalompangan rt3 rw2 ds kendit\r\nKecamatan : Kendit\r\nKota : Kab. Situbondo\r\nProvinsi : Jawa Timur', 'JAWA TIMUR', 'Kendit', 'KAB. SITUBONDO', NULL, 1, 170000, 'JNE', 12000, NULL, 182000, '2021-08-05 02:17:52', 0, 1, 1, '004046', 1),
 ('05-SO-AGI-VIII-2021-434', 'C452', 1, NULL, 'M009', 'Eru', '8176389206', 'Toko cahaya baru 18 Blok M Square it Baseman Blok D no 126 kebayoran baru DKI', 'DKI JAKARTA', 'Kebayoran Baru', 'KOTA ADM. JAKARTA SELATAN', NULL, 1, 170000, 'J&T', 15800, 0, 185800, '2021-08-05 12:40:22', 0, 2, 1, '-', 1),
+('06-SO-AGI-IX-2021-483', 'C542', 14, NULL, 'M007', 'Mas irul', '6289520230127', 'Genteng wetan', 'JAWA TIMUR', 'Genteng', 'KAB. BANYUWANGI', NULL, 4, 680000, 'Office', 0, NULL, 680000, '2021-09-06 00:01:11', 2, 2, 0, NULL, 0),
 ('06-SO-AGI-VIII-2021-221', 'C212', 6, NULL, 'M006', 'Suyono', '089524073899', 'Dsn. Pendem RT 02 RW 02 Desa Carat Kec. Kauman Kab. Ponorogo', 'JAWA TIMUR', 'Kauman', 'KAB. PONOROGO', NULL, 1, 170000, 'JNE', 11000, NULL, 181000, '2021-08-06 03:58:39', 0, 1, 1, '003832', 1),
 ('06-SO-AGI-VIII-2021-222', 'C213', 6, NULL, 'M006', 'Mohammad Najib', '085238331010', 'Celukanbawang ( PT. Artha Labora ) kec, Gerokgak kab Buleleng Singaraja Bali', 'BALI', 'Gerokgak', 'KAB. BULELENG', NULL, 1, 100000, 'JNE', 16000, NULL, 116000, '2021-08-06 04:01:01', 0, 1, 1, '004079', 1),
 ('06-SO-AGI-VIII-2021-223', 'C214', 5, NULL, 'M004', 'PAK CARMAN', '085384944855', 'Dusun 4 desa suka jaya', 'SUMATERA SELATAN', 'Sumber Harta', 'KAB. MUSI RAWAS', NULL, 1, 170000, 'JNE', 47000, NULL, 217000, '2021-08-06 04:13:43', 0, 2, 1, '004061', 1),
 ('06-SO-AGI-VIII-2021-224', 'C215', 5, NULL, 'M004', 'PAK DARIB', '85333008766', 'Ds Banyuputih lor dsn pondok telo RT 28/ RW 08', 'JAWA TIMUR', 'Randuagung', 'KAB. LUMAJANG', NULL, 1, 110000, 'JNE', 11000, NULL, 121000, '2021-08-06 08:26:40', 0, 2, 1, '004061', 1),
 ('06-SO-AGI-VIII-2021-225', 'C216', 4, NULL, 'M003', 'Dr. Abdul Roni, M.Pd.I.,', '6282175740894', 'Dusun 2 Desa Ulak Teberau\nKecamatan : Lawang Wetan\nKota : Kab. Musi Banyuasin\nProvinsi : Sumatera Selatan\nKode Pos : 30752', 'SUMATERA SELATAN', 'Lawang Wetan', 'KAB. MUSI BANYUASIN', NULL, 1, 100000, 'JNE', 47000, NULL, 147000, '2021-08-06 08:39:41', 0, 1, 1, '004053', 1),
-('06-SO-AGI-VIII-2021-435', 'C453', 1, NULL, 'M009', 'Rifki', '-', 'Lapangan Bengabing KAb serdang Begadai', 'SUMATERA UTARA', 'Pegajahan', 'KAB. SERDANG BEDAGAI', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-08-06 12:45:51', 0, 1, 1, '-', 1),
+('06-SO-AGI-VIII-2021-435', 'C453', 1, NULL, 'M009', 'Rifki', '-', 'Lapangan Bengabing KAb serdang Begadai', 'SUMATERA UTARA', 'Pegajahan', 'KAB. SERDANG BEDAGAI', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-08-06 12:45:51', 0, 2, 1, '-', 1),
 ('07-SO-AGI-VIII-2021-226', 'C217', 5, NULL, 'M004', 'SONGKIK SUDARSONO', '087834555841', 's kedung dandang rt 03/ rw 02', 'JAWA TIMUR', 'Muncar', 'KAB. BANYUWANGI', NULL, 2, 340000, 'JNE', 12000, NULL, 352000, '2021-08-07 03:52:03', 0, 2, 1, '004194', 1),
 ('07-SO-AGI-VIII-2021-227', 'C218', 6, NULL, 'M006', 'Syaiful Huda', '085366053802', 'desa sarimulyo  kec sukaraja  kab seluma  prop bengkulu', 'BENGKULU', 'Sukaraja', 'KAB. SELUMA', NULL, 1, 170000, 'JNE', 54000, NULL, 224000, '2021-08-07 04:14:07', 0, 1, 1, '004111', 1),
 ('07-SO-AGI-VIII-2021-228', 'C219', 6, NULL, 'M006', 'Siti Musyayadah', '082332619677', 'Desa Slungkep rt/rw 02 /03  Komplek Masjid Baitul Ghofur Kecamatan : Kayen Kota : Kab. Pati Provinsi : Jawa Tengah', 'JAWA TENGAH', 'Kayen', 'KAB. PATI', NULL, 1, 170000, 'JNE', 23000, NULL, 193000, '2021-08-07 04:16:04', 0, 1, 1, '004129', 1),
 ('07-SO-AGI-VIII-2021-229', 'C220', 6, 1, 'M006', 'Suprawitono', '6282322222226', 'Dsn. 1 Desa Pelempang Kec. Kelekar Kab. Muara Enim Prov. Sumatera Selatan', 'SUMATERA SELATAN', 'Kelekar', 'KAB. MUARA ENIM', NULL, 1, 170000, 'JNE', 47000, NULL, 217000, '2021-08-07 07:10:27', 1, 1, 1, '140001', 1),
 ('07-SO-AGI-VIII-2021-230', 'C221', 9, NULL, 'M011', 'Maskur', '085338997710', 'Kelurahan sadia RT. 09 RW. 02 ', 'NUSA TENGGARA BARAT', 'Mpunda', 'KOTA BIMA', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-08-07 07:13:03', 0, 1, 1, '004152', 1),
 ('07-SO-AGI-VIII-2021-231', 'C222', 1, NULL, 'M005', ' I Nengah Sedana', '6285368366002', 'Dharma Agung Mataram Kec.Seputih Mataram\nKab. Lampung Tengah LAMPUNG', 'LAMPUNG', 'Seputih Mataram', 'KAB. LAMPUNG TENGAH', NULL, 1, 170000, 'JNE', 50000, 0, 220000, '2021-08-07 07:14:08', 0, 2, 1, '004145', 1),
-('07-SO-AGI-VIII-2021-232', 'C223', 1, NULL, 'M009', 'sofia', '6285230786842', 'Jalan H Yuns RT/RW 002/026 Dusun Karanggenting desa kasiyan Timur Kab Jember. PUGER Jawa Timur', 'JAWA TIMUR', 'Puger', 'KAB. JEMBER', NULL, 1, 170000, 'J&T', 0, 0, 170000, '2021-08-07 07:17:40', 0, 1, 1, '0008598', 1),
+('07-SO-AGI-VIII-2021-232', 'C223', 1, NULL, 'M009', 'sofia', '6285230786842', 'Jalan H Yuns RT/RW 002/026 Dusun Karanggenting desa kasiyan Timur Kab Jember. PUGER Jawa Timur', 'JAWA TIMUR', 'Puger', 'KAB. JEMBER', NULL, 1, 170000, 'J&T', 0, 0, 170000, '2021-08-07 07:17:40', 0, 2, 1, '0008598', 1),
 ('07-SO-AGI-VIII-2021-233', 'C224', 4, NULL, 'M003', 'Sunarji', '6285244410005', 'Kelurahan sidomekar RT 01 RW 01\nKEC. gedung aji baru.\nKAB. TULANG BAWANG LAMPUNG.', 'LAMPUNG', 'Gedung Aji Baru', 'KAB. TULANG BAWANG', NULL, 3, 510000, 'JNE', 100000, NULL, 610000, '2021-08-07 07:26:03', 0, 1, 1, '004103', 1),
 ('07-SO-AGI-VIII-2021-234', 'C225', 4, NULL, 'M003', 'Chrisna Panjaitan', '6282351241462', 'Bangun Jaya, Dk 4 Simpang 1 Mekar Jaya Kecamatan : Tambusai Utara Kota : Kab. Rokan Hulu Provinsi : Riau Kode Pos : 28558', 'RIAU', 'Tambusai Utara', 'KAB. ROKAN HULU', NULL, 1, 170000, 'JNE', 56000, NULL, 226000, '2021-08-07 07:27:33', 0, 1, 1, '004186', 1),
 ('09-SO-AGI-VIII-2021-235', 'C226', 9, NULL, 'M011', 'Indra Kurniawan', '085263432343', 'Jalan massjid muflihin talang. Rt 01 rw 03 kelurahan talang', 'SUMATERA BARAT', 'Payakumbuh Barat', 'KOTA PAYAKUMBUH', NULL, 1, 170000, 'J&T', 44000, NULL, 214000, '2021-08-09 03:10:53', 0, 1, 1, '004424', 1),
@@ -193,7 +436,7 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('12-SO-AGI-VIII-2021-266', 'C128', 4, NULL, 'M003', 'Cholifah', '6281230361337', 'Mbodang kyu gedang RT 05 RW 10\nKecamatan : Padang\nKota : Kab. Lumajang\nProvinsi : Jawa Timur\nKode Pos : 67352', 'JAWA TIMUR', 'Padang', 'KAB. LUMAJANG', NULL, 1, 170000, 'JNE', 11000, NULL, 181000, '2021-08-12 07:08:51', 0, 1, 1, '004525', 1),
 ('12-SO-AGI-VIII-2021-267', 'C257', 4, NULL, 'M003', 'Eko Budi Rahayu', '6285878271029', 'ngelo karangrowo RT 5/RW 4\nKec.undaan,,kab.kudus,, Jateng', 'JAWA TENGAH', 'Undaan', 'KAB. KUDUS', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-08-12 07:09:18', 0, 1, 1, '004491', 1),
 ('12-SO-AGI-VIII-2021-268', 'C256', 4, NULL, 'M003', 'Nurdin', '085337298733', 'desa usar kec,plmpang kab,bima,rt 02 rw 04.\nKecamatan : Plampang\nKota : Kab. Sumbawa\nProvinsi : Nusa Tenggara Barat (NTB)\nKode Pos : 84383', 'NUSA TENGGARA BARAT', 'Plampang', 'KAB. SUMBAWA', NULL, 1, 170000, 'JNE', 30000, NULL, 200000, '2021-08-12 07:10:22', 0, 1, 1, '004483', 1),
-('12-SO-AGI-VIII-2021-269', 'C255', 4, NULL, 'M003', 'Diki', '085366387620', 'blok d sitiung 2, Depan puskesmas Kec koto salak Kab dharmasrayaProv sumatra barat', 'SUMATERA BARAT', 'Koto Salak', 'KAB. DHARMASRAYA', NULL, 1, 170000, 'JNE', 56000, NULL, 226000, '2021-08-12 07:12:03', 0, 2, 1, '004624', 1),
+('12-SO-AGI-VIII-2021-269', 'C255', 4, NULL, 'M003', 'Diki', '085366387620', 'blok d sitiung 2, Depan puskesmas Kec koto salak Kab dharmasrayaProv sumatra barat', 'SUMATERA BARAT', 'Koto Salak', 'KAB. DHARMASRAYA', NULL, 1, 170000, 'JNE', 56000, NULL, 226000, '2021-08-12 07:12:03', 0, 1, 1, '004624', 1),
 ('12-SO-AGI-VIII-2021-270', 'C223', 1, NULL, 'M009', 'sofia', '6285230786842', 'Jalan H Yuns RT/RW 002/026 Dusun Karanggenting desa kasiyan Timur Kab Jember. PUGER Jawa Timur', 'JAWA TIMUR', 'Puger', 'KAB. JEMBER', NULL, 1, 170000, 'J&T', 0, 0, 170000, '2021-08-12 07:17:29', 0, 2, 1, '009911', 1),
 ('12-SO-AGI-VIII-2021-271', 'C260', 1, NULL, 'M003', 'Hamzah', '6281268009922', 'Jl.sukaramai balairaja rt/rw 004/001, PINGGIR,\nKAB. BENGKALIS, RIAU', 'RIAU', 'Pinggir', 'KAB. BENGKALIS', NULL, 1, 170000, 'J&T', 63000, 0, 233000, '2021-08-12 07:27:39', 0, 1, 1, '005072', 1),
 ('12-SO-AGI-VIII-2021-272', 'C261', 6, NULL, 'M006', 'Muhammad Alif', '081267839661', 'SMAn5 Payakumbuh jalan padat karya.tangah Padang indah kel.balai panjang.\nKecamatan : Payakumbuh Selatan\nKota : Kota Payakumbuh\nProvinsi : Sumatera Barat', 'SUMATERA BARAT', 'Payakumbuh Selatan', 'KOTA PAYAKUMBUH', NULL, 1, 170000, 'JNE', 50000, NULL, 220000, '2021-08-12 07:30:43', 0, 1, 1, '004541', 1),
@@ -214,12 +457,12 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('12-SO-AGI-VIII-2021-288', 'C276', 6, NULL, 'M006', 'Tutut Ismadianto', '081339464670', 'Dsn. Sumberjo RT/RW 001/001 Desa Pranggang -Barat Masjid YAMP Kec. Ploso Kab. Jombang Prov. Jawa Timur', 'JAWA TIMUR', 'Ploso', 'KAB. JOMBANG', NULL, 2, 340000, 'JNE', 22000, NULL, 362000, '2021-08-12 10:15:38', 0, 1, 1, '004715', 1),
 ('12-SO-AGI-VIII-2021-289', 'C223', 1, NULL, 'M009', 'sofia', '6285230786842', 'Jalan H Yuns RT/RW 002/026 Dusun Karanggenting desa kasiyan Timur Kab Jember. PUGER Jawa Timur', 'JAWA TIMUR', 'Puger', 'KAB. JEMBER', NULL, 1, 170000, 'SiCepat', 0, 0, 170000, '2021-08-12 10:14:50', 0, 2, 1, '002956', 1),
 ('12-SO-AGI-VIII-2021-438', 'C456', 1, NULL, 'M007', 'Pak Yudi', '-', 'Banyuwangi', 'JAWA TIMUR', 'Pesanggaran', 'KAB. BANYUWANGI', NULL, 100, 12000000, 'JNE', 0, 0, 12000000, '2021-08-12 12:58:09', 2, 2, 1, NULL, 1),
-('12-SO-AGI-VIII-2021-439', 'C457', 1, NULL, 'M009', 'Ujang', '-', 'Jakarta', 'DKI JAKARTA', 'Kembangan', 'KOTA ADM. JAKARTA BARAT', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-08-12 13:07:44', 0, 1, 1, '-', 1),
+('12-SO-AGI-VIII-2021-439', 'C457', 1, NULL, 'M009', 'Ujang', '-', 'Jakarta', 'DKI JAKARTA', 'Kembangan', 'KOTA ADM. JAKARTA BARAT', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-08-12 13:07:44', 0, 2, 1, '-', 1),
 ('12-SO-AGI-VIII-2021-440', 'C458', 1, 2, 'M008', 'Darsani', '6282230292495', 'Desa Gendang Timburu kec sungai durian kab Kotabaru Kalimantan Selatan', 'KALIMANTAN SELATAN', 'Sungaidurian', 'KAB. KOTABARU', NULL, 20, 2700000, 'JNE', 0, 0, 2700000, '2021-08-12 13:12:05', 1, 1, 1, '-', 1),
 ('12-SO-AGI-VIII-2021-441', 'C373', 1, NULL, 'M009', 'Eko', '0818-0330-5026', 'Dusun Sigit RT. 002/001 Kel. Kedungsigit Kec. Karangan Kab. Trenggalek', 'JAWA TIMUR', 'Karangan', 'KAB. TRENGGALEK', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-08-12 13:16:50', 0, 2, 1, '-', 1),
 ('12-SO-AGI-VIII-2021-442', 'C460', 1, NULL, 'M004', 'Muhammad fawaid', '-', 'Jember', 'JAWA TIMUR', 'Arjasa', 'KAB. JEMBER', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-08-12 13:19:27', 2, 2, 1, NULL, 1),
 ('13-SO-AGI-VIII-2021-289', 'C277', 5, NULL, 'M004', 'muhtarom', '08777934319', 'Dusun bendungan desa sukaraja', 'LAMPUNG', 'Palas', 'KAB. LAMPUNG SELATAN', NULL, 1, 170000, 'JNE', 45000, NULL, 215000, '2021-08-13 03:21:03', 0, 2, 1, '004731', 1),
-('13-SO-AGI-VIII-2021-290', 'C002', 1, NULL, 'M010', 'Ray Bagaskara', '081232167441', 'Perum GPI Jember', 'JAWA TIMUR', 'Sumbersari', 'KAB. JEMBER', NULL, 22, 1600000, 'JNE', 0, 0, 1600000, '2021-08-13 03:25:32', 2, 1, 1, NULL, 1),
+('13-SO-AGI-VIII-2021-290', 'C002', 1, NULL, 'M010', 'Ray Bagaskara', '081232167441', 'Perum GPI Jember', 'JAWA TIMUR', 'Sumbersari', 'KAB. JEMBER', NULL, 22, 1600000, 'JNE', 0, 0, 1600000, '2021-08-13 03:25:32', 2, 2, 1, NULL, 1),
 ('13-SO-AGI-VIII-2021-291', 'C278', 5, NULL, 'M004', 'masrur', '087700285431', 'Dk.krajan rt 02/04\nDs.plantaran', 'JAWA TENGAH', 'Kaliwungu Selatan', 'KAB. KENDAL', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-08-13 06:27:34', 0, 2, 1, '004756', 1),
 ('13-SO-AGI-VIII-2021-292', 'C279', 4, NULL, 'M003', 'Sudiyono', '085225302648', 'Gunungsari pulingan rt 3 rw 2\nKecamatan : Tlogowungu\nKota : Kab. Pati\nProvinsi : Jawa Tengah\nKode Pos : 59161', 'JAWA TENGAH', 'Tlogowungu', 'KAB. PATI', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-08-13 07:42:39', 0, 1, 1, '004749', 1),
 ('13-SO-AGI-VIII-2021-293', 'C280', 4, 1, 'M003', 'Yudi', '6281380022100', ' SMK Yapermas   Jln Anyer no. 7  Menteng\nKecamatan : Menteng\nKota : Kota Jakarta Pusat\nProvinsi : DKI Jakarta\nKode Pos : 10330', 'DKI JAKARTA', 'Menteng', 'KOTA ADM. JAKARTA PUSAT', NULL, 1, 170000, 'SiCepat', 13500, NULL, 183500, '2021-08-13 07:43:46', 1, 1, 1, '5416', 1),
@@ -234,7 +477,8 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('14-SO-AGI-VIII-2021-301', 'C286', 1, NULL, 'M003', 'agus makruf', '62895397666569', ' dukuh karang rt 03 rw /02 \nDesa: prajegan\nKec: sukorejo\nKab: ponorogo', 'JAWA TIMUR', 'Sukorejo', 'KAB. PONOROGO', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-08-14 07:15:55', 0, 1, 1, '004806', 1),
 ('14-SO-AGI-VIII-2021-302', 'C287', 1, NULL, 'M011', 'Imam', '6287710250553', ' Jl blok Nongko sidonganti kraton kencong Jember jatim\nKecamatan : Kencong\nKota : Kab. Jember\nProvinsi : Jawa Timur\nKode Pos : 68167', 'JAWA TIMUR', 'Kencong', 'KAB. JEMBER', NULL, 1, 170000, 'JNE', 6000, 0, 176000, '2021-08-14 07:18:55', 0, 1, 1, '004814', 1),
 ('14-SO-AGI-VIII-2021-303', 'C288', 1, NULL, 'M011', 'Abdul Wafi (bpk. Iqul)', '6282331055158', 'Kp.Klowangan RT/RW 02/02 Ds. Mlandingan Wetan Kec. Bungatan Situbondo\nKecamatan : Bungatan\nKota : Kab. Situbondo\nProvinsi : Jawa Timur\nKode Pos : 68358', 'JAWA TIMUR', 'Bungatan', 'KAB. SITUBONDO', NULL, 1, 170000, 'J&T', 8000, 0, 178000, '2021-08-14 07:20:54', 0, 1, 1, '1096281936', 1),
-('14-SO-AGI-VIII-2021-304', 'C289', 1, NULL, 'M003', 'Khoirul umam', '6281233417243', 'Nanggalan rt01 rw 04 Kec Diwek kab  jombang Jawa Timur', 'JAWA TIMUR', 'Diwek', 'KAB. JOMBANG', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-08-14 07:22:30', 0, 1, 1, '004830', 1),
+('14-SO-AGI-VIII-2021-304', 'C289', 1, NULL, 'M003', 'Khoirul umam', '6281233417243', 'Nanggalan rt01 rw 04 Kec Diwek kab  jombang Jawa Timur', 'JAWA TIMUR', 'Diwek', 'KAB. JOMBANG', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-08-14 07:22:30', 0, 1, 1, '004830', 1);
+INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `potongan`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `jenis_order`, `status_bayar`, `no_resi`, `status_baca`) VALUES
 ('15-SO-AGI-VII-2021-003', 'C004', 6, NULL, 'M006', ' Agus widodo', '082334206571', 'Desa Sumber Asri RT. 01/RW. 02', 'JAWA TIMUR', 'Songgon', 'KAB. BANYUWANGI', NULL, 1, 170000, 'JNE', 6000, NULL, 176000, '2021-07-15 07:24:08', 0, 1, 1, '002362', 1),
 ('15-SO-AGI-VII-2021-004', 'C005', 3, NULL, 'M002', 'Toko Zaenal rina', '6289525671516', 'Desa tangkis RT  02 /01 Kecamatan Guntur Kab. Demak Kode Pos 59565', 'JAWA TENGAH', 'Guntur', 'KAB. DEMAK', NULL, 1, 170000, 'JNE', 23000, NULL, 193000, '2021-07-15 07:24:09', 0, 1, 1, '002396', 1),
 ('15-SO-AGI-VII-2021-005', 'C006', 6, NULL, 'M006', 'Nyoman Budiasa', '081353264133', 'Jalan pramuka no 1 ', 'BALI', 'Buleleng', 'KAB. BULELENG', NULL, 1, 170000, 'JNE', 18000, NULL, 188000, '2021-07-15 07:24:10', 0, 1, 1, '002370', 1),
@@ -258,7 +502,7 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('16-SO-AGI-VII-2021-023', 'C023', 3, NULL, 'M002', 'Ferdinan silalahi', '082166742233', 'Jl parapat km4,5 p siantar Kecamatan Siantar Marimbun Kota Pematang Siantar Kode Pos 21128', 'SUMATERA UTARA', 'Siantar Marimbun', 'KOTA PEMATANGSIANTAR', NULL, 1, 170000, 'JNE', 51000, NULL, 221000, '2021-07-16 07:24:27', 0, 1, 1, '002487', 1),
 ('16-SO-AGI-VII-2021-024', 'C025', 3, 2, 'M002', 'Achmad salim', '082187605116', 'Sambung gg11 rt06 rw01 undaan kudus Kecamatan Undaan Kab. Kudus Kode Pos 59372', 'JAWA TENGAH', 'Undaan', 'KAB. KUDUS', NULL, 1, 170000, 'JNE', 23000, NULL, 193000, '2021-07-16 07:24:28', 1, 1, 1, '090007', 1),
 ('16-SO-AGI-VII-2021-025', 'C026', 3, NULL, 'M002', 'Erwin', '082359458390', 'Pelampang sepayung Kecamatan Empang Kab. Sumbawa Kode Pos 84384', 'NUSA TENGGARA BARAT', 'Empang', 'KAB. SUMBAWA', NULL, 1, 170000, 'SiCepat', 37000, NULL, 207000, '2021-07-16 07:24:29', 0, 1, 1, '9148', 1),
-('16-SO-AGI-VII-2021-026', 'C024', 1, NULL, 'M009', 'mersiamanda', '085271871209', 'Jl Suka karya, perum katya Abady Blok D.9 Kota pekanbaru', 'RIAU', 'Pekanbaru Kota', 'KOTA PEKANBARU', NULL, 1, 170000, 'J&T', 0, 0, 170000, '2021-07-16 07:24:30', 0, 1, 1, '5277', 1),
+('16-SO-AGI-VII-2021-026', 'C024', 1, NULL, 'M009', 'mersiamanda', '085271871209', 'Jl Suka karya, perum katya Abady Blok D.9 Kota pekanbaru', 'RIAU', 'Pekanbaru Kota', 'KOTA PEKANBARU', NULL, 1, 170000, 'J&T', 0, 0, 170000, '2021-07-16 07:24:30', 0, 2, 1, '5277', 1),
 ('16-SO-AGI-VII-2021-027', 'C027', 6, NULL, 'M006', 'Tri Haris H.', '085702025150', 'Jl. Salban No. 4 RT/RW 02/01 Dexa Sidamulya', 'JAWA TENGAH', 'Tonjong', 'KAB. BREBES', NULL, 1, 170000, 'SiCepat', 26000, NULL, 196000, '2021-07-16 07:24:31', 0, 1, 1, '9064', 1),
 ('16-SO-AGI-VII-2021-028', 'C028', 3, NULL, 'M002', 'Sutopo', '081335723487', 'Rt 06 Garit Sambirejo kecamatan Sambirejo Sragen Kecamatan Sambirejo Kab. Sragen Kode Pos 57293', 'JAWA TENGAH', 'Sambirejo', 'KAB. SRAGEN', NULL, 1, 170000, 'JNE', 23000, NULL, 193000, '2021-07-16 07:24:32', 0, 1, 1, '002412', 1),
 ('16-SO-AGI-VIII-2021-305', 'C099', 1, 1, 'M002', 'Bapak Ansori/Bapak Dona', '085231720928', 'jln raya situbondo-banyuwangi (depan rumah makan istana lele Banyuputih)\nDesa, RT/RW Kelurahan banyuputih, Rt 3 rw 2 kecamatan Banyuputih  Kabupaten Situbondo', 'JAWA TIMUR', 'Banyuputih', 'KAB. SITUBONDO', NULL, 20, 2700000, 'SiCepat', 116000, 0, 2816000, '2021-08-16 06:41:17', 1, 2, 1, '008123', 1),
@@ -268,18 +512,17 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('16-SO-AGI-VIII-2021-309', 'C291', 4, NULL, 'M003', 'Supriyadi ', '6282234647714', 'dsn. Karangdowo rt 03 rw 02 Ds Leran Wétan Kec Palang Kab Tuban Jawa Timur', 'JAWA TIMUR', 'Palang', 'KAB. TUBAN', NULL, 2, 340000, 'JNE', 22000, NULL, 362000, '2021-08-16 07:08:04', 0, 1, 1, '004905', 1),
 ('16-SO-AGI-VIII-2021-310', 'C290', 4, NULL, 'M003', 'Yelda Rugesty', '6281285932536', 'Komplek marinir blok AH 2 no 7 RT 01 RW 06 rangkapan jaya baru, Pancoran mas, Depok, Jabar', 'JAWA BARAT', 'Pancoran Mas', 'KOTA DEPOK', NULL, 1, 170000, 'JNE', 15000, NULL, 185000, '2021-08-16 07:10:16', 0, 1, 1, '004897', 1),
 ('16-SO-AGI-VIII-2021-311', 'C295', 1, NULL, 'M009', 'Fitri Dwi Astuti', '6285861212839', 'Kampung Pasir bedil rt/rw 05/04 desa tunggilis, kalipucang, kab pangandaran, jawa barat', 'JAWA BARAT', 'Kalipucang', 'KAB. PANGANDARAN', NULL, 1, 170000, 'J&T', 29000, 0, 199000, '2021-08-16 08:16:13', 0, 2, 1, '000347', 1),
-('16-SO-AGI-VIII-2021-312', 'C296', 1, NULL, 'M003', 'Iksan', '6285770009094', 'Dsn sepreh DS Legundi RT 02 RW 04 kec Karangjati kab Ngawi', 'JAWA TIMUR', 'Karangjati', 'KAB. NGAWI', NULL, 2, 340000, 'JNE', 22000, 0, 362000, '2021-08-16 08:19:38', 0, 1, 1, '004855', 1),
+('16-SO-AGI-VIII-2021-312', 'C296', 1, NULL, 'M003', 'Iksan', '6285770009094', 'Dsn sepreh DS Legundi RT 02 RW 04 kec Karangjati kab Ngawi', 'JAWA TIMUR', 'Karangjati', 'KAB. NGAWI', NULL, 2, 340000, 'JNE', 22000, 0, 362000, '2021-08-16 08:19:38', 0, 2, 1, '004855', 1),
 ('16-SO-AGI-VIII-2021-313', 'C297', 1, NULL, 'M004', 'azwar anas', '6282340773825', ' lambu \nKec. :lambu\nKbp: Bima\nProv: Ntb', 'NUSA TENGGARA BARAT', 'Lambu', 'KAB. BIMA', NULL, 1, 170000, 'JNE', 33000, 0, 203000, '2021-08-16 08:57:11', 0, 2, 1, '004863', 1),
 ('16-SO-AGI-VIII-2021-314', 'C298', 1, 2, 'M001', 'Imam sobari', '6281281319343', 'jl raya kalong RT 06 RW 01 desa kalong 2 kecamatan leuwisadeng kab Bogor', 'JAWA BARAT', 'Leuwisadeng', 'KAB. BOGOR', NULL, 1, 170000, 'JNE', 18000, 0, 188000, '2021-08-16 08:59:01', 1, 2, 1, '0030005', 1),
 ('16-SO-AGI-VIII-2021-315', 'C299', 1, NULL, 'M004', 'Supri,', '6282266175719', 'desa tebuk Depan kantor desa kecamata NITA kabupaten  SIKKA Flores NUSA TENGGARA TIMUR', 'NUSA TENGGARA TIMUR', 'Nita', 'KAB. SIKKA', NULL, 1, 170000, 'JNE', 59000, 0, 229000, '2021-08-16 09:02:05', 0, 2, 1, '004871', 1),
 ('16-SO-AGI-VIII-2021-316', 'C300', 1, NULL, 'M005', 'Nur Hidayat', '6287755790902', 'usun Tlogosari RT. 002 RW. 003 Jambewangi Sempu Banyuwangi', 'JAWA TIMUR', 'Sempu', 'KAB. BANYUWANGI', NULL, 2, 340000, 'JNE', 12000, 0, 352000, '2021-08-16 09:04:49', 0, 2, 1, '004989', 1),
 ('16-SO-AGI-VIII-2021-317', 'C301', 1, NULL, 'M004', 'Hj NARTO/PAK MUHLEH', '', 'bangsalsari', 'JAWA TIMUR', 'Bangsalsari', 'KAB. JEMBER', NULL, 20, 2700000, 'Office', 0, 0, 2700000, '2021-08-16 09:07:10', 2, 2, 1, NULL, 1),
-('16-SO-AGI-VIII-2021-318', 'C302', 1, NULL, 'M006', 'Nyoto', '6285330550716', 'Rt/rw 05/02 dkh ngimpik,ds bulu lor jambon ponorogo\nKecamatan : Jambon\nKota : Kab. Ponorogo\nProvinsi : Jawa Timur', 'JAWA TIMUR', 'Jambon', 'KAB. PONOROGO', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-08-16 09:10:29', 0, 1, 1, '004939', 1);
-INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `potongan`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `jenis_order`, `status_bayar`, `no_resi`, `status_baca`) VALUES
+('16-SO-AGI-VIII-2021-318', 'C302', 1, NULL, 'M006', 'Nyoto', '6285330550716', 'Rt/rw 05/02 dkh ngimpik,ds bulu lor jambon ponorogo\nKecamatan : Jambon\nKota : Kab. Ponorogo\nProvinsi : Jawa Timur', 'JAWA TIMUR', 'Jambon', 'KAB. PONOROGO', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-08-16 09:10:29', 0, 1, 1, '004939', 1),
 ('16-SO-AGI-VIII-2021-319', 'C303', 1, NULL, 'M006', 'Yanto', '6282393300200', 'Kampung Sengereng.ternak dokter.kecamatan Panongan tangerang\nKecamatan : Panongan\nKota : Kab. Tangerang\nProvinsi : Banten\nKode Pos : 15710', 'BANTEN', 'Panongan', 'KAB. TANGERANG', NULL, 1, 170000, 'JNE', 15000, 0, 185000, '2021-08-16 09:13:45', 0, 1, 1, '004947', 1),
 ('16-SO-AGI-VIII-2021-320', 'C304', 1, NULL, 'M006', 'Lukman Sholeh', '6281335383460', 'Dsn. Sono RT/RW. 003/003 Desa Kepuh  Kec. Papar Kab. Kediri Prov. Jawa Timur', 'JAWA TIMUR', 'Papar', 'KAB. KEDIRI', NULL, 2, 340000, 'JNE', 22000, 0, 362000, '2021-08-16 09:15:39', 0, 1, 1, '004913', 1),
 ('16-SO-AGI-VIII-2021-321', 'C305', 1, 1, 'M006', 'Agus Purnomo ( Boik )', '6288229686342', ' Dpn jln. Flamboyan 1 Perum Palm Asri 2 RT.02/04 Desa Pedagangan\nKecamatan : Dukuhwaru\nKota : Kab. Tegal\nProvinsi : Jawa Tengah\nKode Pos : 52451', 'JAWA TENGAH', 'Dukuhwaru', 'KAB. TEGAL', NULL, 1, 170000, 'SiCepat', 26000, 0, 196000, '2021-08-16 09:17:48', 1, 1, 1, '7374', 1),
-('17-SO-AGI-VI-2021-328', 'C312', 1, NULL, 'M009', 'Sugeng', '6282325601315', ' Jl H Ismail No 17 DSN Parimono \r\n<br>RT/RW 002/001 Kec jombang', 'JAWA TIMUR', 'Jombang', 'KAB. JOMBANG', NULL, 200, 24000000, 'OneExpress', 0, 0, 24000000, '2021-06-17 07:05:21', 2, 1, 1, NULL, 1),
+('17-SO-AGI-VI-2021-328', 'C312', 1, NULL, 'M009', 'Sugeng', '6282325601315', ' Jl H Ismail No 17 DSN Parimono \r\n<br>RT/RW 002/001 Kec jombang', 'JAWA TIMUR', 'Jombang', 'KAB. JOMBANG', NULL, 200, 24000000, 'OneExpress', 0, 0, 24000000, '2021-06-17 07:05:21', 2, 2, 1, NULL, 1),
 ('17-SO-AGI-VII-2021-029', 'C029', 1, NULL, 'M003', 'Ayub Sumaja ', '6285703139223', 'Blok Mawarsari RT/RW 001/004 Desa Cilancang  kac Cikijing  Kab. Majalengka', 'JAWA BARAT', 'Cikijing', 'KAB. MAJALENGKA', NULL, 1, 170000, 'JNE', 28000, 0, 198000, '2021-07-17 07:24:33', 0, 1, 1, '002610', 1),
 ('17-SO-AGI-VII-2021-030', 'C030', 1, NULL, 'M003', 'sudarta/eko', '6281245231418', 'dkh gading rt/rw 03/02 ds sraten kec jenangan kab ponorogo jatim', 'JAWA TIMUR', 'Jenangan', 'KAB. PONOROGO', NULL, 1, 170000, 'JNE', 11000, 0, 181000, '2021-07-17 07:24:34', 0, 1, 1, '002628', 1),
 ('17-SO-AGI-VII-2021-031', 'C031', 1, NULL, 'M002', 'Sri Hasyim Asy\'ari', '6285379928883', 'Desa cempaka nuban kec batang hari nuban Kab. Lampung Timur', 'LAMPUNG', 'Batanghari', 'KAB. LAMPUNG TIMUR', NULL, 1, 170000, 'JNE', 50000, 0, 220000, '2021-07-17 07:24:35', 0, 1, 1, '002677', 1),
@@ -382,8 +625,8 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('21-SO-AGI-VII-2021-085', 'C084', 1, NULL, 'M003', ' I Wayan Kentra', '+62895392335454', 'Jl Ken Arok,  Gg Pudak I no 2 Denpasar', 'BALI', 'Denpasar Utara', 'KOTA DENPASAR', NULL, 1, 170000, 'SiCepat', 22000, 0, 192000, '2021-07-21 07:25:22', 0, 1, 1, '004661', 1),
 ('21-SO-AGI-VII-2021-086', 'C085', 1, NULL, 'M006', ' Lukman nul hakim', '+6281367651420', 'Desa panca tunggal rt007/rw004 Kecamatan : Sungai Lilin Kab. Musi Banyuasin Sumatera Selatan', 'SUMATERA SELATAN', 'Sungai Lilin', 'KAB. MUSI BANYUASIN', NULL, 1, 170000, 'JNE', 42000, 0, 212000, '2021-07-21 07:25:23', 0, 1, 1, '002891', 1),
 ('21-SO-AGI-VII-2021-087', 'C086', 1, NULL, 'M006', 'Susi dewi prasasti', '+6281774996621', 'Kampung padarincang sukaharja rt 001 Rw 005 Kecamatan : Pacet Kota : Kab. Cianjur Provinsi : Jawa Barat', 'JAWA BARAT', 'Pacet', 'KAB. CIANJUR', NULL, 1, 170000, 'JNE', 24000, 0, 194000, '2021-07-21 07:25:24', 0, 1, 1, '002909', 1),
-('21-SO-AGI-VII-2021-089', 'C087', 1, 1, 'M001', 'H. HAIRIL ANWAR', ' 0819-9788-3385', 'Praktik Bidan Hajjah Baeti Jl. Kerongkong Menuju Gerung Permai Dsn. Gerung Barat Kec. Suralaga Lombok Timur, NTB', 'NUSA TENGGARA BARAT', 'Suralaga', 'KAB. LOMBOK TIMUR', NULL, 20, 2700000, 'OneExpress', 235000, 0, 2935000, '2021-07-21 07:25:25', 1, 2, 1, '', 1),
-('21-SO-AGI-VII-2021-090', 'C087', 1, 1, 'M001', 'H. HAIRIL ANWAR', ' 0819-9788-3385', 'Praktik Bidan Hajjah Baeti Jl. Kerongkong Menuju Gerung Permai Dsn. Gerung Barat Kec. Suralaga Lombok Timur, NTB', 'NUSA TENGGARA BARAT', 'Suralaga', 'KAB. LOMBOK TIMUR', NULL, 40, 3200000, 'OneExpress', 235000, 0, 3435000, '2021-07-21 07:25:26', 1, 2, 1, '', 1),
+('21-SO-AGI-VII-2021-089', 'C087', 17, 1, 'M001', 'H. HAIRIL ANWAR', ' 0819-9788-3385', 'Praktik Bidan Hajjah Baeti Jl. Kerongkong Menuju Gerung Permai Dsn. Gerung Barat Kec. Suralaga Lombok Timur, NTB', 'NUSA TENGGARA BARAT', 'Suralaga', 'KAB. LOMBOK TIMUR', NULL, 20, 2700000, 'OneExpress', 235000, 0, 2935000, '2021-07-21 07:25:25', 1, 2, 1, '', 1),
+('21-SO-AGI-VII-2021-090', 'C087', 17, 1, 'M001', 'H. HAIRIL ANWAR', ' 0819-9788-3385', 'Praktik Bidan Hajjah Baeti Jl. Kerongkong Menuju Gerung Permai Dsn. Gerung Barat Kec. Suralaga Lombok Timur, NTB', 'NUSA TENGGARA BARAT', 'Suralaga', 'KAB. LOMBOK TIMUR', NULL, 40, 3200000, 'OneExpress', 235000, 0, 3435000, '2021-07-21 07:25:26', 1, 2, 1, '', 1),
 ('21-SO-AGI-VII-2021-091', 'C088', 1, NULL, 'M006', 'Ikomang ardana', '6285858511303', 'Br mengenuanyar.desa pengeragoan kecamatan pekutatan kabupaten jembrana Kecamatan Pekutatan Kab. Jembrana Bali Kode Pos 82262', 'BALI', 'Pekutatan', 'KAB. JEMBRANA', NULL, 1, 170000, 'JNE', 16000, 0, 186000, '2021-07-21 07:25:27', 0, 1, 1, '002917', 1),
 ('21-SO-AGI-VII-2021-092', 'C089', 1, NULL, 'M006', 'Yasin', '+62 857-0725-18', 'Dsn. Rambang RT 02 RW 01 Desa Weduni Kec. Deket Kab. Lamongan Jatim', 'JAWA TIMUR', 'Deket', 'KAB. LAMONGAN', NULL, 5, 850000, 'JNE', 77000, 0, 927000, '2021-07-21 07:25:28', 0, 1, 1, '002925', 1),
 ('21-SO-AGI-VII-2021-093', 'C090', 1, NULL, 'M006', 'Ibu Yeyet', '+62 857-2001-56', 'Blok Pongpok Desa Bantarjati Kec. Kertajati Kab. Majalengka Jawa Barat', 'JAWA BARAT', 'Kertajati', 'KAB. MAJALENGKA', NULL, 1, 170000, 'JNE', 24000, 0, 194000, '2021-07-21 07:25:29', 0, 1, 1, '002933', 1),
@@ -393,14 +636,15 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('21-SO-AGI-VII-2021-097', 'C094', 1, NULL, 'M006', 'Listiyono', '+6281392881096', 'Dsn Toko RT 03 /02 Desa Toko, Kec. Penawangan Kecamatan Penawangan Kab. Grobogan Jawa Tengah Kode Pos 58161', 'JAWA TENGAH', 'Penawangan', 'KAB. GROBOGAN', NULL, 1, 170000, 'JNE', 23000, 0, 193000, '2021-07-21 07:25:33', 0, 1, 1, '002966', 1),
 ('21-SO-AGI-VII-2021-098', 'C095', 1, 1, 'M005', 'Puji', '085385767557', 'RT. 009 RW. 003 Desa Bokol Kec.Kemangkon Kab.Purbalingga Kode pos. 53381 Jawa Tengah', 'JAWA TENGAH', 'Kemangkon', 'KAB. PURBALINGGA', NULL, 1, 170000, 'JNE', 23000, 0, 193000, '2021-07-21 07:25:34', 1, 1, 1, '500001', 1),
 ('21-SO-AGI-VII-2021-099', 'C096', 1, NULL, 'M004', 'vikri', '85804138612', 'Panti Suci Jember', 'JAWA TIMUR', 'Panti', 'KAB. JEMBER', NULL, 5, 500000, 'Office', 0, 0, 500000, '2021-07-21 07:25:35', 2, 2, 1, NULL, 1),
-('21-SO-AGI-VII-2021-100', 'C015', 1, NULL, 'M004', 'Indra', '085238756390', 'Toko pertanian sebelah pukesmas Klompangan ajung', 'JAWA TIMUR', 'ajung', 'KAB. JEMBER', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-07-21 07:25:36', 2, 1, 1, NULL, 1),
+('21-SO-AGI-VII-2021-100', 'C015', 1, NULL, 'M004', 'Indra', '085238756390', 'Toko pertanian sebelah pukesmas Klompangan ajung', 'JAWA TIMUR', 'ajung', 'KAB. JEMBER', NULL, 1, 170000, 'JNE', 0, 0, 170000, '2021-07-21 07:25:36', 2, 2, 1, NULL, 1),
 ('21-SO-AGI-VIII-2021-373', 'C360', 5, NULL, 'M004', 'Dewi haryani', '085237303859', 'Desa monta-monta Rt 09/Rw 03\nKec:monta', 'NUSA TENGGARA BARAT', 'Monta', 'KAB. BIMA', NULL, 2, 340000, 'JNE', 60000, NULL, 400000, '2021-08-21 02:53:26', 0, 2, 1, '005373', 1),
 ('21-SO-AGI-VIII-2021-374', 'C367', 6, NULL, 'M006', 'Joko Suronggo', '087728543132', 'Desa Watulawang RT 01 RW 01 \nKec. Pejagogan Kab. Kebumen Prov. Jawa Tengah', 'JAWA TENGAH', 'Pejagoan', 'KAB. KEBUMEN', NULL, 2, 340000, 'JNE', 39000, NULL, 379000, '2021-08-21 07:27:45', 0, 1, 1, '005431', 1),
 ('21-SO-AGI-VIII-2021-375', 'C368', 6, NULL, 'M006', ' Muhammad Efendi', '082286954885', 'Jl.Arifin Ahmad, gg.parit alai, Rt.10\'desa selingsing, kelurahan pelintung\nKecamatan : Medang Kampai\nKota : Kota Dumai\nProvinsi : Riau', 'RIAU', 'Medang Kampai', 'KOTA DUMAI', NULL, 1, 170000, 'JNE', 56000, NULL, 226000, '2021-08-21 07:29:44', 0, 1, 1, '005449', 1),
 ('21-SO-AGI-VIII-2021-376', 'C375', 9, NULL, 'M011', 'Sidana', '085743264746', 'Plosorejo RT 04 RW 14 Umbulharjo cangkringan Sleman diy', 'DAERAH ISTIMEWA YOGYAKARTA', 'Cangkringan', 'KAB. SLEMAN', NULL, 1, 170000, 'JNE', 16000, NULL, 186000, '2021-08-21 07:42:30', 0, 1, 1, '005381', 1),
 ('21-SO-AGI-VIII-2021-377', 'C378', 9, NULL, 'M011', 'Eri Setyawan', '087737711919', 'Jln hasanudin rt02 rw07 pasarnongko bengkel Jaya motor', 'JAWA TENGAH', 'Banjarsari', 'KOTA SURAKARTA', NULL, 1, 170000, 'JNE', 12000, NULL, 182000, '2021-08-21 07:44:09', 0, 1, 1, '005399', 1),
 ('21-SO-AGI-VIII-2021-378', 'C380', 9, NULL, 'M011', 'ahmad thamrin perangin angin', '082163755567', 'Desa ujung deleng', 'SUMATERA UTARA', 'Kutabuluh', 'KAB. KARO', NULL, 1, 170000, 'JNE', 53000, NULL, 223000, '2021-08-21 07:45:31', 0, 1, 1, '005407', 1),
-('21-SO-AGI-VIII-2021-379', 'C383', 4, NULL, 'M003', 'Yogi permana', '6281374999680', 'Dalam koto taeh baruah, kecamatan payakumbuh, kota payakumbuh sumatera barat\nKecamatan : Payakumbuh Barat\nKota : Kota Payakumbuh\nProvinsi : Sumatera Barat\nKode Pos : 26224', 'SUMATERA BARAT', 'Payakumbuh Barat', 'KOTA PAYAKUMBUH', NULL, 1, 170000, 'JNE', 50000, NULL, 220000, '2021-08-21 07:49:09', 0, 1, 1, '005472', 1),
+('21-SO-AGI-VIII-2021-379', 'C383', 4, NULL, 'M003', 'Yogi permana', '6281374999680', 'Dalam koto taeh baruah, kecamatan payakumbuh, kota payakumbuh sumatera barat\nKecamatan : Payakumbuh Barat\nKota : Kota Payakumbuh\nProvinsi : Sumatera Barat\nKode Pos : 26224', 'SUMATERA BARAT', 'Payakumbuh Barat', 'KOTA PAYAKUMBUH', NULL, 1, 170000, 'JNE', 50000, NULL, 220000, '2021-08-21 07:49:09', 0, 1, 1, '005472', 1);
+INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `potongan`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `jenis_order`, `status_bayar`, `no_resi`, `status_baca`) VALUES
 ('21-SO-AGI-VIII-2021-380', 'C105', 4, NULL, 'M003', 'Budi Utomo', '6282143135744', 'Dsn. Pogag RT / RW. 01/01 Desa Besuki Sambit  Kab. Ponorogo Jawa Timur', 'JAWA TIMUR', 'Sambit', 'KAB. PONOROGO', NULL, 1, 170000, 'JNE', 11000, NULL, 181000, '2021-08-21 07:49:51', 0, 1, 1, '005464', 1),
 ('21-SO-AGI-VIII-2021-381', 'C385', 9, NULL, 'M011', 'salman', '085337431562', 'kebon repok RT 02 Desa peringgasela timur', 'NUSA TENGGARA BARAT', 'Pringgasela', 'KAB. LOMBOK TIMUR', NULL, 1, 170000, 'JNE', 30000, NULL, 200000, '2021-08-21 07:50:21', 0, 1, 1, '005415', 1),
 ('21-SO-AGI-VIII-2021-382', 'C387', 4, NULL, 'M003', 'Azhari', '6281360188999', ' SDN2 jaya\nKecamatan : Jaya\nKota : Kab. Aceh Jaya\nProvinsi : Nanggroe Aceh Darussalam (NAD)\nKode Pos : 23657', 'ACEH', 'Jaya', 'KAB. ACEH JAYA', NULL, 1, 170000, 'JNE', 68000, NULL, 238000, '2021-08-21 07:53:07', 0, 1, 1, '005498', 1),
@@ -415,7 +659,7 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('22-SO-AGI-VII-2021-103', 'C100', 6, NULL, 'M006', 'Suprapto', '081390990465', 'Kebonagung, Candisari RT. 06 RW.03 Kec. Purwodadi Kab. Grobogan Jawa Tengah', 'JAWA TENGAH', 'Purwodadi', 'KAB. GROBOGAN', NULL, 2, 340000, 'JNE', 39000, NULL, 379000, '2021-07-22 07:25:39', 0, 1, 1, '003063', 1),
 ('22-SO-AGI-VII-2021-104', 'C101', 1, NULL, 'M003', 'Azis', '+62 822-7825-56', 'desa tanjung bulan kecamatan pulau beringin kabupaten oku selatan Sumatera Selatan', 'SUMATERA SELATAN', 'Pulau Beringin', 'KAB. OGAN KOMERING ULU SELATAN', NULL, 1, 170000, 'JNE', 47000, 0, 217000, '2021-07-22 07:25:40', 0, 1, 1, '003089', 1),
 ('22-SO-AGI-VII-2021-105', 'C102', 1, NULL, 'M004', 'Hedar jaya/ndang', '082125078166', 'Kampung citalahab\nDesa: citalahab.rt 05/rw 02\nKec: Banjar\nKab: Pandeglang.Banten', 'BANTEN', 'Banjar', 'KAB. PANDEGLANG', NULL, 1, 170000, 'JNE', 23000, 0, 193000, '2021-07-22 07:25:41', 0, 2, 1, '003095', 1),
-('22-SO-AGI-VII-2021-106', 'C103', 1, NULL, 'M004', 'Jumiyanto', '085789520347', 'Munggangsari,rt1/rw3,grabag,purworejo', 'JAWA TENGAH', 'Grabag', 'KAB. PURWOREJO', NULL, 1, 100000, 'JNE', 19000, 0, 119000, '2021-07-22 07:25:42', 0, 1, 1, '003097', 1),
+('22-SO-AGI-VII-2021-106', 'C103', 1, NULL, 'M004', 'Jumiyanto', '085789520347', 'Munggangsari,rt1/rw3,grabag,purworejo', 'JAWA TENGAH', 'Grabag', 'KAB. PURWOREJO', NULL, 1, 100000, 'JNE', 19000, 0, 119000, '2021-07-22 07:25:42', 0, 2, 1, '003097', 1),
 ('23-SO-AGI-VII-2021-107', 'C104', 1, NULL, 'M006', 'Sugito', '6285758131055', 'Desa ruguk dusun sri basuki rw 09 rt 20 Kalianda Kab. Lampung Selatan Lampung', 'LAMPUNG', 'Kalianda', 'KAB. LAMPUNG SELATAN', NULL, 1, 170000, 'JNE', 44000, 0, 214000, '2021-07-23 07:25:43', 0, 1, 1, '003113', 1),
 ('23-SO-AGI-VII-2021-108', 'C105', 1, NULL, 'M006', 'Budi Utomo', '6282143135744', 'Dsn. Pogag RT / RW. 01/01 Desa Besuki Sambit  Kab. Ponorogo Jawa Timur', 'JAWA TIMUR', 'Sambit', 'KAB. PONOROGO', NULL, 2, 340000, 'JNE', 24000, 0, 364000, '2021-07-23 07:25:44', 0, 1, 1, '003105', 1),
 ('23-SO-AGI-VII-2021-109', 'C106', 1, 1, 'M005', 'Budiman', '087788329346', 'Jln.Pandanaran -- UII , Candiwinangun RT 3 RW 12 , Sardonoharjo , Ngaglik , Sleman , Yogyakarta 55581', 'DAERAH ISTIMEWA YOGYAKARTA', 'Ngaglik', 'KAB. SLEMAN', NULL, 20, 2700000, 'JNE', 145000, 0, 2845000, '2021-07-23 07:25:45', 1, 2, 1, '00005', 1),
@@ -437,8 +681,7 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('23-SO-AGI-VIII-2021-400', 'C415', 6, NULL, 'M006', 'Enen - Jamal', '085220148006', 'Gang Jambu, Desa Gardumukti RT/RW 02/06 Kec. Tambakdahan Kab. Subang Prov. Jawa Barat', 'JAWA BARAT', 'Tambakdahan', 'KAB. SUBANG', NULL, 5, 850000, 'JNE', 80000, NULL, 930000, '2021-08-23 07:52:36', 0, 1, 1, '005605', 1),
 ('23-SO-AGI-VIII-2021-401', 'C416', 9, NULL, 'M011', 'Hermanus Seno', '081264104617', 'Dolok Nagodang dusun1 kecamatan uluan desa Dolok nagodang', 'SUMATERA UTARA', 'Balige', 'KAB. TOBA SAMOSIR', NULL, 1, 170000, 'JNE', 47000, NULL, 217000, '2021-08-23 08:44:42', 0, 1, 1, '005522', 1),
 ('23-SO-AGI-VIII-2021-402', 'C417', 9, NULL, 'M011', ' Linda astuti alawiyah', '083825406164', 'Blok karang asem, ds drunten wetan rt09/05.kec gabus wetan, kab indramayu', 'JAWA BARAT', 'Gabuswetan', 'KAB. INDRAMAYU', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-08-23 08:46:06', 0, 1, 1, '005530', 1),
-('23-SO-AGI-VIII-2021-403', 'C418', 9, NULL, 'M011', 'Rexno cahyono', '085212144183', 'Ardiwilis RT 01 RW 02 Desa Paowan', 'JAWA TIMUR', 'Panarukan', 'KAB. SITUBONDO', NULL, 1, 170000, 'JNE', 11000, NULL, 181000, '2021-08-23 08:47:29', 0, 1, 1, '005613', 1);
-INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `potongan`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `jenis_order`, `status_bayar`, `no_resi`, `status_baca`) VALUES
+('23-SO-AGI-VIII-2021-403', 'C418', 9, NULL, 'M011', 'Rexno cahyono', '085212144183', 'Ardiwilis RT 01 RW 02 Desa Paowan', 'JAWA TIMUR', 'Panarukan', 'KAB. SITUBONDO', NULL, 1, 170000, 'JNE', 11000, NULL, 181000, '2021-08-23 08:47:29', 0, 1, 1, '005613', 1),
 ('23-SO-AGI-VIII-2021-404', 'C419', 9, NULL, 'M011', 'Ernanto', '085729179798', 'jarakan RT 01/ RW 01,kokosan', 'JAWA TENGAH', 'Prambanan', 'KAB. KLATEN', NULL, 1, 110000, 'JNE', 19000, NULL, 129000, '2021-08-23 08:49:13', 0, 1, 1, '005621', 1),
 ('23-SO-AGI-VIII-2021-405', 'C420', 2, NULL, 'M001', 'Dery', '082117589559', 'Desa Cipulus RT 05/02 blok senen\nKecamatan Cikijing\nKabupaten:majalengka', 'JAWA BARAT', 'Cikijing', 'KAB. MAJALENGKA', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-08-23 08:54:00', 0, 2, 1, '005514', 1),
 ('23-SO-AGI-VIII-2021-475', 'C491', 1, NULL, 'M009', 'Leo Marko', '6285331498686', 'Jln KM 12 Sawang Kundur Barat(Toko Subur Tani) Kab.Karimun Kep.Riau \r\n', 'KEPULAUAN RIAU', 'Kundur Barat', 'KAB. KARIMUN', NULL, 2, 340000, 'JNE', 0, 0, 340000, '2021-08-23 09:48:11', 0, 2, 1, '-', 1),
@@ -493,7 +736,7 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('26-SO-AGI-VII-2021-143', 'C138', 3, NULL, 'M002', 'Masdar', '6285339146630', 'Raioi dusun barekah RT 011rw 005 Kecamatan Sape Kab. Bima Nusa Tenggara Barat (NTB) Kode Pos 84182', 'NUSA TENGGARA BARAT', 'Sape', 'KAB. BIMA', NULL, 1, 170000, 'JNE', 30000, NULL, 200000, '2021-07-26 07:26:19', 0, 1, 1, '003345', 1),
 ('26-SO-AGI-VII-2021-144', 'C139', 4, NULL, 'M003', 'Badrus', '6282332573373', 'desa pokaan rt2 rw2 Kec.kapongan. situbondo', 'JAWA TIMUR', 'Kapongan', 'KAB. SITUBONDO', NULL, 1, 170000, 'JNE', 11000, NULL, 181000, '2021-07-26 07:26:20', 0, 1, 1, '003386', 1),
 ('26-SO-AGI-VII-2021-145', 'C140', 1, 2, 'M005', 'Rama Saputra', '087705010656', 'Jl. Sukaramai Gg: Agusta RT. 008 Kel. Bukit kapur Kec. Bukit kapur Kota Dumai Riau', 'RIAU', 'Bukit Kapur', 'KOTA DUMAI', NULL, 20, 2700000, 'JNE', 406000, 0, 3106000, '2021-07-26 07:26:21', 1, 1, 1, '0005', 1),
-('26-SO-AGI-VII-2021-146', 'C141', 1, NULL, 'M009', 'Muhammad Ridwan', '282167527798', 'Jalinsum desa pekebunan sei bejangkar, kecamatan sei balai, kabupaten batubara', 'SUMATERA UTARA', 'Sei Balai', 'KAB. BATU BARA', NULL, 1, 170000, 'JNE', 55000, 0, 225000, '2021-07-26 07:26:22', 0, 1, 1, '0658', 1),
+('26-SO-AGI-VII-2021-146', 'C141', 1, NULL, 'M009', 'Muhammad Ridwan', '282167527798', 'Jalinsum desa pekebunan sei bejangkar, kecamatan sei balai, kabupaten batubara', 'SUMATERA UTARA', 'Sei Balai', 'KAB. BATU BARA', NULL, 1, 170000, 'JNE', 55000, 0, 225000, '2021-07-26 07:26:22', 0, 2, 1, '0658', 1),
 ('26-SO-AGI-VIII-2021-426', 'C445', 9, NULL, 'M011', 'rosda', '081267697750', 'Dusun pendung mudik Desa penawar tinggi, Kecamatan Sitinjau laut, ', 'JAMBI', 'Sitinjau Laut', 'KAB. KERINCI', NULL, 1, 170000, 'JNE', 48000, NULL, 218000, '2021-08-26 03:28:34', 0, 1, 1, '005803', 1),
 ('26-SO-AGI-VIII-2021-428', 'C448', 4, NULL, 'M003', 'Saprin', '6281349013893', ' Jln.GMFirdaus Rt3.Desa Bagendang Tengah(Ramban) kecamatan Mentaya HilirUtara.Kotim 74361\nKecamatan : Mentaya Hilir Utara\nKota : Kab. Kotawaringin Timur\nProvinsi : Kalimantan Tengah\nKode Pos : 74361', 'KALIMANTAN TENGAH', 'Mentaya Hilir Utara', 'KAB. KOTAWARINGIN TIMUR', NULL, 1, 170000, 'JNE', 46000, NULL, 216000, '2021-08-26 03:37:31', 0, 1, 1, '005795', 1),
 ('26-SO-AGI-VIII-2021-430', 'C449', 9, NULL, 'M011', 'Ardian hari prasetyo', '08882743542', 'wora-wari, Desa sukoreno RT 15 RW 08', 'DAERAH ISTIMEWA YOGYAKARTA', 'Sentolo', 'KAB. KULON PROGO', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-08-26 07:45:19', 0, 1, 1, '005829', 1),
@@ -522,9 +765,9 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('28-SO-AGI-VII-2021-156', 'C151', 3, NULL, 'M002', 'Sugiyono', '6285643865448', 'Jl.pusponjolo timur 8 no.13, (bakpao megajaya) Kecamatan Semarang Barat Kota Semarang Jawa Tengah Kode Pos 50141', 'JAWA TENGAH', 'Semarang Barat', 'KOTA SEMARANG', NULL, 1, 170000, 'JNE', 12000, NULL, 182000, '2021-07-28 07:26:32', 0, 1, 1, '003493', 1),
 ('28-SO-AGI-VII-2021-157', 'C152', 4, NULL, 'M003', 'Asrofi', '6287832234522', ' Jl. Kauman no. 04\nRt. 03/07 Kel. Harjosari, Kec. Bawen, Kab. Semarang. 50661.', 'JAWA TENGAH', 'Bawen', 'KAB. SEMARANG', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-07-28 07:26:33', 0, 1, 1, '003501', 1),
 ('28-SO-AGI-VII-2021-158', 'C153', 4, NULL, 'M003', 'Zunarno', '628123531020', 'Rt 02 Rw 02 Desa Banggle Kec.  Ngadiluwih\nKecamatan : Ngadiluwih\nKota : Kab. Kediri', 'JAWA TIMUR', 'Ngadiluwih', 'KAB. KEDIRI', NULL, 1, 170000, 'J&T', 12000, NULL, 182000, '2021-07-28 07:26:34', 0, 1, 1, '008453', 1),
-('28-SO-AGI-VII-2021-159', 'C154', 1, NULL, 'M009', 'Yoga Aditama', '6285331498686', 'Desa Sei Sijenggi Dusun 1 gang Sampurno, Perbaungan Kab. Serdang Bedagai Sumatera Utara', 'SUMATERA UTARA', 'Perbaungan', 'KAB. SERDANG BEDAGAI', NULL, 1, 170000, 'SiCepat', 0, 0, 170000, '2021-07-28 07:26:35', 0, 1, 1, '001817', 1),
+('28-SO-AGI-VII-2021-159', 'C154', 1, NULL, 'M009', 'Yoga Aditama', '6285331498686', 'Desa Sei Sijenggi Dusun 1 gang Sampurno, Perbaungan Kab. Serdang Bedagai Sumatera Utara', 'SUMATERA UTARA', 'Perbaungan', 'KAB. SERDANG BEDAGAI', NULL, 1, 170000, 'SiCepat', 0, 0, 170000, '2021-07-28 07:26:35', 0, 2, 1, '001817', 1),
 ('28-SO-AGI-VII-2021-160', 'C154', 1, NULL, 'M009', 'Yoga Aditama', '6285331498686', 'Desa Sei Sijenggi Dusun 1 gang Sampurno, Perbaungan Kab. Serdang Bedagai Sumatera Utara', 'SUMATERA UTARA', 'Perbaungan', 'KAB. SERDANG BEDAGAI', NULL, 1, 170000, 'SiCepat', 0, 0, 170000, '2021-07-28 07:26:36', 0, 1, 1, '000644', 1),
-('28-SO-AGI-VII-2021-161', 'C154', 1, NULL, 'M009', 'Yoga Aditama', '6285331498686', 'Desa Sei Sijenggi Dusun 1 gang Sampurno, Perbaungan Kab. Serdang Bedagai Sumatera Utara', 'SUMATERA UTARA', 'Perbaungan', 'KAB. SERDANG BEDAGAI', NULL, 1, 170000, 'SiCepat', 0, 0, 170000, '2021-07-28 07:26:37', 0, 1, 1, '001812', 1),
+('28-SO-AGI-VII-2021-161', 'C154', 1, NULL, 'M009', 'Yoga Aditama', '6285331498686', 'Desa Sei Sijenggi Dusun 1 gang Sampurno, Perbaungan Kab. Serdang Bedagai Sumatera Utara', 'SUMATERA UTARA', 'Perbaungan', 'KAB. SERDANG BEDAGAI', NULL, 1, 170000, 'SiCepat', 0, 0, 170000, '2021-07-28 07:26:37', 0, 2, 1, '001812', 1),
 ('28-SO-AGI-VIII-2021-455', 'C475', 5, NULL, 'M004', 'i  wayan agus s', '085378755288', 'ds. ekasari rt01 rw01 ', 'LAMPUNG', 'Seputih Banyak', 'KAB. LAMPUNG TENGAH', NULL, 1, 170000, 'JNE', 45000, NULL, 215000, '2021-08-28 04:08:12', 0, 2, 1, '33150802100008910', 1),
 ('28-SO-AGI-VIII-2021-456', 'C476', 4, NULL, 'M003', 'Epi', '6282384858713', 'Kampung Rimbo panjang.Nagari Punggasan,Kec Linggo sari baganti,Kab Pessel Patokan Rumah Jalan bandes  Depan kantor Capil\nKecamatan : Linggo Sari Baganti\nKota : Kab. Pesisir Selatan\nProvinsi : Sumatera Barat\nKode Pos : 25668', 'SUMATERA BARAT', 'Linggo Sari Baganti', 'KAB. PESISIR SELATAN', NULL, 2, 340000, 'J&T', 104000, NULL, 444000, '2021-08-28 06:30:51', 0, 1, 1, '1098156968', 1),
 ('28-SO-AGI-VIII-2021-457', 'C477', 4, NULL, 'M003', 'Rahmat', '6281212652515', 'SMPN 1 talagA, kec.talaga kab.majalengka\nKecamatan : Banjaran\nKota : Kab. Majalengka\nProvinsi : Jawa Barat\nKode Pos : 45468', 'JAWA BARAT', 'Talaga', 'KAB. MAJALENGKA', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-08-28 06:39:33', 0, 1, 1, '33150802100005894', 1),
@@ -549,9 +792,9 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('30-SO-AGI-VII-2021-175', 'C168', 6, NULL, 'M006', 'Khairullah', '6282368628668', 'Jl. T. Amir Hamzah Dusun 4 Sambirejo Kec. Binjai Kab. Langkat', 'SUMATERA UTARA', 'Binjai', 'KAB. LANGKAT', NULL, 1, 170000, 'JNE', 53000, NULL, 223000, '2021-07-30 07:26:50', 0, 1, 1, '003568', 1),
 ('30-SO-AGI-VII-2021-176', 'C169', 6, NULL, 'M006', 'Eliyunus waruwu', '6281212345180', 'Jl. Gomo No. 12 simpang tandawana Gunungsitoli Kota Gunungsitoli Sumatera Utara', 'SUMATERA UTARA', 'Gunungsitoli', 'KOTA GUNUNGSITOLI', NULL, 1, 170000, 'JNE', 47000, NULL, 217000, '2021-07-30 07:26:51', 0, 1, 1, '003576', 1),
 ('30-SO-AGI-VII-2021-177', 'C170', 1, NULL, 'M009', 'Hadi Suarman', '6281997609474', 'Jln. Mawar No 16 Komplek Rumah Sehat Kel. Majidi Kec. Selong Kab. Lotim NTB', 'NUSA TENGGARA BARAT', 'Selong', 'KAB. LOMBOK TIMUR', NULL, 1, 170000, 'JNE', 24000, 0, 194000, '2021-07-30 07:26:52', 0, 2, 1, '003618', 1),
-('30-SO-AGI-VII-2021-178', 'C171', 1, NULL, 'M004', 'Andik ', '085204220122', 'Jubung Rumah depan Perumahan griya Mangli', 'JAWA TIMUR', 'Sumbersari', 'KAB. JEMBER', NULL, 1, 100000, 'JNE', 0, 0, 100000, '2021-07-30 07:26:53', 2, 1, 1, NULL, 1),
+('30-SO-AGI-VII-2021-178', 'C171', 1, NULL, 'M004', 'Andik ', '085204220122', 'Jubung Rumah depan Perumahan griya Mangli', 'JAWA TIMUR', 'Sumbersari', 'KAB. JEMBER', NULL, 1, 100000, 'JNE', 0, 0, 100000, '2021-07-30 07:26:53', 2, 2, 1, NULL, 1),
 ('30-SO-AGI-VIII-2021-462', 'C060', 4, 1, 'M003', 'Toni Hartono ', '6285828443374', 'Dusun Dukuh RT 04 RW 04 Banaranwetan Bagor Nganjuk Jawa Timur\nBagor, Kab. Nganjuk, Jawa Timur, ', 'JAWA TIMUR', '', 'KAB. NGANJUK', NULL, 6, 1020000, 'JNE', 40000, NULL, 1060000, '2021-08-30 06:04:36', 1, 1, 1, '', 1),
-('30-SO-AGI-VIII-2021-463', 'C209', 4, NULL, 'M003', 'Mulyadi', '6285717710726', ',kp Mandala Rt004/002 depan SMAN8 Gg durian No 34 kota Bogor kec.Bogor utara', 'JAWA BARAT', 'Bogor Utara', 'KOTA BOGOR', NULL, 1, 110000, 'JNE', 15000, NULL, 125000, '2021-08-30 06:14:32', 0, 2, 1, '006009', 1),
+('30-SO-AGI-VIII-2021-463', 'C209', 4, NULL, 'M003', 'Mulyadi', '6285717710726', ',kp Mandala Rt004/002 depan SMAN8 Gg durian No 34 kota Bogor kec.Bogor utara', 'JAWA BARAT', 'Bogor Utara', 'KOTA BOGOR', NULL, 1, 110000, 'JNE', 15000, NULL, 125000, '2021-08-30 06:14:32', 0, 1, 1, '006009', 1),
 ('30-SO-AGI-VIII-2021-464', 'C483', 4, 1, 'M003', 'Sutopo', '6285204218421', 'SMKN 8 Jember, Jl. Pelita 27 Sidomekar Kec Semboro\nKecamatan : Semboro\nKota : Kab. Jember\nProvinsi : Jawa Timur\nKode Pos : 68157', 'JAWA TIMUR', 'Semboro', 'KAB. JEMBER', NULL, 1, 170000, 'J&T', 7000, NULL, 177000, '2021-08-30 06:15:35', 1, 1, 1, '005654', 1),
 ('30-SO-AGI-VIII-2021-465', 'C481', 4, NULL, 'M003', 'Solikin', '6281333888455', 'DS.Remen Dsn.Sumurwaru RT01 RW07\nKecamatan : Jenu\nKota : Kab. Tuban\nProvinsi : Jawa Timur\nKode Pos : 62352', 'JAWA TIMUR', 'Jenu', 'KAB. TUBAN', NULL, 1, 170000, 'SiCepat', 14000, NULL, 184000, '2021-08-30 06:17:06', 0, 1, 1, '008980', 1),
 ('30-SO-AGI-VIII-2021-466', 'C482', 4, NULL, 'M003', ' Erik Prawiro', '081288211272', 'Craba\'an RT.15 RW.02 kec Dampit Kab.Malang(rumah p.sudiono) kode pos 65181', 'JAWA TIMUR', 'Dampit', 'KAB. MALANG', NULL, 20, 2700000, 'JNE', 85000, NULL, 2785000, '2021-08-30 06:17:58', 1, 2, 0, NULL, 0),
@@ -566,7 +809,8 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('30-SO-AGI-VIII-2021-475', 'C492', 6, NULL, 'M006', 'Salim', '081360452930', 'Desa semadam awal\nKecamatan : Semadam\nKota : Kab. Aceh Tenggara\nProvinsi : Nanggroe Aceh Darussalam (NAD)\nKode Pos : 24678', 'ACEH', 'Semadam', 'KAB. ACEH TENGGARA', NULL, 1, 170000, 'JNE', 68000, NULL, 238000, '2021-08-30 09:56:04', 0, 1, 1, '005951', 1),
 ('30-SO-AGI-VIII-2021-476', 'C049', 6, NULL, 'M006', 'Tarmana ', '081398574654', 'Kp. Dano RT 03 RW 01 Desa Cipada Kec. Cikalong Wetan Kab. Bandung Barat', 'JAWA BARAT', 'Cikalongwetan', 'KAB. BANDUNG BARAT', NULL, 2, 340000, 'JNE', 42000, NULL, 382000, '2021-08-30 09:57:11', 0, 1, 1, '005969', 1),
 ('30-SO-AGI-VIII-2021-477', 'C493', 6, 2, 'M006', 'Ibu Ifa', '08159334666', 'Kp. Baru Klender RT/RW 0041/001 Kel. Jatinegara Kec. Cakung  Jakarta Timur', 'DKI JAKARTA', 'Cakung', 'KOTA ADM. JAKARTA TIMUR', NULL, 2, 340000, 'JNE', 30000, NULL, 370000, '2021-08-30 10:00:34', 1, 1, 1, '320008', 1),
-('30-SO-AGI-VIII-2021-478', 'C494', 6, 1, 'M006', 'Supriadi / Nunik Ernawati', '081357688640', 'D/A Banjarjo 2, rt 13 rw 04, desa trisono kec Babadan, Kab Ponorogo, jatim 63491', 'JAWA TIMUR', '', 'KAB. PONOROGO', NULL, 2, 340000, 'JNE', 24000, NULL, 364000, '2021-08-30 10:03:03', 1, 1, 1, '00330007', 1),
+('30-SO-AGI-VIII-2021-478', 'C494', 6, 1, 'M006', 'Supriadi / Nunik Ernawati', '081357688640', 'D/A Banjarjo 2, rt 13 rw 04, desa trisono kec Babadan, Kab Ponorogo, jatim 63491', 'JAWA TIMUR', '', 'KAB. PONOROGO', NULL, 2, 340000, 'JNE', 24000, NULL, 364000, '2021-08-30 10:03:03', 1, 1, 1, '00330007', 1);
+INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_rekening`, `id_marketing`, `nama_pelanggan`, `no_hp`, `alamat`, `provinsi`, `kecamatan`, `kabupaten`, `catatan`, `total_item`, `total_transaksi`, `expedisi`, `ongkir`, `potongan`, `total_bayar`, `tanggal_transaksi`, `metode_pembayaran`, `jenis_order`, `status_bayar`, `no_resi`, `status_baca`) VALUES
 ('30-SO-AGI-VIII-2021-479', 'C495', 6, NULL, 'M006', 'Pitoyo', '081368633508', 'Desa karang Binangun 2 RT/RW 008/004  Kec. Belitang Madang Raya Kab. OKU Timur Prov. Sumsel', 'SUMATERA SELATAN', 'Belitang Madang Raya', 'KAB. OGAN KOMERING ULU TIMUR', NULL, 1, 170000, 'JNE', 47000, NULL, 217000, '2021-08-30 10:05:08', 0, 1, 1, '006025', 1),
 ('30-SO-AGI-VIII-2021-480', 'C405', 1, NULL, 'M004', 'MATEOS PELAIK ', '081338279606', 'DALODE RT04 RW02 DESA EDALODE KECAMATAN PANTAI BARU KAB. ROTE NDAO NUSA TENGGARA TIMUR ', 'NUSA TENGGARA TIMUR', 'Pantai Baru', 'KAB. ROTE NDAO', NULL, 2, 340000, 'JNE', 20000, 0, 360000, '2021-08-30 07:06:29', 0, 2, 1, '3315802100006017', 1),
 ('30-SO-AGI-VIII-2021-489', 'C504', 1, NULL, 'M004', 'unggul', '-', 'ghh', 'JAWA TIMUR', 'Panti', 'KAB. JEMBER', NULL, 40, 4300000, 'Office', 0, 0, 4300000, '2021-08-30 15:19:30', 2, 2, 1, NULL, 1),
@@ -581,19 +825,19 @@ INSERT INTO `tb_detail_order` (`kode_transaksi`, `id_pelanggan`, `id_user`, `id_
 ('31-SO-AGI-VII-2021-187', 'C179', 6, NULL, 'M006', 'Miat Muliawan', '6282340742290', 'Dsn. Ampu Desa Lab. Aji Kec. Tarano Kab. Sumbawa Besar NTB', 'NUSA TENGGARA BARAT', 'Tarano', 'KAB. SUMBAWA', NULL, 1, 170000, 'JNE', 200000, NULL, 370000, '2021-07-31 07:27:01', 0, 1, 1, '003659', 1),
 ('31-SO-AGI-VII-2021-188', 'C180', 6, NULL, 'M006', 'Dedi efron', '6282175812452', 'Jl. Merdeka no : 36.rt.005/003 Kel.kayuara - kec: Sekayu muba palembang Sekayu Kab. Musi Banyuasin Sumatera Selatan', 'SUMATERA SELATAN', 'Sekayu', 'KAB. MUSI BANYUASIN', NULL, 1, 170000, 'JNE', 42000, NULL, 212000, '2021-07-31 07:27:02', 0, 1, 1, '003667', 1),
 ('31-SO-AGI-VII-2021-189', 'C181', 2, NULL, 'M001', 'Zakaria Ginting', '081268593077', 'Jln pipa air bersih simpang 5 desa petani duri, KAB. BENGKALIS, MANDAU, RIAU, ID, 28784', 'RIAU', 'Mandau', 'KAB. BENGKALIS', NULL, 1, 170000, 'J&T', 0, NULL, 170000, '2021-07-31 07:27:03', 0, 2, 1, '7237', 1),
-('31-SO-AGI-VIII-2021-480', 'C497', 1, NULL, 'M008', 'pak ujang', '', 'JakartaAsmil 509 Kostrad', 'JAWA TIMUR', 'Sumbersari', 'KAB. JEMBER', NULL, 1, 170000, 'Office', 0, 0, 170000, '2021-08-31 08:00:56', 2, 2, 0, NULL, 1),
-('31-SO-AGI-VIII-2021-481', 'C498', 9, NULL, 'M011', 'Sukiman', '081226886605', ' Desa Medayu RT 03 RW 02', 'JAWA TENGAH', 'Wanadadi', 'KAB. BANJARNEGARA', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-08-31 08:02:05', 0, 1, 0, NULL, 0),
-('31-SO-AGI-VIII-2021-482', 'C205', 1, NULL, 'M004', 'Hendra S', '6282330620407', 'Ponjen kencong', 'JAWA TIMUR', 'Kencong', 'KAB. JEMBER', NULL, 15, 2025000, 'Office', 0, 0, 2025000, '2021-08-31 08:03:33', 2, 2, 0, NULL, 1),
-('31-SO-AGI-VIII-2021-483', 'C499', 4, NULL, 'M003', 'EDI SUCIPTO', '6285664276697', 'Desa Brawijaya Rt 1 / Rw 2  ,  Kecamatan Sekampung Udik , Kabupaten  Lampung timur , Provensi LAMPUNG\nKecamatan : Sekampung Udik\nKota : Kab. Lampung Timur\nProvinsi : Lampung\nKode Pos : 34385', 'LAMPUNG', 'Sekampung Udik', 'KAB. LAMPUNG TIMUR', NULL, 1, 170000, 'J&T', 49000, NULL, 219000, '2021-08-31 08:10:20', 0, 1, 0, NULL, 0),
-('31-SO-AGI-VIII-2021-484', 'C500', 4, NULL, 'M003', 'Suriansyah', '6282149202095', 'Handil B. RT 07 Desa Handil Terusan  Kec. Anggana Kab. Kutai Kartanegara\nKecamatan : Anggana\nKota : Kab. Kutai Kartanegara\nProvinsi : Kalimantan Timur\nKode Pos : 75381', 'KALIMANTAN TIMUR', 'Anggana', 'KAB. KUTAI KARTANEGARA', NULL, 1, 170000, 'JNE', 54000, NULL, 224000, '2021-08-31 08:22:13', 0, 1, 0, NULL, 0),
-('31-SO-AGI-VIII-2021-485', 'C501', 4, NULL, 'M003', ' Irmawati ', '085333619605', 'Desa banjar , Dusun langgadung rt 02, rw 05 Kec taliwang Kab sumbawa barat NTB ', 'NUSA TENGGARA BARAT', 'Taliwang', 'KAB. SUMBAWA BARAT', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-08-31 08:23:04', 0, 1, 0, NULL, 0),
-('31-SO-AGI-VIII-2021-486', 'C502', 4, NULL, 'M003', 'Musmuliadin', '6282339161460', 'Desa nipa kct ambalawi dusun harapan baru rt 01 rw 02\nKecamatan : Ambalawi\nKota : Kab. Bima\nProvinsi : Nusa Tenggara Barat (NTB)\nKode Pos : 84153', 'NUSA TENGGARA BARAT', 'Ambalawi', 'KAB. BIMA', NULL, 1, 170000, 'JNE', 39000, NULL, 209000, '2021-08-31 12:48:37', 0, 1, 0, NULL, 0),
-('31-SO-AGI-VIII-2021-487', 'C100', 6, NULL, 'M006', 'Suprapto', '081390990465', 'Kebonagung, Candisari RT. 06 RW.03 Kec. Purwodadi Kab. Grobogan Jawa Tengah', 'JAWA TENGAH', 'Purwodadi', 'KAB. GROBOGAN', NULL, 5, 850000, 'JNE', 50000, NULL, 900000, '2021-08-31 12:55:18', 1, 1, 0, NULL, 0);
+('31-SO-AGI-VIII-2021-480', 'C497', 1, NULL, 'M008', 'pak ujang', '', 'JakartaAsmil 509 Kostrad', 'JAWA TIMUR', 'Sumbersari', 'KAB. JEMBER', NULL, 1, 170000, 'Office', 0, 0, 170000, '2021-08-31 08:00:56', 2, 2, 1, NULL, 1),
+('31-SO-AGI-VIII-2021-481', 'C498', 9, NULL, 'M011', 'Sukiman', '081226886605', ' Desa Medayu RT 03 RW 02', 'JAWA TENGAH', 'Wanadadi', 'KAB. BANJARNEGARA', NULL, 1, 170000, 'JNE', 19000, NULL, 189000, '2021-08-31 08:02:05', 0, 1, 1, '3315802100006058', 1),
+('31-SO-AGI-VIII-2021-482', 'C205', 1, NULL, 'M004', 'Hendra S', '6282330620407', 'Ponjen kencong', 'JAWA TIMUR', 'Kencong', 'KAB. JEMBER', NULL, 15, 2025000, 'Office', 0, 0, 2025000, '2021-08-31 08:03:33', 2, 2, 1, NULL, 1),
+('31-SO-AGI-VIII-2021-483', 'C499', 4, NULL, 'M003', 'EDI SUCIPTO', '6285664276697', 'Desa Brawijaya Rt 1 / Rw 2  ,  Kecamatan Sekampung Udik , Kabupaten  Lampung timur , Provensi LAMPUNG\nKecamatan : Sekampung Udik\nKota : Kab. Lampung Timur\nProvinsi : Lampung\nKode Pos : 34385', 'LAMPUNG', 'Sekampung Udik', 'KAB. LAMPUNG TIMUR', NULL, 1, 170000, 'J&T', 49000, NULL, 219000, '2021-08-31 08:10:20', 0, 1, 1, '1098538828', 1),
+('31-SO-AGI-VIII-2021-484', 'C500', 4, NULL, 'M003', 'Suriansyah', '6282149202095', 'Handil B. RT 07 Desa Handil Terusan  Kec. Anggana Kab. Kutai Kartanegara\nKecamatan : Anggana\nKota : Kab. Kutai Kartanegara\nProvinsi : Kalimantan Timur\nKode Pos : 75381', 'KALIMANTAN TIMUR', 'Anggana', 'KAB. KUTAI KARTANEGARA', NULL, 1, 170000, 'JNE', 54000, NULL, 224000, '2021-08-31 08:22:13', 0, 1, 1, '3315802100006041', 1),
+('31-SO-AGI-VIII-2021-485', 'C501', 4, NULL, 'M003', ' Irmawati ', '085333619605', 'Desa banjar , Dusun langgadung rt 02, rw 05 Kec taliwang Kab sumbawa barat NTB ', 'NUSA TENGGARA BARAT', 'Taliwang', 'KAB. SUMBAWA BARAT', NULL, 1, 170000, 'JNE', 24000, NULL, 194000, '2021-08-31 08:23:04', 0, 1, 1, '3315802100006066', 1),
+('31-SO-AGI-VIII-2021-486', 'C502', 4, NULL, 'M003', 'Musmuliadin', '6282339161460', 'Desa nipa kct ambalawi dusun harapan baru rt 01 rw 02\nKecamatan : Ambalawi\nKota : Kab. Bima\nProvinsi : Nusa Tenggara Barat (NTB)\nKode Pos : 84153', 'NUSA TENGGARA BARAT', 'Ambalawi', 'KAB. BIMA', NULL, 1, 170000, 'JNE', 39000, NULL, 209000, '2021-08-31 12:48:37', 0, 1, 0, NULL, 1),
+('31-SO-AGI-VIII-2021-487', 'C100', 6, NULL, 'M006', 'Suprapto', '081390990465', 'Kebonagung, Candisari RT. 06 RW.03 Kec. Purwodadi Kab. Grobogan Jawa Tengah', 'JAWA TENGAH', 'Purwodadi', 'KAB. GROBOGAN', NULL, 5, 850000, 'JNE', 50000, NULL, 900000, '2021-08-31 12:55:18', 1, 1, 0, 'jkt408', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_expedisi`
+-- Struktur dari tabel `tb_expedisi`
 --
 
 CREATE TABLE `tb_expedisi` (
@@ -602,7 +846,7 @@ CREATE TABLE `tb_expedisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_expedisi`
+-- Dumping data untuk tabel `tb_expedisi`
 --
 
 INSERT INTO `tb_expedisi` (`id_expedisi`, `expedisi`) VALUES
@@ -621,7 +865,7 @@ INSERT INTO `tb_expedisi` (`id_expedisi`, `expedisi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_marketing`
+-- Struktur dari tabel `tb_marketing`
 --
 
 CREATE TABLE `tb_marketing` (
@@ -630,32 +874,34 @@ CREATE TABLE `tb_marketing` (
   `nama_marketing` varchar(50) NOT NULL,
   `alamat` text DEFAULT NULL,
   `no_hp` varchar(15) NOT NULL,
-  `foto` varchar(100) DEFAULT NULL
+  `foto` varchar(100) DEFAULT NULL,
+  `chat` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_marketing`
+-- Dumping data untuk tabel `tb_marketing`
 --
 
-INSERT INTO `tb_marketing` (`id_marketing`, `id_user`, `nama_marketing`, `alamat`, `no_hp`, `foto`) VALUES
-('M001', 2, 'Tunggul', 'Jember', '081333633550', 'tunggul.jpg'),
-('M002', 3, 'Faida Nur Laeli', 'Jember', '085336477178', 'faida.jpg'),
-('M003', 4, 'Raisa Bani', 'Jember', '085335164843', 'raisa.jpg'),
-('M004', 5, 'Frendi Junaidi', 'Jember', '085156712751', 'rendy.jpg'),
-('M005', 11, 'Bowo Suhardianto', 'Jember', '08124926363', 'bowo.jpg'),
-('M006', 6, 'Ardhino Okta', 'Jember', '081336470604', 'dhino.jpg\r\n'),
-('M007', 14, 'Wahyudi', 'Banyuwangi', '085236892915', 'yudi.jpg'),
-('M008', 1, 'Melina', 'Jember', '0813350053', 'meli.jpg'),
-('M009', 10, 'Dadik', 'Jember', '085331498686', 'dadik.jpg'),
-('M010', 7, 'Sutikno', 'Jember', '082315035135', 'tikno.jpg'),
-('M011', 9, 'Poppy', 'Jember', '085336477178', 'poppy.jpg'),
-('M012', 12, 'Gecol', '-', '-', 'gecol.jpg'),
-('M013', 13, 'Deka', '-', '-', 'deka.jpg');
+INSERT INTO `tb_marketing` (`id_marketing`, `id_user`, `nama_marketing`, `alamat`, `no_hp`, `foto`, `chat`) VALUES
+('M001', 2, 'Tunggul', 'Jember', '081333633550', 'tunggul.webp', 1),
+('M002', 3, 'Faida Nur Laeli', 'Jember', '085336477178', 'faida.jpg', 0),
+('M003', 4, 'Raisa Bani', 'Jember', '085335164843', 'raisa.webp', 1),
+('M004', 5, 'Frendi Junaidi', 'Jember', '085156712751', 'randi.webp', 1),
+('M005', 11, 'Bowo Suhardianto', 'Jember', '08124926363', 'bowo.jpg', 0),
+('M006', 6, 'Ardhino Okta', 'Jember', '081336470604', 'dino.webp\r\n', 1),
+('M007', 14, 'Wahyudi', 'Banyuwangi', '085236892915', 'yudi.jpg', 0),
+('M008', 1, 'Melina', 'Jember', '0813350053', 'meli.webp', 1),
+('M009', 10, 'Dadik', 'Jember', '085331498686', 'dadik.webp', 1),
+('M010', 7, 'Sutikno', 'Jember', '082315035135', 'sutikno.webp', 1),
+('M011', 9, 'Poppy', 'Jember', '085336477178', 'poppy.webp', 1),
+('M012', 12, 'Gecol', '-', '-', 'gecol.jpg', 0),
+('M013', 13, 'Deka', '-', '-', 'deka.jpg', 0),
+('M014', 15, 'Namira', 'jember', '081554988354', 'mira.webp', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_order`
+-- Struktur dari tabel `tb_order`
 --
 
 CREATE TABLE `tb_order` (
@@ -675,7 +921,7 @@ CREATE TABLE `tb_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_order`
+-- Dumping data untuk tabel `tb_order`
 --
 
 INSERT INTO `tb_order` (`id_order`, `kode_transaksi`, `id_pelanggan`, `id_produk`, `id_promo`, `id_marketing`, `jml_beli`, `harga`, `total_harga`, `potongan`, `total_transaksi`, `tanggal_transaksi`, `status`) VALUES
@@ -1222,12 +1468,52 @@ INSERT INTO `tb_order` (`id_order`, `kode_transaksi`, `id_pelanggan`, `id_produk
 (654, '27-SO-AGI-VIII-2021-488', 'C456', 'PK002', 0, 'M007', 40, 0, 0, 0, 0, '2021-08-27', 2),
 (655, '30-SO-AGI-VIII-2021-489', 'C504', 'PK001', 0, 'M004', 20, 135000, 2700000, 0, 2700000, '2021-08-30', 2),
 (656, '30-SO-AGI-VIII-2021-489', 'C504', 'PK002', 0, 'M004', 20, 80000, 1600000, 0, 1600000, '2021-08-30', 2),
-(657, '30-SO-AGI-VIII-2021-489', 'C504', 'PK002', 0, 'M004', 7, 0, 0, 0, 0, '2021-08-30', 2);
+(657, '30-SO-AGI-VIII-2021-489', 'C504', 'PK002', 0, 'M004', 7, 0, 0, 0, 0, '2021-08-30', 2),
+(658, '01-SO-AGI-IX-2021-488', 'C505', 'PK001', 0, 'M011', 1, 170000, 170000, 0, 170000, '2021-09-01', 2),
+(659, '01-SO-AGI-IX-2021-449', 'C506', 'PK001', 0, 'M006', 1, 170000, 170000, 0, 170000, '2021-09-01', 2),
+(660, '01-SO-AGI-IX-2021-450', 'C507', 'PK002', 0, 'M006', 1, 100000, 100000, 0, 100000, '2021-09-01', 2),
+(661, '01-SO-AGI-IX-2021-451', 'C508', 'PK001', 0, 'M006', 1, 170000, 170000, 0, 170000, '2021-09-01', 2),
+(662, '01-SO-AGI-IX-2021-452', 'C509', 'PK001', 0, 'M003', 1, 170000, 170000, 0, 170000, '2021-09-01', 2),
+(663, '01-SO-AGI-IX-2021-453', 'C229', 'PK001', 0, 'M003', 2, 170000, 340000, 0, 340000, '2021-09-01', 2),
+(664, '01-SO-AGI-IX-2021-454', 'C510', 'PK001', 0, 'M004', 1, 170000, 170000, 0, 170000, '2021-09-01', 2),
+(665, '02-SO-AGI-IX-2021-456', 'C514', 'PK001', 0, 'M003', 1, 170000, 170000, 0, 170000, '2021-09-02', 2),
+(666, '02-SO-AGI-IX-2021-457', 'C513', 'PK001', 0, 'M003', 1, 170000, 170000, 0, 170000, '2021-09-02', 2),
+(667, '02-SO-AGI-IX-2021-458', 'C515', 'PK001', 0, 'M011', 1, 170000, 170000, 0, 170000, '2021-09-02', 2),
+(668, '02-SO-AGI-IX-2021-459', 'C516', 'PK002', 0, 'M011', 1, 100000, 100000, 0, 100000, '2021-09-02', 2),
+(669, '02-SO-AGI-IX-2021-460', 'C512', 'PK001', 0, 'M003', 1, 170000, 170000, 0, 170000, '2021-09-02', 2),
+(670, '02-SO-AGI-IX-2021-461', 'C511', 'PK002', 0, 'M003', 1, 100000, 100000, 0, 100000, '2021-09-02', 2),
+(671, '02-SO-AGI-IX-2021-462', 'C517', 'PK001', 0, 'M011', 1, 170000, 170000, 0, 170000, '2021-09-02', 2),
+(672, '02-SO-AGI-IX-2021-463', 'C150', 'PK001', 0, 'M002', 1, 170000, 170000, 0, 170000, '2021-09-02', 2),
+(673, '02-SO-AGI-IX-2021-464', 'C099', 'PK001', 0, 'M002', 20, 135000, 2700000, 0, 2700000, '2021-09-02', 2),
+(674, '02-SO-AGI-IX-2021-464', 'C099', 'PK002', 0, 'M002', 5, 0, 0, 0, 0, '2021-09-02', 2),
+(675, '01-SO-AGI-IX-2021-455', 'C518', 'PK001', 0, 'M001', 1, 170000, 170000, 0, 170000, '2021-09-01', 2),
+(676, '03-SO-AGI-IX-2021-465', 'C519', 'PK001', 0, 'M004', 1, 170000, 170000, 0, 170000, '2021-09-03', 2),
+(677, '03-SO-AGI-IX-2021-466', 'C520', 'PK001', 0, 'M004', 1, 170000, 170000, 0, 170000, '2021-09-03', 2),
+(678, '03-SO-AGI-IX-2021-467', 'C521', 'PK001', 0, 'M003', 1, 170000, 170000, 0, 170000, '2021-09-03', 2),
+(679, '03-SO-AGI-IX-2021-468', 'C522', 'PK001', 0, 'M009', 1, 170000, 170000, 0, 170000, '2021-09-03', 2),
+(681, '03-SO-AGI-IX-2021-469', 'C523', 'PK001', 0, 'M008', 20, 135000, 2700000, 0, 2700000, '2021-09-03', 2),
+(682, '03-SO-AGI-IX-2021-469', 'C523', 'PK002', 0, 'M008', 5, 0, 0, 0, 0, '2021-09-03', 2),
+(683, '03-SO-AGI-IX-2021-470', 'C524', 'PK001', 0, 'M006', 1, 170000, 170000, 0, 170000, '2021-09-03', 2),
+(684, '03-SO-AGI-IX-2021-471', 'C525', 'PK001', 0, 'M009', 20, 135000, 2700000, 0, 2700000, '2021-09-03', 2),
+(685, '03-SO-AGI-IX-2021-471', 'C525', 'PK002', 0, 'M009', 5, 0, 0, 0, 0, '2021-09-03', 2),
+(686, '03-SO-AGI-IX-2021-472', 'C527', 'PK001', 0, 'M005', 1, 170000, 170000, 0, 170000, '2021-09-03', 2),
+(688, '04-SO-AGI-IX-2021-473', 'C530', 'PK001', 0, 'M011', 1, 170000, 170000, 0, 170000, '2021-09-04', 2),
+(689, '04-SO-AGI-IX-2021-474', 'C531', 'PK001', 0, 'M011', 1, 170000, 170000, 0, 170000, '2021-09-04', 2),
+(690, '04-SO-AGI-IX-2021-475', 'C532', 'PK002', 0, 'M011', 1, 100000, 100000, 0, 100000, '2021-09-04', 2),
+(691, '04-SO-AGI-IX-2021-476', 'C533', 'PK001', 0, 'M011', 1, 170000, 170000, 0, 170000, '2021-09-04', 2),
+(692, '04-SO-AGI-IX-2021-478', 'C292', 'PK001', 0, 'M003', 5, 170000, 850000, 0, 850000, '2021-09-04', 2),
+(693, '04-SO-AGI-IX-2021-478', 'C292', 'PK002', 0, 'M003', 1, 0, 0, 0, 0, '2021-09-04', 2),
+(694, '04-SO-AGI-IX-2021-479', 'C534', 'PK001', 0, 'M003', 1, 170000, 170000, 0, 170000, '2021-09-04', 2),
+(695, '04-SO-AGI-IX-2021-480', 'C535', 'PK001', 0, 'M011', 3, 170000, 510000, 0, 510000, '2021-09-04', 2),
+(696, '04-SO-AGI-IX-2021-481', 'C536', 'PK001', 0, 'M009', 1, 170000, 170000, 0, 170000, '2021-09-04', 2),
+(697, '04-SO-AGI-IX-2021-482', 'C538', 'PK001', 0, 'M007', 3, 170000, 510000, 0, 510000, '2021-09-04', 2),
+(698, '04-SO-AGI-IX-2021-477', 'C539', 'PK001', 0, 'M006', 1, 170000, 170000, 0, 170000, '2021-09-04', 2),
+(699, '06-SO-AGI-IX-2021-483', 'C542', 'PK001', 0, 'M007', 4, 170000, 680000, 0, 680000, '2021-09-06', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pelanggan`
+-- Struktur dari tabel `tb_pelanggan`
 --
 
 CREATE TABLE `tb_pelanggan` (
@@ -1235,7 +1521,7 @@ CREATE TABLE `tb_pelanggan` (
   `id_marketing` varchar(5) DEFAULT NULL,
   `id_user` int(11) NOT NULL,
   `nama_pelanggan` varchar(50) NOT NULL,
-  `no_hp` varchar(15) NOT NULL,
+  `no_hp` varchar(25) NOT NULL,
   `alamat` text NOT NULL,
   `kecamatan` varchar(50) NOT NULL,
   `kabupaten` varchar(50) NOT NULL,
@@ -1246,7 +1532,7 @@ CREATE TABLE `tb_pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_pelanggan`
+-- Dumping data untuk tabel `tb_pelanggan`
 --
 
 INSERT INTO `tb_pelanggan` (`id_pelanggan`, `id_marketing`, `id_user`, `nama_pelanggan`, `no_hp`, `alamat`, `kecamatan`, `kabupaten`, `provinsi`, `komoditi`, `jenis_pelanggan`, `tanggal_daftar`) VALUES
@@ -1294,7 +1580,7 @@ INSERT INTO `tb_pelanggan` (`id_pelanggan`, `id_marketing`, `id_user`, `nama_pel
 ('C045', 'M006', 0, 'Tatan Buldan', '081322664377', 'kp sudimampir 07/03 ds haurpugur', 'Rancaekek', 'KAB. BANDUNG', 'JAWA BARAT', '-', 'Customer', '2021-07-17'),
 ('C046', 'M006', 0, 'Amer Sukri', '6282280007998', 'Desa gunung terang dusun 2 gang way serdang no 89', 'Buay Sandang Aji', 'KAB. OGAN KOMERING ULU SELATAN', 'SUMATERA SELATAN', '-', 'Customer', '2021-07-17'),
 ('C047', 'M002', 0, 'SADRI,AW', '085262104628', 'KUA KEC TIMANG GAJAH.Jln.BIREUEN-Takengon, mekar ayu Lampahan Kecamatan Timang Gajah Kab. Bener Meriah Nanggroe Aceh Darussalam (NAD) Kode Pos 24553', 'Timang gajah', 'KAB. BENER MERIAH', 'ACEH', '-', 'Customer', '2021-07-19'),
-('C048', 'M003', 8, 'Nurdin', '0886986647558', 'RT. 04 RW. 02 desa sakuru kec. Monta Kab. Bima Prov. NTB', 'Monta', 'KAB. BIMA', 'NUSA TENGGARA BARAT', '-', 'Mitra', '2021-07-19'),
+('C048', 'M003', 8, 'Nurdin', '886986647558', 'RT. 04 RW. 02 desa sakuru kec. Monta Kab. Bima Prov. NTB', 'Monta', 'KAB. BIMA', 'NUSA TENGGARA BARAT', '-', 'Mitra', '2021-07-19'),
 ('C049', 'M010', 0, 'Tarmana ', '081398574654', 'Kp. Dano RT 03 RW 01 Desa Cipada Kec. Cikalong Wetan Kab. Bandung Barat', 'Cikalongwetan', 'KAB. BANDUNG BARAT', 'JAWA BARAT', NULL, 'Customer', '2021-07-19'),
 ('C050', 'M006', 0, 'Agus Suwarno ', '082265008193', 'Desa Wuwur RT 03 RW 01 Kec. Pancur Kab. Rembang 59263', 'Pancur', 'KAB. REMBANG', 'JAWA TENGAH', NULL, 'Customer', '2021-07-19'),
 ('C051', 'M006', 0, 'Gede Tora Lesmawan', '6287863030454', 'Jl Jelantik Gingsir no 68 Bantang Banua Kec. Sukasada Kab. Buleleng Singaraja BALI', 'Sukasada', 'KAB. BULELENG', 'BALI', NULL, 'Customer', '2021-07-19'),
@@ -1326,14 +1612,14 @@ INSERT INTO `tb_pelanggan` (`id_pelanggan`, `id_marketing`, `id_user`, `nama_pel
 ('C077', 'M002', 0, 'Jatu fauzi ardi', '082135416910', 'desa/kel: ngentak rt/rw 002/001 Kecamatan Ngombol Kab. Purworejo Provinsi Jawa Tengah Kode Pos 54172', 'Ngombol', 'KAB. PURWOREJO', 'JAWA TENGAH', '-', 'Customer', '2021-07-21'),
 ('C078', 'M001', 0, 'Moh.yunus ', ' +62 852-5865-4', 'd/a. dsn mojongudi rt/rw.03/02 Ds.Kalisari kec.Baureno kab.Bojonegoro', 'Baureno', 'KAB. BOJONEGORO', 'JAWA TIMUR', NULL, 'Customer', '2021-07-21'),
 ('C079', 'M001', 0, 'Wijati ', ' 085707333775', 'DS NGLINGGO RT 01 RW 01  kec Gondang Kab. NGANJUK', 'Gondang', 'KAB. NGANJUK', 'JAWA TIMUR', NULL, 'Customer', '2021-07-21'),
-('C080', 'M003', 0, 'Ilham Kurniawan', '+62 812-7530-03', 'Jorong campago, kecamatan malalak utara Kabubaten agam. propinsi sumatra barat. Dekat Masjid Ijtihad Capago malalak utara.', 'Malalak', 'KAB. AGAM', 'SUMATERA BARAT', NULL, 'Mitra', '2021-07-21'),
+('C080', 'M003', 0, 'Ilham Kurniawan', '+62 812-7530-0396', 'Jorong campago, kecamatan malalak utara Kabubaten agam. propinsi sumatra barat. Dekat Masjid Ijtihad Capago malalak utara.', 'Malalak', 'KAB. AGAM', 'SUMATERA BARAT', NULL, 'Mitra', '2021-07-21'),
 ('C081', 'M006', 0, 'Wayan Sudirahman ', '81369903435', 'kec balitang bk 6 Desa metro rejo kab OKU timur Buay madang Timur Sumsel', '', 'KAB. OGAN KOMERING ULU TIMUR', 'SUMATERA SELATAN', NULL, 'Customer', '2021-07-21'),
 ('C082', 'M004', 0, 'LILIK', '082131187601', 'DESA REJUNO DUSUN KARANG ANYAR RT 02/RW03 KECAMATAN KARANG JATI KABUPATEN NGAWI JAWA TIMUR INDONESIA ', 'Karangjati', 'KAB. NGAWI', 'JAWA TIMUR', '-', 'Customer', '2021-07-21'),
 ('C083', 'M003', 0, 'Maryono', '+6283178054192', 'Jln. Umar Akhmad no.62 Kel. Pasar Tais Kec.Seluma Kab.Seluma Belakang SMA MUHAMMADIYAH', 'Seluma', 'KAB. SELUMA', 'BENGKULU', NULL, 'Customer', '2021-07-21'),
 ('C084', 'M003', 0, ' I Wayan Kentra', '+62895392335454', 'Jl Ken Arok,  Gg Pudak I no 2 Denpasar', 'Denpasar Utara', 'KOTA DENPASAR', 'BALI', NULL, 'Customer', '2021-07-21'),
 ('C085', 'M006', 0, ' Lukman nul hakim', '+6281367651420', 'Desa panca tunggal rt007/rw004 Kecamatan : Sungai Lilin Kab. Musi Banyuasin Sumatera Selatan', 'Sungai Lilin', 'KAB. MUSI BANYUASIN', 'SUMATERA SELATAN', NULL, 'Customer', '2021-07-21'),
 ('C086', 'M006', 0, 'Susi dewi prasasti', '+6281774996621', 'Kampung padarincang sukaharja rt 001 Rw 005 Kecamatan : Pacet Kota : Kab. Cianjur Provinsi : Jawa Barat', 'Pacet', 'KAB. CIANJUR', 'JAWA BARAT', NULL, 'Customer', '2021-07-21'),
-('C087', 'M001', 0, 'H. HAIRIL ANWAR', ' 0819-9788-3385', 'Praktik Bidan Hajjah Baeti Jl. Kerongkong Menuju Gerung Permai Dsn. Gerung Barat Kec. Suralaga Lombok Timur, NTB', 'Suralaga', 'KAB. LOMBOK TIMUR', 'NUSA TENGGARA BARAT', NULL, 'Mitra', '2021-07-21'),
+('C087', 'M001', 17, 'H. HAIRIL ANWAR', ' 0819-9788-3385', 'Praktik Bidan Hajjah Baeti Jl. Kerongkong Menuju Gerung Permai Dsn. Gerung Barat Kec. Suralaga Lombok Timur, NTB', 'Suralaga', 'KAB. LOMBOK TIMUR', 'NUSA TENGGARA BARAT', NULL, 'Mitra', '2021-07-21'),
 ('C088', 'M006', 0, 'Ikomang ardana', '6285858511303', 'Br mengenuanyar.desa pengeragoan kecamatan pekutatan kabupaten jembrana Kecamatan Pekutatan Kab. Jembrana Bali Kode Pos 82262', 'Pekutatan', 'KAB. JEMBRANA', 'BALI', '-', 'Customer', '2021-07-21'),
 ('C089', 'M006', 0, 'Yasin', '+62 857-0725-18', 'Dsn. Rambang RT 02 RW 01 Desa Weduni Kec. Deket Kab. Lamongan Jatim', 'Deket', 'KAB. LAMONGAN', 'JAWA TIMUR', NULL, 'Customer', '2021-07-21'),
 ('C090', 'M006', 0, 'Ibu Yeyet', '+62 857-2001-56', 'Blok Pongpok Desa Bantarjati Kec. Kertajati Kab. Majalengka Jawa Barat', 'Kertajati', 'KAB. MAJALENGKA', 'JAWA BARAT', NULL, 'Customer', '2021-07-21'),
@@ -1351,7 +1637,7 @@ INSERT INTO `tb_pelanggan` (`id_pelanggan`, `id_marketing`, `id_user`, `nama_pel
 ('C102', 'M010', 0, 'Hedar jaya/ndang', '082125078166', 'Kampung citalahab\r\nDesa: citalahab.rt 05/rw 02\r\nKec: Banjar\r\nKab: Pandeglang.Banten', 'Banjar', 'KAB. PANDEGLANG', 'BANTEN', NULL, 'Customer', '2021-07-22'),
 ('C103', 'M004', 0, 'Jumiyanto', '085789520347', 'Munggangsari,rt1/rw3,grabag,purworejo', 'Grabag', 'KAB. PURWOREJO', 'JAWA TENGAH', NULL, 'Customer', '2021-07-22'),
 ('C104', 'M010', 0, 'Sugito', '6285758131055', 'Desa ruguk dusun sri basuki rw 09 rt 20 Kalianda Kab. Lampung Selatan Lampung', 'Kalianda', 'KAB. LAMPUNG SELATAN', 'LAMPUNG', NULL, 'Customer', '2021-07-23'),
-('C105', 'M006', 0, 'Budi Utomo', '6282143135744', 'Dsn. Pogag RT / RW. 01/01 Desa Besuki Sambit  Kab. Ponorogo Jawa Timur', 'Sambit', 'KAB. PONOROGO', 'JAWA TIMUR', NULL, 'Mitra', '2021-07-23'),
+('C105', 'M003', 0, 'Budi Utomo', '6282143135744', 'Dsn. Pogag RT / RW. 01/01 Desa Besuki Sambit  Kab. Ponorogo Jawa Timur', 'Sambit', 'KAB. PONOROGO', 'JAWA TIMUR', NULL, 'Mitra', '2021-07-23'),
 ('C106', 'M005', 0, 'Budiman', '087788329346', 'Jln.Pandanaran -- UII , Candiwinangun RT 3 RW 12 , Sardonoharjo , Ngaglik , Sleman , Yogyakarta 55581', 'Ngaglik', 'KAB. SLEMAN', 'DAERAH ISTIMEWA YOGYAKARTA', NULL, 'Mitra', '2021-07-23'),
 ('C107', 'M005', 0, 'Mulyono (NOVITA LAUNDRY)', '081230345137', ' Jln SMADATARA pandan RT. 001 RW.003 Kembiritan Genteng Banyuwangi', 'Genteng', 'KAB. BANYUWANGI', 'JAWA TIMUR', NULL, 'Customer', '2021-07-23'),
 ('C108', 'M002', 0, 'Sukur', '6282278532533', 'Desa Argomulyo RT 12 RW 003 nomor 26 Kecamatan Muara Sugihan Kab. Banyuasin Sumatera Selatan', 'Muara Sugihan', 'KAB. BANYUASIN', 'SUMATERA SELATAN', '-', 'Customer', '2021-07-23'),
@@ -1606,7 +1892,7 @@ INSERT INTO `tb_pelanggan` (`id_pelanggan`, `id_marketing`, `id_user`, `nama_pel
 ('C358', 'M001', 0, 'Muji Slamet', '0852-3619-8440', 'Panda Yora.kec.pamona selatan.kab.poso- Sulteng', 'Pamona Selatan', 'KAB. POSO', 'SULAWESI TENGAH', NULL, 'Mitra', '2021-08-20'),
 ('C359', 'M001', 0, 'Alfin', '0813-5768-0929', 'Toko Azonk Jl. Tan malaka No. 92 Simp. 4 Napar Payakumbuh Utara', 'Payakumbuh Utara', 'KOTA PAYAKUMBUH', 'SUMATERA BARAT', NULL, 'Mitra', '2021-08-20'),
 ('C360', 'M004', 0, 'Dewi haryani', '085237303859', 'Desa monta-monta Rt 09/Rw 03\r\nKec:monta', 'Monta', 'KAB. BIMA', 'NUSA TENGGARA BARAT', 'bawang merah', 'Customer', '2021-08-21'),
-('C361', 'M003', 0, 'I Gede Wijana', '082190112637', 'kabupaten Gianyar ,kecamatan blahbatuh,desa bedulu', 'Blahbatuh', 'KAB. GIANYAR', 'BALI', NULL, 'Mitra', '2021-08-21'),
+('C361', 'M003', 0, 'I Gede Wijana', '6281239955755', 'kabupaten Gianyar ,kecamatan blahbatuh,desa bedulu', 'Blahbatuh', 'KAB. GIANYAR', 'BALI', NULL, 'Mitra', '2021-08-21'),
 ('C362', 'M005', 0, 'Wayan yasmika', '081236853891', 'dusun pumahan desa Gitgit kec: Sukasada  kab: Buleleng', 'Sukasada', 'KAB. BULELENG', 'BALI', NULL, 'Mitra', '2021-08-21'),
 ('C363', 'M005', 0, 'Wahyudin', '0877-7323-2969', ' Jln. Gunungkencana Banjarsari Kp Rajawana Desa Ciginggang Kec. Gunungkencana Kab. Lebak Banten 42354', 'Gunungkencana', 'KAB. LEBAK', 'BANTEN', NULL, 'Mitra', '2021-08-21'),
 ('C364', 'M010', 0, 'Eko Suprastiyono', '085236128416', 'Jln.Raya Banyuwangi Barat Pertigaan Kayumas KP. Saksak RT 13 RW05 Desa Lamongan Kec. Arjasa Kab. Situbondo\r\n', 'Arjasa', 'KAB. SITUBONDO', 'JAWA TIMUR', NULL, 'Mitra', '2021-08-21'),
@@ -1745,12 +2031,49 @@ INSERT INTO `tb_pelanggan` (`id_pelanggan`, `id_marketing`, `id_user`, `nama_pel
 ('C501', 'M003', 0, ' Irmawati ', '085333619605', 'Desa banjar , Dusun langgadung rt 02, rw 05 Kec taliwang Kab sumbawa barat NTB ', 'Taliwang', 'KAB. SUMBAWA BARAT', 'NUSA TENGGARA BARAT', '-', 'Customer', '2021-08-31'),
 ('C502', 'M003', 0, 'Musmuliadin', '6282339161460', 'Desa nipa kct ambalawi dusun harapan baru rt 01 rw 02\r\nKecamatan : Ambalawi\r\nKota : Kab. Bima\r\nProvinsi : Nusa Tenggara Barat (NTB)\r\nKode Pos : 84153', 'Ambalawi', 'KAB. BIMA', 'NUSA TENGGARA BARAT', '-', 'Customer', '2021-08-31'),
 ('C503', 'M009', 0, 'danil Satpam', '', 'bernadi - jember', 'Patrang', 'KAB. JEMBER', 'JAWA TIMUR', NULL, 'Customer', '2021-08-31'),
-('C504', 'M004', 0, 'unggul', '', 'ghh', 'Panti', 'KAB. JEMBER', 'JAWA TIMUR', NULL, 'Mitra', '2021-08-31');
+('C504', 'M004', 0, 'unggul', '-', 'Jember', 'Panti', 'KAB. JEMBER', 'JAWA TIMUR', NULL, 'Mitra', '2021-08-31'),
+('C505', 'M011', 0, 'Aprianto', '082253636188', 'Jalan gang ponpes alfalah putri , dusun 1 ,rt 003 ,rw 001 desa jadimulyo sekampung lampungtimur', 'Sekampung', 'KAB. LAMPUNG TIMUR', 'LAMPUNG', '-', 'Customer', '2021-09-01'),
+('C506', 'M006', 0, 'Dia', '087854083064', 'Ds.sambong rt17 rw04 kec. Gondang kab. Bojonegoro\r\nKecamatan : Gondang\r\nKota : Kab. Bojonegoro\r\nProvinsi : Jawa Timur\r\nKode Pos : 62172', 'Gondang', 'KAB. BOJONEGORO', 'JAWA TIMUR', 'Cabai', 'Customer', '2021-09-01'),
+('C507', 'M006', 0, 'Khairil Anwar', '081375592047', 'Jalan Pertanian Kelurahan Sibuluan Raya\r\nKecamatan : Pandan\r\nKota : Kab. Tapanuli Tengah\r\nProvinsi : Sumatera Utara\r\nKode Pos : 22616', 'Pandan', 'KAB. TAPANULI TENGAH', 'SUMATERA UTARA', '-', 'Customer', '2021-09-01'),
+('C508', 'M006', 0, 'Muhammad Chairul', '085245596630', ' Desa sungai Melayu baru Rt 13 Rw 04 kec. Sungai Melayu rayak kab. Ketapang kalbar\r\nKecamatan : Sungai Melayu Rayak\r\nKota : Kab. Ketapang\r\nProvinsi : Kalimantan Barat\r\nKode Pos : 78874', 'Sungai Melayu Rayak', 'KAB. KETAPANG', 'KALIMANTAN BARAT', '-', 'Customer', '2021-09-01'),
+('C509', 'M003', 0, ' Ahmad Rifai', '6282358464178', 'Jl jonggon a desa margahayu kec. Loa kulu rt22 dusun pondok ulin\r\nKecamatan : Tenggarong\r\nKota : Kab. Kutai Kartanegara\r\nProvinsi : Kalimantan Timur\r\nKode Pos : 75511', 'Tenggarong', 'KAB. KUTAI KARTANEGARA', 'KALIMANTAN TIMUR', '-', 'Customer', '2021-09-01'),
+('C510', 'M004', 0, 'mohammad jenal ridawan', '082316404626', 'Kbuten:Cianjur\r\nKcmtn:Takokak\r\nDeasa Hegarmanah\r\nRT 001\r\nRw 011', 'Takokak', 'KAB. CIANJUR', 'JAWA BARAT', 'lemon', 'Customer', '2021-09-01'),
+('C511', 'M003', 0, 'Ismanto', '6285723867251', ' KEC Sindangkasih Desa Budiharja kamp kalangari RT 05 RW 01\r\nKecamatan : Cikoneng\r\nKota : Kab. Ciamis\r\nProvinsi : Jawa Barat\r\nKode Pos : 46261', 'Sindangkasih', 'KAB. CIAMIS', 'JAWA BARAT', '-', 'Customer', '2021-09-02'),
+('C512', 'M003', 0, 'Suleman', '085278561996', 'Sungai manis jorong V111 tingkarang,nagari tarung tarung,kec rao,kab pasaman,prov sumbar,kode pos 26353', 'Rao', 'KAB. PASAMAN', 'SUMATERA BARAT', '-', 'Customer', '2021-09-02'),
+('C513', 'M003', 0, 'Fatimah', '6281110652523', 'Komplek Pertamina EP Jatibarang, Jalan Melati C6 Mundu Karangampel Indramayu\r\nKecamatan : Karangampel\r\nKota : Kab. Indramayu\r\nProvinsi : Jawa Barat\r\nKode Pos : 45283', 'Karangampel', 'KAB. INDRAMAYU', 'JAWA BARAT', '-', 'Customer', '2021-09-02'),
+('C514', 'M003', 0, 'Gunnes Sipahutar', '6282364176665', 'Dinas Pendidikan Kabupaten Tapanuli Utara\r\nKecamatan : Tarutung\r\nKota : Kab. Tapanuli Utara\r\nProvinsi : Sumatera Utara\r\nKode Pos : 22413', 'Tarutung', 'KAB. TAPANULI UTARA', 'SUMATERA UTARA', '-', 'Customer', '2021-09-02'),
+('C515', 'M011', 0, 'Murti Kasih', '085349938870', 'Jl.semangka,labanan makmur RT 09', 'Teluk Bayur', 'KAB. BERAU', 'KALIMANTAN TIMUR', '-', 'Customer', '2021-09-02'),
+('C516', 'M011', 0, 'Gede suwardike', '085380333963', 'Sadar seriwijaya dusun 8 RT 36/14 kecamatan bandar seribawono lampung timur Lampung', 'Bandar Sribhawono', 'KAB. LAMPUNG TIMUR', 'LAMPUNG', '-', 'Customer', '2021-09-02'),
+('C517', 'M011', 0, 'Judianto sormin', '081277557233', 'Desa lontung jae1.Dusun 3 Rambasiala. Kec:Garoga Kab.tapanuli utara', 'Garoga', 'KAB. TAPANULI UTARA', 'SUMATERA UTARA', '-', 'Customer', '2021-09-02'),
+('C518', 'M001', 0, 'Ibu Mila', '6285314122255', 'ds.susukan\r\nkp.babakan ciherang\r\nrt 05/08\r\nKec. Campaka\r\nKab. Cianjur', 'Campaka', 'KAB. CIANJUR', 'JAWA BARAT', NULL, 'Customer', '2021-09-02'),
+('C519', 'M004', 0, 'ikbal', '085333457879', ' dusun rona masa\r\nDesa: parangina \r\nKecematan: SAPE\r\nKAB.WOHA NTB ', 'Sape', 'KAB. BIMA', 'NUSA TENGGARA BARAT', 'bawang merah', 'Customer', '2021-09-03'),
+('C520', 'M004', 0, 'Tutik', '082338858560', 'Alasmalang motor\r\nRt3\r\nRW2\r\nDam umbul bondoyudo\r\nJln lintas timur\r\nKC . Sukodono \r\nKB .  Lumajang', 'Sukodono', 'KAB. LUMAJANG', 'JAWA TIMUR', 'TOKO PERTANIAN', 'Customer', '2021-09-03'),
+('C521', 'M003', 0, 'Mangajak siagian', '6285306320192', 'desa hutagurgur II (Depan kantor kepala desa hutagurgur II )\r\nKecamatan : Silaen\r\nKota : Kab. Toba Samosir\r\nProvinsi : Sumatera Utara', 'Silaen', 'KAB. TOBA SAMOSIR', 'SUMATERA UTARA', '-', 'Customer', '2021-09-03'),
+('C522', 'M009', 0, 'Ridwan', '6285378156311', 'T. Angin rt 001 rw 001 dusun 4 kecamatan punggur', 'Punggur', 'KAB. LAMPUNG TENGAH', 'LAMPUNG', NULL, 'Customer', '2021-09-03'),
+('C523', 'M008', 0, 'Diyan riyanto', '6282225236765', 'Upt.kandan desa kandan kecmatan,kota besi. kab,kota warigin timur', 'Kota Besi', 'KAB. KOTAWARINGIN TIMUR', 'KALIMANTAN TENGAH', NULL, 'Mitra', '2021-09-03'),
+('C524', 'M006', 0, 'Susantie', '6287720324551', 'Amin Jaya RT 016 RW 004\r\nPangkalan Banteng\r\nKota : Kab. Kotawaringin Barat\r\nProvinsi : Kalimantan Tengah\r\nKode Pos : 74183', 'Pangkalan Banteng', 'KAB. KOTAWARINGIN BARAT', 'KALIMANTAN TENGAH', NULL, 'Customer', '2021-09-03'),
+('C525', 'M009', 0, 'Deka', '', 'Jl. Kamboja timur no. 23 (Yuby shop) timur balai desa padomasan kec. Jombang kab. Jember 6', 'Jombang', 'KAB. JEMBER', 'JAWA TIMUR', NULL, 'Mitra', '2021-09-03'),
+('C527', 'M005', 0, 'Atang', '6281318688540', 'kampung bapung RT. 001/009.kel Ciakar, kec Cibeureum, Tasikmalaya, Jabar', 'Cibeureum', 'KOTA TASIKMALAYA', 'JAWA BARAT', NULL, 'Customer', '2021-09-03'),
+('C528', 'M001', 0, 'Mustopa', '081297363793', 'kp cinangka rt001 rw009.desa tugu jaya.kecamatan cigombong .. kabupaten Bogor. Jawa barat', 'Cigombong', 'KAB. BOGOR', 'JAWA BARAT', NULL, 'Mitra', '2021-09-03'),
+('C529', 'M001', 0, 'sohri', '6285376988930', 'propinsi riau kota pekan baru kabupaten kampar kecamatan kampar kiri hilir kelurahan sungai pagar lingkungan darusalam rt 01 rw 01', 'Kampar Kiri Hilir', 'KAB. KAMPAR', 'RIAU', NULL, 'Mitra', '2021-09-03'),
+('C530', 'M011', 0, 'Supar', '628124923777', 'Perumahan bulu indah blok e7 desa bulu', 'Kraksaan', 'KAB. PROBOLINGGO', 'JAWA TIMUR', '-', 'Customer', '2021-09-04'),
+('C531', 'M011', 0, 'Maman Rahman', '081809461404', 'Dusun Wage RT 12 RW 04, Desa Setianegara', 'Cilimus', 'KAB. KUNINGAN', 'JAWA BARAT', '-', 'Customer', '2021-09-04'),
+('C532', 'M011', 0, 'Iswadi ', '083176087021', 'Gunung Dempo,  Dempo makmur, desa dempo rejo, Rt 7 Rw 3, gang simin', 'Pagar Alam Utara', 'KOTA PAGAR ALAM', 'SUMATERA SELATAN', '-', 'Customer', '2021-09-04'),
+('C533', 'M011', 0, 'Sutrisno', '085368163525', 'Jl. kasmowiyono RT.04 dusun 1 Desa Rejodadi', 'Sembawa', 'KAB. BANYUASIN', 'SUMATERA SELATAN', '-', 'Customer', '2021-09-04'),
+('C534', 'M003', 0, 'Ngatmanto', '6285648745688', ' Sidowayah RT 01 RW 02 kel.jenggrik kec Kedunggalar,kab Ngawi,prov Jawa timur.kode pos 63254\r\nKecamatan : Kedunggalar\r\nKota : Kab. Ngawi\r\nProvinsi : Jawa Timur\r\nKode Pos : 63254', 'Kedunggalar', 'KAB. NGAWI', 'JAWA TIMUR', '-', 'Customer', '2021-09-04'),
+('C535', 'M011', 0, 'Hj Adah', '085348296357', ' Jln.Handil mesjid Des.Tinggiran Tengah RT.02 No.19 Kec.mekarsari Kab.barito kuala', 'Mekarsari', 'KAB. BARITO KUALA', 'KALIMANTAN SELATAN', '-', 'Customer', '2021-09-04'),
+('C536', 'M009', 0, 'Bismillahhirohmanirrohim', '6285279022220', 'karang mulya RT 08 RW 03 Lempuing, kab OKI Sumatera Selatan', 'Lempuing', 'KAB. OGAN KOMERING ILIR', 'SUMATERA SELATAN', NULL, 'Customer', '2021-09-04'),
+('C537', 'M005', 0, 'Umi musyayadah', '6285865401954', ' bregoh  rt/rw 001/033 sumberejo ambulu\r\nPesan 1 botol Pupuk Kilat 1 ltr', 'Ambulu', 'KAB. JEMBER', 'JAWA TIMUR', NULL, 'Customer', '2021-09-04'),
+('C538', 'M007', 0, 'Pur toye', '6281217985584', 'Sumber mulyo pesanggaran', 'Pesanggaran', 'KAB. BANYUWANGI', 'JAWA TIMUR', 'Buah naga', 'Customer', '2021-09-04'),
+('C539', 'M001', 0, 'Sirbayan', '087849155950', ' Dusun Labang kara desa sukadana kecamatan bayan kabupaten Lombok Utara NTB', 'Parado', 'KAB. BIMA', 'NUSA TENGGARA BARAT', '-', 'Customer', '2021-09-04'),
+('C540', 'M006', 0, 'Masriana', '081363686446', 'Jalan ambacang Rt 05/ RW 02 karang putih kelurahan batu gadang kecamatan lubuk kilangan kota padang sumatera barat', 'Lubuk Kilangan', 'KOTA PADANG', 'SUMATERA BARAT', '-', 'Customer', '2021-09-04'),
+('C541', NULL, 16, 'Juwanto', '081272232444', 'Dusun III RT.015/RW.006 Kampung Sumber Rejo', 'Kotagajah', 'Lampung Tengah', 'Lampung', NULL, 'Customer', '2021-09-05'),
+('C542', 'M007', 0, 'Mas irul', '6289520230127', 'Genteng wetan', 'Genteng', 'KAB. BANYUWANGI', 'JAWA TIMUR', 'Buah naga', 'Customer', '2021-09-06');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pembayaran`
+-- Struktur dari tabel `tb_pembayaran`
 --
 
 CREATE TABLE `tb_pembayaran` (
@@ -1765,7 +2088,7 @@ CREATE TABLE `tb_pembayaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_pembayaran`
+-- Dumping data untuk tabel `tb_pembayaran`
 --
 
 INSERT INTO `tb_pembayaran` (`id_pembayaran`, `kode_transaksi`, `id_rekening`, `no_rekening`, `atas_nama`, `tanggal_bayar`, `nama_bank`, `jumlah_bayar`) VALUES
@@ -2221,12 +2544,16 @@ INSERT INTO `tb_pembayaran` (`id_pembayaran`, `kode_transaksi`, `id_rekening`, `
 (457, '28-SO-AGI-VIII-2021-460', 2, '', '', '2021-08-30', 'BCA', 2773000),
 (458, '30-SO-AGI-VIII-2021-462', 1, '', '', '2021-08-30', 'Mandiri', 1060000),
 (459, '31-SO-AGI-VIII-2021-480', 0, '', '', '2021-08-31', '-', 4171500),
-(460, '31-SO-AGI-VIII-2021-480', 0, '', '', '2021-08-31', '-', 370800);
+(460, '31-SO-AGI-VIII-2021-480', 0, '', '', '2021-08-31', '-', 370800),
+(461, '31-SO-AGI-VIII-2021-485', 0, '', '', '2021-09-01', '-', 199820),
+(462, '31-SO-AGI-VIII-2021-484', 0, '', '', '2021-09-01', '-', 230720),
+(463, '31-SO-AGI-VIII-2021-483', 0, '', '', '2021-09-01', '-', 225570),
+(464, '31-SO-AGI-VIII-2021-481', 0, '', '', '2021-09-01', '-', 194670);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pencairan_reward`
+-- Struktur dari tabel `tb_pencairan_reward`
 --
 
 CREATE TABLE `tb_pencairan_reward` (
@@ -2240,7 +2567,7 @@ CREATE TABLE `tb_pencairan_reward` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_point`
+-- Struktur dari tabel `tb_point`
 --
 
 CREATE TABLE `tb_point` (
@@ -2254,7 +2581,7 @@ CREATE TABLE `tb_point` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_point`
+-- Dumping data untuk tabel `tb_point`
 --
 
 INSERT INTO `tb_point` (`id_point`, `id_pelanggan`, `kode_transaksi`, `point`, `status`, `total_point`, `tanggal`) VALUES
@@ -2278,7 +2605,7 @@ INSERT INTO `tb_point` (`id_point`, `id_pelanggan`, `kode_transaksi`, `point`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_produk`
+-- Struktur dari tabel `tb_produk`
 --
 
 CREATE TABLE `tb_produk` (
@@ -2294,19 +2621,19 @@ CREATE TABLE `tb_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_produk`
+-- Dumping data untuk tabel `tb_produk`
 --
 
 INSERT INTO `tb_produk` (`kode_produk`, `nama_produk`, `harga_customer`, `harga_mitra`, `harga_distributor`, `keterangan`, `gambar`, `stok`, `tanggal_update`) VALUES
-('PK001', 'Pupuk Kilat 1L', 170000, 135000, 120000, 'Pupuk Organik Cair KILAT dari Catur Inti Persada isi 1 liter\r\n\r\nTerbuat dari bahan organik yang didapatkan dari hasil pengolahan tanaman-tanaman tertentu. Mengandung berbagai unsur hara makro & mikro tanah yang difungsikan untuk pertumbuhan tanaman, mikroba tanah & hormon untuk tanaman. Fungsi utama pupuk organik cair kilat sebagai penyedia hara tanah bagi tanaman. \r\nFungsi lainnya yaitu meningkatkan pertumbuhan tanaman, memperbaiki kondisi fisik & biologi tanah, menjaga kelestarian alam serta mendukung terciptanya pemupukan berimbang. Peningkatan produktifitas tanaman serta kelestarian alam menjadi prioritas bagi POC kilat dalam mengembangkan pertanian INDONESIA sekarang, saat ini & masa depan. ', 'POC.jpg', 3953, '2021-09-01 00:28:56'),
-('PK002', 'Pupuk Kilat 500ml', 100000, 80000, 80000, 'Pupuk Organik Cair KILAT dari Catur Inti Persada isi 1 liter\r\n\r\nTerbuat dari bahan organik yang didapatkan dari hasil pengolahan tanaman-tanaman tertentu. Mengandung berbagai unsur hara makro & mikro tanah yang difungsikan untuk pertumbuhan tanaman, mikroba tanah & hormon untuk tanaman. Fungsi utama pupuk organik cair kilat sebagai penyedia hara tanah bagi tanaman. \r\nFungsi lainnya yaitu meningkatkan pertumbuhan tanaman, memperbaiki kondisi fisik & biologi tanah, menjaga kelestarian alam serta mendukung terciptanya pemupukan berimbang. Peningkatan produktifitas tanaman serta kelestarian alam menjadi prioritas bagi POC kilat dalam mengembangkan pertanian INDONESIA sekarang, saat ini & masa depan. ', 'POC.jpg', 6126, '2021-09-01 01:01:49'),
+('PK001', 'Pupuk Kilat 1L', 170000, 135000, 120000, 'Pupuk Organik Cair KILAT dari Catur Inti Persada isi 1 liter\r\n\r\nTerbuat dari bahan organik yang didapatkan dari hasil pengolahan tanaman-tanaman tertentu. Mengandung berbagai unsur hara makro & mikro tanah yang difungsikan untuk pertumbuhan tanaman, mikroba tanah & hormon untuk tanaman. Fungsi utama pupuk organik cair kilat sebagai penyedia hara tanah bagi tanaman. \r\nFungsi lainnya yaitu meningkatkan pertumbuhan tanaman, memperbaiki kondisi fisik & biologi tanah, menjaga kelestarian alam serta mendukung terciptanya pemupukan berimbang. Peningkatan produktifitas tanaman serta kelestarian alam menjadi prioritas bagi POC kilat dalam mengembangkan pertanian INDONESIA sekarang, saat ini & masa depan. ', 'POC.jpg', 3850, '2021-09-06 00:04:25'),
+('PK002', 'Pupuk Kilat 500ml', 100000, 80000, 80000, 'Pupuk Organik Cair KILAT dari Catur Inti Persada isi 1 liter\r\n\r\nTerbuat dari bahan organik yang didapatkan dari hasil pengolahan tanaman-tanaman tertentu. Mengandung berbagai unsur hara makro & mikro tanah yang difungsikan untuk pertumbuhan tanaman, mikroba tanah & hormon untuk tanaman. Fungsi utama pupuk organik cair kilat sebagai penyedia hara tanah bagi tanaman. \r\nFungsi lainnya yaitu meningkatkan pertumbuhan tanaman, memperbaiki kondisi fisik & biologi tanah, menjaga kelestarian alam serta mendukung terciptanya pemupukan berimbang. Peningkatan produktifitas tanaman serta kelestarian alam menjadi prioritas bagi POC kilat dalam mengembangkan pertanian INDONESIA sekarang, saat ini & masa depan. ', 'POC.jpg', 6106, '2021-09-04 05:54:54'),
 ('PK003', 'Nutrisi Ternak', 110000, 85000, 85000, 'NUTRISI KILAT TERNAK memperkaya pakan ternak dengan asam amino essensial, vitamin, mikroba bermanfaat, yeast maltase multim-enzim, gula, mineral-mineral dan elektrolit yang sangat membantu proses pertumbuhan dan perkembangan ternak .Tambahan kebutuhan gizi dan NUTRISI TERNAK KILAT membuat ternak lebih sehat, lebih berat, metabolisme terjaga, bau kotoran ternak pun berkurang banyak.Kualitas dan penggunaan pakan lebih efisien.', 'ternak.jpg', 267, '2021-09-01 01:07:10'),
 ('PK004', 'Nutrisi Ikan', 110000, 85000, 85000, 'NUTRISI IAKN KILAT mengandung formula organik untuk ikan/udang berupa nutrisi lengkap yang mengandung asam amino essensial, vitamin, ZPT alami, Mikroba probiotik dan Mineral-mineral. NUTRISI IKAN KILAT mempercepat pertumbuhan plankton sebagai pakan alami, mengikat logam berat dan mengurai senyawa organik. Proses pertumbuhan dan perkembangan ikan dan udang menjadi lebih optimal, kualitas aqua plankton dan zoo plankton meningkat sehingga mencukupi kebutuhan ikan/udang.   ', 'ikan.jpg', 285, '2021-09-01 01:07:23');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_promo`
+-- Struktur dari tabel `tb_promo`
 --
 
 CREATE TABLE `tb_promo` (
@@ -2322,7 +2649,7 @@ CREATE TABLE `tb_promo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_promo`
+-- Dumping data untuk tabel `tb_promo`
 --
 
 INSERT INTO `tb_promo` (`id_promo`, `kode_produk`, `nama_promo`, `harga`, `jumlah`, `bonus`, `gambar`, `keterangan`, `status`) VALUES
@@ -2348,7 +2675,7 @@ INSERT INTO `tb_promo` (`id_promo`, `kode_produk`, `nama_promo`, `harga`, `jumla
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_rekening`
+-- Struktur dari tabel `tb_rekening`
 --
 
 CREATE TABLE `tb_rekening` (
@@ -2359,7 +2686,7 @@ CREATE TABLE `tb_rekening` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_rekening`
+-- Dumping data untuk tabel `tb_rekening`
 --
 
 INSERT INTO `tb_rekening` (`id_rekening`, `nama_bank`, `no_rekening`, `nama_pemilik`) VALUES
@@ -2369,7 +2696,7 @@ INSERT INTO `tb_rekening` (`id_rekening`, `nama_bank`, `no_rekening`, `nama_pemi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_reward`
+-- Struktur dari tabel `tb_reward`
 --
 
 CREATE TABLE `tb_reward` (
@@ -2379,7 +2706,7 @@ CREATE TABLE `tb_reward` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_reward`
+-- Dumping data untuk tabel `tb_reward`
 --
 
 INSERT INTO `tb_reward` (`id_reward`, `pencapaian`, `reward`) VALUES
@@ -2392,7 +2719,7 @@ INSERT INTO `tb_reward` (`id_reward`, `pencapaian`, `reward`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_stok`
+-- Struktur dari tabel `tb_stok`
 --
 
 CREATE TABLE `tb_stok` (
@@ -2408,7 +2735,7 @@ CREATE TABLE `tb_stok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_stok`
+-- Dumping data untuk tabel `tb_stok`
 --
 
 INSERT INTO `tb_stok` (`id_stok`, `kode_produk`, `kode_transaksi`, `id_pelanggan`, `qty`, `sisa`, `status`, `bonus`, `tanggal`) VALUES
@@ -2651,13 +2978,13 @@ INSERT INTO `tb_stok` (`id_stok`, `kode_produk`, `kode_transaksi`, `id_pelanggan
 (334, 'PK001', '09-SO-AGI-VIII-2021-235', 'C226', 1, 2193, 'out', 0, '2021-08-09'),
 (335, 'PK001', '09-SO-AGI-VIII-2021-236', 'C227', 1, 2192, 'out', 0, '2021-08-09'),
 (336, 'PK002', '09-SO-AGI-VIII-2021-237', 'C228', 1, 2191, 'out', 0, '2021-08-09'),
-(337, 'PK001', '09-SO-AGI-VIII-2021-238', 'C229', 2, 2189, 'out', 0, '2021-08-09'),
-(338, 'PK001', '09-SO-AGI-VIII-2021-239', 'C230', 1, 2188, 'out', 0, '2021-08-09'),
-(339, 'PK001', '09-SO-AGI-VIII-2021-240', 'C231', 1, 2187, 'out', 0, '2021-08-09'),
-(340, 'PK001', '09-SO-AGI-VIII-2021-241', 'C232', 1, 2186, 'out', 0, '2021-08-09'),
-(341, 'PK001', '09-SO-AGI-VIII-2021-242', 'C233', 1, 2185, 'out', 0, '2021-08-09'),
-(342, 'PK001', '09-SO-AGI-VIII-2021-243', 'C234', 1, 2184, 'out', 0, '2021-08-09'),
-(343, 'PK001', '09-SO-AGI-VIII-2021-244', 'C235', 1, 2183, 'out', 0, '2021-08-09'),
+(337, 'PK001', '09-SO-AGI-VIII-2021-238', 'C229', 2, 2190, 'out', 0, '2021-08-09'),
+(338, 'PK001', '09-SO-AGI-VIII-2021-239', 'C230', 1, 2189, 'out', 0, '2021-08-09'),
+(339, 'PK001', '09-SO-AGI-VIII-2021-240', 'C231', 1, 2188, 'out', 0, '2021-08-09'),
+(340, 'PK001', '09-SO-AGI-VIII-2021-241', 'C232', 1, 2187, 'out', 0, '2021-08-09'),
+(341, 'PK001', '09-SO-AGI-VIII-2021-242', 'C233', 1, 2186, 'out', 0, '2021-08-09'),
+(342, 'PK001', '09-SO-AGI-VIII-2021-243', 'C234', 1, 2185, 'out', 0, '2021-08-09'),
+(343, 'PK001', '09-SO-AGI-VIII-2021-244', 'C235', 1, 2184, 'out', 0, '2021-08-09'),
 (344, 'PK001', '10-SO-AGI-VIII-2021-245', 'C236', 1, 2179, 'out', 0, '2021-08-10'),
 (345, 'PK001', '10-SO-AGI-VIII-2021-246', 'C237', 1, 2178, 'out', 0, '2021-08-10'),
 (346, 'PK001', '10-SO-AGI-VIII-2021-247', 'C238', 1, 2177, 'out', 0, '2021-08-10'),
@@ -2731,137 +3058,137 @@ INSERT INTO `tb_stok` (`id_stok`, `kode_produk`, `kode_transaksi`, `id_pelanggan
 (419, 'PK001', '16-SO-AGI-VIII-2021-312', 'C296', 2, 1959, 'out', 0, '2021-08-16'),
 (420, 'PK001', '16-SO-AGI-VIII-2021-313', 'C297', 1, 1958, 'out', 0, '2021-08-16'),
 (421, 'PK002', '16-SO-AGI-VIII-2021-314', 'C298', 1, 1957, 'out', 0, '2021-08-16'),
-(422, 'PK001', '16-SO-AGI-VIII-2021-315', 'C299', 1, 1956, 'out', 0, '2021-08-16'),
-(423, 'PK001', '16-SO-AGI-VIII-2021-316', 'C300', 2, 1954, 'out', 0, '2021-08-16'),
-(424, 'PK001', '16-SO-AGI-VIII-2021-317', 'C301', 20, 1934, 'out', 0, '2021-08-16'),
+(422, 'PK001', '16-SO-AGI-VIII-2021-315', 'C299', 1, 1957, 'out', 0, '2021-08-16'),
+(423, 'PK001', '16-SO-AGI-VIII-2021-316', 'C300', 2, 1955, 'out', 0, '2021-08-16'),
+(424, 'PK001', '16-SO-AGI-VIII-2021-317', 'C301', 20, 1935, 'out', 0, '2021-08-16'),
 (425, 'PK002', '16-SO-AGI-VIII-2021-317', 'C301', 4, 6253, 'out', 1, '2021-08-16'),
-(426, 'PK001', '16-SO-AGI-VIII-2021-318', 'C302', 1, 1933, 'out', 0, '2021-08-16'),
-(427, 'PK001', '16-SO-AGI-VIII-2021-319', 'C303', 1, 1932, 'out', 0, '2021-08-16'),
-(428, 'PK001', '16-SO-AGI-VIII-2021-320', 'C304', 2, 1930, 'out', 0, '2021-08-16'),
-(429, 'PK001', '16-SO-AGI-VIII-2021-321', 'C305', 1, 1929, 'out', 0, '2021-08-16'),
-(430, 'PK001', '18-SO-AGI-VIII-2021-322', 'C306', 2, 1927, 'out', 0, '2021-08-18'),
-(431, 'PK001', '18-SO-AGI-VIII-2021-323', 'C029', 1, 1926, 'out', 0, '2021-08-18'),
-(432, 'PK001', '18-SO-AGI-VIII-2021-324', 'C307', 1, 1925, 'out', 0, '2021-08-18'),
-(433, 'PK001', '18-SO-AGI-VIII-2021-325', 'C308', 1, 1924, 'out', 0, '2021-08-18'),
-(434, 'PK001', '18-SO-AGI-VIII-2021-326', 'C309', 1, 1923, 'out', 0, '2021-08-18'),
-(435, 'PK001', '18-SO-AGI-VIII-2021-327', 'C310', 1, 1922, 'out', 0, '2021-08-18'),
+(426, 'PK001', '16-SO-AGI-VIII-2021-318', 'C302', 1, 1934, 'out', 0, '2021-08-16'),
+(427, 'PK001', '16-SO-AGI-VIII-2021-319', 'C303', 1, 1933, 'out', 0, '2021-08-16'),
+(428, 'PK001', '16-SO-AGI-VIII-2021-320', 'C304', 2, 1931, 'out', 0, '2021-08-16'),
+(429, 'PK001', '16-SO-AGI-VIII-2021-321', 'C305', 1, 1930, 'out', 0, '2021-08-16'),
+(430, 'PK001', '18-SO-AGI-VIII-2021-322', 'C306', 2, 1928, 'out', 0, '2021-08-18'),
+(431, 'PK001', '18-SO-AGI-VIII-2021-323', 'C029', 1, 1927, 'out', 0, '2021-08-18'),
+(432, 'PK001', '18-SO-AGI-VIII-2021-324', 'C307', 1, 1926, 'out', 0, '2021-08-18'),
+(433, 'PK001', '18-SO-AGI-VIII-2021-325', 'C308', 1, 1925, 'out', 0, '2021-08-18'),
+(434, 'PK001', '18-SO-AGI-VIII-2021-326', 'C309', 1, 1924, 'out', 0, '2021-08-18'),
+(435, 'PK001', '18-SO-AGI-VIII-2021-327', 'C310', 1, 1923, 'out', 0, '2021-08-18'),
 (436, 'PK001', '17-SO-AGI-VI-2021-328', 'C312', 200, 2056, 'out', 0, '2021-06-17'),
 (437, 'PK002', '17-SO-AGI-VI-2021-328', 'C312', 50, 6294, 'out', 1, '2021-06-17'),
 (438, 'PK002', '18-SO-AGI-VIII-2021-329', 'C313', 1, 6252, 'out', 0, '2021-08-18'),
-(440, 'PK001', '18-SO-AGI-VIII-2021-331', 'C315', 1, 1921, 'out', 0, '2021-08-18'),
-(441, 'PK001', '18-SO-AGI-VIII-2021-332', 'C316', 1, 1920, 'out', 0, '2021-08-18'),
-(442, 'PK001', '18-SO-AGI-VIII-2021-333', 'C317', 2, 1918, 'out', 0, '2021-08-18'),
-(443, 'PK001', '18-SO-AGI-VIII-2021-334', 'C318', 1, 1917, 'out', 0, '2021-08-18'),
+(440, 'PK001', '18-SO-AGI-VIII-2021-331', 'C315', 1, 1922, 'out', 0, '2021-08-18'),
+(441, 'PK001', '18-SO-AGI-VIII-2021-332', 'C316', 1, 1921, 'out', 0, '2021-08-18'),
+(442, 'PK001', '18-SO-AGI-VIII-2021-333', 'C317', 2, 1919, 'out', 0, '2021-08-18'),
+(443, 'PK001', '18-SO-AGI-VIII-2021-334', 'C318', 1, 1918, 'out', 0, '2021-08-18'),
 (444, 'PK002', '18-SO-AGI-VIII-2021-335', 'C319', 1, 6251, 'out', 0, '2021-08-18'),
-(445, 'PK001', '18-SO-AGI-VIII-2021-336', 'C320', 1, 1916, 'out', 0, '2021-08-18'),
-(446, 'PK001', '18-SO-AGI-VIII-2021-337', 'C321', 1, 1915, 'out', 0, '2021-08-18'),
-(447, 'PK001', '18-SO-AGI-VIII-2021-338', 'C311', 1, 1914, 'out', 0, '2021-08-18'),
-(448, 'PK001', '18-SO-AGI-VIII-2021-339', 'C322', 2, 1912, 'out', 0, '2021-08-18'),
-(449, 'PK001', '18-SO-AGI-VIII-2021-340', 'C323', 1, 1911, 'out', 0, '2021-08-18'),
-(450, 'PK001', '18-SO-AGI-VIII-2021-341', 'C324', 1, 1910, 'out', 0, '2021-08-18'),
-(451, 'PK001', '18-SO-AGI-VIII-2021-342', 'C325', 1, 1909, 'out', 0, '2021-08-18'),
-(452, 'PK001', '18-SO-AGI-VIII-2021-343', 'C007', 2, 1907, 'out', 0, '2021-08-18'),
-(453, 'PK001', '18-SO-AGI-VIII-2021-344', 'C207', 2, 1905, 'out', 0, '2021-08-18'),
-(454, 'PK001', '18-SO-AGI-VIII-2021-345', 'C326', 1, 1904, 'out', 0, '2021-08-18'),
-(455, 'PK001', '18-SO-AGI-VIII-2021-346', 'C065', 1, 1903, 'out', 0, '2021-08-18'),
-(456, 'PK001', '18-SO-AGI-VIII-2021-347', 'C327', 1, 1902, 'out', 0, '2021-08-18'),
-(457, 'PK001', '18-SO-AGI-VIII-2021-348', 'C328', 1, 1901, 'out', 0, '2021-08-18'),
-(458, 'PK001', '18-SO-AGI-VIII-2021-349', 'C190', 20, 1881, 'out', 0, '2021-08-18'),
+(445, 'PK001', '18-SO-AGI-VIII-2021-336', 'C320', 1, 1917, 'out', 0, '2021-08-18'),
+(446, 'PK001', '18-SO-AGI-VIII-2021-337', 'C321', 1, 1916, 'out', 0, '2021-08-18'),
+(447, 'PK001', '18-SO-AGI-VIII-2021-338', 'C311', 1, 1915, 'out', 0, '2021-08-18'),
+(448, 'PK001', '18-SO-AGI-VIII-2021-339', 'C322', 2, 1913, 'out', 0, '2021-08-18'),
+(449, 'PK001', '18-SO-AGI-VIII-2021-340', 'C323', 1, 1912, 'out', 0, '2021-08-18'),
+(450, 'PK001', '18-SO-AGI-VIII-2021-341', 'C324', 1, 1911, 'out', 0, '2021-08-18'),
+(451, 'PK001', '18-SO-AGI-VIII-2021-342', 'C325', 1, 1910, 'out', 0, '2021-08-18'),
+(452, 'PK001', '18-SO-AGI-VIII-2021-343', 'C007', 2, 1908, 'out', 0, '2021-08-18'),
+(453, 'PK001', '18-SO-AGI-VIII-2021-344', 'C207', 2, 1906, 'out', 0, '2021-08-18'),
+(454, 'PK001', '18-SO-AGI-VIII-2021-345', 'C326', 1, 1905, 'out', 0, '2021-08-18'),
+(455, 'PK001', '18-SO-AGI-VIII-2021-346', 'C065', 1, 1904, 'out', 0, '2021-08-18'),
+(456, 'PK001', '18-SO-AGI-VIII-2021-347', 'C327', 1, 1903, 'out', 0, '2021-08-18'),
+(457, 'PK001', '18-SO-AGI-VIII-2021-348', 'C328', 1, 1902, 'out', 0, '2021-08-18'),
+(458, 'PK001', '18-SO-AGI-VIII-2021-349', 'C190', 20, 1882, 'out', 0, '2021-08-18'),
 (459, 'PK002', '18-SO-AGI-VIII-2021-349', 'C190', 4, 6247, 'out', 1, '2021-08-18'),
 (460, 'PK003', '18-SO-AGI-VIII-2021-349', 'C190', 2, 306, 'out', 1, '2021-08-18'),
 (461, 'PK004', '18-SO-AGI-VIII-2021-349', 'C190', 2, 296, 'out', 1, '2021-08-18'),
-(462, 'PK001', '18-SO-AGI-VIII-2021-350', 'C329', 1, 1880, 'out', 0, '2021-08-18'),
+(462, 'PK001', '18-SO-AGI-VIII-2021-350', 'C329', 1, 1881, 'out', 0, '2021-08-18'),
 (463, 'PK001', '18-SO-AGI-VIII-2021-351', 'C330', 2, 1878, 'out', 0, '2021-08-18'),
 (464, 'PK001', '18-SO-AGI-VIII-2021-352', 'C331', 1, 1876, 'out', 0, '2021-08-18'),
-(465, 'PK001', '19-SO-AGI-VIII-2021-353', 'C332', 2, 1873, 'out', 0, '2021-08-19'),
-(466, 'PK001', '19-SO-AGI-VIII-2021-354', 'C333', 1, 1872, 'out', 0, '2021-08-19'),
-(467, 'PK001', '19-SO-AGI-VIII-2021-355', 'C334', 1, 1871, 'out', 0, '2021-08-19'),
+(465, 'PK001', '19-SO-AGI-VIII-2021-353', 'C332', 2, 1879, 'out', 0, '2021-08-19'),
+(466, 'PK001', '19-SO-AGI-VIII-2021-354', 'C333', 1, 1878, 'out', 0, '2021-08-19'),
+(467, 'PK001', '19-SO-AGI-VIII-2021-355', 'C334', 1, 1877, 'out', 0, '2021-08-19'),
 (468, 'PK002', '19-SO-AGI-VIII-2021-356', 'C248', 1, 6246, 'out', 0, '2021-08-19'),
-(469, 'PK001', '19-SO-AGI-VIII-2021-357', 'C335', 1, 1870, 'out', 0, '2021-08-19'),
-(470, 'PK001', '19-SO-AGI-VIII-2021-358', 'C336', 1, 1869, 'out', 0, '2021-08-19'),
+(469, 'PK001', '19-SO-AGI-VIII-2021-357', 'C335', 1, 1876, 'out', 0, '2021-08-19'),
+(470, 'PK001', '19-SO-AGI-VIII-2021-358', 'C336', 1, 1875, 'out', 0, '2021-08-19'),
 (471, 'PK003', '19-SO-AGI-VIII-2021-359', 'C338', 1, 305, 'out', 0, '2021-08-19'),
-(472, 'PK001', '19-SO-AGI-VIII-2021-360', 'C337', 5, 1864, 'out', 0, '2021-08-19'),
+(472, 'PK001', '19-SO-AGI-VIII-2021-360', 'C337', 5, 1870, 'out', 0, '2021-08-19'),
 (473, 'PK002', '19-SO-AGI-VIII-2021-360', 'C337', 1, 6245, 'out', 1, '2021-08-19'),
 (474, 'PK003', '19-SO-AGI-VIII-2021-360', 'C337', 1, 304, 'out', 1, '2021-08-19'),
-(475, 'PK001', '19-SO-AGI-VIII-2021-361', 'C166', 1, 1863, 'out', 0, '2021-08-19'),
-(476, 'PK001', '19-SO-AGI-VIII-2021-362', 'C340', 1, 1862, 'out', 0, '2021-08-19'),
-(477, 'PK001', '19-SO-AGI-VIII-2021-363', 'C341', 1, 1861, 'out', 0, '2021-08-19'),
-(478, 'PK001', '19-SO-AGI-VIII-2021-364', 'C339', 1, 1860, 'out', 0, '2021-08-19'),
-(479, 'PK001', '20-SO-AGI-VIII-2021-365', 'C342', 1, 1859, 'out', 0, '2021-08-20'),
-(480, 'PK001', '20-SO-AGI-VIII-2021-366', 'C343', 1, 1858, 'out', 0, '2021-08-20'),
-(481, 'PK001', '20-SO-AGI-VIII-2021-367', 'C344', 1, 1857, 'out', 0, '2021-08-20'),
-(482, 'PK001', '20-SO-AGI-VIII-2021-368', 'C346', 1, 1856, 'out', 0, '2021-08-20'),
-(483, 'PK001', '20-SO-AGI-VIII-2021-369', 'C105', 1, 1855, 'out', 0, '2021-08-20'),
-(484, 'PK001', '20-SO-AGI-VIII-2021-370', 'C347', 1, 1854, 'out', 0, '2021-08-20'),
-(485, 'PK001', '20-SO-AGI-VIII-2021-371', 'C223', 1, 1853, 'out', 0, '2021-08-20'),
-(486, 'PK001', '20-SO-AGI-VIII-2021-372', 'C156', 1, 1852, 'out', 0, '2021-08-20'),
-(487, 'PK001', '21-SO-AGI-VIII-2021-373', 'C360', 2, 1850, 'out', 0, '2021-08-21'),
-(488, 'PK001', '21-SO-AGI-VIII-2021-374', 'C367', 2, 1848, 'out', 0, '2021-08-21'),
-(489, 'PK001', '21-SO-AGI-VIII-2021-375', 'C368', 1, 1847, 'out', 0, '2021-08-21'),
-(490, 'PK001', '21-SO-AGI-VIII-2021-376', 'C375', 1, 1846, 'out', 0, '2021-08-21'),
-(491, 'PK001', '21-SO-AGI-VIII-2021-377', 'C378', 1, 1845, 'out', 0, '2021-08-21'),
-(492, 'PK001', '21-SO-AGI-VIII-2021-378', 'C380', 1, 1844, 'out', 0, '2021-08-21'),
-(493, 'PK001', '21-SO-AGI-VIII-2021-379', 'C383', 1, 1843, 'out', 0, '2021-08-21'),
-(494, 'PK001', '21-SO-AGI-VIII-2021-380', 'C105', 1, 1842, 'out', 0, '2021-08-21'),
-(495, 'PK001', '21-SO-AGI-VIII-2021-381', 'C385', 1, 1841, 'out', 0, '2021-08-21'),
-(496, 'PK001', '21-SO-AGI-VIII-2021-382', 'C387', 1, 1840, 'out', 0, '2021-08-21'),
-(497, 'PK001', '21-SO-AGI-VIII-2021-383', 'C381', 1, 1839, 'out', 0, '2021-08-21'),
-(499, 'PK001', '21-SO-AGI-VIII-2021-385', 'C222', 20, 1819, 'out', 0, '2021-08-21'),
+(475, 'PK001', '19-SO-AGI-VIII-2021-361', 'C166', 1, 1869, 'out', 0, '2021-08-19'),
+(476, 'PK001', '19-SO-AGI-VIII-2021-362', 'C340', 1, 1868, 'out', 0, '2021-08-19'),
+(477, 'PK001', '19-SO-AGI-VIII-2021-363', 'C341', 1, 1867, 'out', 0, '2021-08-19'),
+(478, 'PK001', '19-SO-AGI-VIII-2021-364', 'C339', 1, 1866, 'out', 0, '2021-08-19'),
+(479, 'PK001', '20-SO-AGI-VIII-2021-365', 'C342', 1, 4365, 'out', 0, '2021-08-20'),
+(480, 'PK001', '20-SO-AGI-VIII-2021-366', 'C343', 1, 4364, 'out', 0, '2021-08-20'),
+(481, 'PK001', '20-SO-AGI-VIII-2021-367', 'C344', 1, 4363, 'out', 0, '2021-08-20'),
+(482, 'PK001', '20-SO-AGI-VIII-2021-368', 'C346', 1, 4362, 'out', 0, '2021-08-20'),
+(483, 'PK001', '20-SO-AGI-VIII-2021-369', 'C105', 1, 4361, 'out', 0, '2021-08-20'),
+(484, 'PK001', '20-SO-AGI-VIII-2021-370', 'C347', 1, 4360, 'out', 0, '2021-08-20'),
+(485, 'PK001', '20-SO-AGI-VIII-2021-371', 'C223', 1, 4359, 'out', 0, '2021-08-20'),
+(486, 'PK001', '20-SO-AGI-VIII-2021-372', 'C156', 1, 4358, 'out', 0, '2021-08-20'),
+(487, 'PK001', '21-SO-AGI-VIII-2021-373', 'C360', 2, 4356, 'out', 0, '2021-08-21'),
+(488, 'PK001', '21-SO-AGI-VIII-2021-374', 'C367', 2, 4354, 'out', 0, '2021-08-21'),
+(489, 'PK001', '21-SO-AGI-VIII-2021-375', 'C368', 1, 4353, 'out', 0, '2021-08-21'),
+(490, 'PK001', '21-SO-AGI-VIII-2021-376', 'C375', 1, 4352, 'out', 0, '2021-08-21'),
+(491, 'PK001', '21-SO-AGI-VIII-2021-377', 'C378', 1, 4351, 'out', 0, '2021-08-21'),
+(492, 'PK001', '21-SO-AGI-VIII-2021-378', 'C380', 1, 4350, 'out', 0, '2021-08-21'),
+(493, 'PK001', '21-SO-AGI-VIII-2021-379', 'C383', 1, 4349, 'out', 0, '2021-08-21'),
+(494, 'PK001', '21-SO-AGI-VIII-2021-380', 'C105', 1, 4348, 'out', 0, '2021-08-21'),
+(495, 'PK001', '21-SO-AGI-VIII-2021-381', 'C385', 1, 4347, 'out', 0, '2021-08-21'),
+(496, 'PK001', '21-SO-AGI-VIII-2021-382', 'C387', 1, 4346, 'out', 0, '2021-08-21'),
+(497, 'PK001', '21-SO-AGI-VIII-2021-383', 'C381', 1, 4345, 'out', 0, '2021-08-21'),
+(499, 'PK001', '21-SO-AGI-VIII-2021-385', 'C222', 20, 4329, 'out', 0, '2021-08-21'),
 (500, 'PK002', '21-SO-AGI-VIII-2021-385', 'C222', 4, 6241, 'out', 1, '2021-08-21'),
 (501, 'PK003', '21-SO-AGI-VIII-2021-385', 'C222', 2, 302, 'out', 1, '2021-08-21'),
 (502, 'PK004', '21-SO-AGI-VIII-2021-385', 'C222', 2, 294, 'out', 1, '2021-08-21'),
-(503, 'PK001', '21-SO-AGI-VIII-2021-386', 'C402', 1, 1818, 'out', 0, '2021-08-21'),
-(504, 'PK001', '21-SO-AGI-VIII-2021-387', 'C403', 2, 1816, 'out', 0, '2021-08-21'),
-(505, 'PK001', '21-SO-AGI-VIII-2021-388', 'C390', 5, 1811, 'out', 0, '2021-08-21'),
+(503, 'PK001', '21-SO-AGI-VIII-2021-386', 'C402', 1, 4328, 'out', 0, '2021-08-21'),
+(504, 'PK001', '21-SO-AGI-VIII-2021-387', 'C403', 2, 4326, 'out', 0, '2021-08-21'),
+(505, 'PK001', '21-SO-AGI-VIII-2021-388', 'C390', 5, 4321, 'out', 0, '2021-08-21'),
 (506, 'PK002', '21-SO-AGI-VIII-2021-388', 'C390', 1, 6240, 'out', 1, '2021-08-21'),
 (507, 'PK003', '21-SO-AGI-VIII-2021-388', 'C390', 1, 301, 'out', 1, '2021-08-21'),
-(508, 'PK001', '21-SO-AGI-VIII-2021-389', 'C404', 3, 1808, 'out', 0, '2021-08-21'),
-(509, 'PK001', '23-SO-AGI-VIII-2021-390', 'C405', 2, 1806, 'out', 0, '2021-08-23'),
-(510, 'PK001', '23-SO-AGI-VIII-2021-391', 'C411', 1, 1803, 'out', 0, '2021-08-23'),
-(511, 'PK001', '23-SO-AGI-VIII-2021-392', 'C410', 1, 1802, 'out', 0, '2021-08-23'),
-(512, 'PK001', '23-SO-AGI-VIII-2021-393', 'C409', 2, 1800, 'out', 0, '2021-08-23'),
-(513, 'PK001', '23-SO-AGI-VIII-2021-394', 'C408', 1, 1799, 'out', 0, '2021-08-23'),
-(514, 'PK001', '23-SO-AGI-VIII-2021-395', 'C407', 1, 1798, 'out', 0, '2021-08-23'),
-(515, 'PK001', '23-SO-AGI-VIII-2021-396', 'C406', 1, 1797, 'out', 0, '2021-08-23'),
-(516, 'PK001', '23-SO-AGI-VIII-2021-397', 'C412', 1, 1796, 'out', 0, '2021-08-23'),
-(517, 'PK001', '23-SO-AGI-VIII-2021-398', 'C413', 1, 1795, 'out', 0, '2021-08-23'),
-(518, 'PK001', '23-SO-AGI-VIII-2021-399', 'C414', 2, 1793, 'out', 0, '2021-08-23'),
-(519, 'PK001', '23-SO-AGI-VIII-2021-400', 'C415', 5, 1788, 'out', 0, '2021-08-23'),
+(508, 'PK001', '21-SO-AGI-VIII-2021-389', 'C404', 3, 4318, 'out', 0, '2021-08-21'),
+(509, 'PK001', '23-SO-AGI-VIII-2021-390', 'C405', 2, 4316, 'out', 0, '2021-08-23'),
+(510, 'PK001', '23-SO-AGI-VIII-2021-391', 'C411', 1, 4315, 'out', 0, '2021-08-23'),
+(511, 'PK001', '23-SO-AGI-VIII-2021-392', 'C410', 1, 4314, 'out', 0, '2021-08-23'),
+(512, 'PK001', '23-SO-AGI-VIII-2021-393', 'C409', 2, 4312, 'out', 0, '2021-08-23'),
+(513, 'PK001', '23-SO-AGI-VIII-2021-394', 'C408', 1, 4311, 'out', 0, '2021-08-23'),
+(514, 'PK001', '23-SO-AGI-VIII-2021-395', 'C407', 1, 4310, 'out', 0, '2021-08-23'),
+(515, 'PK001', '23-SO-AGI-VIII-2021-396', 'C406', 1, 4309, 'out', 0, '2021-08-23'),
+(516, 'PK001', '23-SO-AGI-VIII-2021-397', 'C412', 1, 4308, 'out', 0, '2021-08-23'),
+(517, 'PK001', '23-SO-AGI-VIII-2021-398', 'C413', 1, 4307, 'out', 0, '2021-08-23'),
+(518, 'PK001', '23-SO-AGI-VIII-2021-399', 'C414', 2, 4305, 'out', 0, '2021-08-23'),
+(519, 'PK001', '23-SO-AGI-VIII-2021-400', 'C415', 5, 4300, 'out', 0, '2021-08-23'),
 (520, 'PK002', '23-SO-AGI-VIII-2021-400', 'C415', 1, 6239, 'out', 1, '2021-08-23'),
 (521, 'PK003', '23-SO-AGI-VIII-2021-400', 'C415', 1, 300, 'out', 1, '2021-08-23'),
-(522, 'PK001', '23-SO-AGI-VIII-2021-401', 'C416', 1, 1787, 'out', 0, '2021-08-23'),
-(523, 'PK001', '23-SO-AGI-VIII-2021-402', 'C417', 1, 1786, 'out', 0, '2021-08-23'),
-(524, 'PK001', '23-SO-AGI-VIII-2021-403', 'C418', 1, 1785, 'out', 0, '2021-08-23'),
+(522, 'PK001', '23-SO-AGI-VIII-2021-401', 'C416', 1, 4299, 'out', 0, '2021-08-23'),
+(523, 'PK001', '23-SO-AGI-VIII-2021-402', 'C417', 1, 4298, 'out', 0, '2021-08-23'),
+(524, 'PK001', '23-SO-AGI-VIII-2021-403', 'C418', 1, 4297, 'out', 0, '2021-08-23'),
 (525, 'PK004', '23-SO-AGI-VIII-2021-404', 'C419', 1, 293, 'out', 0, '2021-08-23'),
-(526, 'PK001', '23-SO-AGI-VIII-2021-405', 'C420', 1, 1784, 'out', 0, '2021-08-23'),
-(527, 'PK001', '24-SO-AGI-VIII-2021-406', 'C424', 2, 1780, 'out', 0, '2021-08-24'),
-(528, 'PK001', '24-SO-AGI-VIII-2021-407', 'C426', 1, 1779, 'out', 0, '2021-08-24'),
-(529, 'PK001', '24-SO-AGI-VIII-2021-408', 'C428', 1, 1778, 'out', 0, '2021-08-24'),
-(530, 'PK001', '24-SO-AGI-VIII-2021-409', 'C429', 2, 1776, 'out', 0, '2021-08-24'),
-(531, 'PK001', '24-SO-AGI-VIII-2021-410', 'C430', 2, 1774, 'out', 0, '2021-08-24'),
-(532, 'PK001', '24-SO-AGI-VIII-2021-411', 'C431', 1, 1773, 'out', 0, '2021-08-24'),
-(533, 'PK001', '24-SO-AGI-VIII-2021-412', 'C432', 1, 1772, 'out', 0, '2021-08-24'),
-(534, 'PK001', '24-SO-AGI-VIII-2021-413', 'C433', 1, 1771, 'out', 0, '2021-08-24'),
+(526, 'PK001', '23-SO-AGI-VIII-2021-405', 'C420', 1, 4296, 'out', 0, '2021-08-23'),
+(527, 'PK001', '24-SO-AGI-VIII-2021-406', 'C424', 2, 4292, 'out', 0, '2021-08-24'),
+(528, 'PK001', '24-SO-AGI-VIII-2021-407', 'C426', 1, 4291, 'out', 0, '2021-08-24'),
+(529, 'PK001', '24-SO-AGI-VIII-2021-408', 'C428', 1, 4290, 'out', 0, '2021-08-24'),
+(530, 'PK001', '24-SO-AGI-VIII-2021-409', 'C429', 2, 4289, 'out', 0, '2021-08-24'),
+(531, 'PK001', '24-SO-AGI-VIII-2021-410', 'C430', 2, 4288, 'out', 0, '2021-08-24'),
+(532, 'PK001', '24-SO-AGI-VIII-2021-411', 'C431', 1, 4287, 'out', 0, '2021-08-24'),
+(533, 'PK001', '24-SO-AGI-VIII-2021-412', 'C432', 1, 4296, 'out', 0, '2021-08-24'),
+(534, 'PK001', '24-SO-AGI-VIII-2021-413', 'C433', 1, 4295, 'out', 0, '2021-08-24'),
 (535, 'PK002', '24-SO-AGI-VIII-2021-414', 'C157', 2, 6235, 'out', 1, '2021-08-24'),
 (536, 'PK003', '24-SO-AGI-VIII-2021-414', 'C157', 1, 299, 'out', 1, '2021-08-24'),
-(537, 'PK001', '24-SO-AGI-VIII-2021-414', 'C157', 10, 1761, 'out', 0, '2021-08-24'),
-(538, 'PK001', '24-SO-AGI-VIII-2021-415', 'C435', 5, 1756, 'out', 0, '2021-08-24'),
+(537, 'PK001', '24-SO-AGI-VIII-2021-414', 'C157', 10, 4285, 'out', 0, '2021-08-24'),
+(538, 'PK001', '24-SO-AGI-VIII-2021-415', 'C435', 5, 4280, 'out', 0, '2021-08-24'),
 (539, 'PK002', '24-SO-AGI-VIII-2021-415', 'C435', 1, 6234, 'out', 1, '2021-08-24'),
 (540, 'PK003', '24-SO-AGI-VIII-2021-415', 'C435', 1, 298, 'out', 1, '2021-08-24'),
-(541, 'PK001', '24-SO-AGI-VIII-2021-416', 'C436', 1, 1755, 'out', 0, '2021-08-24'),
-(542, 'PK001', '25-SO-AGI-VIII-2021-417', 'C437', 1, 1591, 'out', 0, '2021-08-25'),
-(543, 'PK001', '25-SO-AGI-VIII-2021-418', 'C438', 1, 1590, 'out', 0, '2021-08-25'),
-(544, 'PK001', '25-SO-AGI-VIII-2021-419', 'C439', 1, 1589, 'out', 0, '2021-08-25'),
-(545, 'PK001', '25-SO-AGI-VIII-2021-420', 'C440', 1, 1588, 'out', 0, '2021-08-25'),
-(546, 'PK001', '25-SO-AGI-VIII-2021-421', 'C223', 1, 1587, 'out', 0, '2021-08-25'),
-(547, 'PK001', '25-SO-AGI-VIII-2021-422', 'C441', 1, 1586, 'out', 0, '2021-08-25'),
+(541, 'PK001', '24-SO-AGI-VIII-2021-416', 'C436', 1, 4279, 'out', 0, '2021-08-24'),
+(542, 'PK001', '25-SO-AGI-VIII-2021-417', 'C437', 1, 4248, 'out', 0, '2021-08-25'),
+(543, 'PK001', '25-SO-AGI-VIII-2021-418', 'C438', 1, 4247, 'out', 0, '2021-08-25'),
+(544, 'PK001', '25-SO-AGI-VIII-2021-419', 'C439', 1, 4246, 'out', 0, '2021-08-25'),
+(545, 'PK001', '25-SO-AGI-VIII-2021-420', 'C440', 1, 4245, 'out', 0, '2021-08-25'),
+(546, 'PK001', '25-SO-AGI-VIII-2021-421', 'C223', 1, 4244, 'out', 0, '2021-08-25'),
+(547, 'PK001', '25-SO-AGI-VIII-2021-422', 'C441', 1, 4243, 'out', 0, '2021-08-25'),
 (548, 'PK002', '25-SO-AGI-VIII-2021-423', 'C442', 1, 6233, 'out', 0, '2021-08-25'),
-(549, 'PK001', '25-SO-AGI-VIII-2021-424', 'C443', 1, 1585, 'out', 0, '2021-08-25'),
-(550, 'PK001', '25-SO-AGI-VIII-2021-425', 'C444', 1, 1584, 'out', 0, '2021-08-25'),
-(551, 'PK001', '26-SO-AGI-VIII-2021-426', 'C445', 1, 1583, 'out', 0, '2021-08-26'),
+(549, 'PK001', '25-SO-AGI-VIII-2021-424', 'C443', 1, 4242, 'out', 0, '2021-08-25'),
+(550, 'PK001', '25-SO-AGI-VIII-2021-425', 'C444', 1, 4241, 'out', 0, '2021-08-25'),
+(551, 'PK001', '26-SO-AGI-VIII-2021-426', 'C445', 1, 4240, 'out', 0, '2021-08-26'),
 (552, 'PK001', '14-SO-AGI-VII-2021-427', 'C447', 200, 1684, 'out', 0, '2021-07-14'),
-(553, 'PK001', '26-SO-AGI-VIII-2021-428', 'C448', 1, 1582, 'out', 0, '2021-08-26'),
-(555, 'PK001', '26-SO-AGI-VIII-2021-430', 'C449', 1, 1580, 'out', 0, '2021-08-26'),
+(553, 'PK001', '26-SO-AGI-VIII-2021-428', 'C448', 1, 4239, 'out', 0, '2021-08-26'),
+(555, 'PK001', '26-SO-AGI-VIII-2021-430', 'C449', 1, 4238, 'out', 0, '2021-08-26'),
 (556, 'PK001', '02-SO-AGI-VIII-2021-431', 'C450', 1, 2249, 'out', 0, '2021-08-02'),
 (557, 'PK001', '02-SO-AGI-VIII-2021-432', 'C451', 1, 2248, 'out', 0, '2021-08-02'),
 (558, 'PK001', '03-SO-AGI-VIII-2021-433', 'C389', 20, 2216, 'out', 0, '2021-08-03'),
@@ -2876,34 +3203,34 @@ INSERT INTO `tb_stok` (`id_stok`, `kode_produk`, `kode_transaksi`, `id_pelanggan
 (570, 'PK002', '12-SO-AGI-VIII-2021-440', 'C458', 5, 6293, 'out', 1, '2021-08-12'),
 (571, 'PK001', '12-SO-AGI-VIII-2021-441', 'C373', 1, 2007, 'out', 0, '2021-08-12'),
 (572, 'PK001', '12-SO-AGI-VIII-2021-442', 'C460', 1, 2006, 'out', 0, '2021-08-12'),
-(573, 'PK001', '27-SO-AGI-VIII-2021-443', 'C462', 1, 1579, 'out', 0, '2021-08-27'),
-(574, 'PK001', '27-SO-AGI-VIII-2021-444', 'C463', 1, 1578, 'out', 0, '2021-08-27'),
-(575, 'PK001', '27-SO-AGI-VIII-2021-445', 'C205', 5, 1573, 'out', 0, '2021-08-27'),
+(573, 'PK001', '27-SO-AGI-VIII-2021-443', 'C462', 1, 4237, 'out', 0, '2021-08-27'),
+(574, 'PK001', '27-SO-AGI-VIII-2021-444', 'C463', 1, 4236, 'out', 0, '2021-08-27'),
+(575, 'PK001', '27-SO-AGI-VIII-2021-445', 'C205', 5, 4231, 'out', 0, '2021-08-27'),
 (576, 'PK002', '27-SO-AGI-VIII-2021-445', 'C205', 1, 6221, 'out', 1, '2021-08-27'),
 (577, 'PK003', '27-SO-AGI-VIII-2021-445', 'C205', 1, 297, 'out', 1, '2021-08-27'),
-(578, 'PK001', '27-SO-AGI-VIII-2021-446', 'C464', 1, 1572, 'out', 0, '2021-08-27'),
-(579, 'PK001', '27-SO-AGI-VIII-2021-447', 'C465', 1, 1571, 'out', 0, '2021-08-27'),
+(578, 'PK001', '27-SO-AGI-VIII-2021-446', 'C464', 1, 4230, 'out', 0, '2021-08-27'),
+(579, 'PK001', '27-SO-AGI-VIII-2021-447', 'C465', 1, 4229, 'out', 0, '2021-08-27'),
 (580, 'PK002', '27-SO-AGI-VIII-2021-448', 'C466', 1, 6220, 'out', 0, '2021-08-27'),
-(581, 'PK001', '27-SO-AGI-VIII-2021-449', 'C468', 1, 1570, 'out', 0, '2021-08-27'),
-(582, 'PK001', '27-SO-AGI-VIII-2021-450', 'C467', 20, 1550, 'out', 0, '2021-08-27'),
-(584, 'PK001', '27-SO-AGI-VIII-2021-451', 'C469', 20, 1530, 'out', 0, '2021-08-27'),
+(581, 'PK001', '27-SO-AGI-VIII-2021-449', 'C468', 1, 4228, 'out', 0, '2021-08-27'),
+(582, 'PK001', '27-SO-AGI-VIII-2021-450', 'C467', 20, 4208, 'out', 0, '2021-08-27'),
+(584, 'PK001', '27-SO-AGI-VIII-2021-451', 'C469', 20, 4208, 'out', 0, '2021-08-27'),
 (585, 'PK002', '27-SO-AGI-VIII-2021-451', 'C469', 4, 6212, 'out', 1, '2021-08-27'),
 (586, 'PK003', '27-SO-AGI-VIII-2021-451', 'C469', 2, 295, 'out', 1, '2021-08-27'),
 (587, 'PK004', '27-SO-AGI-VIII-2021-451', 'C469', 2, 291, 'out', 1, '2021-08-27'),
-(588, 'PK001', '27-SO-AGI-VIII-2021-452', 'C471', 1, 1529, 'out', 0, '2021-08-27'),
-(589, 'PK001', '27-SO-AGI-VIII-2021-453', 'C472', 1, 1528, 'out', 0, '2021-08-27'),
-(590, 'PK001', '27-SO-AGI-VIII-2021-454', 'C473', 1, 1527, 'out', 0, '2021-08-27'),
-(591, 'PK001', '28-SO-AGI-VIII-2021-455', 'C475', 1, 1526, 'out', 0, '2021-08-28'),
-(592, 'PK001', '28-SO-AGI-VIII-2021-456', 'C476', 2, 1524, 'out', 0, '2021-08-28'),
-(593, 'PK001', '28-SO-AGI-VIII-2021-457', 'C477', 1, 1523, 'out', 0, '2021-08-28'),
-(594, 'PK001', '28-SO-AGI-VIII-2021-458', 'C478', 1, 1522, 'out', 0, '2021-08-28'),
-(595, 'PK001', '28-SO-AGI-VIII-2021-459', 'C479', 1, 1521, 'out', 0, '2021-08-28'),
-(596, 'PK001', '28-SO-AGI-VIII-2021-460', 'C105', 20, 1501, 'out', 0, '2021-08-28'),
+(588, 'PK001', '27-SO-AGI-VIII-2021-452', 'C471', 1, 4188, 'out', 0, '2021-08-27'),
+(589, 'PK001', '27-SO-AGI-VIII-2021-453', 'C472', 1, 4187, 'out', 0, '2021-08-27'),
+(590, 'PK001', '27-SO-AGI-VIII-2021-454', 'C473', 1, 4186, 'out', 0, '2021-08-27'),
+(591, 'PK001', '28-SO-AGI-VIII-2021-455', 'C475', 1, 4085, 'out', 0, '2021-08-28'),
+(592, 'PK001', '28-SO-AGI-VIII-2021-456', 'C476', 2, 4083, 'out', 0, '2021-08-28'),
+(593, 'PK001', '28-SO-AGI-VIII-2021-457', 'C477', 1, 4082, 'out', 0, '2021-08-28'),
+(594, 'PK001', '28-SO-AGI-VIII-2021-458', 'C478', 1, 4081, 'out', 0, '2021-08-28'),
+(595, 'PK001', '28-SO-AGI-VIII-2021-459', 'C479', 1, 4080, 'out', 0, '2021-08-28'),
+(596, 'PK001', '28-SO-AGI-VIII-2021-460', 'C105', 20, 4070, 'out', 0, '2021-08-28'),
 (597, 'PK002', '28-SO-AGI-VIII-2021-460', 'C105', 4, 6208, 'out', 1, '2021-08-28'),
 (598, 'PK003', '28-SO-AGI-VIII-2021-460', 'C105', 2, 293, 'out', 1, '2021-08-28'),
 (599, 'PK004', '28-SO-AGI-VIII-2021-460', 'C105', 2, 289, 'out', 1, '2021-08-28'),
-(600, 'PK001', '28-SO-AGI-VIII-2021-461', 'C480', 1, 1500, 'out', 0, '2021-08-28'),
-(601, 'PK001', '-', '-', 3, 2180, 'sampel', 0, '2021-08-09'),
+(600, 'PK001', '28-SO-AGI-VIII-2021-461', 'C480', 1, 4069, 'out', 0, '2021-08-28'),
+(601, 'PK001', '-', '-', 3, 2181, 'sampel', 0, '2021-08-09'),
 (602, 'PK004', '16-SO-AGI-VIII-2021-305', 'C099', 2, 300, 'out', 1, '2021-08-16'),
 (603, 'PK003', '16-SO-AGI-VIII-2021-305', 'C099', 2, 310, 'out', 1, '2021-08-16'),
 (604, 'PK003', '16-SO-AGI-VIII-2021-317', 'C301', 2, 308, 'out', 1, '2021-08-16'),
@@ -2912,73 +3239,113 @@ INSERT INTO `tb_stok` (`id_stok`, `kode_produk`, `kode_transaksi`, `id_pelanggan
 (607, 'PK003', '-', '-', 4, 312, 'sampel', 0, '2021-08-14'),
 (608, 'PK001', '14-SO-AGI-VII-2021-427', 'C447', 200, 2000, 'out', 0, '2021-07-14'),
 (609, 'PK002', '-', '-', 2, 6290, 'sampel', 0, '2021-08-12'),
-(611, 'PK001', '30-SO-AGI-VIII-2021-462', 'C060', 6, 1493, 'out', 0, '2021-08-30'),
+(611, 'PK001', '30-SO-AGI-VIII-2021-462', 'C060', 6, 4063, 'out', 0, '2021-08-30'),
 (612, 'PK002', '30-SO-AGI-VIII-2021-462', 'C060', 1, 6184, 'out', 0, '2021-08-30'),
 (613, 'PK003', '30-SO-AGI-VIII-2021-462', 'C060', 1, 292, 'out', 0, '2021-08-30'),
 (614, 'PK003', '30-SO-AGI-VIII-2021-463', 'C209', 1, 291, 'out', 0, '2021-08-30'),
-(615, 'PK001', '30-SO-AGI-VIII-2021-464', 'C483', 1, 1492, 'out', 0, '2021-08-30'),
-(616, 'PK001', '30-SO-AGI-VIII-2021-465', 'C481', 1, 1491, 'out', 0, '2021-08-30'),
-(617, 'PK001', '30-SO-AGI-VIII-2021-466', 'C482', 20, 1471, 'out', 0, '2021-08-30'),
+(615, 'PK001', '30-SO-AGI-VIII-2021-464', 'C483', 1, 4062, 'out', 0, '2021-08-30'),
+(616, 'PK001', '30-SO-AGI-VIII-2021-465', 'C481', 1, 4061, 'out', 0, '2021-08-30'),
+(617, 'PK001', '30-SO-AGI-VIII-2021-466', 'C482', 20, 4041, 'out', 0, '2021-08-30'),
 (618, 'PK002', '30-SO-AGI-VIII-2021-466', 'C482', 4, 6183, 'out', 0, '2021-08-30'),
 (619, 'PK004', '30-SO-AGI-VIII-2021-466', 'C482', 2, 287, 'out', 0, '2021-08-30'),
 (620, 'PK003', '30-SO-AGI-VIII-2021-466', 'C482', 2, 289, 'out', 0, '2021-08-30'),
-(621, 'PK001', '30-SO-AGI-VIII-2021-467', 'C484', 1, 1470, 'out', 0, '2021-08-30'),
-(622, 'PK001', '30-SO-AGI-VIII-2021-468', 'C485', 1, 1469, 'out', 0, '2021-08-30'),
-(623, 'PK001', '30-SO-AGI-VIII-2021-469', 'C486', 1, 1468, 'out', 0, '2021-08-30'),
-(624, 'PK001', '30-SO-AGI-VIII-2021-470', 'C487', 1, 1467, 'out', 0, '2021-08-30'),
-(625, 'PK001', '30-SO-AGI-VIII-2021-471', 'C488', 2, 1465, 'out', 0, '2021-08-30'),
-(626, 'PK001', '30-SO-AGI-VIII-2021-472', 'C489', 3, 1462, 'out', 0, '2021-08-30'),
-(627, 'PK001', '30-SO-AGI-VIII-2021-473', 'C402', 1, 1461, 'out', 0, '2021-08-30'),
+(621, 'PK001', '30-SO-AGI-VIII-2021-467', 'C484', 1, 4040, 'out', 0, '2021-08-30'),
+(622, 'PK001', '30-SO-AGI-VIII-2021-468', 'C485', 1, 4039, 'out', 0, '2021-08-30'),
+(623, 'PK001', '30-SO-AGI-VIII-2021-469', 'C486', 1, 4038, 'out', 0, '2021-08-30'),
+(624, 'PK001', '30-SO-AGI-VIII-2021-470', 'C487', 1, 4037, 'out', 0, '2021-08-30'),
+(625, 'PK001', '30-SO-AGI-VIII-2021-471', 'C488', 2, 4035, 'out', 0, '2021-08-30'),
+(626, 'PK001', '30-SO-AGI-VIII-2021-472', 'C489', 3, 4032, 'out', 0, '2021-08-30'),
+(627, 'PK001', '30-SO-AGI-VIII-2021-473', 'C402', 1, 4031, 'out', 0, '2021-08-30'),
 (629, 'PK002', '-', '-', 1, 6323, 'sampel', 0, '2021-08-09'),
-(630, 'PK001', '30-SO-AGI-VIII-2021-474', 'C490', 5, 1456, 'out', 0, '2021-08-30'),
+(630, 'PK001', '30-SO-AGI-VIII-2021-474', 'C490', 5, 4026, 'out', 0, '2021-08-30'),
 (631, 'PK002', '30-SO-AGI-VIII-2021-474', 'C490', 1, 6179, 'out', 0, '2021-08-30'),
-(632, 'PK001', '23-SO-AGI-VIII-2021-475', 'C491', 2, 1782, 'out', 0, '2021-08-23'),
+(632, 'PK001', '23-SO-AGI-VIII-2021-475', 'C491', 2, 4294, 'out', 0, '2021-08-23'),
 (633, 'PK002', '23-SO-AGI-VIII-2021-475', 'C491', 2, 6237, 'out', 0, '2021-08-23'),
-(634, 'PK001', '30-SO-AGI-VIII-2021-475', 'C492', 1, 1455, 'out', 0, '2021-08-30'),
-(635, 'PK001', '30-SO-AGI-VIII-2021-476', 'C049', 2, 1453, 'out', 0, '2021-08-30'),
-(636, 'PK001', '30-SO-AGI-VIII-2021-477', 'C493', 2, 1451, 'out', 0, '2021-08-30'),
-(637, 'PK001', '30-SO-AGI-VIII-2021-478', 'C494', 2, 1449, 'out', 0, '2021-08-30'),
-(638, 'PK001', '30-SO-AGI-VIII-2021-479', 'C495', 1, 1448, 'out', 0, '2021-08-30'),
+(634, 'PK001', '30-SO-AGI-VIII-2021-475', 'C492', 1, 4025, 'out', 0, '2021-08-30'),
+(635, 'PK001', '30-SO-AGI-VIII-2021-476', 'C049', 2, 4023, 'out', 0, '2021-08-30'),
+(636, 'PK001', '30-SO-AGI-VIII-2021-477', 'C493', 2, 4021, 'out', 0, '2021-08-30'),
+(637, 'PK001', '30-SO-AGI-VIII-2021-478', 'C494', 2, 4018, 'out', 0, '2021-08-30'),
+(638, 'PK001', '30-SO-AGI-VIII-2021-479', 'C495', 1, 4017, 'out', 0, '2021-08-30'),
 (639, 'PK003', '28-SO-AGI-VIII-2021-480', 'C496', 20, 6204, 'out', 0, '2021-08-28'),
-(640, 'PK001', '24-SO-AGI-VIII-2021-480', 'C393', 30, 1592, 'out', 0, '2021-08-24'),
+(640, 'PK001', '24-SO-AGI-VIII-2021-480', 'C393', 30, 4249, 'out', 0, '2021-08-24'),
 (641, 'PK002', '24-SO-AGI-VIII-2021-480', 'C393', 12, 6222, 'out', 0, '2021-08-24'),
 (642, 'PK001', '18-SO-AGI-VIII-2021-480', 'C314', 1, 1875, 'out', 0, '2021-08-18'),
-(644, 'PK001', '30-SO-AGI-VIII-2021-480', 'C405', 2, 1446, 'out', 0, '2021-08-30'),
+(644, 'PK001', '30-SO-AGI-VIII-2021-480', 'C405', 2, 4015, 'out', 0, '2021-08-30'),
 (647, 'PK002', '27-SO-AGI-VIII-2021-450', 'C467', 8, 1550, 'out', 1, '2021-08-27'),
-(650, 'PK001', '31-SO-AGI-VIII-2021-480', 'C497', 1, 1588, 'out', 0, '2021-08-31'),
-(651, 'PK001', '31-SO-AGI-VIII-2021-481', 'C498', 1, 1587, 'out', 0, '2021-08-31'),
-(652, 'PK001', '31-SO-AGI-VIII-2021-482', 'C205', 15, 1586, 'out', 0, '2021-08-31'),
+(650, 'PK001', '31-SO-AGI-VIII-2021-480', 'C497', 1, 3994, 'out', 0, '2021-08-31'),
+(651, 'PK001', '31-SO-AGI-VIII-2021-481', 'C498', 1, 3993, 'out', 0, '2021-08-31'),
+(652, 'PK001', '31-SO-AGI-VIII-2021-482', 'C205', 15, 3978, 'out', 0, '2021-08-31'),
 (653, 'PK002', '31-SO-AGI-VIII-2021-482', 'C205', 4, 6183, 'out', 0, '2021-08-31'),
 (654, 'PK003', '31-SO-AGI-VIII-2021-482', 'C205', 1, 287, 'out', 0, '2021-08-31'),
 (655, 'PK004', '31-SO-AGI-VIII-2021-482', 'C205', 2, 285, 'out', 0, '2021-08-31'),
-(656, 'PK001', '31-SO-AGI-VIII-2021-483', 'C499', 1, 1571, 'out', 0, '2021-08-31'),
-(657, 'PK001', '31-SO-AGI-VIII-2021-484', 'C500', 1, 1570, 'out', 0, '2021-08-31'),
-(658, 'PK001', '31-SO-AGI-VIII-2021-485', 'C501', 1, 1569, 'out', 0, '2021-08-31'),
-(659, 'PK001', '31-SO-AGI-VIII-2021-486', 'C502', 1, 1568, 'out', 0, '2021-08-31'),
-(660, 'PK001', '31-SO-AGI-VIII-2021-487', 'C100', 5, 1567, 'out', 0, '2021-08-31'),
+(656, 'PK001', '31-SO-AGI-VIII-2021-483', 'C499', 1, 3977, 'out', 0, '2021-08-31'),
+(657, 'PK001', '31-SO-AGI-VIII-2021-484', 'C500', 1, 3976, 'out', 0, '2021-08-31'),
+(658, 'PK001', '31-SO-AGI-VIII-2021-485', 'C501', 1, 3975, 'out', 0, '2021-08-31'),
+(659, 'PK001', '31-SO-AGI-VIII-2021-486', 'C502', 1, 3974, 'out', 0, '2021-08-31'),
+(660, 'PK001', '31-SO-AGI-VIII-2021-487', 'C100', 5, 3969, 'out', 0, '2021-08-31'),
 (661, 'PK002', '31-SO-AGI-VIII-2021-487', 'C100', 1, 6179, 'out', 0, '2021-08-31'),
 (662, 'PK003', '31-SO-AGI-VIII-2021-487', 'C100', 1, 286, 'out', 0, '2021-08-31'),
-(664, 'PK001', '27-SO-AGI-VIII-2021-488', 'C456', 100, 1561, 'out', 0, '2021-08-27'),
+(664, 'PK001', '27-SO-AGI-VIII-2021-488', 'C456', 100, 4086, 'out', 0, '2021-08-27'),
 (665, 'PK002', '27-SO-AGI-VIII-2021-488', 'C456', 40, 6178, 'out', 0, '2021-08-27'),
-(666, 'PK001', '30-SO-AGI-VIII-2021-489', 'C504', 20, 1461, 'out', 0, '2021-08-30'),
+(666, 'PK001', '30-SO-AGI-VIII-2021-489', 'C504', 20, 3995, 'out', 0, '2021-08-30'),
 (667, 'PK002', '30-SO-AGI-VIII-2021-489', 'C504', 20, 6138, 'out', 0, '2021-08-30'),
 (668, 'PK002', '30-SO-AGI-VIII-2021-489', 'C504', 7, 6118, 'out', 1, '2021-08-30'),
-(679, 'PK001', '09-SO-AGI-VIII-2021-488', 'C503', 1, 2456, 'out', 0, '2021-08-09'),
-(680, 'PK001', '', NULL, 2500, 3944, 'in', 0, '2021-08-31'),
-(681, 'PK001', '23-SO-AGI-VIII-2021-390', 'C405', 2, 3946, 'return', 0, '2021-08-31'),
-(682, 'PK001', '17-SO-AGI-VII-2021-043', 'C042', 1, 3947, 'return', 0, '2021-08-31'),
-(683, 'PK001', '19-SO-AGI-VII-2021-069', 'C069', 1, 3948, 'return', 0, '2021-08-31'),
-(684, 'PK001', '31-SO-AGI-VII-2021-182', 'C175', 1, 3949, 'return', 0, '2021-08-31'),
-(685, 'PK001', '26-SO-AGI-VII-2021-143', 'C138', 1, 3950, 'return', 0, '2021-08-31'),
-(686, 'PK001', '07-SO-AGI-VIII-2021-230', 'C221', 1, 3951, 'return', 0, '2021-08-31'),
-(687, 'PK001', '06-SO-AGI-VIII-2021-223', 'C214', 1, 3952, 'return', 0, '2021-08-31'),
-(688, 'PK001', '26-SO-AGI-VII-2021-131', 'C126', 1, 3953, 'return', 0, '2021-08-31'),
-(689, 'PK002', '18-SO-AGI-VIII-2021-335', 'C319', 1, 6126, 'return', 0, '2021-09-01');
+(679, 'PK001', '09-SO-AGI-VIII-2021-488', 'C503', 1, 2180, 'out', 0, '2021-08-09'),
+(680, 'PK001', '', NULL, 2500, 4366, 'in', 0, '2021-08-19'),
+(681, 'PK001', '23-SO-AGI-VIII-2021-390', 'C405', 2, 3971, 'return', 0, '2021-08-31'),
+(682, 'PK001', '17-SO-AGI-VII-2021-043', 'C042', 1, 3972, 'return', 0, '2021-08-31'),
+(683, 'PK001', '19-SO-AGI-VII-2021-069', 'C069', 1, 3973, 'return', 0, '2021-08-31'),
+(684, 'PK001', '31-SO-AGI-VII-2021-182', 'C175', 1, 3974, 'return', 0, '2021-08-31'),
+(685, 'PK001', '26-SO-AGI-VII-2021-143', 'C138', 1, 3975, 'return', 0, '2021-08-31'),
+(686, 'PK001', '07-SO-AGI-VIII-2021-230', 'C221', 1, 3976, 'return', 0, '2021-08-31'),
+(687, 'PK001', '06-SO-AGI-VIII-2021-223', 'C214', 1, 3977, 'return', 0, '2021-08-31'),
+(688, 'PK001', '26-SO-AGI-VII-2021-131', 'C126', 1, 3978, 'return', 0, '2021-08-31'),
+(689, 'PK002', '18-SO-AGI-VIII-2021-335', 'C319', 1, 6126, 'return', 0, '2021-08-31'),
+(690, 'PK001', '01-SO-AGI-IX-2021-488', 'C505', 1, 3953, 'proses', 0, '2021-09-01'),
+(691, 'PK001', '01-SO-AGI-IX-2021-009', 'C506', 1, 3952, 'proses', 0, '2021-09-01'),
+(692, 'PK002', '01-SO-AGI-IX-2021-010', 'C507', 1, 6126, 'proses', 0, '2021-09-01'),
+(693, 'PK001', '01-SO-AGI-IX-2021-001', 'C508', 1, 3951, 'proses', 0, '2021-09-01'),
+(694, 'PK001', '01-SO-AGI-IX-2021-002', 'C509', 1, 3950, 'proses', 0, '2021-09-01'),
+(695, 'PK001', '01-SO-AGI-IX-2021-003', 'C229', 2, 3949, 'proses', 0, '2021-09-01'),
+(696, 'PK001', '01-SO-AGI-IX-2021-004', 'C510', 1, 3947, 'proses', 0, '2021-09-01'),
+(697, 'PK001', '02-SO-AGI-IX-2021-005', 'C514', 1, 3946, 'proses', 0, '2021-09-02'),
+(698, 'PK001', '02-SO-AGI-IX-2021-006', 'C513', 1, 3945, 'proses', 0, '2021-09-02'),
+(699, 'PK001', '02-SO-AGI-IX-2021-007', 'C515', 1, 3944, 'proses', 0, '2021-09-02'),
+(700, 'PK002', '02-SO-AGI-IX-2021-008', 'C516', 1, 6125, 'proses', 0, '2021-09-02'),
+(701, 'PK001', '02-SO-AGI-IX-2021-009', 'C512', 1, 3943, 'proses', 0, '2021-09-02'),
+(702, 'PK002', '02-SO-AGI-IX-2021-010', 'C511', 1, 6124, 'proses', 0, '2021-09-02'),
+(703, 'PK001', '02-SO-AGI-IX-2021-001', 'C517', 1, 3942, 'proses', 0, '2021-09-02'),
+(704, 'PK001', '02-SO-AGI-IX-2021-002', 'C150', 1, 3941, 'proses', 0, '2021-09-02'),
+(705, 'PK001', '02-SO-AGI-IX-2021-003', 'C099', 20, 3940, 'proses', 0, '2021-09-02'),
+(706, 'PK002', '02-SO-AGI-IX-2021-003', 'C099', 5, 6123, 'proses', 0, '2021-09-02'),
+(707, 'PK001', '02-SO-AGI-IX-2021-004', 'C518', 1, 3920, 'proses', 0, '2021-09-02'),
+(708, 'PK001', '03-SO-AGI-IX-2021-004', 'C519', 1, 3919, 'proses', 0, '2021-09-03'),
+(709, 'PK001', '03-SO-AGI-IX-2021-005', 'C520', 1, 3918, 'proses', 0, '2021-09-03'),
+(710, 'PK001', '03-SO-AGI-IX-2021-006', 'C521', 1, 3917, 'proses', 0, '2021-09-03'),
+(711, 'PK001', '03-SO-AGI-IX-2021-007', 'C522', 1, 3916, 'proses', 0, '2021-09-03'),
+(713, 'PK001', '03-SO-AGI-IX-2021-008', 'C523', 20, 3914, 'proses', 0, '2021-09-03'),
+(714, 'PK002', '03-SO-AGI-IX-2021-008', 'C523', 5, 6118, 'proses', 0, '2021-09-03'),
+(715, 'PK001', '03-SO-AGI-IX-2021-009', 'C524', 1, 3894, 'proses', 0, '2021-09-03'),
+(716, 'PK001', '03-SO-AGI-IX-2021-010', 'C525', 20, 3893, 'proses', 0, '2021-09-03'),
+(717, 'PK002', '03-SO-AGI-IX-2021-010', 'C525', 5, 6113, 'proses', 0, '2021-09-03'),
+(718, 'PK001', '03-SO-AGI-IX-2021-001', 'C527', 1, 3873, 'proses', 0, '2021-09-03'),
+(720, 'PK001', '04-SO-AGI-IX-2021-002', 'C530', 1, 3871, 'proses', 0, '2021-09-04'),
+(721, 'PK001', '04-SO-AGI-IX-2021-003', 'C531', 1, 3870, 'proses', 0, '2021-09-04'),
+(722, 'PK002', '04-SO-AGI-IX-2021-004', 'C532', 1, 6108, 'proses', 0, '2021-09-04'),
+(723, 'PK001', '04-SO-AGI-IX-2021-005', 'C533', 1, 3869, 'proses', 0, '2021-09-04'),
+(724, 'PK001', '04-SO-AGI-IX-2021-006', 'C292', 5, 3868, 'proses', 0, '2021-09-04'),
+(725, 'PK002', '04-SO-AGI-IX-2021-006', 'C292', 1, 6107, 'proses', 0, '2021-09-04'),
+(726, 'PK001', '04-SO-AGI-IX-2021-007', 'C534', 1, 3863, 'proses', 0, '2021-09-04'),
+(727, 'PK001', '04-SO-AGI-IX-2021-008', 'C535', 3, 3862, 'proses', 0, '2021-09-04'),
+(728, 'PK001', '04-SO-AGI-IX-2021-009', 'C536', 1, 3859, 'proses', 0, '2021-09-04'),
+(729, 'PK001', '04-SO-AGI-IX-2021-010', 'C538', 3, 3858, 'proses', 0, '2021-09-04'),
+(730, 'PK001', '04-SO-AGI-IX-2021-001', 'C539', 1, 3855, 'proses', 0, '2021-09-04'),
+(731, 'PK001', '06-SO-AGI-IX-2021-001', 'C542', 4, 3854, 'proses', 0, '2021-09-06');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -2991,7 +3358,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `nama_user`, `email`, `username`, `password`, `hak_akses`) VALUES
@@ -3008,12 +3375,163 @@ INSERT INTO `tb_user` (`id_user`, `nama_user`, `email`, `username`, `password`, 
 (11, 'Bowo Suhardianto', '-', 'bowo', 'bfb26de0b0830236b944cc130e0ca2ac89e79f5e', 5),
 (12, 'Gecol', '-', 'gecol', 'bfb26de0b0830236b944cc130e0ca2ac89e79f5e', 5),
 (13, 'Deka', '-', 'deka', 'bfb26de0b0830236b944cc130e0ca2ac89e79f5e', 5),
-(14, 'Wahyudi', '-', 'yudi', 'bfb26de0b0830236b944cc130e0ca2ac89e79f5e', 5);
+(14, 'Wahyudi', '-', 'yudi', 'bfb26de0b0830236b944cc130e0ca2ac89e79f5e', 5),
+(15, 'Namira', '-', 'mira', 'bfb26de0b0830236b944cc130e0ca2ac89e79f5e', 6),
+(16, 'Juwanto', 'juwanto506@gmail.com', 'Juan', '058450f1de78e7be8d1ebbdeded55a953bf631ec', 4),
+(17, 'H. HAIRIL ANWAR', '-', 'anwar', '4f0ad3d4052c3bbc0d81c7c2cadc0e048213f053', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wilayah_2020`
+-- Struktur dari tabel `tb_userchat`
+--
+
+CREATE TABLE `tb_userchat` (
+  `id_user_chat` int(9) NOT NULL,
+  `user1` int(9) NOT NULL,
+  `user2` int(9) NOT NULL,
+  `read` int(9) NOT NULL,
+  `total` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_userchat`
+--
+
+INSERT INTO `tb_userchat` (`id_user_chat`, `user1`, `user2`, `read`, `total`) VALUES
+(1, 1, 2, 0, 0),
+(2, 1, 4, 0, 0),
+(3, 1, 5, 0, 0),
+(4, 1, 6, 0, 0),
+(5, 1, 7, 0, 0),
+(6, 1, 9, 0, 0),
+(7, 1, 10, 0, 0),
+(8, 1, 15, 0, 0),
+(9, 2, 1, 0, 0),
+(10, 2, 4, 0, 0),
+(11, 2, 5, 0, 0),
+(12, 2, 6, 0, 0),
+(13, 2, 7, 0, 0),
+(14, 2, 9, 0, 0),
+(15, 2, 10, 0, 0),
+(17, 2, 15, 0, 0),
+(18, 4, 1, 0, 0),
+(19, 4, 2, 0, 0),
+(20, 4, 5, 0, 0),
+(21, 4, 6, 0, 0),
+(22, 4, 7, 0, 0),
+(23, 4, 9, 0, 0),
+(24, 4, 10, 0, 0),
+(25, 4, 15, 0, 0),
+(26, 5, 1, 0, 0),
+(27, 5, 2, 0, 0),
+(28, 5, 4, 0, 0),
+(29, 5, 6, 0, 0),
+(30, 5, 7, 0, 0),
+(31, 5, 9, 0, 0),
+(32, 5, 10, 0, 0),
+(33, 5, 15, 0, 0),
+(34, 6, 1, 0, 0),
+(35, 6, 2, 0, 0),
+(36, 6, 4, 0, 0),
+(37, 6, 5, 0, 0),
+(38, 6, 7, 0, 0),
+(39, 6, 9, 0, 0),
+(40, 6, 10, 0, 0),
+(41, 6, 15, 0, 0),
+(42, 7, 1, 0, 0),
+(43, 7, 2, 0, 0),
+(44, 7, 4, 0, 0),
+(45, 7, 5, 0, 0),
+(46, 7, 6, 0, 0),
+(47, 7, 9, 0, 0),
+(48, 7, 10, 0, 0),
+(49, 7, 15, 0, 0),
+(50, 9, 1, 0, 0),
+(51, 9, 2, 0, 0),
+(52, 9, 4, 0, 0),
+(53, 9, 5, 0, 0),
+(54, 9, 6, 0, 0),
+(55, 9, 7, 0, 0),
+(56, 9, 10, 0, 0),
+(57, 9, 15, 0, 0),
+(58, 10, 1, 0, 0),
+(59, 10, 2, 0, 0),
+(60, 10, 4, 0, 0),
+(61, 10, 5, 0, 0),
+(62, 10, 6, 0, 0),
+(63, 10, 7, 0, 0),
+(64, 10, 9, 0, 0),
+(65, 10, 15, 0, 0),
+(66, 15, 1, 0, 0),
+(67, 15, 2, 0, 0),
+(68, 15, 4, 0, 0),
+(69, 15, 5, 0, 0),
+(70, 15, 6, 0, 0),
+(71, 15, 7, 0, 0),
+(72, 15, 9, 0, 0),
+(73, 15, 10, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_user_chat`
+--
+
+CREATE TABLE `tb_user_chat` (
+  `id_userchat` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `read_chat` int(11) NOT NULL,
+  `total_chat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_user_chat`
+--
+
+INSERT INTO `tb_user_chat` (`id_userchat`, `id_user`, `read_chat`, `total_chat`) VALUES
+(1, 1, 0, 1),
+(2, 2, 0, 11),
+(3, 4, 0, 11),
+(4, 5, 0, 11),
+(5, 6, 0, 11),
+(6, 7, 0, 11),
+(7, 9, 0, 11),
+(8, 10, 0, 11),
+(9, 15, 0, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_user_group`
+--
+
+CREATE TABLE `tb_user_group` (
+  `id_user_group` int(9) NOT NULL,
+  `id_user` int(9) NOT NULL,
+  `read_chat` int(9) NOT NULL,
+  `total_chat` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_user_group`
+--
+
+INSERT INTO `tb_user_group` (`id_user_group`, `id_user`, `read_chat`, `total_chat`) VALUES
+(1, 1, 61, 61),
+(2, 2, 61, 61),
+(3, 4, 61, 61),
+(4, 5, 61, 61),
+(5, 6, 61, 61),
+(6, 7, 0, 61),
+(7, 9, 61, 61),
+(8, 10, 0, 61),
+(9, 15, 61, 61);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `wilayah_2020`
 --
 
 CREATE TABLE `wilayah_2020` (
@@ -3022,7 +3540,7 @@ CREATE TABLE `wilayah_2020` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `wilayah_2020`
+-- Dumping data untuk tabel `wilayah_2020`
 --
 
 INSERT INTO `wilayah_2020` (`kode`, `nama`) VALUES
@@ -94309,19 +94827,37 @@ INSERT INTO `wilayah_2020` (`kode`, `nama`) VALUES
 --
 
 --
--- Indexes for table `tb_ativitas`
+-- Indeks untuk tabel `tb_ativitas`
 --
 ALTER TABLE `tb_ativitas`
   ADD PRIMARY KEY (`id_aktivitas`);
 
 --
--- Indexes for table `tb_calon_pelanggan`
+-- Indeks untuk tabel `tb_calon_pelanggan`
 --
 ALTER TABLE `tb_calon_pelanggan`
   ADD PRIMARY KEY (`id_calon`);
 
 --
--- Indexes for table `tb_detail_order`
+-- Indeks untuk tabel `tb_chat`
+--
+ALTER TABLE `tb_chat`
+  ADD PRIMARY KEY (`id_chat`);
+
+--
+-- Indeks untuk tabel `tb_chat_group`
+--
+ALTER TABLE `tb_chat_group`
+  ADD PRIMARY KEY (`id_chat_group`);
+
+--
+-- Indeks untuk tabel `tb_chat_user`
+--
+ALTER TABLE `tb_chat_user`
+  ADD PRIMARY KEY (`id_chat_user`);
+
+--
+-- Indeks untuk tabel `tb_detail_order`
 --
 ALTER TABLE `tb_detail_order`
   ADD PRIMARY KEY (`kode_transaksi`),
@@ -94331,20 +94867,20 @@ ALTER TABLE `tb_detail_order`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `tb_expedisi`
+-- Indeks untuk tabel `tb_expedisi`
 --
 ALTER TABLE `tb_expedisi`
   ADD PRIMARY KEY (`id_expedisi`);
 
 --
--- Indexes for table `tb_marketing`
+-- Indeks untuk tabel `tb_marketing`
 --
 ALTER TABLE `tb_marketing`
   ADD PRIMARY KEY (`id_marketing`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `tb_order`
+-- Indeks untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
   ADD PRIMARY KEY (`id_order`),
@@ -94355,14 +94891,14 @@ ALTER TABLE `tb_order`
   ADD KEY `id_promo` (`id_promo`);
 
 --
--- Indexes for table `tb_pelanggan`
+-- Indeks untuk tabel `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`),
   ADD KEY `id_marketing` (`id_marketing`);
 
 --
--- Indexes for table `tb_pembayaran`
+-- Indeks untuk tabel `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
@@ -94370,7 +94906,7 @@ ALTER TABLE `tb_pembayaran`
   ADD KEY `kode_transaksi` (`kode_transaksi`);
 
 --
--- Indexes for table `tb_pencairan_reward`
+-- Indeks untuk tabel `tb_pencairan_reward`
 --
 ALTER TABLE `tb_pencairan_reward`
   ADD PRIMARY KEY (`id_pencairan_reward`),
@@ -94378,7 +94914,7 @@ ALTER TABLE `tb_pencairan_reward`
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indexes for table `tb_point`
+-- Indeks untuk tabel `tb_point`
 --
 ALTER TABLE `tb_point`
   ADD PRIMARY KEY (`id_point`),
@@ -94386,32 +94922,32 @@ ALTER TABLE `tb_point`
   ADD KEY `kode_transaksi` (`kode_transaksi`);
 
 --
--- Indexes for table `tb_produk`
+-- Indeks untuk tabel `tb_produk`
 --
 ALTER TABLE `tb_produk`
   ADD PRIMARY KEY (`kode_produk`);
 
 --
--- Indexes for table `tb_promo`
+-- Indeks untuk tabel `tb_promo`
 --
 ALTER TABLE `tb_promo`
   ADD PRIMARY KEY (`id_promo`),
   ADD KEY `kode_produk` (`kode_produk`);
 
 --
--- Indexes for table `tb_rekening`
+-- Indeks untuk tabel `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
   ADD PRIMARY KEY (`id_rekening`);
 
 --
--- Indexes for table `tb_reward`
+-- Indeks untuk tabel `tb_reward`
 --
 ALTER TABLE `tb_reward`
   ADD PRIMARY KEY (`id_reward`);
 
 --
--- Indexes for table `tb_stok`
+-- Indeks untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
   ADD PRIMARY KEY (`id_stok`),
@@ -94420,93 +94956,148 @@ ALTER TABLE `tb_stok`
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indexes for table `wilayah_2020`
+-- Indeks untuk tabel `tb_userchat`
+--
+ALTER TABLE `tb_userchat`
+  ADD PRIMARY KEY (`id_user_chat`);
+
+--
+-- Indeks untuk tabel `tb_user_chat`
+--
+ALTER TABLE `tb_user_chat`
+  ADD PRIMARY KEY (`id_userchat`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeks untuk tabel `tb_user_group`
+--
+ALTER TABLE `tb_user_group`
+  ADD PRIMARY KEY (`id_user_group`);
+
+--
+-- Indeks untuk tabel `wilayah_2020`
 --
 ALTER TABLE `wilayah_2020`
   ADD PRIMARY KEY (`kode`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_ativitas`
+-- AUTO_INCREMENT untuk tabel `tb_ativitas`
 --
 ALTER TABLE `tb_ativitas`
-  MODIFY `id_aktivitas` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_aktivitas` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT for table `tb_expedisi`
+-- AUTO_INCREMENT untuk tabel `tb_chat`
+--
+ALTER TABLE `tb_chat`
+  MODIFY `id_chat` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_chat_group`
+--
+ALTER TABLE `tb_chat_group`
+  MODIFY `id_chat_group` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_chat_user`
+--
+ALTER TABLE `tb_chat_user`
+  MODIFY `id_chat_user` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_expedisi`
 --
 ALTER TABLE `tb_expedisi`
   MODIFY `id_expedisi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_order`
+-- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id_order` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=658;
+  MODIFY `id_order` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=700;
 
 --
--- AUTO_INCREMENT for table `tb_pembayaran`
+-- AUTO_INCREMENT untuk tabel `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=461;
+  MODIFY `id_pembayaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=465;
 
 --
--- AUTO_INCREMENT for table `tb_pencairan_reward`
+-- AUTO_INCREMENT untuk tabel `tb_pencairan_reward`
 --
 ALTER TABLE `tb_pencairan_reward`
   MODIFY `id_pencairan_reward` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_point`
+-- AUTO_INCREMENT untuk tabel `tb_point`
 --
 ALTER TABLE `tb_point`
   MODIFY `id_point` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `tb_promo`
+-- AUTO_INCREMENT untuk tabel `tb_promo`
 --
 ALTER TABLE `tb_promo`
   MODIFY `id_promo` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `tb_rekening`
+-- AUTO_INCREMENT untuk tabel `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
   MODIFY `id_rekening` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_reward`
+-- AUTO_INCREMENT untuk tabel `tb_reward`
 --
 ALTER TABLE `tb_reward`
   MODIFY `id_reward` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tb_stok`
+-- AUTO_INCREMENT untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
-  MODIFY `id_stok` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=690;
+  MODIFY `id_stok` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=732;
 
 --
--- AUTO_INCREMENT for table `tb_user`
+-- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_user` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT untuk tabel `tb_userchat`
+--
+ALTER TABLE `tb_userchat`
+  MODIFY `id_user_chat` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_user_chat`
+--
+ALTER TABLE `tb_user_chat`
+  MODIFY `id_userchat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_user_group`
+--
+ALTER TABLE `tb_user_group`
+  MODIFY `id_user_group` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tb_detail_order`
+-- Ketidakleluasaan untuk tabel `tb_detail_order`
 --
 ALTER TABLE `tb_detail_order`
   ADD CONSTRAINT `tb_detail_order_ibfk_1` FOREIGN KEY (`id_marketing`) REFERENCES `tb_marketing` (`id_marketing`),
@@ -94514,13 +95105,13 @@ ALTER TABLE `tb_detail_order`
   ADD CONSTRAINT `tb_detail_order_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
 
 --
--- Constraints for table `tb_marketing`
+-- Ketidakleluasaan untuk tabel `tb_marketing`
 --
 ALTER TABLE `tb_marketing`
   ADD CONSTRAINT `tb_marketing_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
 
 --
--- Constraints for table `tb_order`
+-- Ketidakleluasaan untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
   ADD CONSTRAINT `tb_order_ibfk_1` FOREIGN KEY (`id_marketing`) REFERENCES `tb_marketing` (`id_marketing`),
@@ -94528,17 +95119,23 @@ ALTER TABLE `tb_order`
   ADD CONSTRAINT `tb_order_ibfk_5` FOREIGN KEY (`kode_transaksi`) REFERENCES `tb_detail_order` (`kode_transaksi`);
 
 --
--- Constraints for table `tb_pelanggan`
+-- Ketidakleluasaan untuk tabel `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
   ADD CONSTRAINT `tb_pelanggan_ibfk_1` FOREIGN KEY (`id_marketing`) REFERENCES `tb_marketing` (`id_marketing`);
 
 --
--- Constraints for table `tb_pencairan_reward`
+-- Ketidakleluasaan untuk tabel `tb_pencairan_reward`
 --
 ALTER TABLE `tb_pencairan_reward`
   ADD CONSTRAINT `tb_pencairan_reward_ibfk_1` FOREIGN KEY (`id_reward`) REFERENCES `tb_reward` (`id_reward`),
   ADD CONSTRAINT `tb_pencairan_reward_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_user_chat`
+--
+ALTER TABLE `tb_user_chat`
+  ADD CONSTRAINT `tb_user_chat_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

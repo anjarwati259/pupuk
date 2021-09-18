@@ -108,13 +108,18 @@ class Chat extends CI_Controller
 	}
 
 	private function up_userchat($lawan,$id_user){
-		$chat = $this->chat_model->get_chatuser($lawan,$id_user);
-		$total = ($chat->total) - ($chat->read);
-		$read_chat = ($chat->read)+$total;
-		$data = array(	'user1' => $id_user,
-						'user2' => $lawan,
-						'read' => $read_chat);
-		$this->chat_model->up_userchat($data);
+		$lawan = $this->input->post('id');
+		$id_user = $this->session->userdata('id_user');
+			$chat = $this->chat_model->get_chatuser($lawan,$id_user);
+			if(isset($chat)){
+			$total = ($chat->total) - ($chat->read);
+			$read_chat = ($chat->read)+$total;
+			$data = array(	'user1' => $id_user,
+							'user2' => $lawan,
+							'read' => $read_chat);
+			$this->chat_model->up_userchat($data);
+		}
+
 	}
 	public function add_chat(){
 		$id_user = $this->session->userdata('id_user');
@@ -127,6 +132,7 @@ class Chat extends CI_Controller
 						);
 		$this->chat_model->add_chat($data1);
 		$this->chat_model->update_chatuser($lawan,$id_user);
+		$this->chat_model->update_chatuser2($lawan,$id_user);
 		$this->up_userchat($lawan,$id_user);
 		require_once(APPPATH.'views/vendor/autoload.php');
 
@@ -147,6 +153,12 @@ class Chat extends CI_Controller
 	public function count_user(){
 		$id_user = $this->session->userdata('id_user');
 		$chat = $this->chat_model->count_user($id_user);
+		echo json_encode($chat);
+	}
+	public function end_chat(){
+		$id_user = $this->session->userdata('id_user');
+		$lawan = $this->input->post('id');
+		$chat = $this->chat_model->end_chat($lawan, $id_user);
 		echo json_encode($chat);
 	}
 }

@@ -27,7 +27,13 @@
 
                         <div>
                             <div class="avatar-saya">
-                                <img src="<?php echo base_url() ?>assets/chat/gambar/user/1607057107_vino.jpg">
+                                <?php 
+                                $id_user = $this->session->userdata('id_user');
+                                $this->db->select('*');
+                                $this->db->from('tb_marketing');
+                                $this->db->where('id_user', $this->session->userdata('id_user'));
+                                $getchat= $this->db->get()->row();  ?>
+                                <img src="<?php echo base_url() ?>assets/img/team/<?php echo $getchat->foto ?>">
                                 <span><strong><?php echo $this->session->userdata('nama_user'); ?></strong></span>
                             </div>
                         </div>
@@ -48,14 +54,14 @@
                         <div class="row teman-list" id="group"> 
                             <div class="col-3 col-sm-3 col-xs-3 teman-avatar">
                                 <div class="avatar-icon">
-                                        <img class="avatar-icon" src="<?php echo base_url() ?>assets/chat/gambar/default/user.png">
+                                        <img class="avatar-icon" src="<?php echo base_url() ?>assets/img/team/group.webp">
                                 </div>
                             </div>
                             <div class="col-9 col-sm-9 col-xs-9 teman-main">
                                 <div class="row">
                                     <div class="col-sm-9 col-xs-8 teman-data">
                                         <span class="nama-meta font-weight-bold">Kilat Office</span>
-                                        <span class="chat-meta text-muted">Sedang mengetik ..</span>
+                                        <!-- <span class="chat-meta text-muted">Sedang mengetik ..</span> -->
                                     </div>
                                     <div class="col-sm-3 col-xs-4 pull-right teman-time">
 
@@ -78,14 +84,14 @@
                         <div class="row teman-list" id="<?php echo $member->id_user; ?>"> 
                             <div class="col-3 col-sm-3 col-xs-3 teman-avatar">
                                 <div class="avatar-icon">
-                                        <img class="avatar-icon" src="<?php echo base_url() ?>assets/chat/gambar/default/user.png">
+                                        <img class="avatar-icon" src="<?php echo base_url() ?>assets/img/team/<?php echo $member->foto;?>">
                                 </div>
                             </div>
                             <div class="col-9 col-sm-9 col-xs-9 teman-main">
                                 <div class="row">
                                     <div class="col-sm-9 col-xs-8 teman-data">
                                         <span class="nama-meta font-weight-bold"><?php echo $member->nama_marketing ?></span>
-                                        <span class="chat-meta text-muted">Sedang mengetik ..</span>
+                                        <!-- <span class="chat-meta text-muted chat-<?php echo $member->id_user; ?>">Sedang mengetik ..</span> -->
                                     </div>
                                     <div class="col-sm-3 col-xs-4 pull-right teman-time">
 
@@ -120,7 +126,7 @@
                 </div>
 
                 <div class="col-sm-8 col-6">
-                  <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .."></textarea>
+                  <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .." style="overflow-y: auto;"></textarea>
                 </div>
 
                 <div class="col-sm-2 col-4">

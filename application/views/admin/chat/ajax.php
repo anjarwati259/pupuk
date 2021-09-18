@@ -4,6 +4,7 @@
         show_data();
         //show_chat();
         count_user();
+        //end_chat();
         count_group();
 
         // realtime chat
@@ -108,7 +109,7 @@
                 var id = $(".avatar-lawan").attr("id");
                 var data = "&id="+id;
                 $.ajax({
-                    type: 'POST', 
+                    type: 'POST',
                     data: data,
                     url: "<?php echo base_url('admin/chat/read_chat') ?>",
                     success: function(html) {
@@ -188,13 +189,16 @@
         }
         //hitung jumlah chat group
         function count_user(){
-            var id = $(".teman-list").attr("id");
+            var id = $(".avatar-lawan").attr("id");
+            var data = "&id="+id;
+
             //alert(id);
             //$('.count-user').html(id);
               $.ajax({
                   url   : '<?php echo base_url("admin/chat/count_user");?>',
                   type  : 'GET',
                   async : true,
+                  data  : data,
                   dataType : 'json',
                   success : function(data){
                     //alert(data.length);
@@ -210,5 +214,21 @@
               });
         }
 
+        function end_chat(){
+            var id = $(".avatar-lawan").attr("id");
+            var data = "&id="+id;
+            alert(data);
+            // $.ajax({
+            //       url   : '<?php echo base_url("admin/chat/end_chat");?>',
+            //       type  : 'GET',
+            //       async : true,
+            //       data  : data,
+            //       dataType : 'json',
+            //       success : function(data){
+            //         alert(data);
+            //       }
+            //   });
+
+        }
       });
 </script>

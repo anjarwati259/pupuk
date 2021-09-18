@@ -58,12 +58,18 @@ class Chat_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tb_userchat');
 		$this->db->where('user1',$id_user);
+		$this->db->or_where('user2',$id_user);
 		$query = $this->db->get();
 		return $query->result();
 	}
 	 public function up_userchat($data){
 	 	$this->db->where('user1', $data['user1']);
 	 	$this->db->where('user2', $data['user2']);
+		$this->db->update('tb_userchat',$data);
+	 }
+	 public function up_userchat2($data){
+	 	$this->db->where('user1', $data['user2']);
+	 	$this->db->where('user2', $data['user1']);
 		$this->db->update('tb_userchat',$data);
 	 }
 	public function get_chatuser($lawan,$id_user){
@@ -79,5 +85,19 @@ class Chat_model extends CI_Model
 		$this->db->where('user1', $id_user);
 	 	$this->db->where('user2', $lawan);
 		$this->db->update('tb_userchat');
+	}
+	public function update_chatuser2($lawan,$id_user){
+		$this->db->set('total', 'total+1', FALSE);
+		$this->db->where('user1', $lawan);
+	 	$this->db->where('user2', $id_user);
+		$this->db->update('tb_userchat');
+	}
+	public function end_chat($lawan,$id_user){
+		$this->db->select('*');
+		$this->db->from('tb_chat_user');
+		$this->db->where('dari', $id_user);
+		$this->db->where('ke', $lawan);
+		$query = $this->db->get();
+		return $query->row();
 	}
 }
