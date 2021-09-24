@@ -61,6 +61,7 @@ class Chat extends CI_Controller
 						'chat'			=> $chat,
 						'id_user'		=> $id_user,
 						);
+		//echo json_encode($chat);
 		$this->chat_model->add_group($data1);
 		$this->chat_model->update_chat();
 		$this->up_chat();
@@ -160,5 +161,27 @@ class Chat extends CI_Controller
 		$lawan = $this->input->post('id');
 		$chat = $this->chat_model->end_chat($lawan, $id_user);
 		echo json_encode($chat);
+	}
+	public function tarik_pesan(){
+		$id_pesan = $this->input->post('id');
+		$data1 = array(	'id_chat_group' => $id_pesan,
+						'chat' => 'Pesan Telah Dihapus');
+		$this->chat_model->tarik_pesan($data1);
+		require_once(APPPATH.'views/vendor/autoload.php');
+
+		  $options = array(
+		    'cluster' => 'ap1',
+		    'useTLS' => true
+		  );
+		  $pusher = new Pusher\Pusher(
+		    '195f2f8525152075f786',
+		    'd1b3e40e8ec462d83c86',
+		    '1263280',
+		    $options
+		  );
+
+		  $data['message'] = 'chat group';
+		  $pusher->trigger('my-channel', 'my-event', $data);
+		//echo json_encode($id_pesan);
 	}
 }

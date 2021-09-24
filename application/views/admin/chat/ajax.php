@@ -138,8 +138,9 @@
                     $.ajax({
                         type: 'POST',
                         url: "<?php echo base_url('admin/chat/add_group') ?>",
-                        data: data,
+                        data: {ketik:ketik},
                         success: function(html) {
+                            //alert(html)
                             // $("#balas-ketik").val("");
                             // $(".pesan").append(html);
                             var x = $(".pesan").height()+221000;
@@ -209,7 +210,6 @@
                         var total_chat = parseInt(total-read);
                         $('.count-user-'+data[i].user2).html(total_chat);
                     }
-                    
                   }
               });
         }
@@ -231,4 +231,20 @@
 
         }
       });
+
+$(document).on( "click", '.tarik',function(e) {
+    var id = $(this).data('id');
+    var data = '&id='+id;
+    if(confirm('apakah anda yakin akan menarik pesan ini? ?')) {
+        $.ajax({
+            type: 'POST', 
+            data: data,
+            url: "<?php echo base_url('admin/chat/tarik_pesan') ?>",
+            success: function(html) {
+                //alert(html);
+            }
+        });
+    }
+
+})
 </script>

@@ -40,6 +40,8 @@
         <option value="">Semua</option>
         <option value="Keluar">Keluar</option>
         <option value="Masuk">Masuk</option>
+        <option value="retur">Retur</option>
+        <option value="proses">Proses</option>
       </select>
     </div>
   </div>

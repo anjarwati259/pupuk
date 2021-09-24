@@ -346,6 +346,10 @@
       autoclose: true,
       format:'yyyy-mm-dd'
     });
+    $('#tgl_retur').datepicker({
+      autoclose: true,
+      format:'yyyy-mm-dd'
+    });
     $('#datepicker2').datepicker({
       autoclose: true,
       format:'yyyy-mm-dd'

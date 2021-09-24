@@ -8,6 +8,7 @@
         <li role="presentation" class="active"><a href="#tab_1">Data Stok</a></li>
       <li role="presentation"><a href="<?php echo site_url('admin/produk/tambah_stok');?>">Tambah Stok</a></li>
       <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_keluar');?>">Stok Keluar</a></li>
+      <li role="presentation"><a href="<?php echo site_url('admin/produk/retur_barang');?>">Retur Barang</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="tab_1">

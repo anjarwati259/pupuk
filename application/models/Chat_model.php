@@ -100,4 +100,8 @@ class Chat_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	public function tarik_pesan($data){
+		$this->db->where('id_chat_group', $data['id_chat_group']);
+		$this->db->update('tb_chat_group',$data);
+	}
 }

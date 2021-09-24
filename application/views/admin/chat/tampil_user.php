@@ -5,12 +5,12 @@
     if($chat->dari ==$id_user){
     ?>
   <div class="col-12">
-    <div class="media pesan-item mb-2 pesan-saya">    
+    <div class="media pesan-item mb-2 pesan-saya">
       <div class="media-body">
         <?php echo $chat->chat ?>
         <div class="pesan-waktu">
           <small>
-            12:00
+            <?php echo $chat->tanggal ?>
             <span class="text-primary"><i class="fa fa-check"></i></span>
           </small>
         </div>
@@ -24,7 +24,7 @@
         <?php echo $chat->chat ?>
         <div class="pesan-waktu">
           <small>
-            12:00
+            <?php echo $chat->tanggal ?>
             <span class="text-primary"><i class="fa fa-check"></i></span>
           </small>
         </div>

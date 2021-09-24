@@ -40,8 +40,6 @@
         <option value="">Semua</option>
         <option value="Keluar">Keluar</option>
         <option value="Masuk">Masuk</option>
-        <option value="retur">Retur</option>
-        <option value="proses">Proses</option>
       </select>
     </div>
   </div>
@@ -52,7 +50,7 @@
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Filter
           <span class="fa fa-caret-down"></span></button>
         <ul class="dropdown-menu">
-          <li><a href="#" data-toggle="modal" data-target="#tanggal">Tanggal</a></li>
+          <li><a href="#" class="filter-tanggal" data-toggle="modal" data-target="#tanggal" data-status="out">Tanggal</a></li>
           <li><a href="#" data-toggle="modal" data-target="#bulan_3">Bulan</a></li>
           <li><a href="#" data-toggle="modal" data-target="#tahun_3">Tahun</a></li>
         </ul>
@@ -106,7 +104,7 @@
 <!-- rincian -->
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Rincian Order</h3>
+    <h3 class="box-title">Rincian Stok Keluar</h3>
   </div>
   <div class="box-body">
     <div class="scrollmenu">
@@ -142,8 +140,6 @@
       <?php } ?>
       </tbody>
      </table>
-     <input type="hidden" name="tgl_awal" id="tgl_awal" value="<?php echo $awal ?>">
-    <input type="hidden" name="tgl_akhir" id="tgl_akhir" value="<?php echo $akhir ?>">
     </div>
   </div>
 </div>
@@ -151,6 +147,11 @@
 <?php include "filter.php"; ?>
 
 <script type="text/javascript">
+  $(document).on( "click", '.filter-tanggal',function(e) {
+    var status = $(this).data('status');
+    //alert(status);
+    $("#status").val(status);
+  });
   $(document).ready(function(){
     dataTable = $("#example3").DataTable({
       'pageLength'  : 50

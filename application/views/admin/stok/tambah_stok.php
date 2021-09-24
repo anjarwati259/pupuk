@@ -21,6 +21,7 @@ echo form_open_multipart(base_url('admin/produk/tambah_stok'), ' class="form-hor
               <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_awal');?>">Data Stok</a></li>
             <li role="presentation" class="active"><a href="#tab_1">Tambah Stok</a></li>
             <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_keluar');?>">Stok Keluar</a></li>
+            <li role="presentation"><a href="<?php echo site_url('admin/produk/retur_barang');?>">Retur Barang</a></li>
             </ul>
             <div class="tab-content">
               <!-- /.tab-pane -->

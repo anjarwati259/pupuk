@@ -90,30 +90,16 @@ class Produk_model extends CI_Model
 		$this->db->update('tb_produk');
 	}
 	//listing order stok
-	public function getstok($status,$sampel){
-		if($sampel!=''){
-			$this->db->select('tb_stok.*,
+	public function get_stok(){
+		$this->db->select('tb_stok.*,
 							tb_pelanggan.nama_pelanggan, tb_produk.nama_produk, tb_produk.stok');
-			$this->db->from('tb_stok');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
-			$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
-			$this->db->where('tb_stok.status', $status);
-			$this->db->or_where('tb_stok.status',$sampel);
-			//$this->db->group_by('tb_stok.id_stok');
-			$this->db->order_by('tb_stok.id_stok','asc');
-			$query = $this->db->get();
-			return $query->result();
-		}else{
-			$this->db->select('tb_stok.*,
-								tb_pelanggan.nama_pelanggan, tb_produk.nama_produk, tb_produk.stok');
-			$this->db->from('tb_stok');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
-			$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
-			$this->db->where('tb_stok.status', $status);
-			$this->db->order_by('tb_stok.id_stok','asc');
-			$query = $this->db->get();
-			return $query->result();
-		}
+		$this->db->from('tb_stok');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_stok.id_pelanggan', 'left');
+		$this->db->join('tb_produk','tb_produk.kode_produk = tb_stok.kode_produk', 'left');
+		//$this->db->group_by('tb_stok.id_stok');
+		$this->db->order_by('tb_stok.id_stok','asc');
+		$query = $this->db->get();
+		return $query->result();
 	}
 	public function stok($kode_transaksi){
 		$this->db->select('*');
@@ -155,22 +141,11 @@ class Produk_model extends CI_Model
 		$this->db->update('tb_produk',$data);
 	}
 
-	public function allstok($status,$sampel){
-		if($sampel!=''){
-			$this->db->select('sum(qty) as total');
-			$this->db->from('tb_stok');
-			$this->db->where('status', $status);
-			$this->db->or_where('status',$sampel);
-			$query = $this->db->get();
-			return $query->row();
-		}else{
-			$this->db->select('sum(qty) as total');
-			$this->db->from('tb_stok');
-			$this->db->where('status', $status);
-			$query = $this->db->get();
-			return $query->row();
-		}
-		
+	public function allstok(){
+		$this->db->select('sum(qty) as total');
+		$this->db->from('tb_stok');
+		$query = $this->db->get();
+		return $query->row();
 	}
 	public function allbonus(){
 		$this->db->select('sum(qty) as total');
@@ -612,5 +587,19 @@ class Produk_model extends CI_Model
 		}
 		$query = $this->db->get();
 		return $query->row();
+	}
+
+	public function get_order($id){
+		$this->db->select('tb_order.*, tb_produk.nama_produk');
+		$this->db->from('tb_order');
+		$this->db->where("kode_transaksi", $id);
+		$this->db->join('tb_produk','tb_produk.kode_produk = tb_order.id_produk', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//tambah retur
+	public function retur($data)
+	{
+		$this->db->insert('tb_retur', $data);
 	}
 }
