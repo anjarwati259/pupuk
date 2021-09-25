@@ -258,8 +258,8 @@
 
 <script>
   $(document).ready(function(){
-    show_chat();
-    count_chat();
+    // show_chat();
+    // count_chat();
   });
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
@@ -271,8 +271,8 @@
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
       //alert(JSON.stringify(data));
-      show_chat();
-      count_chat();
+      // show_chat();
+      // count_chat();
     });
 
     function show_chat(){

@@ -156,13 +156,34 @@ class Produk extends CI_Controller
 		$tgl_trans = $this->input->post('tgl_trans');
 		$tgl_retur = $this->input->post('tgl_retur');
 		$keterangan = $this->input->post('ket');
-		$data = array(	'kode_transaksi'	=> $kode_transaksi,
+		$retur = array(	'kode_transaksi'	=> $kode_transaksi,
 						'tgl_transaksi'		=> $tgl_trans,
 						'tgl_retur'		=> $tgl_retur,
 						'keterangan'		=> $keterangan
 					);
-		$this->produk_model->retur($data);
+		$this->_insert_stok_data($kode_transaksi,$tgl_retur);
+		//$this->produk_model->retur($retur);
 	}
+
+	private function _insert_stok_data($kode_transaksi,$tgl_retur){
+		$order = $this->produk_model->get_order();
+		foreach($order as $order){
+			$sisa =  $this->produk_model->get_stok_id($order->id_produk);
+			$stok = array(
+				'kode_transaksi' => $kode_transaksi,
+				'kode_produk' => $order->id_produk,
+				'id_pelanggan' => $order->id_pelanggan,
+				'qty' => $order->jml_beli,
+				'tanggal' => $tgl_retur,
+				'sisa'	=> $sisa->stok,
+				'status' => 'retur'
+			);
+			print_r($stok);
+			// $this->produk_model->update_stok($cart['id'],array('stok' => $cart['qty']));
+			// $this->order_model->tambah_stok($stok);
+		}
+	}
+
 	public function stok_tanggal(){
 		$awal = $this->input->post('tgl_awal');
 		$akhir = $this->input->post('tgl_akhir');

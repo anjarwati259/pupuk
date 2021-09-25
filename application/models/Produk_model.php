@@ -602,4 +602,6 @@ class Produk_model extends CI_Model
 	{
 		$this->db->insert('tb_retur', $data);
 	}
+	//
+
 }

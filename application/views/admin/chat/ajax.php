@@ -127,7 +127,7 @@
         }
 
         //kirim chat group
-        $("body").on("click",".balas-kirim",function(){
+        $("body").on("click","#balas-kirim",function(){
             var id = $(".avatar-lawan").attr("id");
             var ketik = $("#balas-ketik").val();
             //alert(id);
@@ -168,6 +168,15 @@
                 }
             }
 
+        });
+
+        //enter kirim chat 
+        var input = document.getElementById("balas-ketik");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("balas-kirim").click();
+            }
         });
 
         //hitung jumlah chat group

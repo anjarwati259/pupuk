@@ -207,7 +207,7 @@
           url: "<?php echo base_url('admin/produk/add_retur') ?>",
           data: {id:id, tgl_retur:tgl_retur,tgl_trans:tgl_trans,ket:ket},
           success: function(data) {
-            alert(data);
+            alert(data)
           }
       });
     });

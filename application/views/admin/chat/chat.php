@@ -130,7 +130,7 @@
                 </div>
 
                 <div class="col-sm-2 col-4">
-                  <button class="btn btn-primary p-2 balas-kirim"><i class="fa fa-send"></i></button>
+                  <button class="btn btn-primary p-2 balas-kirim" id="balas-kirim"><i class="fa fa-send"></i></button>
                 </div>
 
               </div>

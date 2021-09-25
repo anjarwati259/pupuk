@@ -622,7 +622,7 @@ class Order extends CI_Controller
 				'qty' => $cart['qty'],
 				'tanggal' => date('Y-m-d'),
 				'sisa'	=> $sisa->stok,
-				'status' => 'proses'
+				'status' => 'retur'
 			);
 			$this->produk_model->update_qty_min($cart['id'],array('stok' => $cart['qty']));
 			$this->order_model->tambah_stok($stok);
