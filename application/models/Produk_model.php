@@ -602,6 +602,17 @@ class Produk_model extends CI_Model
 	{
 		$this->db->insert('tb_retur', $data);
 	}
+	//rep
+	public function lap_stok($kode_produk,$status){
+		$this->db->select('sum(qty) as total');
+        $this->db->from('tb_stok');
+        $this->db->where('kode_produk', $kode_produk);
+        $this->db->where('status', $status);
+        $this->db->where("DATE_FORMAT(tanggal,'%Y')", date('Y'));
+        $this->db->where("DATE_FORMAT(tanggal,'%m')", date('m'));
+        $query = $this->db->get();
+        return $query->row();
+	}
 	//
 
 }

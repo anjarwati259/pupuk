@@ -7,7 +7,9 @@
   <div class="col-12">
     <div class="media pesan-item mb-2 pesan-saya">
       <div class="media-body">
-        <?php echo $chat->chat ?>
+        <div style="white-space:pre-wrap;">
+          <?php echo $chat->chat ?>
+        </div>
         <div class="pesan-waktu">
           <small>
             <?php echo $chat->tanggal ?>
@@ -21,7 +23,9 @@
   <div class="col-12">
     <div class="media pesan-item mb-2 pesan-teman">   
       <div class="media-body">
-        <?php echo $chat->chat ?>
+        <div style="white-space:pre-wrap;">
+          <?php echo $chat->chat ?>
+        </div>
         <div class="pesan-waktu">
           <small>
             <?php echo $chat->tanggal ?>

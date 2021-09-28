@@ -24,15 +24,26 @@
                   <th>No</th>
                   <th>Kode Produk</th>
                   <th>Nama Produk</th>
-                  <th>Stok</th>
+                  <th>Stok Keluar</th>
+                  <th>Retur</th>
+                  <th>Stok Masuk</th>
+                  <th>Sisa Stok</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php $no=1; foreach ($produk as $produk) { ?>
+                <?php $no=1; foreach ($produk as $produk) { 
+                  $id_produk = $produk->kode_produk;
+                  $return = $this->produk_model->lap_stok($id_produk,'return');
+                  $out = $this->produk_model->lap_stok($id_produk,'out');
+                  $in = $this->produk_model->lap_stok($id_produk,'in');
+                  ?>
                 <tr>
                   <td><?php echo $no++ ?></td>
                   <td><?php echo $produk->kode_produk ?></td>
                   <td><?php echo $produk->nama_produk ?></td>
+                  <td><?php echo $out->total ?></td>
+                  <td><?php echo $return->total ?></td>
+                  <td><?php echo $in->total ?></td>
                   <td><?php echo $produk->stok ?></td>
                 </tr>
               <?php } ?>

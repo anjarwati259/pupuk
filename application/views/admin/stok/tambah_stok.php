@@ -63,7 +63,7 @@ echo form_open_multipart(base_url('admin/produk/tambah_stok'), ' class="form-hor
                   <!-- /.box-body -->
                   <div class="box-footer">
                     <div class="col-md-3 col-md-offset-4">
-                      <a href="<?php echo base_url('admin/order/stok_awal') ?>" class="btn btn-default">Cancel</a>
+                      <a href="<?php echo base_url('admin/produk/stok_awal') ?>" class="btn btn-default">Cancel</a>
                       <button class="btn btn-info pull-right" type="submit">Save</button>
                     </div>
                   </div>

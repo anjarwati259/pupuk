@@ -162,11 +162,12 @@ class Produk extends CI_Controller
 						'keterangan'		=> $keterangan
 					);
 		$this->_insert_stok_data($kode_transaksi,$tgl_retur);
-		//$this->produk_model->retur($retur);
+		$this->produk_model->retur($retur);
+		
 	}
 
 	private function _insert_stok_data($kode_transaksi,$tgl_retur){
-		$order = $this->produk_model->get_order();
+		$order = $this->produk_model->get_order($kode_transaksi);
 		foreach($order as $order){
 			$sisa =  $this->produk_model->get_stok_id($order->id_produk);
 			$stok = array(
@@ -176,11 +177,10 @@ class Produk extends CI_Controller
 				'qty' => $order->jml_beli,
 				'tanggal' => $tgl_retur,
 				'sisa'	=> $sisa->stok,
-				'status' => 'retur'
+				'status' => 'return'
 			);
-			print_r($stok);
-			// $this->produk_model->update_stok($cart['id'],array('stok' => $cart['qty']));
-			// $this->order_model->tambah_stok($stok);
+			$this->produk_model->update_stok($order->id_produk,array('stok' => $order->jml_beli));
+			$this->order_model->tambah_stok($stok);
 		}
 	}
 

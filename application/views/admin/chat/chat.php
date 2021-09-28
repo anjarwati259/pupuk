@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="col-sm-8 col-6">
-                  <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .." style="overflow-y: auto;"></textarea>
+                  <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .." style="height: 200px; overflow-y: auto;"></textarea>
                 </div>
 
                 <div class="col-sm-2 col-4">

@@ -5,8 +5,8 @@
       <ul class="nav nav-tabs">
         <li role="presentation"><a href="<?php echo site_url('admin/produk/stok_awal');?>">Data Stok</a></li>
       <li role="presentation" ><a href="<?php echo site_url('admin/produk/tambah_stok');?>">Tambah Stok</a></li>
-      <li role="presentation" class="active"><a href="#tab_1">Stok Keluar</a></li>
-      <li role="presentation"><a href="<?php echo site_url('admin/produk/retur_barang');?>">Retur Barang</a></li>
+      <li role="presentation" ><a href="<?php echo site_url('admin/produk/stok_keluar');?>">Stok Keluar</a></li>
+      <li role="presentation" class="active"><a href="#tab_1">Retur Barang</a></li>
       </ul>
       <div class="tab-content">
         <!-- /.tab-pane -->
@@ -91,7 +91,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
               <div class="col-md-3 col-md-offset-4" style="padding-top: 15px;">
-                <a href="<?php echo base_url('admin/order/stok_awal') ?>" class="btn btn-default">Cancel</a>
+                <a href="<?php echo base_url('admin/produk/stok_awal') ?>" class="btn btn-default">Cancel</a>
                 <button class="btn btn-info pull-right" type="submit" id="retur">Retur</button>
               </div>
             </div>
@@ -196,20 +196,20 @@
           }
       });
     });
-    //save retur
-    $("body").on("click","#retur",function(){
-      var id = $("#kode_transaksi").val();
-      var tgl_trans = $("#tgl_transaksi").val();
-      var tgl_retur = $("#tgl_retur").val();
-      var ket = $("#keterangan").val();
-      $.ajax({
-          type: 'POST',
-          url: "<?php echo base_url('admin/produk/add_retur') ?>",
-          data: {id:id, tgl_retur:tgl_retur,tgl_trans:tgl_trans,ket:ket},
-          success: function(data) {
-            alert(data)
-          }
-      });
+});
+//save retur
+  $("body").on("click","#retur",function(){
+    var id = $("#kode_transaksi").val();
+    var tgl_trans = $("#tgl_transaksi").val();
+    var tgl_retur = $("#tgl_retur").val();
+    var ket = $("#keterangan").val();
+    $.ajax({
+        type: 'POST',
+        url: "<?php echo base_url('admin/produk/add_retur') ?>",
+        data: {id:id, tgl_retur:tgl_retur,tgl_trans:tgl_trans,ket:ket},
+        success: function(data) {
+          alert('Retur Barang berhasil');
+        }
     });
   });
 </script>
