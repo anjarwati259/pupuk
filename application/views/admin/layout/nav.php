@@ -265,7 +265,7 @@
           </ul>
         </li>
         <!-- Stok -->
-        <!-- <li class="treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-cubes"></i>
             <span>Stok</span>
@@ -275,10 +275,11 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('admin/produk/stok_awal') ?>"><i class="fa fa-users"></i> Data Stok</a></li>
-            <li><a href="<?php echo base_url('admin/produk/keluar') ?>"><i class="fa fa-plus-square-o"></i> Barang Keluar</a></li>
-            <li><a href="<?php echo base_url('admin/produk/stok_masuk') ?>"><i class="fa fa-plus-square-o"></i> Barang Masuk</a></li>
+            <li><a href="<?php echo base_url('admin/produk/stok') ?>"><i class="fa fa-users"></i> Riwayat Stok</a></li>
+            <!-- <li><a href="<?php echo base_url('admin/produk/keluar') ?>"><i class="fa fa-plus-square-o"></i> Barang Keluar</a></li>
+            <li><a href="<?php echo base_url('admin/produk/stok_masuk') ?>"><i class="fa fa-plus-square-o"></i> Barang Masuk</a></li> -->
           </ul>
-        </li> -->
+        </li>
         <!-- Pegiriman -->
         <li>
           <a href="<?php echo base_url('pengiriman/data_kirim') ?>">

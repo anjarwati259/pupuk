@@ -35,16 +35,20 @@
                   $id_produk = $produk->kode_produk;
                   $return = $this->produk_model->lap_stok($id_produk,'return');
                   $out = $this->produk_model->lap_stok($id_produk,'out');
+                  $sampel = $this->produk_model->lap_stok($id_produk,'sampel');
+                  $proses = $this->produk_model->lap_stok($id_produk,'proses');
+                  $sisa = $produk->stok + $proses->total;
+                  $keluar = ($out->total+$sampel->total)-$return->total;
                   $in = $this->produk_model->lap_stok($id_produk,'in');
                   ?>
                 <tr>
                   <td><?php echo $no++ ?></td>
                   <td><?php echo $produk->kode_produk ?></td>
                   <td><?php echo $produk->nama_produk ?></td>
-                  <td><?php echo $out->total ?></td>
+                  <td><?php echo $keluar ?></td>
                   <td><?php echo $return->total ?></td>
                   <td><?php echo $in->total ?></td>
-                  <td><?php echo $produk->stok ?></td>
+                  <td><?php echo $sisa ?></td>
                 </tr>
               <?php } ?>
                 </tbody>

@@ -47,8 +47,8 @@
               <th>Nama</th>
               <th>No. HP</th>
               <th>Tanggal</th>
-              <th>Jumlah Item</th>
-              <th>Jumlah Belanja</th>
+              <th>Jumlah <br>Item</th>
+              <th>Jumlah <br>Belanja</th>
               <th>Status</th>
               <th>Action</th>
               <th style="display: none;">Action</th>
@@ -68,7 +68,7 @@
                 <td><?php echo $order->total_item ?></td>
                 <td>Rp. <?php echo number_format($order->total_bayar,'0',',','.') ?></td> 
                 <td><?php if($order->status_bayar==0 && $order->metode_pembayaran ==1){
-                      echo "<span class='alert-warning'>Transfer Bank</span>";
+                      echo "<span class='alert-warning'>Transfer</span>";
                     }else if($order->status_bayar==0 && $order->metode_pembayaran ==2){
                       echo "<span class='alert-success'>Cash</span>";
                     }else{

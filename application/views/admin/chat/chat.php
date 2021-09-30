@@ -11,6 +11,13 @@
     <script type="text/javascript" src="<?php echo base_url() ?>assets/chat/js/popper.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/chat/js/bootstrap.js"></script>
 
+    <style type="text/css">
+        #balas-ketik{
+            display: block;
+            overflow: hidden;
+            resize: none;
+        }
+    </style>
     <title>Gi-Chat</title>
 
 </head>
@@ -126,7 +133,7 @@
                 </div>
 
                 <div class="col-sm-8 col-6">
-                  <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .." style="height: 200px; overflow-y: auto;"></textarea>
+                  <textarea class="form-control" id="balas-ketik" placeholder="Ketik pesan .." style="overflow-y: auto;"></textarea>
                 </div>
 
                 <div class="col-sm-2 col-4">
@@ -138,7 +145,15 @@
       </div>
         </div>
     </div>
-
+    <script type="text/javascript">
+        textarea = document.querySelector("#balas-ketik");
+        textarea.addEventListener('input', autoResize, false);
+      
+        function autoResize() {
+            this.style.height = '130px';
+            //this.style.height = this.scrollHeight + 'px';
+        }
+    </script>
     <?php include 'ajax.php'; ?>
 </body>
 </html>

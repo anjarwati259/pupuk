@@ -63,10 +63,10 @@ function getRomawi($bln){
 function getBulan($bln){
     switch ($bln){
     case 1: 
-        return "Januari";
+        return "Jan";
     break;
     case 2:
-        return "Februari";
+        return "Feb";
     break;
     case 3:
         return "maret";
@@ -84,19 +84,19 @@ function getBulan($bln){
         return "Juli";
     break;
     case 8:
-        return "Agustus";
+        return "Agus";
     break;
     case 9:
-        return "September";
+        return "Sept";
     break;
     case 10:
-        return "Oktober";
+        return "Okt";
     break;
     case 11:
-        return "November";
+        return "Nov";
     break;
     case 12:
-        return "Desember";
+        return "Des";
     break;
     }
 }
@@ -131,18 +131,18 @@ function tanggal($tanggal, $cetak_hari = false)
                                     'Minggu'
                                   );
                                   
-                              $bulan = array (1 =>   'Januari',
-                                    'Februari',
+                              $bulan = array (1 =>   'Jan',
+                                    'Feb',
                                     'Maret',
                                     'April',
                                     'Mei',
                                     'Juni',
                                     'Juli',
-                                    'Agustus',
-                                    'September',
-                                    'Oktober',
-                                    'November',
-                                    'Desember'
+                                    'Agus',
+                                    'Sept',
+                                    'Okt',
+                                    'Nov',
+                                    'Des'
                                   );
                               $split    = explode('-', $tanggal);
                               $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
