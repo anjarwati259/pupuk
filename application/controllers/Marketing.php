@@ -155,7 +155,7 @@ class Marketing extends CI_Controller
 							'id_marketing'			=> $i->post('id_marketing'),
 							'no_hp'				=> $i->post('no_hp'),
 							'komoditi'			=> $i->post('komoditi'),
-							'tanggal_daftar'	=> date('Y-m-d'),
+							'tanggal_daftar'	=> date('Y-m-d H:i:s'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
 							'kecamatan'			=> $i->post('kec'),

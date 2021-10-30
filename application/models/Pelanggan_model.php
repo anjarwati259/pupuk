@@ -87,7 +87,7 @@ class Pelanggan_model extends CI_Model
 	}
 	//digunakan untuk mencari id pelanggan terakhir
 	public function get_last_id(){
-		$this->db->order_by('id_pelanggan', 'DESC');
+		$this->db->order_by('tanggal_daftar', 'DESC');
 
 		$query = $this->db->get("tb_pelanggan",1,0);
 		return $query->result();
@@ -114,6 +114,15 @@ class Pelanggan_model extends CI_Model
 		$this->db->where('jenis_pelanggan', $data);
 		$this->db->where('id_marketing', $id_marketing);
 		$this->db->order_by('id_pelanggan','desc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//get all customer by marketing
+	public function get_allmarketing($id_marketing){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id_marketing);
+		$this->db->order_by('tanggal_daftar','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -176,6 +185,7 @@ class Pelanggan_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tb_calon_pelanggan');
 		$this->db->where('id_marketing', $id_marketing);
+		$this->db->where('status !=',2);
 		$this->db->order_by('tanggal','desc');
 		$query = $this->db->get();
 		return $query->result();
@@ -208,6 +218,213 @@ class Pelanggan_model extends CI_Model
 		$this->db->from('tb_calon_pelanggan');
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_calon_pelanggan.id_marketing', 'left');
 		$this->db->where('id_calon', $id_calon);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	// filter customer
+	public function tot_customer($id_marketing){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id_marketing);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function calon_cus($id_marketing){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('status !=',2);
+		$this->db->where('id_marketing', $id_marketing);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function lap_cus($id,$status){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status', $status);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function lap_calon($id,$status){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status !=',2);
+		$this->db->where('status', $status);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function get_tanggal($id,$awal,$akhir){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('tanggal_daftar >=', $awal);
+		$this->db->where('tanggal_daftar <=', $akhir);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function list_tanggal($id,$awal,$akhir){
+		$this->db->select('*');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status !=',2);
+		$this->db->where('tanggal >=', $awal);
+		$this->db->where('tanggal <=', $akhir);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function tot_tanggal($id,$awal,$akhir){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('tanggal_daftar >=', $awal);
+		$this->db->where('tanggal_daftar <=', $akhir);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function calon_tanggal($id,$awal,$akhir){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status !=',2);
+		$this->db->where('tanggal >=', $awal);
+		$this->db->where('tanggal <=', $akhir);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function tgl_cus($id,$data){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status', $data['status']);
+		$this->db->where('tanggal_daftar >=', $data['awal']);
+		$this->db->where('tanggal_daftar <=', $data['akhir']);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function tgl_calon($id,$data){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status', $data['status']);
+		$this->db->where('status !=',2);
+		$this->db->where('tanggal >=', $data['awal']);
+		$this->db->where('tanggal <=', $data['akhir']);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	// bulan
+	public function get_bulan($id,$bulan,$tahun){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%Y')", $tahun);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%m')", $bulan);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function list_bulan($id,$bulan,$tahun){
+		$this->db->select('*');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status !=',2);
+		$this->db->where("DATE_FORMAT(tanggal,'%Y')", $tahun);
+		$this->db->where("DATE_FORMAT(tanggal,'%m')", $bulan);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function tot_bulan($id,$bulan,$tahun){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%Y')", $tahun);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%m')", $bulan);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function calon_bulan($id,$bulan,$tahun){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('status !=',2);
+		$this->db->where('id_marketing', $id);
+		$this->db->where("DATE_FORMAT(tanggal,'%Y')", $tahun);
+		$this->db->where("DATE_FORMAT(tanggal,'%m')", $bulan);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function bln_cus($id,$data){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status', $data['status']);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%Y')", $data['tahun']);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%m')", $data['bulan']);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function bln_calon($id,$data){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status !=',2);
+		$this->db->where('status', $data['status']);
+		$this->db->where("DATE_FORMAT(tanggal,'%Y')", $data['tahun']);
+		$this->db->where("DATE_FORMAT(tanggal,'%m')", $data['bulan']);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	//tahun
+	public function get_tahun($id,$tahun){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%Y')", $tahun);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function list_tahun($id,$tahun){
+		$this->db->select('*');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('status !=',2);
+		$this->db->where('id_marketing', $id);
+		$this->db->where("DATE_FORMAT(tanggal,'%Y')", $tahun);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function tot_tahun($id,$tahun){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%Y')", $tahun);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function calon_tahun($id,$tahun){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('status !=',2);
+		$this->db->where('id_marketing', $id);
+		$this->db->where("DATE_FORMAT(tanggal,'%Y')", $tahun);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function thn_cus($id,$data){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status', $data['status']);
+		$this->db->where("DATE_FORMAT(tanggal_daftar,'%Y')", $data['tahun']);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function thn_calon($id,$data){
+		$this->db->select('COUNT(*) as total');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->where('id_marketing', $id);
+		$this->db->where('status !=',2);
+		$this->db->where('status', $data['status']);
+		$this->db->where("DATE_FORMAT(tanggal,'%Y')", $data['tahun']);
 		$query = $this->db->get();
 		return $query->row();
 	}

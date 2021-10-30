@@ -5,7 +5,7 @@ function generate_code($suffix,$id){
 	// return $prefix.$numcode;
 	$kode = (int) $id;
 	$kode = $kode + 1;
-	return $suffix .str_pad($kode, 3, "0",  STR_PAD_LEFT);
+	return $suffix .str_pad($kode, 4, "0",  STR_PAD_LEFT);
 }
 function rupiah($angka){
     if ($angka==''||$angka==null||$angka=='-') {

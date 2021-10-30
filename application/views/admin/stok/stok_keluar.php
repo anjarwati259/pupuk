@@ -65,6 +65,7 @@ echo form_open_multipart(base_url('admin/produk/stok_keluar'), ' class="form-hor
                             <option>--Pilih Status--</option>
                               <option value="sampel">Sample</option>
                               <option value="rusak">Rusak</option>
+                              <option value="bonus">Bonus</option>
                           </select>
                         </div>
                       </div>

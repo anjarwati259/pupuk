@@ -43,7 +43,6 @@ class Pelanggan extends CI_Controller
 			$id_marketing = $marketing->id_marketing;
 			$customer = $this->pelanggan_model->get_marketing($id_marketing,'Customer');
 		}
-
 		
 		$data = array(	'title' => 'Data Pelanggan',
 						'id'	=> $id_pelanggan,
@@ -987,5 +986,193 @@ class Pelanggan extends CI_Controller
 						'isi' => 'admin/calon/detail' );
 			//print_r($pelanggan);
 			$this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	// laporan pelanggan
+
+	public function lap_customer(){
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$pelanggan =  $this->pelanggan_model->get_allmarketing($id_marketing);
+		$calon =  $this->pelanggan_model->listcalon($id_marketing);
+		$customer = $this->pelanggan_model->tot_customer($id_marketing);
+		$calon_cus = $this->pelanggan_model->calon_cus($id_marketing);
+
+		$data = array(	'title'		=> 'Laporan Data Pelanggan',
+						'pelanggan' => $pelanggan,
+						'calon'		=> $calon,
+						'customer'	=> $customer,
+						'calon_cus'	=> $calon_cus,
+						'isi'		=> 'admin/customer/lap_customer'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function report(){
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$status1 = $this->input->post('status');
+
+		if($status1 == 'Organik'){
+			$status = 0;
+		}else{
+			$status = 1;
+		}
+
+		$customer =  $this->pelanggan_model->lap_cus($id_marketing, $status);
+		$calon =  $this->pelanggan_model->lap_calon($id_marketing, $status);
+		$data = array(	'customer' => $customer->total,
+						'calon'		=> $calon->total,
+					 );
+		echo json_encode($data);
+	}
+	public function report_tanggal(){
+		$awal = $this->input->post('awal');
+		$akhir = $this->input->post('akhir');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$status1 = $this->input->post('status');
+
+		if($status1 == 'Organik'){
+			$status = 0;
+		}else{
+			$status = 1;
+		}
+		$data1 = array('status' => $status,
+						'awal' => $awal,
+						'akhir' => $akhir);
+
+		$customer =  $this->pelanggan_model->tgl_cus($id_marketing, $data1);
+		$calon =  $this->pelanggan_model->tgl_calon($id_marketing, $data1);
+		$data = array(	'customer' => $customer->total,
+						'calon'		=> $calon->total,
+					 );
+		echo json_encode($data);
+	}
+	public function report_bulan(){
+		$bulan = $this->input->post('bulan');
+		$tahun = $this->input->post('tahun');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$status1 = $this->input->post('status');
+
+		if($status1 == 'Organik'){
+			$status = 0;
+		}else{
+			$status = 1;
+		}
+		$data1 = array('status' => $status,
+						'bulan' => $bulan,
+						'tahun' => $tahun);
+
+		$customer =  $this->pelanggan_model->bln_cus($id_marketing, $data1);
+		$calon =  $this->pelanggan_model->bln_calon($id_marketing, $data1);
+		$data = array(	'customer' => $customer->total,
+						'calon'		=> $calon->total,
+					 );
+		echo json_encode($data);
+	}
+	public function report_tahun(){
+		$tahun = $this->input->post('tahun');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$status1 = $this->input->post('status');
+
+		if($status1 == 'Organik'){
+			$status = 0;
+		}else{
+			$status = 1;
+		}
+		$data1 = array('status' => $status,
+						'tahun' => $tahun);
+
+		$customer =  $this->pelanggan_model->thn_cus($id_marketing, $data1);
+		$calon =  $this->pelanggan_model->thn_calon($id_marketing, $data1);
+		$data = array(	'customer' => $customer->total,
+						'calon'		=> $calon->total,
+					 );
+		echo json_encode($data);
+	}
+	public function lap_tanggal(){
+		$awal = $this->input->post('tgl_awal');
+		$akhir = $this->input->post('tgl_akhir');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$pelanggan =  $this->pelanggan_model->get_tanggal($id_marketing,$awal,$akhir);
+		$calon =  $this->pelanggan_model->list_tanggal($id_marketing,$awal,$akhir);
+		$customer = $this->pelanggan_model->tot_tanggal($id_marketing,$awal,$akhir);
+		$calon_cus = $this->pelanggan_model->calon_tanggal($id_marketing,$awal,$akhir);
+
+		$data = array(	'title'		=> 'Laporan Data Pelanggan',
+						'pelanggan' => $pelanggan,
+						'calon'		=> $calon,
+						'customer'	=> $customer,
+						'calon_cus'	=> $calon_cus,
+						'awal'		=> $awal,
+						'akhir'		=> $akhir,
+						'isi'		=> 'admin/customer/lap_tanggal'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function lap_bulan(){
+		$tahun = $this->input->post('tahun');
+		$bulan = $this->input->post('bulan');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$pelanggan =  $this->pelanggan_model->get_bulan($id_marketing,$bulan,$tahun);
+		$calon =  $this->pelanggan_model->list_bulan($id_marketing,$bulan,$tahun);
+		$customer = $this->pelanggan_model->tot_bulan($id_marketing,$bulan,$tahun);
+		$calon_cus = $this->pelanggan_model->calon_bulan($id_marketing,$bulan,$tahun);
+
+		$data = array(	'title'		=> 'Laporan Data Pelanggan',
+						'pelanggan' => $pelanggan,
+						'calon'		=> $calon,
+						'customer'	=> $customer,
+						'calon_cus'	=> $calon_cus,
+						'bln'		=> $bulan,
+						'thn'		=> $tahun,
+						'isi'		=> 'admin/customer/lap_bulan'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function lap_tahun(){
+		$tahun = $this->input->post('tahun2');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+
+		$pelanggan =  $this->pelanggan_model->get_tahun($id_marketing,$tahun);
+		$calon =  $this->pelanggan_model->list_tahun($id_marketing,$tahun);
+		$customer = $this->pelanggan_model->tot_tahun($id_marketing,$tahun);
+		$calon_cus = $this->pelanggan_model->calon_tahun($id_marketing,$tahun);
+
+		$data = array(	'title'		=> 'Laporan Data Pelanggan',
+						'pelanggan' => $pelanggan,
+						'calon'		=> $calon,
+						'customer'	=> $customer,
+						'calon_cus'	=> $calon_cus,
+						'thn'		=> $tahun,
+						'isi'		=> 'admin/customer/lap_tahun'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 }

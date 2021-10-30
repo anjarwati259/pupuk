@@ -220,7 +220,7 @@ class Order extends CI_Controller
 		}else{
 			$id_pelanggan = 'C001';
 		}
-
+		//print_r($id_pelanggan);
 		//destry cart
 		$this->cart->destroy();
 		$id_user = $this->session->userdata('id_user');
@@ -563,8 +563,12 @@ class Order extends CI_Controller
 			$data['potongan'] = $potongan;
 			$data['metode_pembayaran'] = $this->input->post('metode_pembayaran');
 			$data['status_baca'] = $this->input->post('status_baca');
-
 			//$code = $this->input->post('code');
+			if($data['jenis_order']==1){
+				$status = 1;
+			}else{
+				$status = 0;
+			}
 			 if($id_pelanggan==null){
 			 	$id_pelanggan = $this->_insert_pelanggan($data['nama_pelanggan'],$data['alamat'],$data['kecamatan'],$data['kabupaten'], $data['provinsi'], $data['tanggal_transaksi'],$data['total_item'],$komoditi,$no_hp);
 			 	$data['id_pelanggan'] = $id_pelanggan;
@@ -573,6 +577,7 @@ class Order extends CI_Controller
 			 }else{
 			 	$data['id_pelanggan'] = $id_pelanggan;
 			 	$this->order_model->tambah($data);
+			 	$this->up_pelanggan($data['id_pelanggan'], $status);
 			 }
 			 
 			if($data['kode_transaksi']){
@@ -584,6 +589,11 @@ class Order extends CI_Controller
 		}else{
 			echo json_encode(array('status' => 'error'));
 		}
+	}
+	private function up_pelanggan($id,$status){
+		$data = array('id_pelanggan' => $id,
+						'status'	=> $status);
+		$this->pelanggan_model->edit($data);
 	}
 	//untuk menyimpan data belanja ke database
 	private function _insert_purchase_data($kode_transaksi,$carts,$id_pelanggan, $tanggal_transaksi,$id_marketing){
@@ -775,9 +785,9 @@ class Order extends CI_Controller
 			$data = array(	'id_pelanggan'		=> $id_pelanggan,
 							'nama_pelanggan'	=> $i->post('namapelanggan'),
 							'alamat'			=> $i->post('alamat'),
-							'id_marketing'			=> $i->post('id_marketing'),
+							'id_marketing'		=> $i->post('id_marketing'),
 							'no_hp'				=> $no_hp,
-							'tanggal_daftar'	=> date('Y-m-d'),
+							'tanggal_daftar'	=> date('Y-m-d H:i:s'),
 							'provinsi'			=> $i->post('prov'),
 							'kabupaten'			=> $i->post('kab'),
 							'kecamatan'			=> $i->post('kec'),

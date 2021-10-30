@@ -48,6 +48,7 @@
           <input type="hidden" name="kabupaten" value="<?php echo $calon->kabupaten ?>">
           <input type="hidden" name="provinsi" value="<?php echo $calon->provinsi ?>">
           <input type="hidden" name="komiditi" value="<?php echo $calon->komoditi ?>">
+          <input type="hidden" name="tanggal_daftar" value="<?php echo date('Y-m-d') ?>">
 
           <!-- /.box-body -->
           <div class="box-footer">
