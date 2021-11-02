@@ -7,7 +7,13 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/img/logo/logo_2.png" class="img-circle" alt="User Image">
+          <?php 
+            $id_user = $this->session->userdata('id_user');
+            $this->db->select('*');
+            $this->db->from('tb_marketing');
+            $this->db->where('id_user', $this->session->userdata('id_user')); 
+            $getfoto= $this->db->get()->row();  ?>
+          <img src="<?php echo base_url() ?>assets/img/team/<?php echo $getfoto->foto ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama_user'); ?></p>
@@ -147,7 +153,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/img/logo/logo_2.png" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url() ?>assets/img/team/<?php echo $getfoto->foto ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama_user'); ?></p>
@@ -234,7 +240,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/img/logo/logo_2.png" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url() ?>assets/img/team/<?php echo $getfoto->foto ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama_user'); ?></p>

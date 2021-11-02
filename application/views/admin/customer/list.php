@@ -37,14 +37,16 @@
                         <th>Tanggal Gabung</th>
                         <th>Nama</th>
                         <th>No. Hp</th>
-                        <th width="300px">Alamat</th>
+                        <!-- <th width="300px">Alamat</th> -->
                         <th>Kabupaten</th>
-                        <th>Provinsi</th>
+                        <!-- <th>Provinsi</th> -->
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Action</th>
+                      <?php }else{ ?>
+                        <th>Follow UP</th>
                       <?php } ?>
                       </tr>
                       </thead>
@@ -56,11 +58,11 @@
                         <td><?php echo tanggal(date('Y-m-d',strtotime($customer->tanggal_daftar))); ?></td>
                         <td><a href="<?php echo base_url('admin/pelanggan/detail/'.$customer->id_pelanggan) ?>"><?php echo $customer->nama_pelanggan ?></a></td>
                         <td><?php echo $customer->no_hp ?></td>
-                        <td>
+                        <!-- <td>
                           <?php echo $customer->alamat ?><br> 
-                        </td>
+                        </td> -->
                         <td><?php echo $customer->kabupaten ?></td>
-                        <td><?php echo $customer->provinsi ?></td>
+                        <!-- <td><?php echo $customer->provinsi ?></td> -->
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td><?php echo $customer->nama_marketing ?></td>
                       <?php } ?>
@@ -70,6 +72,8 @@
                           <a href="<?php echo base_url('admin/pelanggan/edit_customer/'.$customer->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
                           <a href="<?php echo base_url('admin/pelanggan/delete/'.$customer->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini? Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" ><i class="fa fa-trash"></i> Hapus</a>
                         </td>
+                      <?php }else{ ?>
+                        <td></td>
                       <?php } ?>
                       </tr>
                     <?php } ?>

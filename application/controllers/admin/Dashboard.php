@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('order_model');
 		$this->load->model('produk_model');
 		$this->load->model('marketing_model');
+		$this->load->model('user_model');
 	}
 	public function index(){
 		$tanggal = date('Y-m-d');

@@ -25,7 +25,13 @@
     </div>
 
     <div class="widget-user-image">
-      <img id="file-ip-1-preview" class="img-circle" src="<?php echo base_url() ?>assets/img/logo/logo_2.png" alt="User Avatar">
+      <?php 
+        $id_user = $this->session->userdata('id_user');
+        $this->db->select('*');
+        $this->db->from('tb_marketing');
+        $this->db->where('id_user', $this->session->userdata('id_user')); 
+        $getfoto= $this->db->get()->row();  ?>
+      <img id="file-ip-1-preview" class="img-circle" src="<?php echo base_url() ?>assets/img/team/<?php echo $getfoto->foto ?>" alt="User Avatar">
     </div>
     <div class="box-footer">
       <div class="row">

@@ -44,13 +44,19 @@ $notif = $this->dashboard_model->data_notif();
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url() ?>assets/img/logo/logo_2.png" class="user-image" alt="User Image">
+              <?php 
+                $id_user = $this->session->userdata('id_user');
+                $this->db->select('*');
+                $this->db->from('tb_marketing');
+                $this->db->where('id_user', $this->session->userdata('id_user')); 
+                $getfoto= $this->db->get()->row();  ?>
+              <img style="border-radius: 50%;height: 20px; width: 20px;" src="<?php echo base_url() ?>assets/img/team/<?php echo $getfoto->foto ?>" alt="User Image">
               <span class="hidden-xs"><?php echo $this->session->userdata('nama_user'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url() ?>assets/img/logo/logo_2.png" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url() ?>assets/img/team/<?php echo $getfoto->foto ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <!-- <?php echo $this->session->userdata('nama_user'); ?> - <?php echo $this->session->userdata('akses_level'); ?> -->
