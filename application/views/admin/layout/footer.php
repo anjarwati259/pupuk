@@ -354,6 +354,10 @@
       autoclose: true,
       format:'yyyy-mm-dd'
     });
+    $('#datepicker3').datepicker({
+      autoclose: true,
+      format:'yyyy-mm-dd'
+    });
     $('#min').datepicker({
       autoclose: true,
       format:'yyyy-mm-dd'

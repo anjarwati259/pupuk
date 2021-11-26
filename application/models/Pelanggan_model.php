@@ -161,6 +161,7 @@ class Pelanggan_model extends CI_Model
 		$this->db->join('tb_calon_pelanggan','tb_calon_pelanggan.id_calon = tb_ativitas.id_pelanggan', 'left');
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_ativitas.id_marketing', 'left');
 		$this->db->order_by('id_aktivitas','desc');
+		$this->db->limit(5);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -427,5 +428,43 @@ class Pelanggan_model extends CI_Model
 		$this->db->where("DATE_FORMAT(tanggal,'%Y')", $data['tahun']);
 		$query = $this->db->get();
 		return $query->row();
+	}
+	public function calon_tgl($id,$awal,$akhir){
+		$hak_akses = $this->session->userdata('hak_akses');
+		$this->db->select('tb_calon_pelanggan.*,tb_marketing.nama_marketing');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_calon_pelanggan.id_marketing', 'left');
+		if($hak_akses!=1){
+		$this->db->where('tb_calon_pelanggan.id_marketing', $id);
+		}
+		$this->db->where('tb_calon_pelanggan.tanggal >=', $awal);
+		$this->db->where('tb_calon_pelanggan.tanggal <=', $akhir);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function calon_bln($id,$bulan,$tahun){
+		$hak_akses = $this->session->userdata('hak_akses');
+		$this->db->select('tb_calon_pelanggan.*,tb_marketing.nama_marketing');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_calon_pelanggan.id_marketing', 'left');
+		if($hak_akses!=1){
+		$this->db->where('tb_calon_pelanggan.id_marketing', $id);
+		}
+		$this->db->where("DATE_FORMAT(tb_calon_pelanggan.tanggal,'%Y')", $tahun);
+		$this->db->where("DATE_FORMAT(tb_calon_pelanggan.tanggal,'%m')", $bulan);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function calon_thn($id,$tahun){
+		$hak_akses = $this->session->userdata('hak_akses');
+		$this->db->select('tb_calon_pelanggan.*,tb_marketing.nama_marketing');
+		$this->db->from('tb_calon_pelanggan');
+		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_calon_pelanggan.id_marketing', 'left');
+		if($hak_akses!=1){
+		$this->db->where('tb_calon_pelanggan.id_marketing', $id);
+		}
+		$this->db->where("DATE_FORMAT(tb_calon_pelanggan.tanggal,'%Y')", $tahun);
+		$query = $this->db->get();
+		return $query->result();
 	}
 }

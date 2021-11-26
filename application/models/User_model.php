@@ -30,6 +30,16 @@ class User_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	//login user_admin
+	public function user_login($id_user){
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->where('id_user',$id_user);
+		$this->db->order_by('id_user','desc');
+		$query = $this->db->get();
+		return $query->row();
+	}
+
 	//tambah data user
 	public function tambah($data){
 		$this->db->insert('tb_user', $data);

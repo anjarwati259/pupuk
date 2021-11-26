@@ -19,7 +19,8 @@ class Simple_login
     $check = $this->CI->user_model->login($username, $password);
     //jika ada data user, maka create session login
     if($check){
-      $id_user  = $check->id_user;
+    
+    $id_user  = $check->id_user;
       $nama_user  = $check->nama_user;
       $hak_akses  = $check->hak_akses;
       //create session
@@ -46,6 +47,35 @@ class Simple_login
       $this->CI->session->set_flashdata('warning','Username atau password salah');
       redirect(base_url('login'),'refresh');
     }
+  }
+  public function login_user($id_user,$id_admin){
+    $check = $this->CI->user_model->user_login($id_user);
+    $id_user  = $check->id_user;
+    $username = $check->username;
+    $nama_user  = $check->nama_user;
+    $hak_akses  = '7';
+    //create session
+    $this->CI->session->set_userdata('id_user',$id_user);
+    $this->CI->session->set_userdata('nama_user',$nama_user);
+    $this->CI->session->set_userdata('username',$username);
+    $this->CI->session->set_userdata('hak_akses',$hak_akses);
+    $this->CI->session->set_userdata('id_admin',$id_admin);
+
+    redirect(base_url('marketing'),'refresh');
+  }
+  public function back_admin($id_admin){
+    $check = $this->CI->user_model->user_login($id_admin);
+    $id_user  = $check->id_user;
+    $username = $check->username;
+    $nama_user  = $check->nama_user;
+    $hak_akses  = $check->hak_akses;
+
+    $this->CI->session->set_userdata('id_user',$id_user);
+    $this->CI->session->set_userdata('nama_user',$nama_user);
+    $this->CI->session->set_userdata('username',$username);
+    $this->CI->session->set_userdata('hak_akses',$hak_akses);
+
+    redirect(base_url('marketing/report_marketing'),'refresh');
   }
 
   //fungsi cek login
@@ -89,7 +119,8 @@ class Simple_login
   public function marketing()
   {
     //memeriksa apakah session sudah atau belum, jika belum alihkan ke halaman login
-    if($this->CI->session->userdata('hak_akses')!="5"){
+    $hak_akses = $this->CI->session->userdata('hak_akses');
+    if($hak_akses!="5" || $hak_akses!="7"){
       $this->CI->session->set_flashdata('warning','Anda Tidak Memiliki Akses');
       redirect(base_url('login'),'refresh');
       //echo "anda tidak memiliki akses";

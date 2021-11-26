@@ -31,6 +31,13 @@ class Login extends CI_Controller
     $this->load->view('login/login');
   }
 
+  public function user_login($id_user,$id_admin){
+    $this->simple_login->login_user($id_user,$id_admin);
+  }
+  public function back_admin($id_admin){
+    $this->simple_login->back_admin($id_admin);
+  }
+
   //fungsi register
   public function register()
   {

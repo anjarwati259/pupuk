@@ -90,7 +90,7 @@
 
 <!-- Modal filter bulan -->
 <div class="modal fade" id="bulan">
-  <div class="modal-dialog" style="width: 450px;">
+  <div class="modal-dialog" style="max-width: 450px;">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #F0F8FF;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

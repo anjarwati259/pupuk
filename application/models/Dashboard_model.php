@@ -352,4 +352,15 @@ class Dashboard_model extends CI_Model
 		$this->db->where('id_user', $data['id_user']);
 		$this->db->update('tb_user_chat',$data);
 	}
+
+	//save change profil
+	public function save_change($data){
+		$this->db->where('id_marketing', $data['id_marketing']);
+		$this->db->update('tb_marketing',$data);
+	}
+	//save change email
+	public function save_user($data){
+		$this->db->where('id_user', $data['id_user']);
+		$this->db->update('tb_user',$data);
+	}
 }

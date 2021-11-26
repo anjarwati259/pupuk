@@ -12,6 +12,8 @@
     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
       <span class="fa fa-caret-down"></span></button>
     <ul class="dropdown-menu">
+      <li><a href="#" class="follow" data-toggle="modal" data-target="#follow-up" data-id="<?php echo $calon->id_calon; ?>" data-no="<?php echo $no_hp; ?>" data-market="<?php echo $market_id; ?>">Follow Up</a></li>
+      <li><a href="#" class="detail" data-toggle="modal" data-target="#ubah" data-id="<?php echo $calon->id_calon; ?>" data-nama="<?php echo $calon->nama_calon; ?>">Detail</a></li>
       <li><a href="#" data-toggle="modal" data-target="#ubah<?php echo $calon->id_calon ?>">Ubah</a></li>
       <li><a href="<?php echo base_url('admin/pelanggan/edit_calon/'.$calon->id_calon) ?>">Edit</a></li>
     </ul>
@@ -114,3 +116,4 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+

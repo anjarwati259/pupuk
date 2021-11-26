@@ -20,7 +20,7 @@ $notif = $this->dashboard_model->data_notif();
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <?php if($this->session->userdata('hak_akses')=='1'){ ?>
+          <?php  if($this->session->userdata('hak_akses')=='1'){ ?>
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
@@ -39,6 +39,13 @@ $notif = $this->dashboard_model->data_notif();
                 </ul>
               </li>
             </ul>
+          </li>
+        <?php }else if($this->session->userdata('hak_akses')=='7'){ ?>
+          <li class="dropdown messages-menu">
+            <?php $id_admin = $this->session->userdata('id_admin'); ?>
+            <a href="<?php echo base_url('login/back_admin/'.$id_admin) ?>">
+              <i class="fa fa-sign-out"></i>&nbsp;Back to Admin
+            </a>
           </li>
         <?php } ?>
           <!-- User Account: style can be found in dropdown.less -->

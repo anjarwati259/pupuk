@@ -5,7 +5,7 @@ function generate_code($suffix,$id){
 	// return $prefix.$numcode;
 	$kode = (int) $id;
 	$kode = $kode + 1;
-	return $suffix .str_pad($kode, 4, "0",  STR_PAD_LEFT);
+	return $suffix .str_pad($kode, 3, "0",  STR_PAD_LEFT);
 }
 function rupiah($angka){
     if ($angka==''||$angka==null||$angka=='-') {
@@ -120,36 +120,83 @@ function generate_else(){
     $romawi = getRomawi($bulan);
     return $tanggal . $suffix . $romawi . '-' . $tahun . '-001';
 }
-function tanggal($tanggal, $cetak_hari = false)
-                            {
-                              $hari = array ( 1 =>    'Senin',
-                                    'Selasa',
-                                    'Rabu',
-                                    'Kamis',
-                                    'Jumat',
-                                    'Sabtu',
-                                    'Minggu'
-                                  );
-                                  
-                              $bulan = array (1 =>   'Jan',
-                                    'Feb',
-                                    'Maret',
-                                    'April',
-                                    'Mei',
-                                    'Juni',
-                                    'Juli',
-                                    'Agus',
-                                    'Sept',
-                                    'Okt',
-                                    'Nov',
-                                    'Des'
-                                  );
-                              $split    = explode('-', $tanggal);
-                              $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
-                              
-                              if ($cetak_hari) {
-                                $num = date('N', strtotime($tanggal));
-                                return $hari[$num] . ', ' . $tgl_indo;
-                              }
-                              return $tgl_indo;
-                            }
+function tanggal($tanggal, $cetak_hari = false){
+  $hari = array ( 1 =>    'Senin',
+        'Selasa',
+        'Rabu',
+        'Kamis',
+        'Jumat',
+        'Sabtu',
+        'Minggu'
+      );
+      
+  $bulan = array (1 =>   'Jan',
+        'Feb',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agus',
+        'Sept',
+        'Okt',
+        'Nov',
+        'Des'
+      );
+  $split    = explode('-', $tanggal);
+  $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+  
+  if ($cetak_hari) {
+    $num = date('N', strtotime($tanggal));
+    return $hari[$num] . ', ' . $tgl_indo;
+  }
+  return $tgl_indo;
+}
+
+function count_order($data){
+    $CI = get_instance();
+    $CI->load->model('marketing_model');
+    //$order = $data['id'];
+    if($data['status']==0){
+        $getorder = $CI->marketing_model->count_order($data);
+    }else if($data['status']==1){
+        $getorder = $CI->marketing_model->order_tgl($data);
+    }else if($data['status']==2){
+        $getorder = $CI->marketing_model->order_bln($data);
+    }else if($data['status']==3){
+        $getorder = $CI->marketing_model->order_thn($data);
+    }
+    $order = $getorder->total;
+    return $order;
+}
+function organik($data){
+    $CI = get_instance();
+    $CI->load->model('marketing_model');
+    if($data['status']==0){
+        $getorder = $CI->marketing_model->count_organik($data);
+    }else if($data['status']==1){
+        $getorder = $CI->marketing_model->organik_tgl($data);
+    }else if($data['status']==2){
+        $getorder = $CI->marketing_model->organik_bln($data);
+    }else if($data['status']==3){
+        $getorder = $CI->marketing_model->organik_thn($data);
+    }
+    $order = $getorder->total;
+    return $order;
+}
+function adsense($data){
+    $CI = get_instance();
+    $CI->load->model('marketing_model');
+    if($data['status']==0){
+        $getorder = $CI->marketing_model->count_ads($data);
+    }else if($data['status']==1){
+        $getorder = $CI->marketing_model->ads_tgl($data);
+    }else if($data['status']==2){
+        $getorder = $CI->marketing_model->ads_bln($data);
+    }else if($data['status']==3){
+        $getorder = $CI->marketing_model->ads_thn($data);
+    }
+    $order = $getorder->total;
+    return $order;
+}
+

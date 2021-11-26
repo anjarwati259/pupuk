@@ -9,10 +9,9 @@
         <h4 class="modal-title"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp; <strong>Ubah Password</strong></h4>
       </div>
       <div class="modal-body">
-        <?php echo form_open(base_url('admin/dashboard/change_password/'.$id_user)); ?>
         <div class="form-group">
           <label>Password Lama</label>
-          <input type="text" name="pass_lama" class="form-control" value="<?php echo set_value('pass_lama') ?>" placeholder="Masukkan Password Lama Anda" required>
+          <input type="text" name="pass_lama" id="pass_lama" class="form-control" value="<?php echo set_value('pass_lama') ?>" placeholder="Masukkan Password Lama Anda" required>
         </div>
         <div class="form-group">
           <label>Password Baru</label>
@@ -27,9 +26,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button id="coba" type="submit" class="btn btn-primary">Ubah Password</button>
+        <button id="btn-submit" class="btn btn-primary">Ubah Password</button>
       </div>
-      <?php echo form_close() ?>
     </div>
   </div>
 </div>
@@ -50,5 +48,26 @@
     }else{
       $('#msg1').html('').css('color', 'red');
     }
+  });
+  $("body").on("click","#btn-submit",function(){
+    var pass_lama = $("#pass_lama").val();
+    var pass_baru = $("#pass_baru").val();
+    //alert(pass_lama);
+    $.ajax({
+        type: 'POST',
+        dataType : 'json', 
+        url: "<?php echo base_url('admin/dashboard/change_password') ?>",
+        data: {pass_lama:pass_lama,
+              pass_baru:pass_baru
+        },
+        success: function(hasil) {
+          if (hasil.kode == 1){
+            toastr.success(hasil.sukses);
+          }else{
+            toastr.error(hasil.error);
+          }
+          $('#modal-default').modal('hide');
+        }
+    });
   });
 </script>

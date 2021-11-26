@@ -22,7 +22,7 @@
 
 </head>
 <body>
-        <div class="container-fluid p-0">
+    <div class="container-fluid p-0">
         
         <div class="row kotak">
 
@@ -45,7 +45,6 @@
                             </div>
                         </div>
                     </nav>
-
 
                     <div class="pencarian">
                         <div class="pencarian-inner">
@@ -115,25 +114,32 @@
                         <?php }} ?>
                     </div>
                 </div>
-
-            </div>
-
-
-            <!-- sidebar mobile -->
-            <div class="col-12 col-md-3 kotak-kiri kotak-kiri-mobile d-none d-md-none d-block">
+                <!-- sidebar mobile -->
+            <div class="col-12 col-md-3 kotak-kiri kotak-kiri-mobile d-md-none">
                 <div class="kotak-kiri-sidebar">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <div>
-                            <div class="avatar-saya">
-                                <?php 
-                                $id_user = $this->session->userdata('id_user');
-                                $this->db->select('*');
-                                $this->db->from('tb_marketing');
-                                $this->db->where('id_user', $this->session->userdata('id_user')); 
-                                $getchat= $this->db->get()->row();  ?>
-                                <img src="<?php echo base_url() ?>assets/img/team/<?php echo $getchat->foto ?>">
-                                <span><strong><?php echo $this->session->userdata('nama_user'); ?></strong></span>
+                        <div class="dropdown">
+                            <div class="avatar-saya avatar-saya-online" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="tre" aria-expanded="flse">
+                                                                    <img src="../gambar/user/1607057107_vino.jpg">
+                                                                </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item pilih-status" id="online"><span class="status status-online mr-2"></span> Online</a>
+                                <a class="dropdown-item pilih-status" id="diluar"><span class="status status-diluar mr-2"></span> Di luar</a>
+                                <a class="dropdown-item pilih-status" id="sibuk"><span class="status status-sibuk mr-2"></span> Sibuk</a>
+                                <a class="dropdown-item pilih-status" id="offline"><span class="status status-offline mr-2"></span> Offline</a>
                             </div>
+                        </div>
+                        <div class="dropdown ml-auto">
+                            <div class="dropdown-toggle" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="tre" aria-expanded="flse">
+                                <i class="fa fa-cog"></i>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton2">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">Profile</a>
+                                <a class="dropdown-item" href="logout.php">Keluar</a>
+                            </div>
+                        </div>
+                        <div class="dropdown float-right ml-4">
+                            <button class="btn btn-secondary float-right tombol-sembunyi-user-mobile"><i class="fa fa-envelope"></i></button>
                         </div>
                     </nav>
                     <div class="pencarian">
@@ -146,67 +152,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="teman">
-                        <div class="row teman-list" id="group"> 
-                            <div class="col-3 col-sm-3 col-xs-3 teman-avatar">
-                                <div class="avatar-icon">
-                                        <img class="avatar-icon" src="<?php echo base_url() ?>assets/img/team/group.webp">
-                                </div>
-                            </div>
-                            <div class="col-9 col-sm-9 col-xs-9 teman-main">
-                                <div class="row">
-                                    <div class="col-sm-9 col-xs-8 teman-data">
-                                        <span class="nama-meta font-weight-bold">Kilat Office</span>
-                                        <!-- <span class="chat-meta text-muted">Sedang mengetik ..</span> -->
-                                    </div>
-                                    <div class="col-sm-3 col-xs-4 pull-right teman-time">
-
-                                        <span class="time-meta pull-right">
-                                            <!-- 12:00 -->
-                                            <!-- <br> -->
-                                            <div class="badge badge-danger count-group">1</div>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <?php 
-                        $id_user = $this->session->userdata('id_user');
-                        foreach ($mobile as $mobile) { 
-                            if($mobile->id_user!=$id_user){
-                            ?>
-
-                        <div class="row teman-list" id="<?php echo $mobile->id_user; ?>"> 
-                            <div class="col-3 col-sm-3 col-xs-3 teman-avatar">
-                                <div class="avatar-icon">
-                                        <img class="avatar-icon" src="<?php echo base_url() ?>assets/img/team/<?php echo $mobile->foto;?>">
-                                </div>
-                            </div>
-                            <div class="col-9 col-sm-9 col-xs-9 teman-main">
-                                <div class="row">
-                                    <div class="col-sm-9 col-xs-8 teman-data">
-                                        <span class="nama-meta font-weight-bold"><?php echo $mobile->nama_marketing ?></span>
-                                        <!-- <span class="chat-meta text-muted chat-<?php echo $member->id_user; ?>">Sedang mengetik ..</span> -->
-                                    </div>
-                                    <div class="col-sm-3 col-xs-4 pull-right teman-time">
-
-                                        <span class="time-meta pull-right">
-                                            <!-- 12:00 -->
-                                            <!-- <br> -->
-                                            <div class="badge badge-danger count-user-<?php echo $member->id_user?>">1</div>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php }} ?>
-                    </div>
+                    <div class="teman"></div>
                 </div>
             </div>
             <!-- end sidebar mobile -->
-
-
+            </div>
             <div class="col-md-9 col-12 conversation">
 
               <nav class="navbar navbar-expand-lg navbar-light bg-light" style="min-height: 70px">
@@ -235,10 +185,17 @@
               </div>
 
             </div>
-
         </div>
-
     </div>
+    <script type="text/javascript">
+        textarea = document.querySelector("#balas-ketik");
+        textarea.addEventListener('input', autoResize, false);
+      
+        function autoResize() {
+            this.style.height = '130px';
+            //this.style.height = this.scrollHeight + 'px';
+        }
+    </script>
     <?php include 'ajax.php'; ?>
 </body>
 </html>

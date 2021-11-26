@@ -40,7 +40,8 @@
                              var x = $(".pesan").height()+221000000000;
                              $(".pesan").scrollTop(x);
                             // $("#balas-ketik").val("");
-                            // $(".kotak-kiri-mobile").removeClass("d-block");
+                            $(".kotak-kiri-mobile").addClass("d-none");
+                            $(".kotak-kiri-mobile").removeClass("d-block");
                         }
                     });
 
@@ -69,7 +70,8 @@
                              var x = $(".pesan").height()+221000000000;
                              $(".pesan").scrollTop(x);
                             // $("#balas-ketik").val("");
-                            // $(".kotak-kiri-mobile").removeClass("d-block");
+                            $(".kotak-kiri-mobile").addClass("d-none");
+                            $(".kotak-kiri-mobile").removeClass("d-block");
                         }
                     });
 

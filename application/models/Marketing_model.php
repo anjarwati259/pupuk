@@ -11,6 +11,13 @@ class Marketing_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
+	public function marketing(){
+		$this->db->select('*');
+		$this->db->from('tb_marketing');
+		$this->db->where('nama_marketing!=','Retno');
+		$query = $this->db->get();
+		return $query->result(); 
+	}
 	public function get_marketing($id_user){
 		$this->db->select('*');
 		$this->db->from('tb_marketing');
@@ -540,4 +547,133 @@ class Marketing_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	// report marketing admin
+	public function count_order($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('id_marketing', $data['id']); 
+	  	$this->db->where('harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", date('Y'));
+	  	$this->db->where("DATE_FORMAT(tanggal_transaksi,'%m')", date('m'));
+	  	return $this->db->get()->row();
+	}
+	public function count_organik($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 2); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", date('Y'));
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", date('m'));
+	
+  	return $this->db->get()->row();
+	}
+	public function count_ads($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 1); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", date('Y'));
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", date('m'));
+  	return $this->db->get()->row();
+	}
+	//tanggal
+	public function order_tgl($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('id_marketing', $data['id']); 
+	  	$this->db->where('harga!=', 0);
+	  	$this->db->where('tanggal_transaksi >=', $data['awal']);
+		$this->db->where('tanggal_transaksi <=', $data['akhir']);
+	  	return $this->db->get()->row();
+	}
+	public function organik_tgl($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 2); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where('tb_order.tanggal_transaksi >=', $data['awal']);
+		$this->db->where('tb_order.tanggal_transaksi <=', $data['akhir']);
+	
+  	return $this->db->get()->row();
+	}
+	public function ads_tgl($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 1); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where('tb_order.tanggal_transaksi >=', $data['awal']);
+		$this->db->where('tb_order.tanggal_transaksi <=', $data['akhir']);
+  	return $this->db->get()->row();
+	}
+	//bulan
+	public function order_bln($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('id_marketing', $data['id']); 
+	  	$this->db->where('harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $data['awal']);
+	  	$this->db->where("DATE_FORMAT(tanggal_transaksi,'%m')", $data['akhir']);
+	  	return $this->db->get()->row();
+	}
+	public function organik_bln($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 2); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['awal']);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $data['akhir']);
+	
+  	return $this->db->get()->row();
+	}
+	public function ads_bln($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 1); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['awal']);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $data['akhir']);
+  	return $this->db->get()->row();
+	}
+	//tahun
+	public function order_thn($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('id_marketing', $data['id']); 
+	  	$this->db->where('harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $data['awal']);
+	  	return $this->db->get()->row();
+	}
+	public function organik_thn($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 2); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['awal']);
+	
+  	return $this->db->get()->row();
+	}
+	public function ads_thn($data){
+		$this->db->select('sum(tb_order.jml_beli) as total');
+	  	$this->db->from('tb_order');
+	  	$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+	  	$this->db->where('tb_order.id_marketing', $data['id']); 
+	  	$this->db->where('tb_detail_order.jenis_order', 1); 
+	  	$this->db->where('tb_order.harga!=', 0);
+	  	$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['awal']);
+  	return $this->db->get()->row();
+  }
 }

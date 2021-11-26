@@ -43,6 +43,7 @@
             <li><a href="<?php echo base_url('admin/pelanggan/mitra') ?>"><i class="fa fa-users"></i> Data Mitra</a></li>
             <li><a href="<?php echo base_url('admin/pelanggan/distributor') ?>"><i class="fa fa-users"></i> Data Distributor</a></li>
             <li><a href="<?php echo base_url('admin/pelanggan/calon_customer') ?>"><i class="fa fa-users"></i> Calon Customer</a></li>
+            <li><a href="<?php echo base_url('admin/pelanggan/lap_customer') ?>"><i class="fa fa-users"></i> Laporan Customer</a></li>
           </ul>
         </li>
         <!-- Stok -->
@@ -79,11 +80,18 @@
           </a>
         </li>
         <!-- laporan Order -->
-        <li>
-          <a href="<?php echo base_url('admin/order/laporan') ?>">
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-file" aria-hidden="true"></i>
-            <span>Laporan Penjualan</span>
+            <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('admin/order/laporan') ?>"><i class="fa fa-file" aria-hidden="true"></i> Laporan Penjualan</a></li>
+            <li><a href="<?php echo base_url('marketing/report_marketing') ?>"><i class="fa fa-plus-square-o"></i> Laporan Marketing</a></li>
+          </ul>
         </li>
         <!-- reward -->
         <li class="treeview">
@@ -131,19 +139,8 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?php echo $title; ?>
-      </h1>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
 <!-- end admin -->
-<?php }else if($this->session->userdata('hak_akses')=='5'){ ?>
+<?php }else if($this->session->userdata('hak_akses')=='5' || $this->session->userdata('hak_akses')=='7'){ ?>
 <!-- marketing -->
 
 <!-- Left side column. contains the logo and sidebar -->
@@ -220,17 +217,6 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?php echo $title; ?>
-      </h1>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
 <!-- End marketing -->
 <?php }else if($this->session->userdata('hak_akses')=='6'){ ?>
   <!-- Left side column. contains the logo and sidebar -->
@@ -322,6 +308,8 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+<!-- End marketing -->
+<?php } ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -331,10 +319,9 @@
       </h1>
     </section>
 
+
     <!-- Main content -->
     <section class="content">
-<!-- End marketing -->
-<?php } ?>
 
 <script type="text/javascript">
     

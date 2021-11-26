@@ -33,7 +33,7 @@
                       <table id="example1" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>No</th>
+                        <!-- <th>No</th> -->
                         <th>Tanggal Gabung</th>
                         <th>Nama</th>
                         <th>No. Hp</th>
@@ -43,21 +43,40 @@
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Marketing</th>
                       <?php } ?>
-                        <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <th>Action</th>
-                      <?php }else{ ?>
-                        <th>Follow UP</th>
-                      <?php } ?>
                       </tr>
                       </thead>
                       <tbody>
                       <?php $no=1; 
-                      foreach ($customer as $customer) { ?>
+                      foreach ($customer as $customer) { 
+                      $nohp = $customer->no_hp;
+                      $hp = preg_replace("/[^0-9]/", "", $nohp);
+                      $no = substr($hp,0,1);
+                      $a = substr($hp,1);
+                      
+                      if($no == '0'){
+                        $no_hp = '62'.$a;
+                      }else{
+                        $no_hp = $hp;
+                      }
+
+                       if($this->session->userdata('hak_akses')=='1'){ 
+                        $id_user = $this->session->userdata('id_user');
+                        $this->db->select('id_marketing');
+                        $this->db->where('id_user', $id_user);
+                        $this->db->from('tb_marketing');
+                        $data_market = $this->db->get()->row();
+
+                        $market_id = $data_market->id_marketing;
+                      }else{
+                        $market_id = $customer->id_marketing;
+                      }
+                      ?>
                       <tr>
-                        <td><?php echo $no++ ?></td>
+                        <!-- <td><?php echo $no+1 ?></td> -->
                         <td><?php echo tanggal(date('Y-m-d',strtotime($customer->tanggal_daftar))); ?></td>
                         <td><a href="<?php echo base_url('admin/pelanggan/detail/'.$customer->id_pelanggan) ?>"><?php echo $customer->nama_pelanggan ?></a></td>
-                        <td><?php echo $customer->no_hp ?></td>
+                        <td><?php echo $no_hp; ?></td>
                         <!-- <td>
                           <?php echo $customer->alamat ?><br> 
                         </td> -->
@@ -69,11 +88,28 @@
                         
                         <?php if($this->session->userdata('hak_akses')=='1'){ ?>
                         <td>
-                          <a href="<?php echo base_url('admin/pelanggan/edit_customer/'.$customer->id_pelanggan) ?>" class="btn btn-warning btn-xs" ><i class="fa fa-edit"></i> Edit</a>
-                          <a href="<?php echo base_url('admin/pelanggan/delete/'.$customer->id_pelanggan) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin ingin menghapus data ini? Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" ><i class="fa fa-trash"></i> Hapus</a>
+                          <div class="input-group-btn">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
+                              <span class="fa fa-caret-down"></span></button>
+                            <ul class="dropdown-menu">
+                              <li><a href="#" class="follow" data-toggle="modal" data-target="#follow-up" data-id="<?php echo $customer->id_pelanggan; ?>" data-no="<?php echo $no_hp; ?>" data-market="<?php echo $market_id; ?>">Follow Up</a></li>
+                              <li><a href="#" class="detail" data-toggle="modal" data-target="#ubah" data-id="<?php echo $customer->id_pelanggan; ?>" data-nama="<?php echo $customer->nama_pelanggan; ?>">Detail</a></li>
+                              <li><a href="<?php echo base_url('admin/pelanggan/edit_customer/'.$customer->id_pelanggan) ?>">Edit</a></li>
+                              <li><a href="<?php echo base_url('admin/pelanggan/delete/'.$customer->id_pelanggan) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini? Dengan menghapus data ini, data order anda yang berkaitan dengan data ini juga akan ikut terhapus.')" > Hapus</a></li>
+                            </ul>
+                          </div>
                         </td>
                       <?php }else{ ?>
-                        <td></td>
+                        <td>
+                          <div class="input-group-btn">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Action
+                              <span class="fa fa-caret-down"></span></button>
+                            <ul class="dropdown-menu">
+                              <li><a href="#" class="follow" data-toggle="modal" data-target="#follow-up" data-id="<?php echo $customer->id_pelanggan; ?>" data-no="<?php echo $no_hp; ?>" data-market="<?php echo $market_id; ?>">Follow Up</a></li>
+                              <li><a href="#" class="detail" data-toggle="modal" data-target="#ubah" data-id="<?php echo $customer->id_pelanggan; ?>" data-nama="<?php echo $customer->nama_pelanggan; ?>">Detail</a></li>
+                            </ul>
+                          </div>
+                        </td>
                       <?php } ?>
                       </tr>
                     <?php } ?>
@@ -89,7 +125,7 @@
               <div class="tab-pane" id="tab_1">
                 <?php 
                 // Form open
-              echo form_open_multipart(base_url('admin/pelanggan/add_customer'), ' class="form-horizontal"');
+                  echo form_open_multipart(base_url('admin/pelanggan/add_customer'), ' class="form-horizontal"');
                  ?>
                 <form class="form-horizontal" method="POST">
                   <div class="box-body">
@@ -205,73 +241,102 @@
       </div>
       <!-- /.row -->
       <!-- END CUSTOM TABS -->
-      <?php if($this->session->flashdata('sukses')) { ?>
-      <script>
-        $('#success-alert').slideDown('slow');
-        setTimeout(function() {$('#success-alert').slideUp('slow');}, 3100);
-      </script>
-      <?php }; ?>
-<script type="text/javascript">
-  $(document).ready(function(){
+      <div class="modal fade" id="ubah">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #F0F8FF;">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Aktifitas Follow Up</h4>
+            </div>
+            <div class="modal-body">
 
-      // ambil data kabupaten ketika data memilih provinsi
-      $('body').on("change","#form_prov",function(){
-        var id = $(this).val();
-        var data = "id="+id+"&data=kabupaten";
-        $.ajax({
-          type: 'POST',
-          url: "<?php echo base_url('wilayah/get_wilayah'); ?>",
-          data: data,
-          success: function(hasil) {
-             $("#form_kab").html(hasil);
-            //alert("sukses");
-          }
-        });
-      });
+               <!-- row -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <!-- The time line -->
+                    <ul class="timeline">
+                      <!-- timeline time label -->
+                      <li class="time-label">
+                        <span class="bg-green">
+                          Aktivitas Follow Up
+                        </span>
+                      </li>
+                      <!-- /.timeline-label -->
+                      <!-- timeline item -->
+                      <li class="foll-up">
+                        <i class="fa fa-envelope bg-blue"></i>
 
-      // ambil data kecamatan/kota ketika data memilih kabupaten
-      $('body').on("change","#form_kab",function(){
-        var id = $(this).val();
-        var data = "id="+id+"&data=kecamatan";
-        $.ajax({
-          type: 'POST',
-          url: "<?php echo base_url('wilayah/get_wilayah'); ?>",
-          data: data,
-          success: function(hasil) {
-            $("#form_kec").html(hasil);
-          }
-        });
-      });
+                        <div class="timeline-item">
+                          <span class="time" id="time"><i class="fa fa-clock-o"></i> 08 Nov 2021, 3:02</span>
 
-       //get provinsi
-      $('body').on("change","#form_prov",function(){
-        var id=$(this).val();
-        $.ajax({
-            type : "POST",
-            url  : "<?php echo base_url('wilayah/getprov'); ?>",
-            dataType : "JSON",
-            data : {id: id},
-            cache:false,
-            success: function(data){
-                $.each(data,function(nama){
-                    $('[name="prov"]').val(data.nama);
-                     
-                });
-                 
-            }
-        });
-        return false; 
-      });
+                          <h3 class="timeline-header"><a href="#">Raisa Bani</a> Mengirim Pesan WhatsApp ke <a href="#">Hendro</a></h3>
 
-      //get kabupaten
-    $('body').on("change","#form_kab",function(){
-        var datakab = $("option:selected", this).attr('datakab');
-          $("input[name=kab]").val(datakab);
-      });
-    //get kecamatan
-    $('body').on("change","#form_kec",function(){
-        var datakec = $("option:selected", this).attr('datakec');
-          $("input[name=kec]").val(datakec); 
-      });
-    });
+                          <div class="timeline-body">
+                            Ok            
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <i class="fa fa-clock-o bg-gray"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header no-border"><a href="#" class="nama_pelanggan"></a> Belum Pernah Di follow Up</h3>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- modal follow up -->
+      <div class="modal fade" id="follow-up">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #F0F8FF;">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Follow Up</h4>
+            </div>
+            <div class="modal-body">
+              <div class="group" style="padding: 10px;">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Tanggal</label>
+                  <input type="text" class="form-control" value="<?php echo tanggal(date('Y-m-d',strtotime(date('Y-m-d'))),FALSE); ?>" id="tanggal" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1" style="padding-right: 2%;">Follow Up Ke:</label><span class="badge bg-blue total"><!-- <?php $tot = $total->total + 1;
+                  echo $tot ?> --></span>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">No WhatsApp</label>
+                  <input type="text" class="form-control" id="no_hp">
+                </div>
+                <div class="form-group">
+                  <label>Follow Up Text</label>
+                  <textarea style="height: 190px;" class="form-control" rows="3" placeholder="Enter ..." id="text-follow"></textarea>
+                </div>
+              </div>
+              <input type="hidden" name="id_Pelanggan" id="id_pelanggan">
+              <input type="hidden" name="id_marketing" id="id_marketing">
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="submit" id="btn-submit" class="btn btn-primary pull-right"><i class="fa fa-paper-plane"></i> &nbsp;&nbsp;Kirim</button>
+              </div>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+<?php if($this->session->flashdata('sukses')) { ?>
+<script>
+  $('#success-alert').slideDown('slow');
+  setTimeout(function() {$('#success-alert').slideUp('slow');}, 3100);
 </script>
+<?php }; ?>
+<?php include 'ajax.php'; ?>

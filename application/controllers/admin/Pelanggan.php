@@ -38,7 +38,7 @@ class Pelanggan extends CI_Controller
 		$hak_akses = $this->session->userdata('hak_akses');
 		if($hak_akses==1){
 			$customer = $this->pelanggan_model->customer();
-		}else if($hak_akses==5 || $hak_akses==6){
+		}else if($hak_akses==5 || $hak_akses==6 || $hak_akses==7){
 			$marketing =  $this->marketing_model->get_marketing($id_user);
 			$id_marketing = $marketing->id_marketing;
 			$customer = $this->pelanggan_model->get_marketing($id_marketing,'Customer');
@@ -272,7 +272,7 @@ class Pelanggan extends CI_Controller
 		$hak_akses = $this->session->userdata('hak_akses');
 		if($hak_akses==1){
 			$mitra = $this->pelanggan_model->mitra();
-		}else if($hak_akses==5 || $hak_akses==6){
+		}else if($hak_akses==5 || $hak_akses==6 || $hak_akses==7){
 			$marketing =  $this->marketing_model->get_marketing($id_user);
 			$id_marketing = $marketing->id_marketing;
 			$mitra = $this->pelanggan_model->get_marketing($id_marketing,'Mitra');
@@ -717,7 +717,7 @@ class Pelanggan extends CI_Controller
 		$last_contact = $this->pelanggan_model->last_contact($id_pelanggan);
 		$data = array(	'title' => 'Detail Pelanggan',
 						'pelanggan' => $pelanggan,
-						'follow'	=> $follow,
+						'follow'	=> $follow, 
 						'total'		=> $total,
 						'last_contact' => $last_contact,
 						'isi' => 'admin/customer/detail' );
@@ -743,11 +743,47 @@ class Pelanggan extends CI_Controller
 			echo json_encode(array('statusCode' => 210 ));
 		}
 	}
+	public function follow_calon(){
+		$id_calon = $this->input->post('id_calon');
+		$id_marketing = $this->input->post('id_marketing');
+		$text = $this->input->post('text_follow');
+		$status = $this->input->post('status');
+
+		$data = array(	'id_pelanggan' => $id_calon,
+						'id_marketing' => $id_marketing,
+						'status'		=> $status,
+						'text'			=> $text,
+						'last_kontak'	=> date('Y-m-d h:i:s')
+					);
+		$this->pelanggan_model->insert_aktivitas($data);
+		if($text != null){
+			echo json_encode(array('statusCode' => 200 ));
+		}else{
+			echo json_encode(array('statusCode' => 210 ));
+		}
+	}
+	public function detail_follow(){
+		$id = $this->input->post('id');
+		$follow = $this->pelanggan_model->follow($id);
+		echo json_encode($follow);
+	}
+	public function count_follow(){
+		$id_pelanggan = $this->input->post('id');
+		$total = $this->pelanggan_model->total_follow($id_pelanggan);
+		echo json_encode($total);
+
+	}
+	// public function calon_detail_follow(){
+	// 	$id = $this->input->post('id');
+	// 	$follow = $this->pelanggan_model->follow_calon($id);
+	// 	echo json_encode($follow);
+	// }
 	// ============================= Colon customer ====================//
-	public function calon_customer(){
+	public function calon_customer(){ 
 		$id_user = $this->session->userdata('id_user');
 		$marketing =  $this->marketing_model->get_marketing($id_user);
 		$id_marketing = $marketing->id_marketing;
+		$status = $marketing->status;
 		$marketing = $this->pelanggan_model->marketing();
 		if($this->session->userdata('hak_akses')=='1'){
 			$calon = $this->pelanggan_model->list_calon();
@@ -760,6 +796,7 @@ class Pelanggan extends CI_Controller
 						'calon'	=> $calon,
 						'reminder' => $calon,
 						'marketing' => $marketing,
+						'status'	=> $status,
 						'isi' => 'admin/calon/list' );
 		//print_r($calon);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
@@ -988,7 +1025,6 @@ class Pelanggan extends CI_Controller
 			$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
 	// laporan pelanggan
-
 	public function lap_customer(){
 		$id_user = $this->session->userdata('id_user');
 		$marketing =  $this->marketing_model->get_marketing($id_user);
@@ -1152,7 +1188,6 @@ class Pelanggan extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
-
 	public function lap_tahun(){
 		$tahun = $this->input->post('tahun2');
 
@@ -1172,6 +1207,63 @@ class Pelanggan extends CI_Controller
 						'calon_cus'	=> $calon_cus,
 						'thn'		=> $tahun,
 						'isi'		=> 'admin/customer/lap_tahun'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function lap_tgl_calon(){
+		$awal = $this->input->post('tgl_awal');
+		$akhir = $this->input->post('tgl_akhir');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+		$market = $this->pelanggan_model->marketing();
+
+		$calon =  $this->pelanggan_model->calon_tgl($id_marketing,$awal,$akhir);
+
+		$data = array(	'title'		=> 'Laporan Data Pelanggan',
+						'calon'		=> $calon,
+						'awal'		=> $awal,
+						'marketing' => $market,
+						'akhir'		=> $akhir,
+						'isi'		=> 'admin/calon/list'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function lap_bln_calon(){
+		$tahun = $this->input->post('tahun');
+		$bulan = $this->input->post('bulan');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+		$market = $this->pelanggan_model->marketing();
+
+		$calon =  $this->pelanggan_model->calon_bln($id_marketing,$bulan,$tahun);
+
+		$data = array(	'title'		=> 'Laporan Data Pelanggan',
+						'calon'		=> $calon,
+						'bulan'		=> $bulan,
+						'marketing' => $market,
+						'tahun'		=> $tahun,
+						'isi'		=> 'admin/calon/list'
+						);
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+	public function lap_thn_calon(){
+		$tahun = $this->input->post('tahun2');
+
+		$id_user = $this->session->userdata('id_user');
+		$marketing =  $this->marketing_model->get_marketing($id_user);
+		$id_marketing = $marketing->id_marketing;
+		$market = $this->pelanggan_model->marketing();
+		$calon =  $this->pelanggan_model->calon_thn($id_marketing,$tahun);
+
+		$data = array(	'title'		=> 'Laporan Data Pelanggan',
+						'calon'		=> $calon,
+						'marketing' => $market,
+						'tahun'		=> $tahun,
+						'isi'		=> 'admin/calon/list'
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}

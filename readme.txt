@@ -43,10 +43,9 @@ catatan status
 11. KODE INVOICE/SO
 	NO/SO/AGI/VII/2021/kodecustomer
 12. STATUS CALON
-	1 = ads
 	0 = organik
+	1 = ads
 	2 = pindah
-	3 = blacklist
 13. STATUS AKTIVITAS
 	1 = pelanggan
 	2 = calon

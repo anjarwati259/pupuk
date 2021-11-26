@@ -531,5 +531,71 @@ class Marketing extends CI_Controller
                         'isi' => 'admin/marketing/dashboard' );
         $this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
+// ========================== laporan marketing===================
+	public function report_marketing(){
+		$kode = $this->input->post('kode');
+		$id = $this->input->post('id');
+
+		$marketing = $this->marketing_model->marketing();
+		$produk = $this->produk_model->produk();
+
+		$data = array(	'title' => 'Laporan Marketing',
+						'marketing' => $marketing,
+						'produk'	=> $produk,
+						'awal'		=>'',
+						'akhir'		=>'',
+						'kode'		=>$kode,
+						'status'	=> '0',
+                        'isi' => 'admin/marketing/report' );
+		
+        $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function report_tgl(){
+		$awal = $this->input->post('tgl_awal');
+		$akhir = $this->input->post('tgl_akhir');
+
+		$marketing = $this->marketing_model->marketing();
+		$produk = $this->produk_model->produk();
+
+		$data = array(	'title' => 'Laporan Marketing',
+						'marketing' => $marketing,
+						'produk'	=> $produk,
+						'awal'		=> $awal,
+						'akhir'		=> $akhir,
+						'status'	=> '1',
+                        'isi' => 'admin/marketing/report' );
+        $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function report_bln(){
+		$awal = $this->input->post('tahun');
+		$akhir = $this->input->post('bulan');
+
+		$marketing = $this->marketing_model->marketing();
+		$produk = $this->produk_model->produk();
+
+		$data = array(	'title' => 'Laporan Marketing',
+						'marketing' => $marketing,
+						'produk'	=> $produk,
+						'awal'		=> $awal,
+						'akhir'		=> $akhir,
+						'status'	=> '2',
+                        'isi' => 'admin/marketing/report' );
+        $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
+	public function report_thn(){
+		$awal = $this->input->post('tahun2');
+
+		$marketing = $this->marketing_model->marketing();
+		$produk = $this->produk_model->produk();
+
+		$data = array(	'title' => 'Laporan Marketing',
+						'marketing' => $marketing,
+						'produk'	=> $produk,
+						'awal'		=> $awal,
+						'akhir'		=> '',
+						'status'	=> '3',
+                        'isi' => 'admin/marketing/report' );
+        $this->load->view('admin/layout/wrapper',$data, FALSE);
+	}
 	
 }

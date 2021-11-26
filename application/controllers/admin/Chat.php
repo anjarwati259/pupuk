@@ -31,6 +31,7 @@ class Chat extends CI_Controller
 		$getmember = $this->dashboard_model->getmember();
 		$data = array(	'title' => 'Chatting',
 						'member' => $getmember,
+						'mobile' => $getmember,
 						'isi'	 => 'admin/chat/chat'
 						);
 		$this->load->view('admin/chat/chat',$data,FALSE);

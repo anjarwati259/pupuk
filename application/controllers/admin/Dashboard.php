@@ -116,6 +116,7 @@ class Dashboard extends CI_Controller
 		$this->order_model->status_baca($data);
 		redirect(base_url('admin/order'), 'refresh');
 	}
+	// profile
 	public function profil(){
 		$id_user = $this->session->userdata('id_user');
 		$marketing = $this->dashboard_model->user_market($id_user);
@@ -128,7 +129,8 @@ class Dashboard extends CI_Controller
 						);
 		$this->load->view('admin/layout/wrapper',$data, FALSE);
 	}
-	public function change_password($id_user){
+	public function change_password(){
+		$id_user = $this->session->userdata('id_user');
 		$pass_lama = sha1($this->input->post('pass_lama'));
 		$cek_pass = $this->dashboard_model->old_pass($pass_lama);
 		if (!empty($cek_pass)){
@@ -136,13 +138,84 @@ class Dashboard extends CI_Controller
 				'password' => sha1($this->input->post('pass_baru'))
 			);
 			$this->dashboard_model->update_password($data);
-			$this->session->set_flashdata('sukses','Password telah berhasil diubah' );
-			redirect(base_url('admin/dashboard/profil'),'refresh');
+			echo json_encode(array('sukses' => 'Password telah berhasil diubah','kode'=>1));
+			// $this->session->set_flashdata('sukses','Password telah berhasil diubah' );
+			// redirect(base_url('admin/dashboard/profil'),'refresh');
 		}else{
-			$this->session->set_flashdata('error','password lama tidak sama' );
-			redirect(base_url('admin/dashboard/profil'), 'refresh');
+			echo json_encode(array('error' => 'password lama tidak sama','kode' => 0));
+			// $this->session->set_flashdata('error','password lama tidak sama' );
+			// redirect(base_url('admin/dashboard/profil'), 'refresh');
 		}
 	}
+	public function save_change(){
+		$id_user = $this->session->userdata('id_user');
+		$marketing = $this->dashboard_model->user_market($id_user);
+		$user = $this->user_model->user('id_user');
+
+		if($_FILES['gambar']['size'] != 0 ){
+
+			//unlink('./assets/img/team/'.$marketing->foto);
+
+            $config['upload_path'] = './assets/img/team';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['file_name'] = uniqid();
+            $config['max_size']     = '1000';
+            $config['overwrite']     = TRUE;
+
+            $this->load->library('upload', $config);
+            if(!$this->upload->do_upload('gambar')){
+            	$data = array(	'title' => 'Profil',
+						'id_user' => $id_user,
+						'user'	=> $user,
+						'marketing' => $marketing,
+						//'error'		=> $this->upload->display_errors(),
+						'isi'	 => 'admin/dashboard/profil'
+						);
+            	$this->session->set_flashdata('error','Maaf File Terlalu Besar');
+				$this->load->view('admin/layout/wrapper',$data, FALSE);
+				//echo 'tidak bisa';
+            } else {
+                //$foto = $this->upload->data('file_name');
+                $upload_gambar = array('upload_data' => $this->upload->data());
+
+				$i = $this->input;
+				$data = array(	'id_marketing'		=> $marketing->id_marketing,
+								'nama_marketing'	=> $i->post('nama_marketing'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+								'foto'				=> $upload_gambar['upload_data']['file_name'],
+							);
+				$data2 = array('id_user' => $id_user,
+								'nama_user' => $i->post('nama_marketing'),
+								'email'	=> $i->post('email'),
+							);
+				//print_r($data);
+				$this->dashboard_model->save_change($data);
+				$this->dashboard_model->save_user($data2);
+				$this->session->set_flashdata('sukses','Profil Berhasil Diubah');
+				redirect(base_url('admin/dashboard/profil'), 'refresh');
+
+            }
+            //echo $this->input->post('nama').$msg;
+        }else{
+        	$i = $this->input;
+				$data = array(	'id_marketing'		=> $marketing->id_marketing,
+								'nama_marketing'	=> $i->post('nama_marketing'),
+								'alamat'			=> $i->post('alamat'),
+								'no_hp'				=> $i->post('no_hp'),
+							);
+				$data2 = array('id_user' => $id_user,
+								'nama_user' => $i->post('nama_marketing'),
+								'email'	=> $i->post('email'),
+							);
+				//print_r($data);
+				$this->dashboard_model->save_change($data);
+				$this->dashboard_model->save_user($data2);
+				$this->session->set_flashdata('sukses','Profil Berhasil Diubah');
+				redirect(base_url('admin/dashboard/profil'), 'refresh');
+        }
+	}
+
 	public function bulan(){
 		$bulan = $this->dashboard_model->bulan();
 		
