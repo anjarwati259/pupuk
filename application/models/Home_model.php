@@ -91,4 +91,11 @@ class Home_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function get_produk($kode_produk){
+		$this->db->select('*');
+		$this->db->from('tb_produk');
+		$this->db->where('kode_produk',$kode_produk);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

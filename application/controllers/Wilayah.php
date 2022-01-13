@@ -44,7 +44,7 @@ class Wilayah extends CI_Controller
 		$wilayah = $this->wilayah_model->get_kecamatan($n,$id,$m);
 		//$data1 ="<option value=''> $n </option>";
 		  foreach ($wilayah as $wilayah) {
-		  	$data1 ="<option datakec='$wilayah->nama' value='$wilayah->kode'> $wilayah->nama</option>";
+		  	$data1 ="<option datakec='$wilayah->nama' value='$wilayah->kode'>$wilayah->nama</option>";
 		  	echo $data1;
 		  }
 	}

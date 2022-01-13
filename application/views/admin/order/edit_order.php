@@ -234,7 +234,7 @@
   $(function(){
     var total = function(){
       var sum =0;
-      var item = 0;
+      var item = 0; 
       var i =1;
       $('.prc').each(function(){
         var num = $(this).val();
