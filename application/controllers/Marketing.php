@@ -59,10 +59,11 @@ class Marketing extends CI_Controller
 	}
 	public function order(){
 		//last id pelanggan
+		$tgl = date('Y-m-d');
 		$id_SO = $this->order_model->get_last_id();
 		if($id_SO){
 			$id = substr($id_SO[0]->kode_transaksi, 18);
-			$kode_transaksi = generate_SO($id);
+			$kode_transaksi = generate_SO($id,$tgl);
 		}else{
 			$kode_transaksi = generate_else();
 		}

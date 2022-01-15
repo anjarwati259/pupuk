@@ -1,11 +1,23 @@
 <?php 
 function generate_code($suffix,$id){
-	// $addcode = (int)filter_var($num, FILTER_SANITIZE_NUMBER_INT) + 1;
-	// $numcode = str_pad($addcode,$length,STR_PAD_LEFT);
-	// return $prefix.$numcode;
-	$kode = (int) $id;
-	$kode = $kode + 1;
-	return $suffix .str_pad($kode, 3, "0",  STR_PAD_LEFT);
+    // $addcode = (int)filter_var($num, FILTER_SANITIZE_NUMBER_INT) + 1;
+    // $numcode = str_pad($addcode,$length,STR_PAD_LEFT);
+    // return $prefix.$numcode;
+    $kode = (int) $id;
+    $kode = $kode + 1;
+    $id = $suffix .str_pad($kode, 3, "0",  STR_PAD_LEFT);
+    $check_id = check_pelanggan($id);
+    if($check_id){
+        $kode = $kode + 1;
+    }
+    $hasil = $suffix .str_pad($kode, 3, "0",  STR_PAD_LEFT);
+    return $hasil;
+}
+function check_pelanggan($id){
+    $CI = get_instance();
+    $CI->load->model('pelanggan_model');
+    $id_check = $CI->pelanggan_model->check_id($id);
+    return $id_check;
 }
 function rupiah($angka){
     if ($angka==''||$angka==null||$angka=='-') {
@@ -16,9 +28,9 @@ function rupiah($angka){
 return "Rp ".$rupiah;
 }
 function generate_invoice($prefix,$num,$length = 3){
-	$add_code = (int)filter_var($num, FILTER_SANITIZE_NUMBER_INT) + 1;
-	$num_code = str_pad($add_code,$length,"0",STR_PAD_LEFT);
-	return $prefix.$num_code;
+    $add_code = (int)filter_var($num, FILTER_SANITIZE_NUMBER_INT) + 1;
+    $num_code = str_pad($add_code,$length,"0",STR_PAD_LEFT);
+    return $prefix.$num_code;
 }
 function getRomawi($bln){
     switch ($bln){
@@ -101,16 +113,31 @@ function getBulan($bln){
     }
 }
 
-function generate_SO($id){
-	$tanggal = date('d') ;
-	$suffix = '-SO-AGI-';
-	$bulan = date('m');
-	$tahun = date('Y');
-	$romawi = getRomawi($bulan);
+function generate_SO($id,$tgl){
+    $tgl_2=strtotime($tgl);
+    $tanggal = date('d',$tgl_2);
+    $suffix = '-SO-AGI-';
+    $bulan = date('m',$tgl_2);
+    $tahun = date('Y',$tgl_2);
+    $romawi = getRomawi($bulan);
     $kode = (int) $id;
     $kode = $kode + 1;
+    $hasil = $tanggal . $suffix . $romawi . '-' . $tahun . '-' . str_pad($kode, 3, "0",  STR_PAD_LEFT);
+    $check = check_so($hasil);
+    if($check){
+        $length = 3;    
+        $randid = substr(str_shuffle('0123456789'),1,$length);
+         $kode = $randid;  
+    }
 
-	return $tanggal . $suffix . $romawi . '-' . $tahun . '-' . str_pad($kode, 3, "0",  STR_PAD_LEFT);
+    $so = $tanggal . $suffix . $romawi . '-' . $tahun . '-' . str_pad($kode, 3, "0",  STR_PAD_LEFT);
+    return $so;
+}
+function check_so($kode){
+    $CI = get_instance();
+    $CI->load->model('order_model');
+    $so_check = $CI->order_model->check_so($kode);
+    return($so_check);
 }
 function generate_else(){
     $tanggal = date('d') ;
@@ -199,4 +226,30 @@ function adsense($data){
     $order = $getorder->total;
     return $order;
 }
-
+function tot_order($data){
+    $CI = get_instance();
+    $CI->load->model('marketing_model');
+    if($data['status']==0){
+        $getorder = $CI->marketing_model->total_order($data['status']);
+    }
+    $order = $getorder->total;
+    return $order;
+}
+function tot_organik($data){
+    $CI = get_instance();
+    $CI->load->model('marketing_model');
+    if($data['status']==0){
+        $getorder = $CI->marketing_model->total_organik($data['status']);
+    }
+    $order = $getorder->total;
+    return $order;
+}
+function tot_ads($data){
+    $CI = get_instance();
+    $CI->load->model('marketing_model');
+    if($data['status']==0){
+        $getorder = $CI->marketing_model->total_ads($data['status']);
+    }
+    $order = $getorder->total;
+    return $order;
+}

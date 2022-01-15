@@ -274,166 +274,73 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
-	public function report($kode, $jenis){
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where('harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-			$this->db->where('harga !=',0);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where('harga !=',0);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where('harga !=',0);
-		}
+	public function report($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('harga !=',0);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_ongkir($kode, $jenis){
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where('tb_order.harga !=',0);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-		}else{
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-		}
+	public function report_ongkir($data){
+		$this->db->select('sum(ongkir) as total');
+		$this->db->from('tb_detail_order');
+		$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_hari($kode, $jenis, $awal, $akhir){
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-		}
+	public function report_hari($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('tb_order.tanggal_transaksi >=', $data['awal']);
+		$this->db->where('tb_order.tanggal_transaksi <=', $data['akhir']);
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_bulan($kode, $jenis, $bulan, $tahun){
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-		}
+	public function report_bulan($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $data['bulan']);
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_tahun($kode, $jenis, $tahun){
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-		}
+	public function report_tahun($data){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
@@ -494,6 +401,7 @@ class Order_model extends CI_Model
 		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
 		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
 		$this->db->where('tb_order.harga !=',0);
+
 		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
 		$query = $this->db->get();
 		return $query->row();
@@ -508,163 +416,69 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function jenis_order($kode, $cus, $jenis){
-		if(($kode=='' and $cus=='Semua Pelanggan') or ($kode=='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $cus=='Semua Pelanggan')or ($kode!='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode=='' and $cus!='Semua Pelanggan') or ($kode=='Semua Produk' and $cus!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}
+	public function total_order($jenis){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->where("tb_detail_order.jenis_order", $jenis);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function jenisorder_hari($kode, $cus, $jenis, $awal, $akhir){
-		if(($kode=='' and $cus=='Semua Pelanggan') or ($kode=='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $cus=='Semua Pelanggan')or ($kode!='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode=='' and $cus!='Semua Pelanggan') or ($kode=='Semua Produk' and $cus!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where('tb_order.tanggal_transaksi >=', $awal);
-			$this->db->where('tb_order.tanggal_transaksi <=', $akhir);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}
+	public function jenis_order($data, $jenis){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->where("tb_detail_order.jenis_order", $jenis);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function jenisorder_bulan($kode, $cus, $jenis, $bulan, $tahun){
-		if(($kode=='' and $cus=='Semua Pelanggan') or ($kode=='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $cus=='Semua Pelanggan')or ($kode!='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode=='' and $cus!='Semua Pelanggan') or ($kode=='Semua Produk' and $cus!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}
+	public function jenisorder_hari($data,$jenis){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("tb_detail_order.jenis_order", $jenis);
+		$this->db->where('tb_order.tanggal_transaksi >=', $data['awal']);
+		$this->db->where('tb_order.tanggal_transaksi <=', $data['akhir']);
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function jenisorder_tahun($kode, $cus, $jenis, $tahun){
-		if(($kode=='' and $cus=='Semua Pelanggan') or ($kode=='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $cus=='Semua Pelanggan')or ($kode!='Semua Produk' and $cus=='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode=='' and $cus!='Semua Pelanggan') or ($kode=='Semua Produk' and $cus!='')){
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(jml_beli) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_detail_order.jenis_order", $jenis);
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $cus);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}
+	public function jenisorder_bulan($data, $jenis){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("tb_detail_order.jenis_order", $jenis);
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $data['bulan']);
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function jenisorder_tahun($data,$jenis){
+		$this->db->select('sum(jml_beli) as total');
+		$this->db->from('tb_order');
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->where("tb_detail_order.jenis_order", $jenis);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
@@ -761,14 +575,13 @@ class Order_model extends CI_Model
 							tb_produk.nama_produk, 
 							tb_marketing.nama_marketing,tb_detail_order.metode_pembayaran, tb_detail_order.jenis_order,tb_detail_order.status_bayar,tb_detail_order.ongkir');
 		$this->db->from('tb_order');
-		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
+		// $this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
 		$this->db->where('tb_order.harga !=',0);
 		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
 		$this->db->join('tb_produk','tb_produk.kode_produk = tb_order.id_produk', 'left');
 		$this->db->join('tb_marketing','tb_marketing.id_marketing = tb_order.id_marketing', 'left');
 		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		$this->db->group_by('tb_order.kode_transaksi');
-		$this->db->order_by('tb_order.kode_transaksi','asc');
+		$this->db->like('tb_order.tanggal_transaksi',$tahun);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -809,229 +622,101 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
-
-	public function report_harga($kode,$jenis){
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(total_harga) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-		}
+	public function report_harga($data){
+		$this->db->select('sum(total_harga) as total');
+		$this->db->from('tb_order');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_harga1($kode,$jenis,$awal,$akhir){//hari
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("DATE(tb_order.tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tb_order.tanggal_transaksi) <=", $akhir);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("DATE(tb_order.tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tb_order.tanggal_transaksi) <=", $akhir);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE(tb_order.tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tb_order.tanggal_transaksi) <=", $akhir);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(total_harga) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE(tb_order.tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tb_order.tanggal_transaksi) <=", $akhir);
-		}
+	public function report_harga1($data){
+		$this->db->select('sum(total_harga) as total, sum(tb_detail_order.ongkir) as ongkir');
+		$this->db->from('tb_order');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->where("DATE(tb_order.tanggal_transaksi) >=", $data['awal']);
+		$this->db->where("DATE(tb_order.tanggal_transaksi) <=", $data['akhir']);
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_ongkir1($kode, $jenis,$awal,$akhir){//hari
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->where("DATE(tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tanggal_transaksi) <=", $akhir);
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("DATE(tb_detail_order.tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tb_detail_order.tanggal_transaksi) <=", $akhir);
-			$this->db->where('tb_order.harga !=',0);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE(tb_detail_order.tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tb_detail_order.tanggal_transaksi) <=", $akhir);
-			$this->db->where('tb_order.harga !=',0);
-		}else{
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE(tb_detail_order.tanggal_transaksi) >=", $awal);
-			$this->db->where("DATE(tb_detail_order.tanggal_transaksi) <=", $akhir);
-		}
+	public function report_ongkir1($data){
+		$this->db->select('sum(ongkir) as total');
+		$this->db->from('tb_detail_order');
+		$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->where("DATE(tb_detail_order.tanggal_transaksi) >=", $data['awal']);
+		$this->db->where("DATE(tb_detail_order.tanggal_transaksi) <=", $data['akhir']);
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_harga2($kode,$jenis,$bulan,$tahun){//bulan
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%m')", $bulan);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%m')", $bulan);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%m')", $bulan);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(total_harga) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%m')", $bulan);
-		}
+	public function report_harga2($data){//bulan
+		$this->db->select('sum(total_harga) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
+		$this->db->from('tb_order');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%m')", $data['bulan']);
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_ongkir2($kode, $jenis,$bulan,$tahun){//bulan
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%m')", $bulan);
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%m')", $bulan);
-			$this->db->where('tb_order.harga !=',0);
-		}else{
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%m')", $bulan);
-		}
+	public function report_ongkir2($data){
+		$this->db->select('sum(ongkir) as total');
+		$this->db->from('tb_detail_order');
+		$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%m')", $data['bulan']);
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_harga3($kode,$jenis,$tahun){//tahun
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(total_harga) as total');
-			$this->db->from('tb_order');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-		}else{
-			$this->db->select('sum(total_harga) as total, sum(tb_detail_order.ongkir) as ongkir, tb_pelanggan.jenis_pelanggan');
-			$this->db->from('tb_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_order.id_pelanggan', 'left');
-			$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
-			$this->db->where("id_produk", $kode);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $tahun);
-		}
+	public function report_harga3($data){//tahun
+		$this->db->select('sum(total_harga) as total');
+		$this->db->from('tb_order');
+		$this->db->where("DATE_FORMAT(tb_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->join('tb_detail_order','tb_detail_order.kode_transaksi = tb_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function report_ongkir3($kode, $jenis,$tahun){//tahun
-		if(($kode=='' and $jenis=='Semua Pelanggan') or ($kode=='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->where("DATE_FORMAT(tanggal_transaksi,'%Y')", $tahun);
-		}else if(($kode!='' and $jenis=='Semua Pelanggan') or ($kode!='' and $jenis=='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-		}else if(($kode=='' and $jenis!='Semua Pelanggan') or ($kode=='' and $jenis!='')){
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_pelanggan','tb_pelanggan.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $tahun);
-			$this->db->where('tb_order.harga !=',0);
-		}else{
-			$this->db->select('sum(ongkir) as total');
-			$this->db->from('tb_detail_order');
-			$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
-			$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
-			$this->db->where("tb_order.id_produk", $kode);
-			$this->db->where('tb_order.harga !=',0);
-			$this->db->where("tb_pelanggan.jenis_pelanggan", $jenis);
-			$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $tahun);
-		}
+	public function report_ongkir3($data){
+		$this->db->select('sum(ongkir) as total');
+		$this->db->from('tb_detail_order');
+		$this->db->join('tb_order','tb_order.kode_transaksi = tb_detail_order.kode_transaksi', 'left');
+		$this->db->join('tb_pelanggan','tb_pelanggan.id_pelanggan = tb_detail_order.id_pelanggan', 'left');
+		$this->db->where('tb_order.harga !=',0);
+		$this->db->where("DATE_FORMAT(tb_detail_order.tanggal_transaksi,'%Y')", $data['tahun']);
+		$this->db->like('id_produk',$data['kode']);
+		$this->db->like('tb_pelanggan.jenis_pelanggan',$data['pelanggan']);
+		$this->db->like('tb_detail_order.jenis_order',$data['jenis']);
+		$this->db->like('tb_order.id_marketing',$data['marketing']);
 		$query = $this->db->get();
 		return $query->row();
 	}
@@ -1086,5 +771,12 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
+	public function check_so($kode){
+		$this->db->select('kode_transaksi');
+		$this->db->from('tb_detail_order');
+		$this->db->where('kode_transaksi', $kode);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	// total laporan
 }

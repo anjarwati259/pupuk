@@ -467,4 +467,11 @@ class Pelanggan_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function check_id($id){
+		$this->db->select('id_pelanggan');
+		$this->db->from('tb_pelanggan');
+		$this->db->where("id_pelanggan", $id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

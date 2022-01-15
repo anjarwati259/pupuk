@@ -32,8 +32,8 @@
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="kode">Tanggal</label>
                     <div class="col-sm-8">
-                      <input type="text" id="tgl_trans" value="<?php echo date('Y-m-d H:i:s');?>" class="form-control"/>
-                        <!-- <input type="hidden" id="tanggal_transaksi" name="tanggal_transaksi" value="<?php echo date('Y-m-d H:i:s');?>" id="tanggal_transaksi" class="form-control"/> -->
+                      <input type="text" value="<?php echo date('Y-m-d H:i:s');?>" id="date" class="form-control" disabled/>
+                        <input type="hidden" id="tanggal_transaksi" name="tanggal_transaksi" value="<?php echo date('Y-m-d H:i:s');?>" id="tanggal_transaksi" class="form-control"/>
                     </div>
                   </div>
                   <div class="form-group">
@@ -648,7 +648,6 @@
                     //$el.faLoading();
                 },
                 success: function (data) {
-                  //alert(data);
                     var response = $.parseJSON(data);
                     //$el.faLoading(false);
                     if(response.status == "ok"){
@@ -681,7 +680,7 @@
         var id_marketing = $("#id_marketing").val();
         var jenis_order = $("#jenis_order").val();
         var metode_pembayaran = $("#metode_pembayaran").val();
-        var tanggal_transaksi = $("#tgl_trans").val();
+        var tanggal_transaksi = $("#tanggal_transaksi").val();
         var sub_potongan = $('input[name=sub_potongan]').val();
         var status_baca = $("#status_baca").val();
         if(typeof kode_transaksi !== "undefined" && kode_transaksi != ""){

@@ -33,6 +33,9 @@ class Order extends CI_Controller
 						'isi'			=> 'admin/order/list'
 						);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		// mt_srand(5);
+		// Output: 1656398468
+		
 	}
 	public function cash($kode_transaksi){
 		$data = array(	'kode_transaksi'	=> $kode_transaksi,
@@ -205,10 +208,12 @@ class Order extends CI_Controller
 	public function tambah_order()
 	{ 
 		//last id pelanggan
+		$tgl = date('Y-m-d');
 		$id_SO = $this->order_model->get_last_id();
 		if($id_SO){
-			$id = substr($id_SO[0]->kode_transaksi, 18);
-			$kode_transaksi = generate_SO($id);
+			$id = substr($id_SO[0]->kode_transaksi, 17);
+			// print_r($id);
+			$kode_transaksi = generate_SO($id,$tgl);
 		}else{
 			$kode_transaksi = generate_else();
 		}
@@ -495,6 +500,8 @@ class Order extends CI_Controller
 		$this->form_validation->set_rules('no_hp', 'no_hp', 'required');
 		$this->form_validation->set_rules('ekspedisi', 'ekspedisi', 'required');
 		$this->form_validation->set_rules('ongkir', 'ongkir', 'required');
+		$tgl = $this->input->post('tanggal_transaksi');
+		// echo json_encode($tgl);
 
 		$carts =  $this->cart->contents();
 		if($this->_check_qty($carts)){
@@ -505,12 +512,11 @@ class Order extends CI_Controller
 		//SO
 		$id_SO = $this->order_model->get_last_id();
 		if($id_SO){
-			$id = substr($id_SO[0]->kode_transaksi, 18);
-			$kode_transaksi = generate_SO($id);
+			$id = substr($id_SO[0]->kode_transaksi, 17);
+			$kode_transaksi = generate_SO($id,$tgl); 
 		}else{
 			$kode_transaksi = generate_else();
 		}
-
 		//last id pelanggan
 		$pelanggan_id = $this->pelanggan_model->get_last_id();
 		if($pelanggan_id){
@@ -804,14 +810,16 @@ class Order extends CI_Controller
 	public function laporan(){
 		$laporan = $this->order_model->laporan();
 		$produk = $this->produk_model->produk();
+		$marketing = $this->marketing_model->marketing();
 		$report = $this->order_model->report2();
-		$ads = $this->order_model->jenis_order('Semua Produk','','1');
-		$organik = $this->order_model->jenis_order('Semua Produk','','2');
+		$ads = $this->order_model->total_order('1');
+		$organik = $this->order_model->total_order('2');
 		$ongkir = $this->order_model->total_ongkir();
 		$total_harga = $this->order_model->total_harga();
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'produk'	=> $produk,
+						'marketing' => $marketing,
 						'report'	=> $report,
 						'ongkir'	=> $ongkir,
 						'total_harga' => $total_harga,
@@ -824,17 +832,34 @@ class Order extends CI_Controller
 	public function report(){
 		 $kode = $this->input->post('kode');
 		 $jenis = $this->input->post('jenis');
+		 $marketing = $this->input->post('marketing');
+		 $order = $this->input->post('order');
 
-		 $ads = $this->order_model->jenis_order($kode,$jenis,'1');
-		 $organik = $this->order_model->jenis_order($kode,$jenis,'2');
-		 $total = $this->order_model->report($kode,$jenis);
-		 $ongkir = $this->order_model->report_ongkir($kode,$jenis);
-		 $total_harga = $this->order_model->report_harga($kode,$jenis);
+		 $data = array('kode' => $kode,
+		 				'pelanggan' => $jenis,
+		 				'marketing' => $marketing,
+		 				'jenis' => $order );
+		 //echo json_encode($data);
+		 $ads = $this->order_model->jenis_order($data,'1');
+		 $organik = $this->order_model->jenis_order($data,'2');
+		 $total = $this->order_model->report($data);
+		 $ongkir = $this->order_model->report_ongkir($data);
+		 $total_harga = $this->order_model->report_harga($data);
 
 		 if($total->total==''){
 		 	$tot = 0;
 		 }else{
 		 	$tot = $total->total;
+		 }
+		 if($total_harga->total==''){
+		 	$tot_harga = 0;
+		 }else{
+		 	$tot_harga = $total_harga->total;
+		 }
+		 if($ongkir->total==''){
+		 	$tot_ongkir = 0;
+		 }else{
+		 	$tot_ongkir = $ongkir->total;
 		 }
 
 		 if($ads->total==''){
@@ -852,8 +877,8 @@ class Order extends CI_Controller
 		 $total_report['total'] = $tot;
 		 $total_report['ads'] = $adsense;
 		 $total_report['organik'] = $org;
-		 $total_report['total_harga'] = $total_harga->total;
-		 $total_report['ongkir'] = $ongkir->total;
+		 $total_report['total_harga'] = $tot_harga;
+		 $total_report['ongkir'] = $tot_ongkir;
 		echo json_encode($total_report);
 	}
 	public function report_hari(){
@@ -861,12 +886,21 @@ class Order extends CI_Controller
 		 $akhir = $this->input->post('akhir');
 		 $kode = $this->input->post('kode');
 		 $jenis = $this->input->post('jenis');
+		 $marketing = $this->input->post('marketing');
+		 $order = $this->input->post('order');
 
-		 $ads = $this->order_model->jenisorder_hari($kode,$jenis,'1', $awal, $akhir);
-		 $organik = $this->order_model->jenisorder_hari($kode,$jenis,'2', $awal, $akhir);
-		 $total = $this->order_model->report_hari($kode,$jenis, $awal, $akhir);
-		 $total_harga = $this->order_model->report_harga1($kode,$jenis, $awal, $akhir);
-		 $ongkir = $this->order_model->report_ongkir1($kode,$jenis, $awal,$akhir);
+		 $data = array('kode' => $kode,
+		 				'pelanggan' => $jenis,
+		 				'marketing' => $marketing,
+		 				'jenis' => $order,
+		 				'awal'	=> $awal,
+		 				'akhir' => $akhir );
+
+		 $ads = $this->order_model->jenisorder_hari($data,'1');
+		 $organik = $this->order_model->jenisorder_hari($data,'2');
+		 $total = $this->order_model->report_hari($data);
+		 $total_harga = $this->order_model->report_harga1($data);
+		 $ongkir = $this->order_model->report_ongkir1($data);
 
 		 if($total->total==''){
 		 	$tot = 0;
@@ -908,12 +942,21 @@ class Order extends CI_Controller
 		 $tahun = $this->input->post('tahun');
 		 $kode = $this->input->post('kode');
 		 $jenis = $this->input->post('jenis');
+		 $marketing = $this->input->post('marketing');
+		 $order = $this->input->post('order');
 
-		 $ads = $this->order_model->jenisorder_bulan($kode,$jenis,'1', $bulan, $tahun);
-		 $organik = $this->order_model->jenisorder_bulan($kode,$jenis,'2', $bulan, $tahun);
-		 $total = $this->order_model->report_bulan($kode,$jenis, $bulan, $tahun);
-		 $ongkir = $this->order_model->report_ongkir2($kode,$jenis, $bulan, $tahun);
-		 $total_harga = $this->order_model->report_harga2($kode,$jenis, $bulan, $tahun);
+		 $data = array('kode' => $kode,
+		 				'pelanggan' => $jenis,
+		 				'marketing' => $marketing,
+		 				'jenis' => $order,
+		 				'bulan'	=> $bulan,
+		 				'tahun' => $tahun );
+
+		 $ads = $this->order_model->jenisorder_bulan($data,'1');
+		 $organik = $this->order_model->jenisorder_bulan($data,'2');
+		 $total = $this->order_model->report_bulan($data);
+		 $ongkir = $this->order_model->report_ongkir2($data);
+		 $total_harga = $this->order_model->report_harga2($data);
 
 		 if($total->total==''){
 		 	$tot = 0;
@@ -955,12 +998,20 @@ class Order extends CI_Controller
 		 $tahun = $this->input->post('tahun');
 		 $kode = $this->input->post('kode');
 		 $jenis = $this->input->post('jenis');
+		 $marketing = $this->input->post('marketing');
+		 $order = $this->input->post('order');
 
-		 $ads = $this->order_model->jenisorder_tahun($kode,$jenis,'1', $tahun);
-		 $organik = $this->order_model->jenisorder_tahun($kode,$jenis,'2', $tahun);
-		 $total = $this->order_model->report_tahun($kode,$jenis, $tahun);
-		 $ongkir = $this->order_model->report_ongkir3($kode,$jenis,$tahun);
-		 $total_harga = $this->order_model->report_harga3($kode,$jenis,$tahun);
+		 $data = array('kode' => $kode,
+		 				'pelanggan' => $jenis,
+		 				'marketing' => $marketing,
+		 				'jenis' => $order,
+		 				'tahun' => $tahun );
+
+		 $ads = $this->order_model->jenisorder_tahun($data,'1');
+		 $organik = $this->order_model->jenisorder_tahun($data,'2');
+		 $total = $this->order_model->report_tahun($data);
+		 $ongkir = $this->order_model->report_ongkir3($data);
+		 $total_harga = $this->order_model->report_harga3($data);
 
 		 if($total->total==''){
 		 	$tot = 0;
@@ -1009,6 +1060,7 @@ class Order extends CI_Controller
 		$akhir = $this->input->post('tgl_akhir');
 
 		$produk = $this->produk_model->produk();
+		$marketing = $this->marketing_model->marketing();
 		$laporan = $this->order_model->lap_harian($awal,$akhir);
 		$lap_hari = $this->order_model->report_harian($awal,$akhir);
 		$ongkir = $this->order_model->ongkir_hari($awal, $akhir);
@@ -1026,6 +1078,7 @@ class Order extends CI_Controller
 						'total_harga' => $total_harga,
 						'akhir'		=> $akhir,
 						'produk'	=> $produk,
+						'marketing'	=> $marketing,
 						'organik'	=> $organik,
 						'isi'		=> 'admin/order/lap_tanggal'
 					);
@@ -1037,6 +1090,7 @@ class Order extends CI_Controller
 		$tahun = $this->input->post('tahun');
 
 		$produk = $this->produk_model->produk();
+		$marketing = $this->marketing_model->marketing();
 		$lap_bulan = $this->order_model->report_bulanan($bulan,$tahun);
 		$ongkir = $this->order_model->ongkir_bulan($bulan, $tahun);
 		$laporan = $this->order_model->lap_bulan($bulan, $tahun);
@@ -1047,6 +1101,7 @@ class Order extends CI_Controller
 		$data = array(	'title'		=> 'Laporan Penjualan',
 						'laporan'	=> $laporan,
 						'produk'	=> $produk,
+						'marketing'	=> $marketing,
 						'bulan'		=> $bulan,
 						'tahun'		=> $tahun,
 						'ongkir'	=> $ongkir,
@@ -1063,6 +1118,7 @@ class Order extends CI_Controller
 		$tahun = $this->input->post('tahun2');
 
 		$produk = $this->produk_model->produk();
+		$marketing = $this->marketing_model->marketing();
 		$lap_tahun = $this->order_model->report_tahunan($tahun);
 		$laporan = $this->order_model->lap_tahun($tahun);
 		$ongkir = $this->order_model->ongkir_tahun( $tahun);
@@ -1081,6 +1137,7 @@ class Order extends CI_Controller
 						'organik'	=> $organik,
 						'total_harga' => $total_harga,
 						'produk'	=> $produk,
+						'marketing'	=> $marketing,
 						'isi'		=> 'admin/order/lap_tahun'
 					);
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
