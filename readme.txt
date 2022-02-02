@@ -1,51 +1,56 @@
 catatan status
 
-1. PROMO
-	2 = mitra
-	1 = publish
-	0 = draf
-2. DETAIL ORDER
-	2 = dibatalkan
-	1 = sudah bayar
+1. DETAIL ORDER -> status bayar
 	0 = belum bayar
-3. ORDER
-	1 = promo
-	2 = non promo
-4. HAK AKSES
+	1 = sudah bayar
+	2 = dibatalkan
+2. USER -> hak akses
 	1 = admin
 	2 = distributor
 	3 = mitra
 	4 = customer
 	5 = marketing
-5. STATUS BAYAR
+	6 = freelance
+3. DETAIL ORDER -> jenis bayar
 	0 = COD
 	1 = transfer bank
-	2 = Cash
-6. REWARD
+	3 = cash
+4. REWARD -> status
 	0 = proses
 	1 = verifikasi
-7. JENIS TRANSAKSI
+5. DETAIL ORDER -> jenis order
 	1 = ads
 	2 = organik
 	3 = sistem
-8. KODE ID
-	M001 = kode marketing
-	C = customer
-	S001 = CV. Catur Inti Persada
-9. STATUS BACA
+6. DETAIL ORDER -> status baca
 	1 = sudah dibaca
-	0 = belum baca
-10. KODE PRODUK
+	0 = belum dibaca
+7. KODE PRODUK
 	PK001 = POC 1 liter
 	PK002 = POC 500ml
 	PK003 = NUTRISI TERNAK
 	PK004 = NUTRISI IKAN
-11. KODE INVOICE/SO
+8. KODE INVOICE/SO
 	NO/SO/AGI/VII/2021/kodecustomer
-12. STATUS CALON
+9. CALON PELANGGAN -> status
 	0 = organik
 	1 = ads
-	2 = pindah
-13. STATUS AKTIVITAS
+	2 = pndah
+10. AKTIVITAS -> status aktivitas
 	1 = pelanggan
 	2 = calon
+11. MARKETING -> status
+	1 = full time
+	2 = freelance
+12. PELANGGAN -> status
+	1 = ads
+	0 = organik
+13. DETAIL ORDER -> status order
+	3 = distributor
+	2 = mitra
+	1 = user
+
+
+
+
+
