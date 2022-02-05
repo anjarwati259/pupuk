@@ -10,7 +10,8 @@ catatan status
 	3 = mitra
 	4 = customer
 	5 = marketing
-	6 = freelance
+	6 = pengiriman
+	7 = freelance
 3. DETAIL ORDER -> jenis bayar
 	0 = COD
 	1 = transfer bank

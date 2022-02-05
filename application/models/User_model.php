@@ -1,0 +1,33 @@
+<?php 
+
+/**
+ * 
+ */
+class User_model extends CI_Model
+{
+	
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->database();
+	}
+	//listing all user
+	public function listing(){
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->order_by('id_user','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	//login user
+	public function login($username, $password)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->where(array(	'username'	=> $username,
+								'password'	=> sha1($password)));
+		$this->db->order_by('id_user','desc');
+		$query = $this->db->get();
+		return $query->row();
+	}
+}
