@@ -20,6 +20,8 @@ class Admin extends CI_Controller
 		$this->load->model('user_model');
 	}
 	public function index(){
-		$this->load->view('office/dashboard/admin');
+		$data = array('title' => 'Dashboard Admin',
+                        'isi' => 'office/dashboard/admin' );
+        $this->load->view('office/layout/wrapper',$data, FALSE);
 	}
 }

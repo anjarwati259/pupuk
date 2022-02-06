@@ -34,11 +34,11 @@
                             </div>
                             <div class="form-group">
                                 <span class="input-icon"><i class="fa fa-user"></i></span>
-                                <input type="text" name="username" class="form-control" placeholder="Username">
+                                <input type="text" name="username" class="form-control" placeholder="Username" required>
                             </div>
                             <div class="form-group">
                                 <span class="input-icon"><i class="fa fa-lock"></i></span>
-                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                <input type="password" name="password" class="form-control" placeholder="Password" required>
                             </div>
                             <button class="btn signin" id="btn-submit" type="submit">Login</button>
                         <!-- </form> -->
