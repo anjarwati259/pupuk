@@ -25,8 +25,7 @@
           <a href="../widgets.html" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Widgets
-              <span class="right badge badge-danger">New</span>
+              Dashboard
             </p>
           </a>
         </li>
@@ -34,33 +33,39 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
-              Charts
+              Pelanggan
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../charts/chartjs.html" class="nav-link">
+              <a href="<?php echo base_url('office/admin/pelanggan/'.'Customer') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>ChartJS</p>
+                <p>Data Customer</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="../charts/flot.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Flot</p>
+                <p>Data Mitra</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="../charts/inline.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Inline</p>
+                <p>Calon Distributor</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../charts/inline.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Calon Pelanggan</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="../charts/uplot.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>uPlot</p>
+                <p>Laporan Pelanggan</p>
               </a>
             </li>
           </ul>

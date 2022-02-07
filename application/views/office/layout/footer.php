@@ -24,5 +24,29 @@
 <script src="<?php echo base_url() ?>assets/template/admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/template/admin/dist/js/demo.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/datatables.min.js"></script>
+<script src="<?php echo base_url() ?>assets/js/toastr.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('#example1').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+    });
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+      'pageLength'  : 50
+    });
+  });
+</script>
+<?php include(APPPATH.'views/office/ajax/main_ajax.php'); ?>
 </body>
 </html>

@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/template/admin/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/template/admin/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/datatable/datatables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/toastr.min.css">
+  <style type="text/css">
+    /*csroll table*/
+    .scrollmenu {
+     overflow-x:auto;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 <!-- Site wrapper -->
