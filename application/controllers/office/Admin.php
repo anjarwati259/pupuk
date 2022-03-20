@@ -15,7 +15,7 @@ class Admin extends CI_Controller
 		// $this->load->model('dashboard_model');
 		$this->load->model('admin_model');
 		// $this->load->model('order_model');
-		// $this->load->model('produk_model');
+		$this->load->model('datatable_model');
 		$this->load->model('marketing_model');
 		$this->load->model('user_model');
 	}
@@ -23,6 +23,7 @@ class Admin extends CI_Controller
 		$data = array('title' => 'Dashboard Admin',
                         'isi' => 'office/dashboard/admin' );
         $this->load->view('office/layout/wrapper',$data, FALSE);
+        //$this->load->view('office/dashboard/admin');
 	}
 	public function pelanggan($jenis_pelanggan){
 		$jenis = $jenis_pelanggan;
@@ -38,15 +39,16 @@ class Admin extends CI_Controller
 		}else{
 			$id_pelanggan = 'C001';
 		}
-		$data = array(	'title' => 'Dashboard Admin',
+		$data = array(	'title' => 'Data Customer',
 						'pelanggan' => $pelanggan,
 						'jenis' => $jenis,
 						'id_pelanggan' => $id_pelanggan,
 						'marketing' => $marketing,
-						'provinsi' => $provinsi,
+						'prov' => $provinsi,
                         'isi' => 'office/admin/data_pelanggan' );
         $this->load->view('office/layout/wrapper',$data, FALSE);
 	}
+
 	public function add_pelanggan(){
 		$this->form_validation->set_rules('nama_pelanggan', 'nama_pelanggan', 'required');
 		$this->form_validation->set_rules('no_hp', 'no_hp', 'required');
@@ -87,5 +89,19 @@ class Admin extends CI_Controller
 			$this->admin_model->tambah($data);
 			echo json_encode('sukses');
 		}
+	}
+	// menampilkan detail pelanggan saat edit
+	public function detail_pelanggan(){
+		$id_pelanggan 	= $this->input->post('id_pelanggan');
+		$pelanggan = $this->admin_model->get_pelanggan($id_pelanggan);
+		$prov = $this->wilayah_model->getprov($pelanggan->provinsi);
+
+		// $data = array('pelanggan' => $pelanggan,
+		// 				'prov' => $prov->kode
+		// 			 );
+		$data['pelanggan'] = $pelanggan;
+		$data['prov'] = $prov;
+
+		echo json_encode($data);
 	}
 }

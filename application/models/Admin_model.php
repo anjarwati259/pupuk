@@ -39,4 +39,11 @@ class Admin_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function get_pelanggan($id){
+		$this->db->select('*');
+		$this->db->from('tb_pelanggan');
+		$this->db->where('id_pelanggan',$id);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

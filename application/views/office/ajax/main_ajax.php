@@ -60,6 +60,32 @@
         });
     });
 
+    //edit pelanggan
+    $("body").on("click",".btn-edit",function(){
+      var id_pelanggan = $(this).data('id');
+
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/detail_pelanggan'); ?>",
+            data:{id_pelanggan:id_pelanggan},
+            dataType : 'json',
+            success: function(hasil) {
+              $("#nama_pelanggan_edit").val(hasil['pelanggan'].nama_pelanggan);
+              $("#no_hp_edit").val(hasil['pelanggan'].no_hp);
+              $("#alamat_edit").val(hasil['pelanggan'].alamat);
+              $("#id_marketing_edit").val(hasil['pelanggan'].id_marketing);
+              $("#jenis_pelanggan_edit").val(hasil['pelanggan'].jenis_pelanggan);
+              $("#status_edit").val(hasil['pelanggan'].status);
+
+              $("#form_prov_edit").val(hasil['prov'].kode).change();
+              $("#form_kab_edit").val(hasil['pelanggan'].kabupaten);
+              // alert(hasil);
+              // $("#pegawai").html(hasil.nama_pegawai);
+              // $("#nip").html(hasil.nip_pegawai);
+            }
+        });
+    });
+
     // ambil data kabupaten ketika data memilih provinsi
     $('body').on("change","#form_prov",function(){
       var id = $(this).val();

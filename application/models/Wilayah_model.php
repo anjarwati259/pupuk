@@ -59,4 +59,13 @@ class Wilayah_model extends CI_Model
 		$this->db->where('id', $data['id']);
 		$this->db->update('tb_setting',$data);
 	}
+
+	public function getprov($prov){
+		$this->db->select('*');
+		$this->db->from('wilayah_2020');
+		$this->db->where('CHAR_LENGTH(kode)=2');
+		$this->db->where('nama',$prov);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

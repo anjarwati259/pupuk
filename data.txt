@@ -1,0 +1,22 @@
+<!-- <?php $no=1; foreach ($pelanggan as $key => $value) {?>
+                <tr>
+                  <td><?php echo $no++; ?></td>
+                  <td style="max-width: 100px;"><?php echo tanggal(date('Y-m-d',strtotime($value->tanggal_daftar))); ?></td>
+                  <td><?php echo $value->nama_marketing ?></td>
+                  <td style="max-width: 200px;"><?php echo $value->nama_pelanggan ?></td>
+                  <td><?php echo $value->no_hp ?></td>
+                  <td><?php echo $value->kabupaten ?></td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info">Action</button>
+                      <button type="button" class="btn btn-info dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <div class="dropdown-menu" role="menu">
+                        <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#modal-edit" data-id="<?php echo $value->id_pelanggan; ?>">Edit</button>
+                        <button class="dropdown-item" data-toggle="modal" data-target="#modal-input">Hapus</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              <?php } ?> -->
