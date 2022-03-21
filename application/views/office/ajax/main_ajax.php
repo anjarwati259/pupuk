@@ -19,13 +19,14 @@
       toastr.success("Data Berhasil Diedit");
         localStorage.clear();
     }
-    
+
+    // ====================================== Pelanggan============================
     $("body").on("click","#input-pelanggan",function(){
       var nama_pelanggan = $("#nama_pelanggan").val();
       var no_hp = $("#no_hp").val();
       var alamat = $("#alamat").val();
       var id_marketing = $('#id_marketing option:selected').val();
-      var jenis_pelanggan = $('#jenis_pelanggan option:selected').val();
+      var jenis_pelanggan = $('#jenis_pelanggan').val();
       var status = $('#status option:selected').val();
       var provinsi = $('#form_prov option:selected').text();
       var kabupaten = $('#form_kab option:selected').text();
@@ -60,7 +61,7 @@
         });
     });
 
-    //edit pelanggan
+    //set data pelanggan
     $("body").on("click",".btn-edit",function(){
       var id_pelanggan = $(this).data('id');
 
@@ -70,6 +71,7 @@
             data:{id_pelanggan:id_pelanggan},
             dataType : 'json',
             success: function(hasil) {
+              $("#id_pelanggan_edit").val(hasil['pelanggan'].id_pelanggan);
               $("#nama_pelanggan_edit").val(hasil['pelanggan'].nama_pelanggan);
               $("#no_hp_edit").val(hasil['pelanggan'].no_hp);
               $("#alamat_edit").val(hasil['pelanggan'].alamat);
@@ -78,15 +80,188 @@
               $("#status_edit").val(hasil['pelanggan'].status);
 
               $("#form_prov_edit").val(hasil['prov'].kode).change();
-              $("#form_kab_edit").val(hasil['pelanggan'].kabupaten);
+              setTimeout(function () {
+                $("#form_kab_edit").val(hasil['kab'].kode).change();
+                }, 400);
+              setTimeout(function () {
+                $("#form_kec_edit").val(hasil['kec'].kode).change();
+                }, 600);
               // alert(hasil);
-              // $("#pegawai").html(hasil.nama_pegawai);
-              // $("#nip").html(hasil.nip_pegawai);
+              console.log(hasil);
             }
         });
     });
 
-    // ambil data kabupaten ketika data memilih provinsi
+    // edit pelanggan
+    $("body").on("click","#edit-pelanggan",function(){
+      var id = $("#id_pelanggan_edit").val();
+      var nama_pelanggan = $("#nama_pelanggan_edit").val();
+      var no_hp = $("#no_hp_edit").val();
+      var alamat = $("#alamat_edit").val();
+      var id_marketing = $('#id_marketing_edit option:selected').val();
+      var jenis_pelanggan = $('#jenis_pelanggan_edit').val();
+      var status = $('#status_edit option:selected').text();
+      var provinsi = $('#form_prov_edit option:selected').text();
+      var kabupaten = $('#form_kab_edit option:selected').text();
+      var kecamatan = $('#form_kec_edit option:selected').text();
+
+      var data = {nama_pelanggan:nama_pelanggan,
+            id:id,
+            no_hp:no_hp,
+            alamat:alamat,
+            id_marketing:id_marketing,
+            jenis_pelanggan:jenis_pelanggan,
+            status:status,
+            provinsi:provinsi,
+            kabupaten:kabupaten,
+            kecamatan : kecamatan
+            }
+      // console.log(data);
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/edit_pelanggan'); ?>",
+            data:data,
+            dataType : 'json',
+            success: function(data) {
+              // console.log(data);
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+    });
+
+    // ====================================== Calon Pelanggan ==========================
+    $("body").on("click","#input-calon",function(){
+      var nama_calon = $("#nama_calon").val();
+      var no_hp = $("#no_hp").val();
+      var alamat = $("#alamat").val();
+      var id_marketing = $('#id_marketing option:selected').val();
+      var komoditi = $('#komoditi').val();
+      var keterangan = $('#keterangan').val();
+      var tanggal = $('#tanggal').val();
+      var status = $('#status option:selected').val();
+      var provinsi = $('#form_prov option:selected').text();
+      var kabupaten = $('#form_kab option:selected').text();
+      var kecamatan = $('#form_kec option:selected').text();
+
+      var data = {nama_calon:nama_calon,
+            no_hp:no_hp,
+            alamat:alamat,
+            id_marketing:id_marketing,
+            komoditi:komoditi,
+            keterangan:keterangan,
+            status:status,
+            tanggal:tanggal,
+            provinsi:provinsi,
+            kabupaten:kabupaten,
+            kecamatan : kecamatan
+            }
+      // console.log(data);
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/add_calon'); ?>",
+            data:data,
+            dataType : 'json',
+            success: function(data) {
+              console.log(data);
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+    });
+
+    //set data calon pelanggan
+    $("body").on("click",".btn-calon",function(){
+      var id_calon = $(this).data('calon');
+
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/detail_calon'); ?>",
+            data:{id_calon:id_calon},
+            dataType : 'json',
+            success: function(hasil) {
+              $("#id_calon_edit").val(hasil['pelanggan'].id_calon);
+              $("#nama_calon_edit").val(hasil['pelanggan'].nama_calon);
+              $("#no_hp_edit").val(hasil['pelanggan'].no_hp);
+              $("#alamat_edit").val(hasil['pelanggan'].alamat);
+              $("#id_marketing_edit").val(hasil['pelanggan'].id_marketing);
+              $("#komoditi_edit").val(hasil['pelanggan'].komoditi);
+              $("#keterangan_edit").val(hasil['pelanggan'].keterangan);
+              $("#status_edit").val(hasil['pelanggan'].status);
+
+              $("#form_prov_edit").val(hasil['prov'].kode).change();
+              setTimeout(function () {
+                $("#form_kab_edit").val(hasil['kab'].kode).change();
+                }, 400);
+              setTimeout(function () {
+                $("#form_kec_edit").val(hasil['kec'].kode).change();
+                }, 600);
+              // alert(hasil);
+              console.log(hasil);
+            }
+        });
+    });
+
+    // edit pelanggan
+    $("body").on("click","#edit-calon",function(){
+      var id = $("#id_calon_edit").val();
+      var nama_calon = $("#nama_calon_edit").val();
+      var no_hp = $("#no_hp_edit").val();
+      var alamat = $("#alamat_edit").val();
+      var id_marketing = $('#id_marketing_edit option:selected').val();
+      var komoditi = $('#komoditi_edit').val();
+      var keterangan = $('#keterangan_edit').val();
+      var tanggal = $('#tanggal_edit').val();
+      var status = $('#status_edit option:selected').val();
+      var provinsi = $('#form_prov_edit option:selected').text();
+      var kabupaten = $('#form_kab_edit option:selected').text();
+      var kecamatan = $('#form_kec_edit option:selected').text();
+
+      var data = {nama_calon:nama_calon,
+            id_calon: id,
+            no_hp:no_hp,
+            alamat:alamat,
+            id_marketing:id_marketing,
+            komoditi:komoditi,
+            keterangan:keterangan,
+            status:status,
+            tanggal:tanggal,
+            provinsi:provinsi,
+            kabupaten:kabupaten,
+            kecamatan : kecamatan
+            }
+      //console.log(data);
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/edit_calon'); ?>",
+            data:data,
+            dataType : 'json',
+            success: function(data) {
+              // console.log(data);
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+
+    });
+
+// ===================================== konfigurasi wilayah =============================
+    // ambil data kabupaten ketika data memilih provinsi input
     $('body').on("change","#form_prov",function(){
       var id = $(this).val();
       var data = "id="+id+"&data=kabupaten";
@@ -135,15 +310,54 @@
       return false; 
     });
 
-      //get kabupaten
-    $('body').on("change","#form_kab",function(){
-        var datakab = $("option:selected", this).attr('datakab');
-          $("input[name=kab]").val(datakab);
+
+    // edit
+    $('body').on("change","#form_prov_edit",function(){
+      var id = $(this).val();
+      var data = "id="+id+"&data=kabupaten";
+      $.ajax({
+        type: 'POST',
+        url: "<?php echo base_url('wilayah/get_wilayah'); ?>",
+        data: data,
+        success: function(hasil) {
+           $("#form_kab_edit").html(hasil);
+          //alert("sukses");
+        }
       });
-    //get kecamatan
-    $('body').on("change","#form_kec",function(){
-        var datakec = $("option:selected", this).attr('datakec');
-          $("input[name=kec]").val(datakec); 
+    });
+
+    // ambil data kecamatan/kota ketika data memilih kabupaten
+    $('body').on("change","#form_kab_edit",function(){
+      var id = $(this).val();
+      var data = "id="+id+"&data=kecamatan";
+      $.ajax({
+        type: 'POST',
+        url: "<?php echo base_url('wilayah/get_wilayah'); ?>",
+        data: data,
+        success: function(hasil) {
+          $("#form_kec_edit").html(hasil);
+        }
       });
+    });
+
+     //get provinsi
+    $('body').on("change","#form_prov_edit",function(){
+      var id=$(this).val();
+      $.ajax({
+          type : "POST",
+          url  : "<?php echo base_url('wilayah/getprov'); ?>",
+          dataType : "JSON",
+          data : {id: id},
+          cache:false,
+          success: function(data){
+              $.each(data,function(nama){
+                  $('[name="form_prov_edit"]').val(data.nama);
+                   
+              });
+               
+          }
+      });
+      return false; 
+    });
     });
 </script>

@@ -68,4 +68,20 @@ class Wilayah_model extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+	public function getkab($kab){
+		$this->db->select('*');
+		$this->db->from('wilayah_2020');
+		$this->db->where('CHAR_LENGTH(kode)=5');
+		$this->db->where('nama',$kab);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getkec($kec){
+		$this->db->select('*');
+		$this->db->from('wilayah_2020');
+		$this->db->where('CHAR_LENGTH(kode)=8');
+		$this->db->where('nama',$kec);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

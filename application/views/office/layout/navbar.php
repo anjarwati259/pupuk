@@ -20,12 +20,12 @@
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Master Data</a>
           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-            <li><a href="<?php echo base_url('office/admin/pelanggan/customer') ?>" class="dropdown-item">Data Customer </a></li>
-            <li><a href="#" class="dropdown-item">Data Mitra</a></li>
-            <li><a href="#" class="dropdown-item">Data Distributor </a></li>
-            <li><a href="#" class="dropdown-item">Calon Customer</a></li>
+            <li><a href="<?php echo base_url('office/admin/pelanggan/Customer') ?>" class="dropdown-item">Data Customer </a></li>
+            <li><a href="<?php echo base_url('office/admin/pelanggan/Mitra') ?>" class="dropdown-item">Data Mitra</a></li>
+            <li><a href="<?php echo base_url('office/admin/pelanggan/Distributor') ?>" class="dropdown-item">Data Distributor </a></li>
+            <li><a href="<?php echo base_url('office/admin/calon') ?>" class="dropdown-item">Calon Customer</a></li>
             <li><a href="#" class="dropdown-item">Laporan Customer </a></li>
-            <li><a href="#" class="dropdown-item">Data Expedisi</a></li>
+            <li><a href="<?php echo base_url('office/admin/ekspedisi') ?>" class="dropdown-item">Data Expedisi</a></li>
             <li><a href="#" class="dropdown-item">Data Marketing</a></li>
 
           </ul>

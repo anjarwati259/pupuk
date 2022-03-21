@@ -13,7 +13,7 @@
         <!-- /.card-header -->
         <div class="card-body pt-1">
           <div class="scrollmenu">
-            <table class="table" id="tb_customer">
+            <table class="table" id="tb_calon">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -21,7 +21,9 @@
                   <th>Marketing</th>
                   <th>Nama</th>
                   <th>No. Telpon</th>
+                  <th>Komoditi</th>
                   <th style="max-width: 150px;">Kabupaten</th>
+                  <th style="max-width: 200px;">Keterangan</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -42,7 +44,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Tambah <?php echo $jenis ?></h4>
+        <h4 class="modal-title">Tambah Calon Pelanggan</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -52,11 +54,11 @@
           <div class="col-md-5">
             <div class="form-group">
                     <label class="control-label" for="id_customer">ID</label>
-                    <input type="text" id="id_pelanggan" value="<?php echo $id_pelanggan ?>" class="form-control" disabled/>
+                    <input type="text" id="id_calon" value="<?php echo $id_calon ?>" class="form-control" disabled/>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="id_customer">Nama Pelanggan</label>
-                    <input type="text" id="nama_pelanggan" class="form-control"/>
+                    <input type="text" id="nama_calon" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="id_customer">No. HP</label>
@@ -78,23 +80,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="id_customer">Jenis Pelanggan</label>
-                    <input type="text" id="jenis_pelanggan" value="<?php echo $jenis ?>" class="form-control" disabled/>
+                    <label class="control-label" for="id_customer">Komoditi</label>
+                    <input type="text" id="komoditi" class="form-control"/>
                 </div>
-                <!-- <div class="form-group">
-                    <label class="control-label" for="jenis_pelanggan">Jenis Pelanggan</label>
-                    <select class="form-control" id="jenis_pelanggan">
-                      <option value="Customer">Customer</option>
-                      <option value="Mitra">Mitra</option>
-                      <option value="Distributor">Distributor</option>
-                    </select>
-                </div> -->
           </div>
           <div class="col-md-1"></div>
           <div class="col-md-5">
             <div class="form-group">
                     <label class="control-label">Tanggal Daftar</label>
-                    <input type="text" class="form-control" id="tanggal_daftar" value="<?php echo date("Y-m-d");?>" disabled>
+                    <input type="text" class="form-control" id="tanggal" value="<?php echo date("Y-m-d");?>">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="alamat">Alamat</label>
@@ -122,9 +116,13 @@
                 </div>
           </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" for="alamat">Keterangan</label>
+            <textarea style="min-height: 120px;" id="keterangan" placeholder="Keterangan" class="form-control"/></textarea>
+        </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary" id="input-pelanggan">Simpan</button>
+        <button type="button" class="btn btn-primary" id="input-calon">Simpan</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -137,7 +135,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Edit <?php echo $jenis ?></h4>
+        <h4 class="modal-title">Edit Calon Pelanggan</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -147,11 +145,11 @@
           <div class="col-md-5">
             <div class="form-group">
                     <label class="control-label" for="id_customer">ID</label>
-                    <input type="text" id="id_pelanggan_edit" class="form-control" disabled/>
+                    <input type="text" id="id_calon_edit" class="form-control" disabled/>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="id_customer">Nama Pelanggan</label>
-                    <input type="text" id="nama_pelanggan_edit" class="form-control"/>
+                    <input type="text" id="nama_calon_edit" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="id_customer">No. HP</label>
@@ -172,24 +170,16 @@
                       <?php } ?>
                     </select>
                 </div>
-                <!-- <div class="form-group">
-                    <label class="control-label" for="id_customer">Jenis Pelanggan</label>
-                    <input type="text" id="jenis_pelanggan" value="<?php echo $jenis ?>" class="form-control" disabled/>
-                </div> -->
                 <div class="form-group">
-                    <label class="control-label" for="jenis_pelanggan_edit">Jenis Pelanggan</label>
-                    <select class="form-control" id="jenis_pelanggan_edit">
-                      <option value="Customer">Customer</option>
-                      <option value="Mitra">Mitra</option>
-                      <option value="Distributor">Distributor</option>
-                    </select>
+                    <label class="control-label" for="id_customer">Komoditi</label>
+                    <input type="text" id="komoditi_edit" class="form-control"/>
                 </div>
           </div>
           <div class="col-md-1"></div>
           <div class="col-md-5">
             <div class="form-group">
                     <label class="control-label">Tanggal Daftar</label>
-                    <input type="text" class="form-control" id="tanggal_daftar_edit" value="<?php echo date("Y-m-d");?>" disabled>
+                    <input type="text" class="form-control" id="tanggal_edit" value="<?php echo date("Y-m-d");?>">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="alamat">Alamat</label>
@@ -197,7 +187,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Provinsi</label>
-                    <select class="form-control" id="form_prov_edit" name="provinsi_edit">
+                    <select class="form-control" id="form_prov_edit" name="provinsi">
                         <?php foreach ($prov as $provinsi) { ?>
                         <option value="<?php echo $provinsi->kode ?>"><?php echo $provinsi->nama ?></option>
                       <?php } ?>
@@ -205,21 +195,25 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Kabupaten/Kota</label>
-                    <select class="form-control" id="form_kab_edit" name="kabupaten_edit">
+                    <select class="form-control" id="form_kab_edit" name="kabupaten">
                         <option></option>
                     </select>
                 </div>
                   <div class="form-group">
                     <label class="control-label">Kecamatan</label>
-                    <select class="form-control" id="form_kec_edit" name="kecamatan_edit">
+                    <select class="form-control" id="form_kec_edit" name="kecamatan">
                         <option></option>
                     </select>
                 </div>
           </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" for="alamat">Keterangan</label>
+            <textarea style="min-height: 120px;" id="keterangan_edit" placeholder="Keterangan" class="form-control"/></textarea>
+        </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary" id="edit-pelanggan">Simpan</button>
+        <button type="button" class="btn btn-primary" id="edit-calon">Simpan</button>
       </div>
     </div>
     <!-- /.modal-content -->
