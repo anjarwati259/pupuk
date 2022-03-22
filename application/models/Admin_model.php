@@ -79,4 +79,56 @@ class Admin_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function add_expedisi($data){
+		$this->db->insert('tb_expedisi', $data);
+	}
+	public function get_expedisi($id){
+		$this->db->select('*');
+		$this->db->from('tb_expedisi');
+		$this->db->where('id_expedisi',$id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function edit_expedisi($data){
+		$this->db->where('id_expedisi', $data['id_expedisi']);
+		$this->db->update('tb_expedisi',$data);
+	}
+
+	public function del_expedisi($id){
+		$this->db->where('id_expedisi', $id);
+		$this->db->delete('tb_expedisi');
+	}
+
+	// ======================================== Marketing ===============================
+	public function marketing(){
+		$this->db->select('tb_marketing.*,tb_user.username');
+		$this->db->from('tb_marketing');
+		$this->db->join('tb_user','tb_user.id_user=tb_marketing.id_user','left');
+		$this->db->order_by('tb_marketing.id_marketing','asc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_last_marketing(){
+		$this->db->order_by('id_marketing', 'DESC');
+
+		$query = $this->db->get("tb_marketing",1,0);
+		return $query->result();
+	}
+	public function tambah_marketing($data){
+		$this->db->insert('tb_marketing', $data);
+	}
+
+	public function get_marketing($id){
+		$this->db->select('*');
+		$this->db->from('tb_marketing');
+		$this->db->where('id_marketing',$id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	public function edit_marketing($data){
+		$this->db->where('id_marketing', $data['id_marketing']);
+		$this->db->update('tb_marketing',$data);
+	}
 }

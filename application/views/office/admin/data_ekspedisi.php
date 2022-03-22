@@ -17,6 +17,7 @@
                 <label class="control-label" for="id_customer">Nama Ekspedisi</label>
                 <input type="text" id="ekspedisi" class="form-control"/>
             </div>
+            <input type="hidden" name="kode" id="kode" value="tambah">
           </div>
           <div class="modal-footer justify-content-right">
             <button type="button" class="btn btn-danger">Cancel</button>
@@ -53,8 +54,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <div class="dropdown-menu" role="menu">
-                    <button class="dropdown-item btn-edit" data-id="<?php echo $value->id_expedisi ?>">Edit</button>
-                    <button class="dropdown-item">Hapus</button>
+                    <button class="dropdown-item btn-expedisi" data-expedisi="<?php echo $value->id_expedisi ?>">Edit</button>
+                    <a href="<?php echo base_url('/office/admin/del_expedisi/'.$value->id_expedisi)?>" class="dropdown-item" onclick="return confirm('Apakah anda yakin ingin membatalkan transaksi ini?')">Hapus</a>
                   </div>
                 </div></td>
                   </tr>
@@ -66,7 +67,6 @@
         </div>
       </div>
     </div>
-      
       <!-- /.card -->
   </div>
 </div>

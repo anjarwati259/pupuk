@@ -268,4 +268,123 @@ class Admin extends CI_Controller
         $this->load->view('office/layout/wrapper',$data, FALSE);
 	}
 
+	public function add_expedisi(){
+		$this->form_validation->set_rules('expedisi', 'expedisi', 'required');
+
+		$data = array('expedisi' => $this->input->post('expedisi'), );
+		$this->admin_model->add_expedisi($data);
+		echo json_encode('sukses');
+	}
+
+	public function detail_expedisi(){
+		$id_expedisi = $this->input->post('id');
+		$ekspedisi = $this->admin_model->get_expedisi($id_expedisi);
+		echo json_encode($ekspedisi);
+
+	}
+	public function edit_expedisi(){
+		$this->form_validation->set_rules('expedisi', 'expedisi', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			echo json_encode('error');
+		}else{
+			$i 	= $this->input;
+			$data = array(	'id_expedisi'	=> $i->post('id'),
+							'expedisi'		=> $i->post('expedisi'));
+			// echo json_encode($data);
+			$this->admin_model->edit_expedisi($data);
+			echo json_encode('sukses');
+		}
+	}
+
+	public function del_expedisi($id){
+		$this->admin_model->del_expedisi($id);
+		$this->session->set_flashdata('sukses', 'Data telah dihapus');
+		redirect(base_url('office/admin/ekspedisi'), 'refresh');
+	}
+
+	// ========================================== Marketing ==============================
+
+	public function marketing(){
+		$id_marketing = $this->admin_model->get_last_marketing();
+		//last id pelanggan
+		if($id_marketing){
+			$id = substr($id_marketing[0]->id_marketing, 1);
+			$id_marketing = generate_code('M', $id);
+		}else{
+			$id_marketing = 'M001';
+		}
+
+		$marketing = $this->admin_model->marketing();
+		$data = array('title' => 'Data Marketing',
+						'jenis' =>'',
+						'marketing' =>$marketing, 
+						'id_marketing' => $id_marketing,
+                        'isi' => 'office/admin/data_marketing' );
+        $this->load->view('office/layout/wrapper',$data, FALSE);
+	}
+
+	public function add_marketing(){
+		$this->form_validation->set_rules('nama_marketing', 'nama_marketing', 'required');
+		$this->form_validation->set_rules('no_hp', 'no_hp', 'required');
+		$this->form_validation->set_rules('alamat', 'alamat', 'required');
+		$this->form_validation->set_rules('status', 'status', 'required');
+
+		$id_marketing = $this->admin_model->get_last_marketing();
+		//last id pelanggan
+		if($id_marketing){
+			$id = substr($id_marketing[0]->id_marketing, 1);
+			$id_marketing = generate_code('M', $id);
+		}else{
+			$id_marketing = 'M001';
+		}
+
+		if ($this->form_validation->run() == FALSE) {
+			echo json_encode('error');
+		}else{
+			$i 	= $this->input;
+			$data = array(	'id_marketing'		=> $id_marketing,
+							'nama_marketing'	=> $i->post('nama_marketing'),
+							'status'			=> $i->post('status'),
+							'alamat'			=> $i->post('alamat'),
+							'no_hp'				=> $i->post('no_hp'),
+						);
+			// echo json_encode($data);
+			$this->admin_model->tambah_marketing($data);
+			echo json_encode('sukses');
+		}
+	}
+
+	public function detail_marketing(){
+		$id_marketing = $this->input->post('id');
+		$marketing = $this->admin_model->get_marketing($id_marketing);
+		echo json_encode($marketing);
+	}
+
+	public function edit_marketing(){
+		$this->form_validation->set_rules('nama_marketing', 'nama_marketing', 'required');
+		$this->form_validation->set_rules('no_hp', 'no_hp', 'required');
+		$this->form_validation->set_rules('alamat', 'alamat', 'required');
+		$this->form_validation->set_rules('status', 'status', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			echo json_encode('error');
+		}else{
+			$i 	= $this->input;
+			$data = array(	'id_marketing'		=> $i->post('id'),
+							'nama_marketing'	=> $i->post('nama_marketing'),
+							'status'			=> $i->post('status'),
+							'alamat'			=> $i->post('alamat'),
+							'no_hp'				=> $i->post('no_hp'),
+						);
+			// echo json_encode($data);
+			$this->admin_model->edit_marketing($data);
+			echo json_encode('sukses');
+		}
+	}
+
+	public function aktif(){
+		$id_marketing = $this->input->post('id');
+		$marketing = $this->admin_model->get_marketing($id_marketing);
+	}
 }

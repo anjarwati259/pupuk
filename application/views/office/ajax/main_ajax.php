@@ -260,6 +260,177 @@
 
     });
 
+    // ======================================= expedisi ===========================
+    //set data expedisi
+    $("body").on("click",".btn-expedisi",function(){
+      var id_expedisi = $(this).data('expedisi');
+      //alert(id_expedisi);
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/detail_expedisi'); ?>",
+            data:{id:id_expedisi},
+            dataType : 'json',
+            success: function(hasil) {
+              $("#id").val(hasil.id_expedisi);
+              $("#ekspedisi").val(hasil.expedisi);
+              $("#kode").val('edit');
+
+              // alert(hasil);
+              console.log(hasil);
+            }
+        });
+    });
+
+    // edit expedisi
+    $("body").on("click","#btn_submit",function(){
+      var id = $("#id").val();
+      var expedisi = $("#ekspedisi").val();
+      var kode = $("#kode").val();
+
+      var data = {expedisi:expedisi,
+            id: id,
+            }
+      // console.log(kode);
+      if(kode==='tambah'){
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/add_expedisi'); ?>",
+            data:{expedisi:expedisi},
+            dataType : 'json',
+            success: function(data) {
+              // console.log(data);
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+      }else{
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/edit_expedisi'); ?>",
+            data:data,
+            dataType : 'json',
+            success: function(data) {
+              // console.log(data);
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+      }
+      
+    });
+
+    // ======================================== Marketing ===============================
+    $("body").on("click","#input-marketing",function(){
+      var nama_marketing = $("#nama_marketing").val();
+      var no_hp = $("#no_hp").val();
+      var alamat = $("#alamat").val();
+      var status = $('#status option:selected').val();
+
+      var data = {nama_marketing:nama_marketing,
+            no_hp:no_hp,
+            alamat:alamat,
+            status:status
+            }
+      // console.log(data);
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/add_marketing'); ?>",
+            data:data,
+            dataType : 'json',
+            success: function(data) {
+              // console.log(data);
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+    });
+
+    //set data marketing
+    $("body").on("click",".btn-market",function(){
+      var id = $(this).data('market');
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/detail_marketing'); ?>",
+            data:{id:id},
+            dataType : 'json',
+            success: function(hasil) {
+              $("#id_marketing_edit").val(hasil.id_marketing);
+              $("#nama_marketing_edit").val(hasil.nama_marketing);
+              $("#no_hp_edit").val(hasil.no_hp);
+              $("#alamat_edit").val(hasil.alamat);
+              $("#status_edit").val(hasil.status).change();
+
+              // alert(hasil);
+              console.log(hasil);
+            }
+        });
+    });
+
+    $("body").on("click","#edit-marketing",function(){
+      var id_marketing = $("#id_marketing_edit").val();
+      var nama_marketing = $("#nama_marketing_edit").val();
+      var no_hp = $("#no_hp_edit").val();
+      var alamat = $("#alamat_edit").val();
+      var status = $('#status_edit option:selected').val();
+
+      var data = {nama_marketing:nama_marketing,
+            id:id_marketing,
+            no_hp:no_hp,
+            alamat:alamat,
+            status:status
+            }
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/edit_marketing'); ?>",
+            data:data,
+            dataType : 'json',
+            success: function(data) {
+              // console.log(data);
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+    });
+
+    $("body").on("click",".btn-aktif",function(){
+      var id = $(this).data('market');
+      $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url('office/admin/aktif'); ?>",
+            data:{id:id},
+            dataType : 'json',
+            success: function(hasil) {
+              if (data=='sukses') {
+                localStorage.setItem("sukses",data)
+                window.location.reload(); 
+              }else if(data=='error'){
+                // $('#modal-input').modal('hide');
+                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+              }
+            }
+        });
+    });
+
 // ===================================== konfigurasi wilayah =============================
     // ambil data kabupaten ketika data memilih provinsi input
     $('body').on("change","#form_prov",function(){
@@ -359,5 +530,6 @@
       });
       return false; 
     });
+
     });
 </script>

@@ -32,6 +32,17 @@
 <script src="<?php echo base_url() ?>assets/template/admin/dist/js/demo.js"></script>
 <script src="<?php echo base_url()?>assets/datatable/datatables.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/toastr.min.js"></script>
+<script type="text/javascript">
+  $('#tabel1').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+      'pageLength'  : 10
+    });
+</script>
 <?php include(APPPATH.'views/office/ajax/main_ajax.php'); ?>
 <?php include(APPPATH.'views/office/ajax/datatable.php'); ?>
 </body>

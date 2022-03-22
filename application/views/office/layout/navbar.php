@@ -26,7 +26,7 @@
             <li><a href="<?php echo base_url('office/admin/calon') ?>" class="dropdown-item">Calon Customer</a></li>
             <li><a href="#" class="dropdown-item">Laporan Customer </a></li>
             <li><a href="<?php echo base_url('office/admin/ekspedisi') ?>" class="dropdown-item">Data Expedisi</a></li>
-            <li><a href="#" class="dropdown-item">Data Marketing</a></li>
+            <li><a href="<?php echo base_url('office/admin/marketing') ?>" class="dropdown-item">Data Marketing</a></li>
 
           </ul>
         </li>
