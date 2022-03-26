@@ -31,7 +31,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">Order</a>
+          <a href="<?php echo base_url('office/order') ?>" class="nav-link">Order</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">Chat</a>

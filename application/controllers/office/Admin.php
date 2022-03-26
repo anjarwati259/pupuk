@@ -348,6 +348,7 @@ class Admin extends CI_Controller
 							'status'			=> $i->post('status'),
 							'alamat'			=> $i->post('alamat'),
 							'no_hp'				=> $i->post('no_hp'),
+							'foto'				=> 'default.png'
 						);
 			// echo json_encode($data);
 			$this->admin_model->tambah_marketing($data);
@@ -385,6 +386,44 @@ class Admin extends CI_Controller
 
 	public function aktif(){
 		$id_marketing = $this->input->post('id');
-		$marketing = $this->admin_model->get_marketing($id_marketing);
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+
+		$i 	= $this->input;
+		$data = array(
+						'username'	=> $i->post('username'),
+						'password'	=> SHA1($i->post('password')),
+						'nama_user'	=> $i->post('username'),
+						'email'		=> '-',
+						'hak_akses' => '5'
+						);
+		$id_user = $this->admin_model->add_user($data);
+		// echo json_encode($id_user);
+
+		$data2 = array(
+						'id_marketing'	=> $id_marketing,
+						'id_user'		=> $id_user,
+						'status'		=> '1',
+						'chat'			=> '1'
+						);
+		$this->admin_model->edit_marketing($data2);
+		echo json_encode('sukses');
+
 	}
+	public function nonaktif($id){
+		$get_user = $this->admin_model->get_marketing($id);
+		$id_user = $get_user->id_user;
+
+		$data = array(
+						'id_marketing'	=> $id,
+						'id_user'		=> null,
+						'status'		=> '0',
+						'chat'			=> '0'
+						);
+		$this->admin_model->edit_marketing($data);
+		$this->admin_model->del_user($id_user);
+		$this->session->set_flashdata('error', 'Marketing '.$get_user->nama_marketing. ' telah dinonaktifkan');
+		redirect(base_url('office/admin/marketing'), 'refresh');
+	}
+
 }

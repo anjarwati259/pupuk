@@ -44,9 +44,9 @@
                   <td>
                     <button type="button" class="btn btn-info btn-sm btn-market" data-market="<?php echo $value->id_marketing; ?>" data-toggle="modal" data-target="#modal-edit">Edit</button>
                     <?php if ($value->status==1) { ?>
-                    <button type="button" class="btn btn-success btn-sm btn-aktif" data-market="<?php echo $value->id_marketing; ?>">Aktif</button>
+                      <a href="<?php echo base_url('/office/admin/nonaktif/'.$value->id_marketing)?>" class="btn btn-success btn-sm" onclick="return confirm('Apakah anda yakin ingin menonaktifkan akun mareketing ini?')">Aktif</a>
                   <?php }else{ ?>
-                    <button type="button" class="btn btn-success btn-sm btn-non" data-toggle="modal" data-target="#konfirmasi">NonAktif</button>
+                    <button type="button" class="btn btn-default btn-sm btn-aktif" data-toggle="modal" data-target="#modal-setting" data-market="<?php echo $value->id_marketing; ?>" data-kode="nonaktif">NonAktif</button>
                   <?php } ?>
                   </td>
                 </tr>
@@ -152,6 +152,41 @@
       </div>
       <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-primary" id="edit-marketing">Simpan</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- modal edit pelanggan -->
+<div class="modal fade" id="modal-setting">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Konfigurasi User</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="id_marketingcustomer">Username</label>
+                <input type="text" id="username" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="id_customer">Password</label>
+                <input type="text" id="password" class="form-control"/>
+            </div>
+            <input type="text" id="kode">
+            <input type="text" id="id_market">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" id="submit">Simpan</button>
       </div>
     </div>
     <!-- /.modal-content -->

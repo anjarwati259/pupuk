@@ -131,4 +131,15 @@ class Admin_model extends CI_Model
 		$this->db->where('id_marketing', $data['id_marketing']);
 		$this->db->update('tb_marketing',$data);
 	}
+
+	public function add_user($data){
+		$this->db->insert('tb_user', $data);
+		return $this->db->insert_id();
+	}
+
+	public function del_user($id){
+		$this->db->where('id_user', $id);
+		$this->db->delete('tb_user');
+	}
+
 }

@@ -414,22 +414,72 @@
 
     $("body").on("click",".btn-aktif",function(){
       var id = $(this).data('market');
+      var kode = $(this).data('kode');
       $.ajax({
             type: 'POST',
-            url: "<?php echo base_url('office/admin/aktif'); ?>",
+            url: "<?php echo base_url('office/admin/detail_marketing'); ?>",
             data:{id:id},
             dataType : 'json',
             success: function(hasil) {
-              if (data=='sukses') {
-                localStorage.setItem("sukses",data)
-                window.location.reload(); 
-              }else if(data=='error'){
-                // $('#modal-input').modal('hide');
-                toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
-              }
+              console.log(hasil);
+              $("#username").val(hasil.nama_marketing);
+              $("#password").val('ptagisukses');
+              $("#kode").val(kode);
+              $("#id_market").val(hasil.id_marketing);
             }
         });
+
+      $("body").on("click","#submit",function(){
+        var id = $("#id_market").val();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var kode = $("#kode").val();
+
+        var data = {id:id,
+                    username:username,
+                    password:password,
+              }
+        if(kode==='aktif'){
+          $.ajax({
+              type: 'POST',
+              url: "<?php echo base_url('office/admin/nonaktif'); ?>",
+              data:data,
+              dataType : 'json',
+              success: function(data) {
+                //console.log(data);
+                if (data=='sukses') {
+                  localStorage.setItem("sukses",data)
+                  window.location.reload(); 
+                }else if(data=='error'){
+                  $('#modal-input').modal('hide');
+                  toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+                }
+              }
+          });
+        }else{
+          // console.log(id);
+          $.ajax({
+              type: 'POST',
+              url: "<?php echo base_url('office/admin/aktif'); ?>",
+              data:data,
+              dataType : 'json',
+              success: function(data) {
+                //console.log(data);
+                if (data=='sukses') {
+                  localStorage.setItem("sukses",data)
+                  window.location.reload(); 
+                }else if(data=='error'){
+                  $('#modal-input').modal('hide');
+                  toastr.error("Data Ada yg belum diisi, Silahkan lengkapi!!!");
+                }
+              }
+          });
+        }
+        
+      });
     });
+
+
 
 // ===================================== konfigurasi wilayah =============================
     // ambil data kabupaten ketika data memilih provinsi input
